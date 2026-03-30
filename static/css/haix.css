@@ -295,15 +295,22 @@ p {
 }
 
 .member-grid {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem 0.8rem;
+  width: 100%;
+  max-width: 46.6rem;
+  margin-inline: auto;
 }
 
 .member-card {
-  display: inline-block;
-  vertical-align: top;
+  flex: 0 1 15rem;
+  display: block;
   text-align: center;
   width: 15rem;
-  margin: 0 0.8rem 1rem 0;
+  margin: 0;
 }
 
 .member-card img {
@@ -370,6 +377,12 @@ p {
   color: #777;
 }
 
+.member-grid > .loading,
+.member-grid > .error,
+.member-grid > .fallback-notice {
+  flex: 0 0 100%;
+}
+
 .error {
   color: #b23f24;
 }
@@ -415,6 +428,19 @@ p {
   opacity: 1;
   transform: none;
   transition: opacity 280ms ease, transform 280ms ease;
+}
+
+@media screen and (min-width: 1025px) {
+  .container-fluid {
+    max-width: 1200px;
+    padding: 0 1.25rem;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .container-fluid {
+    padding: 0 1.4rem;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -479,16 +505,13 @@ p {
   }
 
   .member-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.9rem 0.45rem;
-    justify-items: center;
-    align-items: start;
+    justify-content: center;
   }
 
   .member-card {
-    display: block;
-    width: 100%;
+    flex: 0 1 calc(50% - 0.45rem);
+    width: auto;
     max-width: 170px;
     margin: 0;
   }
@@ -504,7 +527,7 @@ p {
 }
 
 @media screen and (max-width: 360px) {
-  .member-grid {
-    grid-template-columns: 1fr;
+  .member-card {
+    flex-basis: 100%;
   }
 }

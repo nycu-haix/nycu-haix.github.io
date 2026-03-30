@@ -894,7 +894,7 @@
     svg.setAttribute("height", "18");
     svg.setAttribute("fill", "none");
     svg.setAttribute("stroke", "currentColor");
-    svg.setAttribute("stroke-width", "1.9");
+    svg.setAttribute("stroke-width", "1.8");
     svg.setAttribute("stroke-linecap", "round");
     svg.setAttribute("stroke-linejoin", "round");
     svg.setAttribute("aria-hidden", "true");
@@ -906,46 +906,36 @@
       svg.appendChild(path);
     };
 
-    const drawCircle = (cx, cy, r) => {
-      const circle = document.createElementNS(ns, "circle");
-      circle.setAttribute("cx", cx);
-      circle.setAttribute("cy", cy);
-      circle.setAttribute("r", r);
-      svg.appendChild(circle);
-    };
-
     if (type === "email") {
-      drawPath("M3.5 7.5h17v9h-17z");
-      drawPath("m4 8 8 5 8-5");
+      drawPath("M3 6h18v12H3z");
+      drawPath("m3 8 7.1 5.2a3 3 0 0 0 3.8 0L21 8");
       return svg;
     }
 
     if (type === "github") {
-      drawPath("M15 22v-3.9a4.8 4.8 0 0 0-.1-1 5 5 0 0 0 2.1-4.1c0-1-.3-2-.8-2.8A4.8 4.8 0 0 0 16.5 7s-.8-.3-2.8 1a9.4 9.4 0 0 0-5 0C6.8 6.7 6 7 6 7a4.8 4.8 0 0 0-.3 3.2 5 5 0 0 0-.7 2.8c0 1.6.8 3.1 2.1 4.1a4.8 4.8 0 0 0-.1 1V22");
-      drawPath("M9 18c-4.5 2-5-2-7-2");
+      drawPath("M9 19c-5 1.5-5-2.5-7-3");
+      drawPath("M14 22v-3.8a3.5 3.5 0 0 0-.9-2.6c3.1-.4 6.4-1.6 6.4-7a5.4 5.4 0 0 0-1.5-3.8c.3-1.1.2-2.4-.1-3.5 0 0-1-.3-3.3 1.3a11.2 11.2 0 0 0-6 0C6.3 1 5.3 1.3 5.3 1.3c-.4 1.1-.4 2.3-.1 3.5a5.4 5.4 0 0 0-1.5 3.8c0 5.4 3.3 6.6 6.4 7a3.5 3.5 0 0 0-.9 2.6V22");
       return svg;
     }
 
     if (type === "orcid") {
-      drawCircle("12", "12", "9");
-      drawCircle("8.2", "8.1", "1.1");
-      drawPath("M8.2 10.5v5");
-      drawPath("M11.2 11v4.5");
-      drawPath("M11.2 11h2.2a2.2 2.2 0 0 1 0 4.5h-2.2");
+      drawPath("M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z");
+      drawPath("M8 8h.01");
+      drawPath("M8 10.5v5");
+      drawPath("M12 10.5h2.4a2.5 2.5 0 0 1 0 5H12z");
       return svg;
     }
 
     if (type === "scholar") {
-      drawPath("M22 10 12 5 2 10l10 5 10-5z");
-      drawPath("M6 12.5v4.3c2.9 2.1 9.1 2.1 12 0v-4.3");
-      drawPath("M19.5 13.5v4");
+      drawPath("M3 9l9-4 9 4-9 4-9-4z");
+      drawPath("M7 11v4.3c0 1.7 2.2 3 5 3s5-1.3 5-3V11");
+      drawPath("M19 10.7V15");
       return svg;
     }
 
-    drawCircle("12", "12", "9");
-    drawPath("M3 12h18");
-    drawPath("M12 3a14 14 0 0 1 0 18");
-    drawPath("M12 3a14 14 0 0 0 0 18");
+    drawPath("M14 5h5v5");
+    drawPath("M10 14 19 5");
+    drawPath("M19 13v6H5V5h6");
     return svg;
   }
 
