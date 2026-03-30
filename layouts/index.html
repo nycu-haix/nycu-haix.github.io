@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
-  <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}Human AI &amp; Creative Computing Lab website{{ end }}">
+  <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}HAIX (Human AI &amp; Creative Computing) Lab website{{ end }}">
+  <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
@@ -16,10 +17,10 @@
   <div class="container-fluid">
     <header class="row nav-row" id="top">
       <div class="col-left">
-        <a class="brand-line" href="#top" aria-label="Human AI &amp; Creative Computing Lab Home">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="Human AI &amp; Creative Computing Lab logo">
+        <a class="brand-line" href="#top" aria-label="HAIX (Human AI &amp; Creative Computing) Lab Home">
+          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX (Human AI &amp; Creative Computing) Lab logo">
           <span class="brand-copy">
-            <strong>Human AI &amp; Creative Computing Lab</strong>
+            <strong>HAIX (Human AI &amp; Creative Computing) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
           </span>
         </a>
@@ -35,7 +36,7 @@
 
     <main id="main-content">
       <p class="title reveal">
-        The <b>Human AI &amp; Creative Computing Lab</b> is based out of the Department of Computer Science at National Yang Ming Chiao Tung University.
+        The <b>HAIX (Human AI &amp; Creative Computing) Lab</b> is based out of the Department of Computer Science at National Yang Ming Chiao Tung University.
         We are reimagining human-AI and collaborative systems to empower people and improve society.
       </p>
 
@@ -70,13 +71,19 @@
 
       <section id="lab" class="row section-row reveal">
         <div class="col-main">
-          <h2>Human AI &amp; Creative Computing Lab</h2>
+          <h2>People</h2>
           <div class="group-overview">
-            <img src="{{ "images/group-photo.jpg" | relURL }}" alt="Human AI and Creative Computing Lab group dinner photo">
+            <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group dinner photo">
           </div>
-          <h3>People</h3>
           <div id="members-list" class="member-grid" aria-live="polite">
             <p class="loading">Loading members...</p>
+          </div>
+          <div class="lab-info">
+            <h3>Lab Info</h3>
+            <p><strong>Location: EC524 (Room 524, Engineering Bldg 3)</strong></p>
+            <p><strong>位置：EC524（光復校區工程三館 524 室）</strong></p>
+            <p>Room 524, Engineering Bldg 3, 1001 University Road, Hsinchu, Taiwan 300, ROC</p>
+            <p>300 新竹市大學路 1001 號光復校區工程三館 524 室</p>
           </div>
         </div>
       </section>
@@ -84,7 +91,7 @@
       <hr>
 
       <footer class="footer">
-        <p>© {{ now.Year }} Human AI &amp; Creative Computing Lab, NYCU</p>
+        <p>© {{ now.Year }} HAIX (Human AI &amp; Creative Computing) Lab, NYCU</p>
         <p class="footer-note">
           <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
           built by

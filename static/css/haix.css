@@ -212,6 +212,14 @@ p {
   border: 1px solid #adadad;
 }
 
+.lab-info {
+  margin-top: 0.8rem;
+}
+
+.lab-info p {
+  margin-top: 0.22rem;
+}
+
 .news-list {
   margin-top: 0.4rem;
 }
