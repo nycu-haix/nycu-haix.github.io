@@ -1,6 +1,8 @@
 {
   "membersCsvUrl": "",
   "publicationsCsvUrl": "",
+  "newsCsvUrl": "",
   "membersLocalCsv": "/data/members.csv",
-  "publicationsLocalCsv": "/data/publications.csv"
+  "publicationsLocalCsv": "/data/publications.csv",
+  "newsLocalCsv": "/data/news.csv"
 }

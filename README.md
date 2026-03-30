@@ -1,9 +1,9 @@
 # Human AI & Creative Computing Lab Website
 
 This site is a one-page Hugo website based on Grace's requirements:
-- One-page structure: `About Me`, `Teaching`, `Research`, `Human AI & Creative Computing Lab`
+- One-page structure: `About Me`, `Teaching`, `News`, `Research`, `Human AI & Creative Computing Lab`
 - Manual member photos (no Gravatar)
-- Spreadsheet/CSV-driven members and publications
+- Spreadsheet/CSV-driven members, news, and publications
 - Lab branding and logo
 
 ## Run locally
@@ -22,8 +22,10 @@ Update:
 {
   "membersCsvUrl": "YOUR_GOOGLE_SHEET_MEMBERS_CSV_URL",
   "publicationsCsvUrl": "YOUR_GOOGLE_SHEET_PUBLICATIONS_CSV_URL",
+  "newsCsvUrl": "YOUR_GOOGLE_SHEET_NEWS_CSV_URL",
   "membersLocalCsv": "/data/members.csv",
-  "publicationsLocalCsv": "/data/publications.csv"
+  "publicationsLocalCsv": "/data/publications.csv",
+  "newsLocalCsv": "/data/news.csv"
 }
 ```
 
@@ -38,10 +40,28 @@ Required:
 
 Recommended:
 - `degree` (e.g., Master, PhD)
-- `year` (e.g., M1, M2, Year 2)
+- `year` (cohort/admission year, e.g., 2024, 2025)
 - `role`
+- `email`
+- `github`
 - `photo` (e.g., `/images/members/alice.jpg`)
 - `description`
+
+Photo fallback order:
+1. `photo`
+2. `/images/members/member-placeholder.svg`
+
+### News (`news.csv`)
+
+Required:
+- `date`
+- `content` or `title`
+
+Recommended:
+- `title`
+- `content` (supports `[label](https://example.com)` and plain `https://...` links)
+- `link_url`
+- `link_text`
 
 ### Publications (`publications.csv`)
 
@@ -61,6 +81,7 @@ Recommended:
 ## Image replacement
 
 - Lab logo: replace `static/images/haix-logo.svg`
-- Group photo: replace `static/images/group-photo-placeholder.svg`
+- Group photo: replace `static/images/group-photo.jpg`
 - Member photos: add files under `static/images/members/` and set CSV `photo` path
+- News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
 - Publication thumbnails: add files under `static/images/publications/` and set CSV `thumbnail` path

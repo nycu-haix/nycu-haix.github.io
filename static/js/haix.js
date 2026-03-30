@@ -4,8 +4,10 @@
   const DEFAULT_SOURCES = {
     membersCsvUrl: "",
     publicationsCsvUrl: "",
+    newsCsvUrl: "",
     membersLocalCsv: "/data/members.csv",
-    publicationsLocalCsv: "/data/publications.csv"
+    publicationsLocalCsv: "/data/publications.csv",
+    newsLocalCsv: "/data/news.csv"
   };
 
   const FALLBACK_MEMBER_PHOTO = "/images/members/member-placeholder.svg";
@@ -13,10 +15,11 @@
 
   const membersContainer = document.getElementById("members-list");
   const publicationsContainer = document.getElementById("publications-list");
+  const newsContainer = document.getElementById("news-list");
 
   setupReveal();
 
-  if (!membersContainer || !publicationsContainer) {
+  if (!membersContainer && !publicationsContainer && !newsContainer) {
     return;
   }
 
@@ -24,15 +27,33 @@
 
   async function initializeData() {
     const sources = await loadSources();
+    const jobs = [];
 
-    await Promise.all([
-      loadMembers(sources).catch((error) => {
-        renderError(membersContainer, `Unable to load members data. ${error.message}`);
-      }),
-      loadPublications(sources).catch((error) => {
-        renderError(publicationsContainer, `Unable to load publications data. ${error.message}`);
-      })
-    ]);
+    if (membersContainer) {
+      jobs.push(
+        loadMembers(sources).catch((error) => {
+          renderError(membersContainer, `Unable to load members data. ${error.message}`);
+        })
+      );
+    }
+
+    if (publicationsContainer) {
+      jobs.push(
+        loadPublications(sources).catch((error) => {
+          renderError(publicationsContainer, `Unable to load publications data. ${error.message}`);
+        })
+      );
+    }
+
+    if (newsContainer) {
+      jobs.push(
+        loadNews(sources).catch((error) => {
+          renderError(newsContainer, `Unable to load news data. ${error.message}`);
+        })
+      );
+    }
+
+    await Promise.all(jobs);
   }
 
   async function loadMembers(sources) {
@@ -61,6 +82,20 @@
 
     publications.sort((a, b) => (b.yearNum || 0) - (a.yearNum || 0));
     renderPublications(publications);
+  }
+
+  async function loadNews(sources) {
+    const remote = cleanUrl(sources.newsCsvUrl);
+    const local = cleanUrl(sources.newsLocalCsv) || DEFAULT_SOURCES.newsLocalCsv;
+    const csvText = await fetchCsvWithFallback(remote, local);
+    const rows = parseCsv(csvText);
+
+    const newsItems = rows
+      .map((row) => normalizeNews(row))
+      .filter((item) => item.title || item.content);
+
+    newsItems.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    renderNews(newsItems);
   }
 
   async function loadSources() {
@@ -205,14 +240,28 @@
   }
 
   function normalizeMember(row) {
+    const email = pick(row, "email", "mail", "e_mail", "e-mail");
+    const explicitPhoto = pick(row, "photo", "photo_url", "image");
+
     return {
       name: pick(row, "name", "student", "student_name"),
       degree: pick(row, "degree", "program", "group"),
       year: pick(row, "year", "grade", "ms_year"),
       role: pick(row, "role", "position"),
-      photo: pick(row, "photo", "photo_url", "image") || FALLBACK_MEMBER_PHOTO,
+      email,
+      github: cleanUrl(pick(row, "github", "github_page", "github_url")),
+      photo: resolveMemberPhoto(explicitPhoto),
       description: pick(row, "description", "bio", "intro")
     };
+  }
+
+  function resolveMemberPhoto(explicitPhoto) {
+    const cleanedPhoto = cleanUrl(explicitPhoto);
+    if (cleanedPhoto && cleanedPhoto !== FALLBACK_MEMBER_PHOTO) {
+      return cleanedPhoto;
+    }
+
+    return FALLBACK_MEMBER_PHOTO;
   }
 
   function compareMember(a, b) {
@@ -265,6 +314,43 @@
       website: cleanUrl(pick(row, "website", "url", "link")),
       award: pick(row, "award", "note")
     };
+  }
+
+  function normalizeNews(row) {
+    const dateRaw = pick(row, "date", "time", "datetime", "published_at", "published");
+    const timestamp = parseTimestamp(dateRaw);
+
+    return {
+      dateRaw,
+      timestamp,
+      dateDisplay: formatNewsDate(dateRaw, timestamp),
+      title: pick(row, "title", "headline"),
+      content: pick(row, "content", "body", "description", "text"),
+      linkUrl: toSafeExternalUrl(pick(row, "link_url", "link", "url", "website")),
+      linkText: pick(row, "link_text", "link_label")
+    };
+  }
+
+  function parseTimestamp(value) {
+    if (!value) {
+      return 0;
+    }
+
+    const parsed = Date.parse(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function formatNewsDate(raw, timestamp) {
+    if (/^\d{4}-\d{2}-\d{2}$/.test(String(raw || "").trim())) {
+      return String(raw).trim();
+    }
+
+    if (!timestamp) {
+      return raw || "";
+    }
+
+    const iso = new Date(timestamp).toISOString();
+    return iso.slice(0, 10);
   }
 
   function normalizeDoiUrl(doi) {
@@ -411,6 +497,148 @@
     });
 
     publicationsContainer.appendChild(fragment);
+  }
+
+  function renderNews(newsItems) {
+    if (!newsContainer) {
+      return;
+    }
+
+    newsContainer.innerHTML = "";
+
+    if (!newsItems.length) {
+      newsContainer.appendChild(buildNote("No news rows found in CSV."));
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+
+    newsItems.forEach((item, index) => {
+      const card = document.createElement("article");
+      card.className = "news-item";
+      card.style.animationDelay = `${Math.min(index * 55, 450)}ms`;
+
+      if (item.dateDisplay) {
+        const date = document.createElement("p");
+        date.className = "news-date";
+        date.textContent = item.dateDisplay;
+        card.appendChild(date);
+      }
+
+      if (item.title) {
+        const title = document.createElement("h4");
+        title.className = "news-title";
+        title.textContent = item.title;
+        card.appendChild(title);
+      }
+
+      if (item.content) {
+        const content = document.createElement("p");
+        content.className = "news-content";
+        appendLinkedText(content, item.content);
+        card.appendChild(content);
+      }
+
+      if (item.linkUrl) {
+        const extraLink = document.createElement("a");
+        extraLink.className = "news-link";
+        extraLink.href = item.linkUrl;
+        extraLink.target = "_blank";
+        extraLink.rel = "noopener noreferrer";
+        extraLink.textContent = item.linkText || "Read more";
+        card.appendChild(extraLink);
+      }
+
+      fragment.appendChild(card);
+    });
+
+    newsContainer.appendChild(fragment);
+  }
+
+  function appendLinkedText(container, inputText) {
+    const text = String(inputText || "");
+    const lines = text.split(/\r?\n/);
+
+    lines.forEach((line, lineIndex) => {
+      appendLinksForLine(container, line);
+
+      if (lineIndex < lines.length - 1) {
+        container.appendChild(document.createElement("br"));
+      }
+    });
+  }
+
+  function appendLinksForLine(container, line) {
+    const pattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s]+)/g;
+    let cursor = 0;
+    let match;
+
+    while ((match = pattern.exec(line)) !== null) {
+      const matchText = match[0];
+      const start = match.index;
+
+      if (start > cursor) {
+        container.appendChild(document.createTextNode(line.slice(cursor, start)));
+      }
+
+      if (match[1] && match[2]) {
+        container.appendChild(buildExternalLink(match[2], match[1]));
+      } else {
+        const plainUrl = match[3];
+        const split = splitTrailingPunctuation(plainUrl);
+        container.appendChild(buildExternalLink(split.url, split.url));
+
+        if (split.trailing) {
+          container.appendChild(document.createTextNode(split.trailing));
+        }
+      }
+
+      cursor = start + matchText.length;
+    }
+
+    if (cursor < line.length) {
+      container.appendChild(document.createTextNode(line.slice(cursor)));
+    }
+  }
+
+  function splitTrailingPunctuation(url) {
+    const matched = String(url || "").match(/^(.*?)([.,;:!?)]*)$/);
+    return {
+      url: matched ? matched[1] : String(url || ""),
+      trailing: matched ? matched[2] : ""
+    };
+  }
+
+  function buildExternalLink(url, text) {
+    const safeUrl = toSafeExternalUrl(url);
+    if (!safeUrl) {
+      return document.createTextNode(text);
+    }
+
+    const link = document.createElement("a");
+    link.href = safeUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = text;
+    return link;
+  }
+
+  function toSafeExternalUrl(value) {
+    const cleaned = cleanUrl(value);
+    if (!cleaned) {
+      return "";
+    }
+
+    try {
+      const parsed = new URL(cleaned);
+      if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+        return parsed.toString();
+      }
+    } catch (_error) {
+      return "";
+    }
+
+    return "";
   }
 
   function composeVenueText(publication) {
