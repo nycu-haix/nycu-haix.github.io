@@ -3,7 +3,7 @@
 This site is a one-page Hugo website based on Grace's requirements:
 - One-page structure: `News`, `Research`, `Human AI & Creative Computing Lab`
 - Manual member photos with Gravatar fallback
-- Spreadsheet/CSV-driven members, news, and publications
+- Spreadsheet/CSV-driven members, news, publications, and research areas
 - Lab branding and logo
 
 ## Run locally
@@ -18,18 +18,36 @@ Update:
 
 `static/data/sources.json`
 
+Current spreadsheet:
+
+- `https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/edit`
+- Sheet tabs / `gid`:
+  - `members` → `0`
+  - `publications` → `313564106`
+  - `news` → `1707205392`
+  - `research` → `1173471225`
+
+Recommended config for this project:
+
 ```json
 {
-  "membersCsvUrl": "YOUR_GOOGLE_SHEET_MEMBERS_CSV_URL",
-  "publicationsCsvUrl": "YOUR_GOOGLE_SHEET_PUBLICATIONS_CSV_URL",
-  "newsCsvUrl": "YOUR_GOOGLE_SHEET_NEWS_CSV_URL",
+  "membersCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=0",
+  "publicationsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=313564106",
+  "newsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1707205392",
+  "researchCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1173471225",
   "membersLocalCsv": "/data/members.csv",
   "publicationsLocalCsv": "/data/publications.csv",
-  "newsLocalCsv": "/data/news.csv"
+  "newsLocalCsv": "/data/news.csv",
+  "researchLocalCsv": "/data/research.csv"
 }
 ```
 
 If remote CSV fails, the site automatically falls back to local CSV files.
+
+Important:
+- Use `.../export?format=csv&gid=...` URLs, not `gviz` URLs.
+- Keep row 1 as exact header names (for example `name`, `degree`, `year`, `title`, `authors`, `date`, `content`).
+- Spreadsheet must be shared as viewable by the website runtime (for public site, usually "Anyone with the link can view").
 
 ## CSV columns
 
@@ -82,6 +100,15 @@ Recommended:
 - `website`
 - `award`
 
+### Research (`research.csv`)
+
+Required:
+- `topic` (or `title`)
+
+Recommended:
+- `description`
+- `order` (numeric sort order, e.g., `1`, `2`, `3`)
+
 ## Image replacement
 
 - Lab logo: replace `static/images/haix-logo.svg`
@@ -89,3 +116,4 @@ Recommended:
 - Member photos: add files under `static/images/members/` and set CSV `photo` path
 - News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
 - Publication thumbnails: add files under `static/images/publications/` and set CSV `thumbnail` path
+- Research data: update `static/data/research.csv` or set `researchCsvUrl` in `static/data/sources.json`

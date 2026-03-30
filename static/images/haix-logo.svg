@@ -1,19 +1,16 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
   <defs>
-    <linearGradient id="g1" x1="24" y1="24" x2="232" y2="232" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0F766E"/>
-      <stop offset="1" stop-color="#C2642D"/>
-    </linearGradient>
-    <linearGradient id="g2" x1="48" y1="208" x2="208" y2="48" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0A4E58"/>
-      <stop offset="1" stop-color="#0F766E"/>
+    <linearGradient id="blueGradStandalone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect x="16" y="16" width="224" height="224" rx="44" fill="#FAF7F2"/>
-  <path d="M128 28L214 78V178L128 228L42 178V78L128 28Z" fill="url(#g1)" fill-opacity="0.16"/>
-  <path d="M84 74H108V182H84V74ZM148 74H172V182H148V74ZM96 118H160V138H96V118Z" fill="url(#g2)"/>
-  <path d="M124 74H147L172 108V74H196V182H173L148 149V182H124V74Z" fill="#C2642D"/>
-  <path d="M62 170L96 122L129 170H102L96 160L90 170H62Z" fill="#0A4E58"/>
-  <path d="M172 74L196 103L220 74H236L204 113L236 154H220L196 124L172 154H156L188 113L156 74H172Z" fill="#0A4E58"/>
-  <text x="128" y="216" text-anchor="middle" fill="#304152" font-size="20" font-family="IBM Plex Sans, sans-serif" font-weight="700" letter-spacing="3">HAIX</text>
+
+  <g transform="translate(15, 10)">
+    <path d="M 0 0 L 16 0 L 16 80 L 0 80 Z" fill="url(#blueGradStandalone)" rx="8" />
+    <path d="M 32 0 L 48 0 L 48 80 L 32 80 Z" fill="url(#blueGradStandalone)" rx="8" />
+    <path d="M 16 35 L 32 35" stroke="url(#blueGradStandalone)" stroke-width="10" stroke-linecap="round" />
+    <path d="M 32 0 L 64 60 C 68 68 68 76 64 80 L 48 80 L 32 80 Z" fill="url(#blueGradStandalone)" rx="8" />
+    <circle cx="36" cy="35" r="9" fill="#ef233c" stroke="#fff" stroke-width="2"/>
+  </g>
 </svg>

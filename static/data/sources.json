@@ -1,8 +1,10 @@
 {
-  "membersCsvUrl": "",
-  "publicationsCsvUrl": "",
-  "newsCsvUrl": "",
+  "membersCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=0",
+  "publicationsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=313564106",
+  "newsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1707205392",
+  "researchCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1173471225",
   "membersLocalCsv": "/data/members.csv",
   "publicationsLocalCsv": "/data/publications.csv",
-  "newsLocalCsv": "/data/news.csv"
+  "newsLocalCsv": "/data/news.csv",
+  "researchLocalCsv": "/data/research.csv"
 }

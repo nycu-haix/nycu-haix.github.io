@@ -5,9 +5,11 @@
     membersCsvUrl: "",
     publicationsCsvUrl: "",
     newsCsvUrl: "",
+    researchCsvUrl: "",
     membersLocalCsv: "/data/members.csv",
     publicationsLocalCsv: "/data/publications.csv",
-    newsLocalCsv: "/data/news.csv"
+    newsLocalCsv: "/data/news.csv",
+    researchLocalCsv: "/data/research.csv"
   };
 
   const FALLBACK_MEMBER_PHOTO = "/images/members/member-placeholder.svg";
@@ -16,10 +18,11 @@
   const membersContainer = document.getElementById("members-list");
   const publicationsContainer = document.getElementById("publications-list");
   const newsContainer = document.getElementById("news-list");
+  const researchContainer = document.getElementById("research-list");
 
   setupReveal();
 
-  if (!membersContainer && !publicationsContainer && !newsContainer) {
+  if (!membersContainer && !publicationsContainer && !newsContainer && !researchContainer) {
     return;
   }
 
@@ -53,13 +56,22 @@
       );
     }
 
+    if (researchContainer) {
+      jobs.push(
+        loadResearch(sources).catch((error) => {
+          renderError(researchContainer, `Unable to load research data. ${error.message}`);
+        })
+      );
+    }
+
     await Promise.all(jobs);
   }
 
   async function loadMembers(sources) {
     const remote = cleanUrl(sources.membersCsvUrl);
     const local = cleanUrl(sources.membersLocalCsv) || DEFAULT_SOURCES.membersLocalCsv;
-    const csvText = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(remote, local);
+    const csvText = result.text;
     const rows = parseCsv(csvText);
 
     const members = rows
@@ -68,12 +80,17 @@
 
     members.sort(compareMember);
     renderMembers(members);
+
+    if (result.usedFallback) {
+      renderFallbackNotice(membersContainer);
+    }
   }
 
   async function loadPublications(sources) {
     const remote = cleanUrl(sources.publicationsCsvUrl);
     const local = cleanUrl(sources.publicationsLocalCsv) || DEFAULT_SOURCES.publicationsLocalCsv;
-    const csvText = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(remote, local);
+    const csvText = result.text;
     const rows = parseCsv(csvText);
 
     const publications = rows
@@ -82,12 +99,17 @@
 
     publications.sort((a, b) => (b.yearNum || 0) - (a.yearNum || 0));
     renderPublications(publications);
+
+    if (result.usedFallback) {
+      renderFallbackNotice(publicationsContainer);
+    }
   }
 
   async function loadNews(sources) {
     const remote = cleanUrl(sources.newsCsvUrl);
     const local = cleanUrl(sources.newsLocalCsv) || DEFAULT_SOURCES.newsLocalCsv;
-    const csvText = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(remote, local);
+    const csvText = result.text;
     const rows = parseCsv(csvText);
 
     const newsItems = rows
@@ -96,6 +118,29 @@
 
     newsItems.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     renderNews(newsItems);
+
+    if (result.usedFallback) {
+      renderFallbackNotice(newsContainer);
+    }
+  }
+
+  async function loadResearch(sources) {
+    const remote = cleanUrl(sources.researchCsvUrl);
+    const local = cleanUrl(sources.researchLocalCsv) || DEFAULT_SOURCES.researchLocalCsv;
+    const result = await fetchCsvWithFallback(remote, local);
+    const csvText = result.text;
+    const rows = parseCsv(csvText);
+
+    const researchItems = rows
+      .map((row) => normalizeResearch(row))
+      .filter((item) => item.topic || item.description);
+
+    researchItems.sort(compareResearch);
+    renderResearch(researchItems);
+
+    if (result.usedFallback) {
+      renderFallbackNotice(researchContainer);
+    }
   }
 
   async function loadSources() {
@@ -127,6 +172,7 @@
     }
 
     let lastError = new Error("No data source configured.");
+    let primaryFailed = false;
 
     for (const url of attempts) {
       try {
@@ -140,8 +186,15 @@
           throw new Error("CSV is empty.");
         }
 
-        return text;
+        const usedFallback = Boolean(primaryFailed && fallbackUrl && url === fallbackUrl && fallbackUrl !== primaryUrl);
+        return {
+          text,
+          usedFallback
+        };
       } catch (error) {
+        if (primaryUrl && url === primaryUrl) {
+          primaryFailed = true;
+        }
         lastError = new Error(`${url} -> ${error.message}`);
       }
     }
@@ -549,6 +602,27 @@
     return 9;
   }
 
+  function normalizeResearch(row) {
+    const orderText = pick(row, "order", "sort", "rank", "index");
+    const orderNum = Number.parseInt(orderText, 10);
+
+    return {
+      topic: pick(row, "topic", "title", "area", "name"),
+      description: pick(row, "description", "details", "content", "summary"),
+      orderNum: Number.isFinite(orderNum) ? orderNum : Number.POSITIVE_INFINITY
+    };
+  }
+
+  function compareResearch(a, b) {
+    if (a.orderNum !== b.orderNum) {
+      return a.orderNum - b.orderNum;
+    }
+
+    const textA = a.topic || a.description;
+    const textB = b.topic || b.description;
+    return String(textA).localeCompare(String(textB), "zh-Hant");
+  }
+
   function normalizePublication(row) {
     const yearText = pick(row, "year", "publication_year");
     const yearNum = Number.parseInt(yearText, 10);
@@ -689,6 +763,42 @@
     membersContainer.appendChild(fragment);
   }
 
+  function renderResearch(researchItems) {
+    if (!researchContainer) {
+      return;
+    }
+
+    researchContainer.innerHTML = "";
+
+    if (!researchItems.length) {
+      researchContainer.appendChild(buildNote("No research rows found in CSV."));
+      return;
+    }
+
+    const list = document.createElement("ul");
+    list.className = "plain-list research-list";
+
+    researchItems.forEach((item) => {
+      const row = document.createElement("li");
+
+      if (item.topic) {
+        const topic = document.createElement("b");
+        topic.textContent = item.topic;
+        row.appendChild(topic);
+      }
+
+      if (item.topic && item.description) {
+        row.appendChild(document.createTextNode(` - ${item.description}`));
+      } else if (item.description) {
+        row.appendChild(document.createTextNode(item.description));
+      }
+
+      list.appendChild(row);
+    });
+
+    researchContainer.appendChild(list);
+  }
+
   function updateMemberPhotoMode(photo, source) {
     const normalized = cleanUrl(source);
     photo.classList.toggle("member-photo-square", normalized === FALLBACK_MEMBER_PHOTO);
@@ -696,17 +806,14 @@
 
   function composeMemberMeta(member) {
     const meta = [];
+    const primaryMeta = member.degree || member.role;
 
-    if (member.degree) {
-      meta.push(member.degree);
+    if (primaryMeta) {
+      meta.push(primaryMeta);
     }
 
     if (member.year) {
       meta.push(member.year);
-    }
-
-    if (!meta.length && member.role) {
-      meta.push(member.role);
     }
 
     return meta.join(" • ") || "Lab Member";
@@ -714,10 +821,11 @@
 
   function buildMemberLinks(member) {
     const linkItems = [
-      { label: "GitHub", url: toSafeExternalUrl(member.github), type: "github" },
-      { label: "ORCID", url: toSafeExternalUrl(member.orcid), type: "orcid" },
-      { label: "Google Scholar", url: toSafeExternalUrl(member.scholar), type: "scholar" },
-      { label: "Website", url: toSafeExternalUrl(member.website), type: "website" }
+      { label: "Email", url: toSafeMailto(member.email), type: "email", external: false },
+      { label: "GitHub", url: toSafeExternalUrl(member.github), type: "github", external: true },
+      { label: "ORCID", url: toSafeExternalUrl(member.orcid), type: "orcid", external: true },
+      { label: "Google Scholar", url: toSafeExternalUrl(member.scholar), type: "scholar", external: true },
+      { label: "Website", url: toSafeExternalUrl(member.website), type: "website", external: true }
     ].filter((item) => item.url);
 
     if (!linkItems.length) {
@@ -731,8 +839,10 @@
       const link = document.createElement("a");
       link.className = `member-link member-link--${item.type}`;
       link.href = item.url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
+      if (item.external) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
       link.title = item.label;
       link.setAttribute("aria-label", item.label);
       link.appendChild(createMemberLinkIcon(item.type));
@@ -769,6 +879,12 @@
       circle.setAttribute("r", r);
       svg.appendChild(circle);
     };
+
+    if (type === "email") {
+      drawPath("M3.5 7.5h17v9h-17z");
+      drawPath("m4 8 8 5 8-5");
+      return svg;
+    }
 
     if (type === "github") {
       drawPath("M15 22v-3.9a4.8 4.8 0 0 0-.1-1 5 5 0 0 0 2.1-4.1c0-1-.3-2-.8-2.8A4.8 4.8 0 0 0 16.5 7s-.8-.3-2.8 1a9.4 9.4 0 0 0-5 0C6.8 6.7 6 7 6 7a4.8 4.8 0 0 0-.3 3.2 5 5 0 0 0-.7 2.8c0 1.6.8 3.1 2.1 4.1a4.8 4.8 0 0 0-.1 1V22");
@@ -997,6 +1113,19 @@
     return "";
   }
 
+  function toSafeMailto(value) {
+    const cleaned = cleanUrl(value);
+    if (!cleaned) {
+      return "";
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleaned)) {
+      return "";
+    }
+
+    return `mailto:${cleaned}`;
+  }
+
   function composeVenueText(publication) {
     const pieces = [];
 
@@ -1042,6 +1171,17 @@
     note.className = "loading";
     note.textContent = text;
     return note;
+  }
+
+  function renderFallbackNotice(container) {
+    if (!container) {
+      return;
+    }
+
+    const notice = document.createElement("p");
+    notice.className = "fallback-notice";
+    notice.textContent = "Spreadsheet unavailable. Showing local fallback data.";
+    container.prepend(notice);
   }
 
   function renderError(container, message) {

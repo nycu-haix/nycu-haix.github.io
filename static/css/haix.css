@@ -366,6 +366,13 @@ p {
   color: #b23f24;
 }
 
+.fallback-notice {
+  margin: 0 0 0.7rem;
+  color: #8a5a00;
+  font-size: 0.92rem;
+  font-family: "Roboto Mono", monospace;
+}
+
 .footer {
   margin: 1.2rem auto 1.6rem;
   text-align: center;
