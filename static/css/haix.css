@@ -5,7 +5,8 @@ html {
 body {
   margin: 0;
   font-family: "Assistant", "Noto Sans TC", sans-serif;
-  line-height: 1.6;
+  line-height: 160%;
+  font-weight: 400;
   font-size: 16px;
   color: #111;
   background: #fff;
@@ -14,16 +15,17 @@ body {
 .skip-link {
   position: absolute;
   left: -9999px;
-  top: auto;
+  opacity: 0;
 }
 
 .skip-link:focus {
   left: 1rem;
   top: 1rem;
-  z-index: 9999;
+  opacity: 1;
   background: #fff;
-  border: 1px solid #000;
-  padding: 0.3rem 0.6rem;
+  border: 1px solid #444;
+  padding: 0.3rem 0.55rem;
+  z-index: 50;
 }
 
 .container-fluid {
@@ -32,22 +34,45 @@ body {
   padding: 0 1rem;
 }
 
-.top-nav {
-  margin: 1.2rem auto 0;
+.row {
+  margin: 1.8rem auto;
+}
+
+.nav-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 5fr;
   align-items: center;
   gap: 1rem;
 }
 
-.brand-area a {
-  display: inline-block;
+.brand-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: #000;
 }
 
-.logo {
-  width: min(350px, 100%);
-  height: auto;
-  display: block;
+.logo-mark {
+  width: 82px;
+  height: 82px;
+}
+
+.brand-copy {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-copy strong {
+  font-family: "Roboto Mono", monospace;
+  font-size: 1.42rem;
+  font-weight: 500;
+}
+
+.brand-copy small {
+  font-size: 0.98rem;
+  color: #555;
 }
 
 .menu {
@@ -55,12 +80,12 @@ body {
 }
 
 .menu a {
-  margin: 0 0.55rem;
+  margin: auto 0.5em;
   font-family: "Roboto Mono", monospace;
-  font-weight: 500;
+  font-weight: 300;
   text-transform: uppercase;
-  font-size: 1rem;
-  line-height: 2.6rem;
+  font-size: 1.1em;
+  line-height: 3.2em;
   color: #000;
   text-decoration: none;
 }
@@ -71,20 +96,20 @@ body {
 }
 
 main {
-  margin: 0 auto;
+  margin-top: 0.5rem;
 }
 
 .title {
   font-family: "Roboto Mono", monospace;
   font-weight: 300;
   font-style: italic;
-  font-size: clamp(1.35rem, 2.5vw, 1.95rem);
-  line-height: 1.5;
-  margin: 1.6rem 0;
+  font-size: 2rem;
+  line-height: 1.5em;
+  margin: 1.8rem 0;
 }
 
 hr {
-  margin: 1.2rem 0 1.6rem;
+  margin: 1.1rem 0;
   border: 0;
   border-top: 1px solid #ddd;
 }
@@ -99,131 +124,134 @@ h4 {
 h2 {
   font-family: "Roboto Mono", monospace;
   font-weight: 700;
-  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  font-size: 2.4rem;
   margin-bottom: 1.2rem;
 }
 
-h3,
-.subheading {
+h3 {
   font-family: "Roboto Mono", monospace;
   font-weight: 500;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  margin-top: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.65rem;
+  margin: 1rem 0 0.6rem;
 }
 
 h4 {
   font-weight: 700;
-  font-size: 1.15rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.18rem;
+  margin: 0.2rem 0;
 }
 
 a {
   color: #4c86f4;
-  text-decoration: none;
+  font-weight: 400;
 }
 
 a:hover,
 a:focus-visible {
+  text-decoration: none;
   color: orange;
 }
 
 p {
-  margin: 0.5rem 0 0;
+  margin: 0.45rem 0 0;
 }
 
-.section-block {
-  margin-bottom: 0.8rem;
-}
-
-.two-col {
+.section-row {
   display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 2rem;
+  align-items: start;
 }
 
-.simple-box {
-  border: 1px solid #ccc;
-  padding: 0.9rem;
-}
-
-.simple-box ul,
-.research-list {
-  margin: 0;
-  padding: 0;
-}
-
-.simple-box li,
-.research-list li {
-  list-style: none;
-  margin-bottom: 0.8rem;
-}
-
-.teaching-list article {
+.content-item {
   margin-bottom: 1rem;
 }
 
-.note {
+.content-item p {
+  margin-top: 0.2rem;
+}
+
+.plain-list {
+  padding: 0;
+  margin: 0;
+}
+
+.plain-list li {
+  list-style-type: none;
+  margin-bottom: 0.8rem;
+}
+
+.research-list li {
+  margin-bottom: 0.65rem;
+}
+
+.col-side {
+  font-size: 1.02rem;
+}
+
+.side-photo {
+  width: 100%;
+  max-width: 260px;
+  border: 1px solid #adadad;
+  margin-bottom: 0.7rem;
+}
+
+.side-note {
+  color: #555;
+}
+
+.subtle {
+  font-size: 0.88rem;
   color: #777;
-  margin-top: 0;
+  font-family: "Assistant", "Noto Sans TC", sans-serif;
+  font-weight: 400;
+}
+
+.group-overview img {
+  width: 100%;
+  border: 1px solid #adadad;
 }
 
 .publication-list {
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
 }
 
 .publication-card {
   display: grid;
-  grid-template-columns: minmax(140px, 180px) 1fr;
+  grid-template-columns: 180px 1fr;
   gap: 1rem;
-  margin-bottom: 1.4rem;
+  margin: 0 0 1.5rem;
 }
 
 .publication-thumb {
   width: 100%;
   max-width: 180px;
   border: 1px solid #adadad;
-  object-fit: cover;
 }
 
 .publication-meta h4 {
-  font-family: "Assistant", sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  line-height: 1.35;
+  font-size: 2rem;
+  line-height: 1.4em;
+  margin: 0.1rem auto;
 }
 
 .publication-meta p {
-  margin-top: 0.35rem;
+  margin-top: 0.3rem;
 }
 
 .publication-links {
+  display: block;
   margin-top: 0.5rem;
 }
 
 .publication-links a {
-  margin-right: 0.8rem;
-  font-family: "Roboto Mono", monospace;
+  margin-right: 10px;
   font-size: 0.95rem;
-}
-
-.lab-overview {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 1.2rem;
-  align-items: start;
-  margin-bottom: 0.8rem;
-}
-
-.lab-overview img {
-  width: 100%;
-  border: 1px solid #adadad;
+  font-family: "Roboto Mono", monospace;
 }
 
 .member-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 0.8rem;
+  display: block;
 }
 
 .member-card {
@@ -231,6 +259,7 @@ p {
   vertical-align: top;
   text-align: center;
   width: 15rem;
+  margin: 0 0.8rem 1rem 0;
 }
 
 .member-card img {
@@ -238,54 +267,73 @@ p {
   width: 12rem;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  margin: 0.5rem 0;
+  margin: 0.5em 0;
   border: 1px solid #adadad;
 }
 
 .member-card h4 {
-  margin-top: 0;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
+  margin-top: 0.1rem;
 }
 
 .member-meta {
   color: #999;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 .member-desc {
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
   color: #444;
 }
 
 .loading,
 .error {
-  margin: 0.6rem 0;
+  margin: 0.7rem 0;
   color: #777;
 }
 
 .error {
-  color: #c43d22;
+  color: #b23f24;
 }
 
 .footer {
-  margin: 2rem auto 1.2rem;
+  margin: 1.2rem auto 1.6rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1em;
+}
+
+.footer-note {
+  color: #666;
 }
 
 .js-enabled .reveal {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
 }
 
 .js-enabled .reveal.is-visible {
   opacity: 1;
   transform: none;
-  transition: opacity 320ms ease, transform 320ms ease;
+  transition: opacity 280ms ease, transform 280ms ease;
 }
 
-@media screen and (max-width: 992px) {
-  .top-nav {
+@media screen and (max-width: 1024px) {
+  .menu a {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 2.05rem;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .nav-row,
+  .section-row {
     grid-template-columns: 1fr;
   }
 
@@ -294,13 +342,26 @@ p {
   }
 
   .menu a {
+    margin-right: 0.8rem;
     margin-left: 0;
-    margin-right: 0.9rem;
+    line-height: 2.4em;
   }
 
-  .two-col,
-  .lab-overview {
-    grid-template-columns: 1fr;
+  .logo-mark {
+    width: 68px;
+    height: 68px;
+  }
+
+  .brand-copy strong {
+    font-size: 1.2rem;
+  }
+
+  .brand-copy small {
+    font-size: 0.9rem;
+  }
+
+  .title {
+    font-size: 1.45rem;
   }
 }
 
@@ -311,5 +372,14 @@ p {
 
   .publication-thumb {
     max-width: 240px;
+  }
+
+  .publication-meta h4 {
+    font-size: 1.55rem;
+  }
+
+  .member-card {
+    width: 100%;
+    max-width: 260px;
   }
 }

@@ -7,129 +7,168 @@
   <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}HAIX Lab website{{ end }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Roboto+Mono:ital,wght@0,500;1,300;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="container-fluid">
-    <header class="top-nav" id="top">
-      <div class="brand-area">
-        <a href="#top" aria-label="HAIX Lab Home">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo" alt="HAIX Lab logo">
+    <header class="row nav-row" id="top">
+      <div class="col-left">
+        <a class="brand-line" href="#top" aria-label="HAIX Lab Home">
+          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <span class="brand-copy">
+            <strong>HAIX Lab</strong>
+            <small>National Yang Ming Chiao Tung University</small>
+          </span>
         </a>
       </div>
-      <nav class="menu" aria-label="Main navigation">
-        <a href="#about">About Me</a>
-        <a href="#teaching">Teaching</a>
-        <a href="#research">Research</a>
-        <a href="#lab">HAIX Lab</a>
-      </nav>
+      <div class="col-right">
+        <nav class="menu" aria-label="Main navigation">
+          <a href="#about">About Me</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#research">Research</a>
+          <a href="#lab">HAIX Lab</a>
+        </nav>
+      </div>
     </header>
 
     <main id="main-content">
       <p class="title reveal">
-        The <b>HAIX Lab</b> at NYCU explores Human-AI Interaction across creativity,
-        cognition, social computing, physical AI, and healthcare. This one-page site follows
-        the clean, section-first academic style that Grace requested.
+        The <b>HAIX Lab</b> at NYCU studies Human-AI Interaction across creativity, cognition,
+        social computing, physical AI, and healthcare. We keep this page intentionally simple,
+        readable, and easy to maintain through spreadsheet-driven updates.
       </p>
 
       <hr>
 
-      <section id="about" class="section-block reveal">
-        <h2>About Me</h2>
-        <div class="two-col">
-          <article>
+      <section id="about" class="row section-row reveal">
+        <div class="col-main">
+          <h2>About Me</h2>
+          <article class="content-block">
             <p>
               I am Grace (Yu-Chun) Yen, Assistant Professor in Computer Science at NYCU.
               My work bridges HCI, AI, and social systems to support learning, creativity,
               and decision making in real-world contexts.
             </p>
             <p>
-              Our lab has evolved from <i>Creativity Lab</i> to <i>HAIX Lab</i> to better match
-              an expanding research scope and interdisciplinary collaborations.
+              Our lab evolved from <i>Creativity Lab</i> to <i>HAIX Lab</i> as research expanded
+              beyond creativity support into broader human-centered intelligence and interdisciplinary work.
             </p>
           </article>
-          <aside class="simple-box">
-            <h3>Current Focus</h3>
-            <ul>
-              <li>Human-AI Creativity Support</li>
-              <li>Cognition and Decision Intelligence</li>
-              <li>Social and Collaborative Computing</li>
-              <li>Physical AI and Healthcare</li>
-            </ul>
-          </aside>
         </div>
+        <aside class="col-side">
+          <img src="{{ "images/members/member-placeholder.svg" | relURL }}" alt="Grace profile placeholder" class="side-photo">
+          <h4>Current Focus</h4>
+          <ul class="plain-list">
+            <li>Human-AI Creativity Support</li>
+            <li>Cognition and Decision Intelligence</li>
+            <li>Social and Collaborative Computing</li>
+            <li>Physical AI and Healthcare</li>
+          </ul>
+        </aside>
       </section>
 
       <hr>
 
-      <section id="teaching" class="section-block reveal">
-        <h2>Teaching</h2>
-        <div class="teaching-list">
-          <article>
+      <section id="teaching" class="row section-row reveal">
+        <div class="col-main">
+          <h2>Teaching</h2>
+          <article class="content-item">
             <h4>Human-Computer Interaction</h4>
             <p>Design methods, prototyping, and empirical evaluation for interactive systems.</p>
           </article>
-          <article>
+          <article class="content-item">
             <h4>Human-AI Collaboration</h4>
             <p>How people coordinate with AI for creativity, feedback, and learning.</p>
           </article>
-          <article>
+          <article class="content-item">
             <h4>Research Seminar</h4>
             <p>Paper discussions and project development across CHI, CSCW, and related venues.</p>
           </article>
         </div>
+        <aside class="col-side">
+          <h4>Teaching Notes</h4>
+          <ul class="plain-list">
+            <li>Graduate-oriented reading and discussion</li>
+            <li>Design + implementation + evaluation cycles</li>
+            <li>Interdisciplinary problem framing</li>
+          </ul>
+        </aside>
       </section>
 
       <hr>
 
-      <section id="research" class="section-block reveal">
-        <h2>Research</h2>
-        <ul class="research-list">
-          <li><b>Creativity & Learning</b> - Support systems for idea generation and critique.</li>
-          <li><b>Cognition & Memory</b> - Interfaces for thinking processes and recall support.</li>
-          <li><b>Social Computing</b> - Collaborative workflows and collective intelligence.</li>
-          <li><b>Physical AI & Healthcare</b> - Human-centered intelligence in embodied settings.</li>
-        </ul>
+      <section id="research" class="row section-row reveal">
+        <div class="col-main">
+          <h2>Research</h2>
+          <ul class="plain-list research-list">
+            <li><b>Creativity & Learning</b> - Support systems for ideation and critique.</li>
+            <li><b>Cognition & Memory</b> - Interfaces for thinking processes and recall support.</li>
+            <li><b>Social Computing</b> - Collaborative workflows and collective intelligence.</li>
+            <li><b>Physical AI & Healthcare</b> - Human-centered intelligence in embodied settings.</li>
+          </ul>
 
-        <h3 class="subheading">Latest Publications</h3>
-        <p class="note">Auto-updated from Google Spreadsheet CSV or local CSV fallback.</p>
-        <div id="publications-list" class="publication-list" aria-live="polite">
-          <p class="loading">Loading publications...</p>
-        </div>
-      </section>
-
-      <hr>
-
-      <section id="lab" class="section-block reveal">
-        <h2>HAIX Lab</h2>
-        <div class="lab-overview">
-          <img src="{{ "images/group-photo-placeholder.svg" | relURL }}" alt="HAIX Lab group photo placeholder">
-          <div>
-            <p>
-              Member profiles use uploaded photos from the lab directly (no Gravatar),
-              and each profile stays concise with degree + year (e.g., M1/M2) as requested.
-            </p>
-            <p>
-              Data source is centralized in spreadsheet/CSV so the site updates without manual editing every time.
-            </p>
+          <h3>Latest Publications <span class="subtle">(auto from spreadsheet/CSV)</span></h3>
+          <div id="publications-list" class="publication-list" aria-live="polite">
+            <p class="loading">Loading publications...</p>
           </div>
         </div>
-
-        <h3 class="subheading">Members</h3>
-        <p class="note">Auto-updated from Google Spreadsheet CSV or local CSV fallback.</p>
-        <div id="members-list" class="member-grid" aria-live="polite">
-          <p class="loading">Loading members...</p>
-        </div>
+        <aside class="col-side">
+          <h4>Data Source</h4>
+          <p class="side-note">
+            Publications are maintained in spreadsheet format and rendered directly on this page.
+          </p>
+          <p class="side-note">
+            Fields include title, authors, proceedings, DOI, links, and thumbnail.
+          </p>
+        </aside>
       </section>
-    </main>
 
-    <footer class="footer">
-      <p>© {{ now.Year }} HAIX Lab, NYCU</p>
-      <p>Data config: <code>/static/data/sources.json</code></p>
-    </footer>
+      <hr>
+
+      <section id="lab" class="row section-row reveal">
+        <div class="col-main">
+          <h2>HAIX Lab</h2>
+          <div class="group-overview">
+            <img src="{{ "images/group-photo-placeholder.svg" | relURL }}" alt="HAIX Lab group photo placeholder">
+          </div>
+          <p>
+            Member profiles use uploaded photos from the lab directly (no Gravatar),
+            and each profile stays concise with degree + year (e.g., M1/M2) as requested.
+          </p>
+          <h3>People <span class="subtle">(auto from spreadsheet/CSV)</span></h3>
+          <div id="members-list" class="member-grid" aria-live="polite">
+            <p class="loading">Loading members...</p>
+          </div>
+        </div>
+        <aside class="col-side">
+          <h4>Lab Info</h4>
+          <p class="side-note">
+            Formerly NYCU Creativity Lab.
+          </p>
+          <p class="side-note">
+            HAIX uses the "X" to represent cross-disciplinary expansion.
+          </p>
+          <p class="side-note">
+            Data config: <code>/static/data/sources.json</code>
+          </p>
+          <p class="side-note">
+            Website: <a href="https://nycu-haix.github.io/">nycu-haix.github.io</a>
+          </p>
+        </aside>
+      </section>
+
+      <hr>
+
+      <footer class="footer">
+        <p>© {{ now.Year }} HAIX Lab, NYCU</p>
+        <p class="footer-note">
+          Maintained via Hugo + spreadsheet/CSV data pipeline.
+        </p>
+      </footer>
+    </main>
   </div>
 
   <script src="{{ "js/haix.js" | relURL }}" defer></script>
