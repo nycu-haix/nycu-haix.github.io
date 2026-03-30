@@ -1,14 +1,14 @@
 baseURL = "https://nycu-haix.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-title = "NYCU HAIX Lab"
+title = "Human AI & Creative Computing Lab"
 theme = "anubis2"
 
 [params]
-description = "HAIX Lab at National Yang Ming Chiao Tung University"
+description = "Human AI & Creative Computing Lab at National Yang Ming Chiao Tung University"
 
 [params.author]
-name = "HAIX Lab"
+name = "Human AI & Creative Computing Lab"
 location = "Hsinchu, Taiwan"
 
 [params.anubis2]

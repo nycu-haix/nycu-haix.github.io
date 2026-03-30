@@ -1,10 +1,10 @@
-# NYCU HAIX Lab Website
+# Human AI & Creative Computing Lab Website
 
 This site is a one-page Hugo website based on Grace's requirements:
-- One-page structure: `About Me`, `Teaching`, `Research`, `HAIX Lab`
+- One-page structure: `About Me`, `Teaching`, `Research`, `Human AI & Creative Computing Lab`
 - Manual member photos (no Gravatar)
 - Spreadsheet/CSV-driven members and publications
-- HAIX branding and logo
+- Lab branding and logo
 
 ## Run locally
 
