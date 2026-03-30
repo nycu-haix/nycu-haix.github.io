@@ -7,7 +7,7 @@
   <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}Human AI &amp; Creative Computing Lab website{{ end }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
 </head>
 <body>
@@ -26,8 +26,6 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
-          <a href="#about">About Me</a>
-          <a href="#teaching">Teaching</a>
           <a href="#news">News</a>
           <a href="#research">Research</a>
           <a href="#lab">Lab</a>
@@ -43,59 +41,6 @@
 
       <hr>
 
-      <section id="about" class="row section-row reveal">
-        <div class="col-main">
-          <h2>About Me</h2>
-          <article class="content-block">
-            <p>
-              I am Grace (Yu-Chun) Yen, Assistant Professor in Computer Science at NYCU.
-              My work bridges HCI, AI, and social systems to support learning, creativity,
-              and decision making in real-world contexts.
-            </p>
-          </article>
-        </div>
-        <aside class="col-side">
-          <img src="{{ "images/members/member-placeholder.svg" | relURL }}" alt="Grace profile placeholder" class="side-photo">
-          <h4>Current Focus</h4>
-          <ul class="plain-list">
-            <li>Human-AI Creativity Support</li>
-            <li>Cognition and Decision Intelligence</li>
-            <li>Social and Collaborative Computing</li>
-            <li>Physical AI and Healthcare</li>
-          </ul>
-        </aside>
-      </section>
-
-      <hr>
-
-      <section id="teaching" class="row section-row reveal">
-        <div class="col-main">
-          <h2>Teaching</h2>
-          <article class="content-item">
-            <h4>Human-Computer Interaction</h4>
-            <p>Design methods, prototyping, and empirical evaluation for interactive systems.</p>
-          </article>
-          <article class="content-item">
-            <h4>Human-AI Collaboration</h4>
-            <p>How people coordinate with AI for creativity, feedback, and learning.</p>
-          </article>
-          <article class="content-item">
-            <h4>Research Seminar</h4>
-            <p>Paper discussions and project development across CHI, CSCW, and related venues.</p>
-          </article>
-        </div>
-        <aside class="col-side">
-          <h4>Teaching Notes</h4>
-          <ul class="plain-list">
-            <li>Graduate-oriented reading and discussion</li>
-            <li>Design + implementation + evaluation cycles</li>
-            <li>Interdisciplinary problem framing</li>
-          </ul>
-        </aside>
-      </section>
-
-      <hr>
-
       <section id="news" class="row section-row reveal">
         <div class="col-main">
           <h2>News</h2>
@@ -103,12 +48,6 @@
             <p class="loading">Loading news...</p>
           </div>
         </div>
-        <aside class="col-side">
-          <h4>Recent Updates</h4>
-          <p class="side-note">
-            Lab events, publications, awards, talks, and opportunities.
-          </p>
-        </aside>
       </section>
 
       <hr>
@@ -128,15 +67,6 @@
             <p class="loading">Loading publications...</p>
           </div>
         </div>
-        <aside class="col-side">
-          <h4>Research Themes</h4>
-          <ul class="plain-list">
-            <li>Creativity support tools</li>
-            <li>Cognitive interface design</li>
-            <li>Social interaction systems</li>
-            <li>Healthcare-centered HAI</li>
-          </ul>
-        </aside>
       </section>
 
       <hr>
@@ -152,18 +82,36 @@
             <p class="loading">Loading members...</p>
           </div>
         </div>
-        <aside class="col-side">
-          <h4>Lab Info</h4>
-          <p class="side-note">
-            Website: <a href="https://nycu-haix.github.io/">nycu-haix.github.io</a>
-          </p>
-        </aside>
       </section>
 
       <hr>
 
       <footer class="footer">
         <p>© {{ now.Year }} Human AI &amp; Creative Computing Lab, NYCU</p>
+        <p class="footer-note">
+          <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
+          built by
+          <a href="https://gracetfg2.github.io/" target="_blank" rel="noopener noreferrer">Grace Yun-Chun Yen</a>
+          and
+          <a href="https://skyhong.tw" target="_blank" rel="noopener noreferrer">Sky Shih-Kai Hong</a>.
+        </p>
+        <p class="footer-note">
+          Inspired by
+          <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
+        </p>
+        <a
+          class="footer-nycu-logo-link"
+          href="https://brand.nycu.edu.tw/guidelines/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="NYCU brand guidelines"
+        >
+          <img
+            src="{{ "images/nycu-logo-official-full-en.png" | relURL }}"
+            class="footer-nycu-logo"
+            alt="NYCU Taiwan National Yang Ming Chiao Tung University logo"
+          >
+        </a>
       </footer>
     </main>
   </div>

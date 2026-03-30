@@ -1,8 +1,8 @@
 # Human AI & Creative Computing Lab Website
 
 This site is a one-page Hugo website based on Grace's requirements:
-- One-page structure: `About Me`, `Teaching`, `News`, `Research`, `Human AI & Creative Computing Lab`
-- Manual member photos (no Gravatar)
+- One-page structure: `News`, `Research`, `Human AI & Creative Computing Lab`
+- Manual member photos with Gravatar fallback
 - Spreadsheet/CSV-driven members, news, and publications
 - Lab branding and logo
 
@@ -44,12 +44,16 @@ Recommended:
 - `role`
 - `email`
 - `github`
+- `orcid`
+- `scholar` (Google Scholar URL)
+- `website`
 - `photo` (e.g., `/images/members/alice.jpg`)
 - `description`
 
 Photo fallback order:
 1. `photo`
-2. `/images/members/member-placeholder.svg`
+2. Gravatar from `email`
+3. `/images/members/member-placeholder.svg`
 
 ### News (`news.csv`)
 
