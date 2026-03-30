@@ -478,8 +478,33 @@ p {
     font-size: 1.55rem;
   }
 
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 0.45rem;
+    justify-items: center;
+    align-items: start;
+  }
+
   .member-card {
+    display: block;
     width: 100%;
-    max-width: 260px;
+    max-width: 170px;
+    margin: 0;
+  }
+
+  .member-card img {
+    width: 100%;
+    max-width: 140px;
+  }
+
+  .member-card h4 {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .member-grid {
+    grid-template-columns: 1fr;
   }
 }
