@@ -546,7 +546,7 @@
       return yearA - yearB;
     }
 
-    return String(a.name).localeCompare(String(b.name), "zh-Hant");
+    return compareMemberName(a.name, b.name);
   }
 
   function memberYearRank(yearValue) {
@@ -582,12 +582,8 @@
       return 0;
     }
 
-    if (normalized.includes("phd") || roleText.includes("博士")) {
-      return 1;
-    }
-
     if (normalized.includes("master") || normalized.includes("ms") || roleText.includes("碩士")) {
-      return 2;
+      return 1;
     }
 
     if (
@@ -596,10 +592,48 @@
       roleText.includes("大學部") ||
       roleText.includes("學士")
     ) {
+      return 2;
+    }
+
+    if (normalized.includes("phd") || roleText.includes("博士")) {
       return 3;
     }
 
     return 9;
+  }
+
+  function compareMemberName(nameA, nameB) {
+    const textA = String(nameA || "").trim();
+    const textB = String(nameB || "").trim();
+
+    const scriptA = memberNameScriptRank(textA);
+    const scriptB = memberNameScriptRank(textB);
+    if (scriptA !== scriptB) {
+      return scriptA - scriptB;
+    }
+
+    if (scriptA === 0) {
+      return textA.localeCompare(textB, "en", { sensitivity: "base" });
+    }
+
+    return textA.localeCompare(textB, "zh-Hant");
+  }
+
+  function memberNameScriptRank(name) {
+    const firstChar = String(name || "").charAt(0);
+    if (!firstChar) {
+      return 2;
+    }
+
+    if (/[A-Za-z]/.test(firstChar)) {
+      return 0;
+    }
+
+    if (/[\u3400-\u9fff]/.test(firstChar)) {
+      return 1;
+    }
+
+    return 2;
   }
 
   function normalizeResearch(row) {
