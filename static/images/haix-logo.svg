@@ -1,0 +1,19 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="24" y1="24" x2="232" y2="232" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#C2642D"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="48" y1="208" x2="208" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0A4E58"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="44" fill="#FAF7F2"/>
+  <path d="M128 28L214 78V178L128 228L42 178V78L128 28Z" fill="url(#g1)" fill-opacity="0.16"/>
+  <path d="M84 74H108V182H84V74ZM148 74H172V182H148V74ZM96 118H160V138H96V118Z" fill="url(#g2)"/>
+  <path d="M124 74H147L172 108V74H196V182H173L148 149V182H124V74Z" fill="#C2642D"/>
+  <path d="M62 170L96 122L129 170H102L96 160L90 170H62Z" fill="#0A4E58"/>
+  <path d="M172 74L196 103L220 74H236L204 113L236 154H220L196 124L172 154H156L188 113L156 74H172Z" fill="#0A4E58"/>
+  <text x="128" y="216" text-anchor="middle" fill="#304152" font-size="20" font-family="IBM Plex Sans, sans-serif" font-weight="700" letter-spacing="3">HAIX</text>
+</svg>

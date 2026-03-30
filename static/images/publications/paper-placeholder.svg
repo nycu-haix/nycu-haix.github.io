@@ -1,0 +1,18 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="600" y2="400" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#E6F3EE"/>
+      <stop offset="1" stop-color="#FAE9DC"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" rx="20" fill="url(#pbg)"/>
+  <rect x="46" y="52" width="508" height="296" rx="16" fill="#FBF8F2" stroke="#D6DFD9" stroke-width="3"/>
+  <rect x="80" y="96" width="190" height="210" rx="10" fill="#D3EDE6"/>
+  <rect x="294" y="102" width="226" height="18" rx="9" fill="#5E7A86"/>
+  <rect x="294" y="136" width="190" height="13" rx="6.5" fill="#7D95A0"/>
+  <rect x="294" y="164" width="214" height="13" rx="6.5" fill="#7D95A0"/>
+  <rect x="294" y="192" width="175" height="13" rx="6.5" fill="#7D95A0"/>
+  <rect x="294" y="240" width="120" height="28" rx="14" fill="#0F766E"/>
+  <text x="354" y="259" text-anchor="middle" fill="#F4FBF8" font-size="14" font-family="IBM Plex Sans, sans-serif" font-weight="700">DOI</text>
+  <text x="300" y="336" text-anchor="middle" fill="#364757" font-size="24" font-family="IBM Plex Sans, sans-serif" font-weight="600">Publication Thumbnail</text>
+</svg>
