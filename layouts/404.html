@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting...</p>
+  <script>
+    (function () {
+      var path = window.location.pathname || "/";
+      var segments = path.split("/").filter(Boolean);
+      var username = segments.length ? segments[segments.length - 1] : "";
+      var home = "{{ "/" | relLangURL }}";
+      if (!home.endsWith("/")) {
+        home += "/";
+      }
+
+      var target = username ? home + "?member=" + encodeURIComponent(username) : home;
+      window.location.replace(target);
+    })();
+  </script>
+</body>
+</html>
