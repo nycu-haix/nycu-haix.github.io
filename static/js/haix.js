@@ -19,8 +19,21 @@
   const publicationsContainer = document.getElementById("publications-list");
   const newsContainer = document.getElementById("news-list");
   const researchContainer = document.getElementById("research-list");
+  const memberModal = document.getElementById("member-modal");
+  const memberModalPhoto = document.getElementById("member-modal-photo");
+  const memberModalName = document.getElementById("member-modal-name");
+  const memberModalMeta = document.getElementById("member-modal-meta");
+  const memberModalDesc = document.getElementById("member-modal-desc");
+  const memberModalContent = document.getElementById("member-modal-content");
+  const memberModalLinks = document.getElementById("member-modal-links");
+  const memberModalCloseButton = memberModal ? memberModal.querySelector(".member-modal__close") : null;
+
+  const memberByUsername = new Map();
+  const memberByAlias = new Map();
+  let lastFocusedElementBeforeModal = null;
 
   setupReveal();
+  setupMemberModal();
 
   if (!membersContainer && !publicationsContainer && !newsContainer && !researchContainer) {
     return;
@@ -75,11 +88,13 @@
     const rows = parseCsv(csvText);
 
     const members = rows
-      .map((row) => normalizeMember(row))
+      .map((row, index) => normalizeMember(row, index))
       .filter((item) => item.name);
 
+    ensureUniqueMemberUsernames(members);
     members.sort(compareMember);
     renderMembers(members);
+    syncMemberModalFromLocation();
 
     if (result.usedFallback) {
       renderFallbackNotice(membersContainer);
@@ -292,9 +307,11 @@
       .replace(/\s+/g, "_");
   }
 
-  function normalizeMember(row) {
+  function normalizeMember(row, index) {
     const email = pick(row, "email", "mail", "e_mail", "e-mail");
     const explicitPhoto = pick(row, "photo", "photo_url", "image");
+    const description = pick(row, "description", "bio", "intro");
+    const profileMarkdown = pick(row, "profile_markdown", "profile_md", "markdown", "profile", "about");
 
     return {
       name: pick(row, "name", "student", "student_name"),
@@ -307,8 +324,89 @@
       scholar: cleanUrl(pick(row, "scholar", "scholar_url", "google_scholar", "google_scholar_url")),
       website: cleanUrl(pick(row, "website", "personal_website", "homepage", "site", "personal_site")),
       photo: resolveMemberPhoto(explicitPhoto, email),
-      description: pick(row, "description", "bio", "intro")
+      description,
+      profileMarkdown,
+      username: buildMemberUsername(
+        pick(row, "username", "user", "slug"),
+        pick(row, "name", "student", "student_name"),
+        email,
+        index
+      )
     };
+  }
+
+  function buildMemberUsername(explicitUsername, name, email, index) {
+    const explicit = slugifyUsername(explicitUsername);
+    if (explicit) {
+      return explicit;
+    }
+
+    const fromName = slugifyUsername(name);
+    if (fromName) {
+      return fromName;
+    }
+
+    const emailLocal = String(email || "").split("@")[0];
+    const fromEmail = slugifyUsername(emailLocal);
+    if (fromEmail) {
+      return fromEmail;
+    }
+
+    return `member-${index + 1}`;
+  }
+
+  function slugifyUsername(value) {
+    const normalized = String(value || "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    return normalized.slice(0, 64);
+  }
+
+  function ensureUniqueMemberUsernames(members) {
+    const seen = new Set();
+
+    members.forEach((member) => {
+      const base = slugifyUsername(member.username) || "member";
+      let candidate = base;
+      let serial = 2;
+
+      while (seen.has(candidate)) {
+        candidate = `${base}-${serial}`;
+        serial += 1;
+      }
+
+      member.username = candidate;
+      seen.add(candidate);
+    });
+  }
+
+  function registerMemberAliases(member) {
+    if (!member || !member.username) {
+      return;
+    }
+
+    const aliases = new Set();
+    aliases.add(member.username);
+    aliases.add(slugifyUsername(member.name));
+
+    const emailLocal = String(member.email || "").split("@")[0];
+    const emailSlug = slugifyUsername(emailLocal);
+    if (emailSlug) {
+      aliases.add(emailSlug);
+      aliases.add(slugifyUsername(emailLocal.split(/[._-]/)[0]));
+    }
+
+    aliases.forEach((alias) => {
+      if (!alias || memberByAlias.has(alias)) {
+        return;
+      }
+      memberByAlias.set(alias, member);
+    });
   }
 
   function resolveMemberPhoto(explicitPhoto, email) {
@@ -742,6 +840,8 @@
 
   function renderMembers(members) {
     membersContainer.innerHTML = "";
+    memberByUsername.clear();
+    memberByAlias.clear();
 
     if (!members.length) {
       membersContainer.appendChild(buildNote("No member rows found in CSV."));
@@ -754,6 +854,7 @@
       const card = document.createElement("article");
       card.className = "member-card";
       card.style.animationDelay = `${Math.min(index * 70, 450)}ms`;
+      card.dataset.username = member.username;
 
       const photo = document.createElement("img");
       const initialPhoto = member.photo || FALLBACK_MEMBER_PHOTO;
@@ -770,14 +871,34 @@
         updateMemberPhotoMode(photo, FALLBACK_MEMBER_PHOTO);
       });
 
+      const profilePath = buildMemberPath(member.username);
+
+      const photoButton = document.createElement("a");
+      photoButton.className = "member-open-photo";
+      photoButton.href = profilePath;
+      photoButton.setAttribute("aria-label", `Open ${member.name} profile`);
+      photoButton.appendChild(photo);
+      photoButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        openMemberModal(member, { pushHistory: true });
+      });
+
       const name = document.createElement("h4");
-      name.textContent = member.name;
+      const nameButton = document.createElement("a");
+      nameButton.className = "member-open-name";
+      nameButton.href = profilePath;
+      nameButton.textContent = member.name;
+      nameButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        openMemberModal(member, { pushHistory: true });
+      });
+      name.appendChild(nameButton);
 
       const meta = document.createElement("p");
       meta.className = "member-meta";
       meta.textContent = composeMemberMeta(member);
 
-      card.append(photo, name, meta);
+      card.append(photoButton, name, meta);
 
       if (member.description) {
         const description = document.createElement("p");
@@ -791,10 +912,400 @@
         card.appendChild(links);
       }
 
+      memberByUsername.set(member.username, member);
+      registerMemberAliases(member);
       fragment.appendChild(card);
     });
 
     membersContainer.appendChild(fragment);
+  }
+
+  function setupMemberModal() {
+    if (!memberModal) {
+      return;
+    }
+
+    const closeTargets = Array.from(memberModal.querySelectorAll("[data-modal-close]"));
+    closeTargets.forEach((target) => {
+      target.addEventListener("click", () => {
+        closeMemberModal({ pushHistory: true });
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || memberModal.hidden) {
+        return;
+      }
+
+      event.preventDefault();
+      closeMemberModal({ pushHistory: true });
+    });
+
+    window.addEventListener("popstate", () => {
+      syncMemberModalFromLocation();
+    });
+  }
+
+  function syncMemberModalFromLocation() {
+    if (!memberModal) {
+      return;
+    }
+
+    const requested = extractMemberFromLocation();
+
+    if (!requested) {
+      if (!memberModal.hidden) {
+        closeMemberModal({ pushHistory: false });
+      }
+      return;
+    }
+
+    if (!memberByUsername.size) {
+      return;
+    }
+
+    const member = findMemberByRouteToken(requested);
+    if (!member) {
+      if (!memberModal.hidden) {
+        closeMemberModal({ pushHistory: false });
+      }
+
+      history.replaceState({}, "", "/");
+      return;
+    }
+
+    openMemberModal(member, { pushHistory: false });
+
+    if (location.search) {
+      history.replaceState({ member: member.username }, "", buildMemberPath(member.username));
+    }
+  }
+
+  function findMemberByRouteToken(token) {
+    const normalized = slugifyUsername(token);
+    if (!normalized) {
+      return null;
+    }
+
+    return memberByUsername.get(normalized) || memberByAlias.get(normalized) || null;
+  }
+
+  function extractMemberFromLocation() {
+    const query = new URLSearchParams(location.search).get("member");
+    if (query) {
+      return slugifyUsername(safeDecodeURIComponent(query));
+    }
+
+    const segments = location.pathname.split("/").filter(Boolean);
+    if (!segments.length) {
+      return "";
+    }
+
+    return slugifyUsername(safeDecodeURIComponent(segments[segments.length - 1]));
+  }
+
+  function safeDecodeURIComponent(value) {
+    try {
+      return decodeURIComponent(String(value || ""));
+    } catch (_error) {
+      return String(value || "");
+    }
+  }
+
+  function buildMemberPath(username) {
+    return `/${encodeURIComponent(String(username || "").trim())}`;
+  }
+
+  function openMemberModal(member, options = {}) {
+    const { pushHistory = false, replaceHistory = false } = options;
+
+    if (
+      !memberModal ||
+      !memberModalPhoto ||
+      !memberModalName ||
+      !memberModalMeta ||
+      !memberModalContent ||
+      !memberModalLinks
+    ) {
+      return;
+    }
+
+    const wasHidden = memberModal.hidden;
+    const photoSource = member.photo || FALLBACK_MEMBER_PHOTO;
+
+    memberModalPhoto.onerror = () => {
+      if (memberModalPhoto.src.includes(FALLBACK_MEMBER_PHOTO)) {
+        memberModalPhoto.onerror = null;
+        return;
+      }
+
+      memberModalPhoto.src = FALLBACK_MEMBER_PHOTO;
+      updateMemberPhotoMode(memberModalPhoto, FALLBACK_MEMBER_PHOTO);
+      memberModalPhoto.onerror = null;
+    };
+    memberModalPhoto.src = photoSource;
+    updateMemberPhotoMode(memberModalPhoto, photoSource);
+    memberModalPhoto.alt = `${member.name} profile photo`;
+    memberModalName.textContent = member.name;
+    memberModalMeta.textContent = composeMemberMeta(member);
+
+    if (memberModalDesc) {
+      const summary = String(member.description || "").trim();
+      memberModalDesc.textContent = summary;
+      memberModalDesc.hidden = !summary;
+    }
+
+    renderMemberProfileMarkdown(member.profileMarkdown);
+    renderMemberModalLinks(member);
+
+    memberModal.hidden = false;
+    memberModal.setAttribute("data-member", member.username);
+    document.body.classList.add("modal-open");
+
+    if (wasHidden) {
+      lastFocusedElementBeforeModal = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      if (memberModalCloseButton) {
+        memberModalCloseButton.focus({ preventScroll: true });
+      }
+    }
+
+    if (pushHistory) {
+      const targetPath = buildMemberPath(member.username);
+      const shouldPush = location.pathname !== targetPath || location.search || location.hash;
+      if (shouldPush) {
+        const method = replaceHistory ? "replaceState" : "pushState";
+        history[method]({ member: member.username }, "", targetPath);
+      }
+    }
+  }
+
+  function closeMemberModal(options = {}) {
+    const { pushHistory = false, replaceHistory = false } = options;
+
+    if (!memberModal || memberModal.hidden) {
+      return;
+    }
+
+    memberModal.hidden = true;
+    memberModal.removeAttribute("data-member");
+    document.body.classList.remove("modal-open");
+
+    if (lastFocusedElementBeforeModal && document.contains(lastFocusedElementBeforeModal)) {
+      lastFocusedElementBeforeModal.focus({ preventScroll: true });
+    }
+    lastFocusedElementBeforeModal = null;
+
+    if (pushHistory) {
+      const shouldPush = location.pathname !== "/" || location.search || location.hash;
+      if (shouldPush) {
+        const method = replaceHistory ? "replaceState" : "pushState";
+        history[method]({}, "", "/");
+      }
+    }
+  }
+
+  function renderMemberModalLinks(member) {
+    memberModalLinks.innerHTML = "";
+    const links = buildMemberLinks(member);
+    if (links) {
+      memberModalLinks.appendChild(links);
+    }
+  }
+
+  function renderMemberProfileMarkdown(markdownText) {
+    memberModalContent.innerHTML = "";
+    const normalized = String(markdownText || "").trim();
+
+    if (!normalized) {
+      const fallback = document.createElement("p");
+      fallback.textContent = "This profile has not been filled in yet.";
+      memberModalContent.appendChild(fallback);
+      return;
+    }
+
+    memberModalContent.appendChild(parseMarkdownToFragment(normalized));
+  }
+
+  function parseMarkdownToFragment(markdownText) {
+    const fragment = document.createDocumentFragment();
+    const lines = String(markdownText || "").replace(/\r\n?/g, "\n").split("\n");
+
+    let paragraphLines = [];
+    let listElement = null;
+
+    const flushParagraph = () => {
+      if (!paragraphLines.length) {
+        return;
+      }
+
+      const paragraph = document.createElement("p");
+      paragraphLines.forEach((line, index) => {
+        appendInlineMarkdown(paragraph, line);
+        if (index < paragraphLines.length - 1) {
+          paragraph.appendChild(document.createElement("br"));
+        }
+      });
+      fragment.appendChild(paragraph);
+      paragraphLines = [];
+    };
+
+    const flushList = () => {
+      if (!listElement) {
+        return;
+      }
+
+      fragment.appendChild(listElement);
+      listElement = null;
+    };
+
+    lines.forEach((line) => {
+      const trimmed = line.trim();
+      const headingMatch = line.match(/^\s*(#{1,6})\s+(.+)$/);
+      const listMatch = line.match(/^\s*[-*]\s+(.+)$/);
+
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+        return;
+      }
+
+      if (headingMatch) {
+        flushParagraph();
+        flushList();
+        const level = headingMatch[1].length;
+        const heading = document.createElement(`h${level}`);
+        appendInlineMarkdown(heading, headingMatch[2].trim());
+        fragment.appendChild(heading);
+        return;
+      }
+
+      if (listMatch) {
+        flushParagraph();
+        if (!listElement) {
+          listElement = document.createElement("ul");
+        }
+
+        const item = document.createElement("li");
+        appendInlineMarkdown(item, listMatch[1]);
+        listElement.appendChild(item);
+        return;
+      }
+
+      flushList();
+      paragraphLines.push(line);
+    });
+
+    flushParagraph();
+    flushList();
+
+    if (!fragment.childNodes.length) {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = String(markdownText || "");
+      fragment.appendChild(paragraph);
+    }
+
+    return fragment;
+  }
+
+  function appendInlineMarkdown(container, line) {
+    const pattern = /(!\[([^\]]*)\]\(([^)]+)\)|\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`)/g;
+    let cursor = 0;
+    let match;
+
+    while ((match = pattern.exec(line)) !== null) {
+      if (match.index > cursor) {
+        container.appendChild(document.createTextNode(line.slice(cursor, match.index)));
+      }
+
+      if (match[2] !== undefined && match[3] !== undefined) {
+        const imageNode = buildMarkdownImage(match[3], match[2], match[0]);
+        container.appendChild(imageNode);
+      } else if (match[4] && match[5]) {
+        const link = buildMarkdownLink(match[5], match[4]);
+        container.appendChild(link);
+      } else if (match[6]) {
+        const strong = document.createElement("strong");
+        strong.textContent = match[6];
+        container.appendChild(strong);
+      } else if (match[7]) {
+        const em = document.createElement("em");
+        em.textContent = match[7];
+        container.appendChild(em);
+      } else if (match[8]) {
+        const code = document.createElement("code");
+        code.textContent = match[8];
+        container.appendChild(code);
+      }
+
+      cursor = pattern.lastIndex;
+    }
+
+    if (cursor < line.length) {
+      container.appendChild(document.createTextNode(line.slice(cursor)));
+    }
+  }
+
+  function buildMarkdownLink(url, text) {
+    const safeUrl = toSafeMarkdownUrl(url);
+    if (!safeUrl) {
+      return document.createTextNode(text);
+    }
+
+    const link = document.createElement("a");
+    link.href = safeUrl;
+    link.textContent = text;
+
+    if (safeUrl.startsWith("http://") || safeUrl.startsWith("https://")) {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    }
+
+    return link;
+  }
+
+  function buildMarkdownImage(url, altText, rawText) {
+    const safeUrl = toSafeImageUrl(url);
+    if (!safeUrl) {
+      return document.createTextNode(rawText || "");
+    }
+
+    const image = document.createElement("img");
+    image.src = safeUrl;
+    image.alt = altText || "";
+    image.loading = "lazy";
+    image.className = "member-modal__markdown-image";
+    return image;
+  }
+
+  function toSafeMarkdownUrl(value) {
+    const cleaned = cleanUrl(value);
+    if (!cleaned) {
+      return "";
+    }
+
+    if (cleaned.startsWith("mailto:")) {
+      const safeMailto = toSafeMailto(cleaned.slice(7));
+      return safeMailto;
+    }
+
+    return toSafeExternalUrl(cleaned);
+  }
+
+  function toSafeImageUrl(value) {
+    const cleaned = cleanUrl(value);
+    if (!cleaned) {
+      return "";
+    }
+
+    if (cleaned.startsWith("/")) {
+      return cleaned;
+    }
+
+    if (cleaned.startsWith("./") || cleaned.startsWith("../")) {
+      return cleaned;
+    }
+
+    return toSafeExternalUrl(cleaned);
   }
 
   function renderResearch(researchItems) {

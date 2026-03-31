@@ -67,11 +67,19 @@ Recommended:
 - `website`
 - `photo` (e.g., `/images/members/alice.jpg`)
 - `description`
+- `username` (URL slug for modal route, e.g., `sky`)
+- `profile_markdown` (popup content, supports new lines, headings `#`~`######`, links, lists, and images `![alt](url)`)
 
 Photo fallback order:
 1. `photo`
 2. Gravatar from `email`
 3. `/images/members/member-placeholder.svg`
+
+Member popup route behavior:
+- Click member photo/name to open popup in-page
+- URL changes to `https://nycu-haix.github.io/<username>` while popup is open
+- Browser back/forward replays popup state
+- For GitHub Pages direct visits to `/username`, `static/404.html` redirects to `/?member=<username>` and the popup opens automatically
 
 ### News (`news.csv`)
 

@@ -129,6 +129,28 @@
     </main>
   </div>
 
+  <div id="member-modal" class="member-modal" hidden>
+    <div class="member-modal__backdrop" data-modal-close></div>
+    <div
+      class="member-modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="member-modal-name"
+    >
+      <button type="button" class="member-modal__close" data-modal-close aria-label="Close profile">×</button>
+      <div class="member-modal__header">
+        <img id="member-modal-photo" class="member-modal__photo" src="" alt="">
+        <div class="member-modal__intro">
+          <h3 id="member-modal-name"></h3>
+          <p id="member-modal-meta" class="member-modal__meta"></p>
+          <p id="member-modal-desc" class="member-modal__desc" hidden></p>
+        </div>
+      </div>
+      <div id="member-modal-content" class="member-modal__content"></div>
+      <div id="member-modal-links" class="member-modal__links"></div>
+    </div>
+  </div>
+
   <script src="{{ "js/haix.js" | relURL }}" defer></script>
 </body>
 </html>
