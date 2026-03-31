@@ -1117,9 +1117,6 @@
     const normalized = String(markdownText || "").trim();
 
     if (!normalized) {
-      const fallback = document.createElement("p");
-      fallback.textContent = "This profile has not been filled in yet.";
-      memberModalContent.appendChild(fallback);
       return;
     }
 
