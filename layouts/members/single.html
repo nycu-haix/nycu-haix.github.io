@@ -55,6 +55,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
+    {{ if hugo.IsProduction }}
+      {{ partial "analytics/google_analytics.html" $ }}
+    {{ end }}
+  {{ end }}
   <script type="application/ld+json">{{ $personLd | jsonify | safeJS }}</script>
   <script>
     (function () {

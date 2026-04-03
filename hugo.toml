@@ -23,5 +23,8 @@ hidefooterattribution = true
 
 [params.anubis2.services]
 
+[params.anubis2.services.googleanalytics]
+gtag = "G-JM618SFJRK"
+
 [markup.goldmark.renderer]
 unsafe = true
