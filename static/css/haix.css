@@ -44,7 +44,7 @@ body.modal-open {
 
 .nav-row {
   display: grid;
-  grid-template-columns: 5fr 5fr;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 1rem;
 }
@@ -72,6 +72,12 @@ body.modal-open {
   font-family: "Roboto Mono", monospace;
   font-size: 1.42rem;
   font-weight: 500;
+}
+
+@media screen and (min-width: 881px) {
+  .brand-copy strong {
+    white-space: nowrap;
+  }
 }
 
 .brand-copy small {
@@ -309,12 +315,58 @@ p {
   margin-inline: auto;
 }
 
+.member-filter-bar {
+  width: 100%;
+  max-width: 72.2rem;
+  margin: 0.4rem auto 0.95rem;
+}
+
+.member-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0;
+}
+
+.member-filter-chip,
+.member-tag {
+  border: 1px solid #c9d0dc;
+  background: #f8fafc;
+  color: #32435d;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  line-height: 1;
+  padding: 0.4rem 0.68rem;
+  cursor: pointer;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.member-filter-chip:hover,
+.member-filter-chip:focus-visible,
+.member-tag:hover,
+.member-tag:focus-visible {
+  background: #eef4ff;
+  border-color: #8fb0ee;
+}
+
+.member-filter-chip.is-active,
+.member-tag.is-active {
+  background: #dbe9ff;
+  border-color: #5f8fdf;
+  color: #1d3e7a;
+}
+
 .member-card {
   flex: 0 1 13.8rem;
   display: block;
   text-align: center;
   width: 13.8rem;
   margin: 0;
+}
+
+.member-card[hidden] {
+  display: none;
 }
 
 .member-card img {
@@ -371,6 +423,14 @@ p {
 .member-card h4 {
   font-size: 1.1rem;
   margin-top: 0.1rem;
+}
+
+.member-tags {
+  margin-top: 0.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.3rem;
 }
 
 .member-meta {
@@ -469,6 +529,11 @@ p {
   align-items: center;
 }
 
+.member-modal__intro h3 {
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+}
+
 .member-modal__photo {
   width: 160px;
   border-radius: 12px;
@@ -482,6 +547,23 @@ p {
 .member-modal__meta {
   margin-top: 0.25rem;
   color: #666;
+}
+
+.member-modal__tags {
+  margin-top: 0.42rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+}
+
+.member-modal-tag {
+  border: 1px solid #c9d0dc;
+  background: #f8fafc;
+  color: #32435d;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  line-height: 1;
+  padding: 0.32rem 0.6rem;
 }
 
 .member-modal__desc {

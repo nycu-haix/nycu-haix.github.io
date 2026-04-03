@@ -1,5 +1,5 @@
-name,role,year,email,github,orcid,scholar,website,photo,description,username,profile_markdown
-Grace Yu-Chun Yen,Associate Professor,,yyen@cs.nycu.edu.tw,https://github.com/gracetfg2,,https://scholar.google.com/citations?user=neA0_u8AAAAJ&hl=en,https://gracetfg2.github.io/,/images/members/grace-yen.png,,grace,"Associate Professor at NYCU.
+name,role,year,email,github,orcid,scholar,website,photo,description,tags,username,profile_markdown
+Grace Yu-Chun Yen,Associate Professor,,yyen@cs.nycu.edu.tw,https://github.com/gracetfg2,,https://scholar.google.com/citations?user=neA0_u8AAAAJ&hl=en,https://gracetfg2.github.io/,/images/members/grace-yen.png,,HAI;Creativity,grace,"Associate Professor at NYCU.
 
 - Human-AI Interaction
 - Creativity and Cognition"
@@ -11,7 +11,7 @@ Grace Yu-Chun Yen,Associate Professor,,yyen@cs.nycu.edu.tw,https://github.com/gr
 陳俞安,Master,2025,zxcv920703.cs14@nycu.edu.tw,,,,,,,,
 洪薇欣,Master,2025,velda.cs14@nycu.edu.tw,https://github.com/veldahung,,,,,,,
 陳昕妤,Master,2025,sychen.cs14@nycu.edu.tw,https://github.com/Yu202523,,,,,,,
-Sky Shih-Kai Hong,Master,2025,sky.cs14@nycu.edu.tw,https://github.com/skyhong2002,https://orcid.org/0009-0003-9491-7900,,https://skyhong.tw,,,"sky","M.S. student at NYCU.
+Sky Shih-Kai Hong,Master,2025,sky.cs14@nycu.edu.tw,https://github.com/skyhong2002,https://orcid.org/0009-0003-9491-7900,,https://skyhong.tw,,,HCI;AI-assisted creation,"sky","M.S. student at NYCU.
 
 Interested in HCI systems and AI-assisted creation."
 吳尚璇,Master,2025,brinawuwu.cs14@nycu.edu.tw,https://github.com/SabrinaWu555,,,,,,,

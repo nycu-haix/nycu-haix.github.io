@@ -67,6 +67,7 @@ Recommended:
 - `website`
 - `photo` (e.g., `/images/members/alice.jpg`)
 - `description`
+- `tags` (member-defined tags for People filtering; separate multiple tags with `,`, `;`, `/`, `|`, `、`, or `，`)
 - `username` (URL slug for modal route, e.g., `sky`)
 - `profile_markdown` (popup content, supports new lines, headings `#`~`######`, links, lists, and images `![alt](url)`)
 

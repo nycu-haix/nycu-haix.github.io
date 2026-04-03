@@ -23,6 +23,7 @@
   const memberModalPhoto = document.getElementById("member-modal-photo");
   const memberModalName = document.getElementById("member-modal-name");
   const memberModalMeta = document.getElementById("member-modal-meta");
+  const memberModalTags = document.getElementById("member-modal-tags");
   const memberModalDesc = document.getElementById("member-modal-desc");
   const memberModalContent = document.getElementById("member-modal-content");
   const memberModalLinks = document.getElementById("member-modal-links");
@@ -31,6 +32,8 @@
   const memberByUsername = new Map();
   const memberByAlias = new Map();
   let lastFocusedElementBeforeModal = null;
+  let activeMemberTagKey = "";
+  let memberFilterBar = null;
 
   setupReveal();
   setupMemberModal();
@@ -325,6 +328,7 @@
       website: cleanUrl(pick(row, "website", "personal_website", "homepage", "site", "personal_site")),
       photo: resolveMemberPhoto(explicitPhoto, email),
       description,
+      tags: parseMemberTags(pick(row, "tags", "tag", "labels", "interests")),
       profileMarkdown,
       username: buildMemberUsername(
         pick(row, "username", "user", "slug"),
@@ -333,6 +337,39 @@
         index
       )
     };
+  }
+
+  function parseMemberTags(value) {
+    const tokens = String(value || "")
+      .split(/[;,|/、，]+/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    const seen = new Set();
+    const tags = [];
+
+    tokens.forEach((token) => {
+      const key = normalizeMemberTagKey(token);
+      if (!key || seen.has(key)) {
+        return;
+      }
+
+      seen.add(key);
+      tags.push({
+        key,
+        label: token
+      });
+    });
+
+    return tags;
+  }
+
+  function normalizeMemberTagKey(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
   }
 
   function buildMemberUsername(explicitUsername, name, email, index) {
@@ -855,6 +892,7 @@
       card.className = "member-card";
       card.style.animationDelay = `${Math.min(index * 70, 450)}ms`;
       card.dataset.username = member.username;
+      card.dataset.memberTags = member.tags.map((tag) => tag.key).join("|");
 
       const photo = document.createElement("img");
       const initialPhoto = member.photo || FALLBACK_MEMBER_PHOTO;
@@ -900,6 +938,27 @@
 
       card.append(photoButton, name, meta);
 
+      if (member.tags.length) {
+        const tagList = document.createElement("div");
+        tagList.className = "member-tags";
+
+        member.tags.forEach((tag) => {
+          const tagButton = document.createElement("button");
+          tagButton.type = "button";
+          tagButton.className = "member-tag";
+          tagButton.dataset.memberTagKey = tag.key;
+          tagButton.textContent = `#${tag.label}`;
+          tagButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setActiveMemberTag(tag.key);
+          });
+          tagList.appendChild(tagButton);
+        });
+
+        card.appendChild(tagList);
+      }
+
       if (member.description) {
         const description = document.createElement("p");
         description.className = "member-desc";
@@ -917,7 +976,119 @@
       fragment.appendChild(card);
     });
 
+    renderMemberTagFilters(members);
     membersContainer.appendChild(fragment);
+    applyMemberTagFilter();
+  }
+
+  function renderMemberTagFilters(members) {
+    const tags = collectMemberTags(members);
+
+    if (!tags.length) {
+      activeMemberTagKey = "";
+      if (memberFilterBar) {
+        memberFilterBar.remove();
+        memberFilterBar = null;
+      }
+      return;
+    }
+
+    if (activeMemberTagKey && !tags.some((tag) => tag.key === activeMemberTagKey)) {
+      activeMemberTagKey = "";
+    }
+
+    if (!memberFilterBar) {
+      memberFilterBar = document.createElement("div");
+      memberFilterBar.className = "member-filter-bar";
+      memberFilterBar.setAttribute("aria-label", "Filter members by tag");
+
+      const parent = membersContainer.parentElement;
+      if (parent) {
+        parent.insertBefore(memberFilterBar, membersContainer);
+      }
+    }
+
+    memberFilterBar.innerHTML = "";
+
+    const chips = document.createElement("div");
+    chips.className = "member-filter-chips";
+
+    const allButton = document.createElement("button");
+    allButton.type = "button";
+    allButton.className = "member-filter-chip";
+    allButton.dataset.memberTagKey = "";
+    allButton.textContent = "All";
+    allButton.addEventListener("click", () => {
+      setActiveMemberTag("");
+    });
+    chips.appendChild(allButton);
+
+    tags.forEach((tag) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "member-filter-chip";
+      button.dataset.memberTagKey = tag.key;
+      button.textContent = `${tag.label} (${tag.count})`;
+      button.addEventListener("click", () => {
+        setActiveMemberTag(tag.key);
+      });
+      chips.appendChild(button);
+    });
+
+    memberFilterBar.appendChild(chips);
+  }
+
+  function collectMemberTags(members) {
+    const tagMap = new Map();
+
+    members.forEach((member) => {
+      member.tags.forEach((tag) => {
+        const existing = tagMap.get(tag.key);
+        if (!existing) {
+          tagMap.set(tag.key, {
+            key: tag.key,
+            label: tag.label,
+            count: 1
+          });
+          return;
+        }
+
+        existing.count += 1;
+      });
+    });
+
+    return Array.from(tagMap.values()).sort((a, b) => a.label.localeCompare(b.label, "zh-Hant", { sensitivity: "base" }));
+  }
+
+  function setActiveMemberTag(key) {
+    const normalizedKey = normalizeMemberTagKey(key);
+    activeMemberTagKey = normalizedKey;
+    applyMemberTagFilter();
+  }
+
+  function applyMemberTagFilter() {
+    if (!membersContainer) {
+      return;
+    }
+
+    const cards = Array.from(membersContainer.querySelectorAll(".member-card"));
+    cards.forEach((card) => {
+      const tags = String(card.dataset.memberTags || "")
+        .split("|")
+        .filter(Boolean);
+      const visible = !activeMemberTagKey || tags.includes(activeMemberTagKey);
+      card.hidden = !visible;
+    });
+
+    const toggles = Array.from(document.querySelectorAll("[data-member-tag-key]"));
+    toggles.forEach((button) => {
+      const key = normalizeMemberTagKey(button.dataset.memberTagKey || "");
+      const isActive = key === activeMemberTagKey;
+      const isAll = !key;
+      const active = isAll ? !activeMemberTagKey : isActive;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
   }
 
   function setupMemberModal() {
@@ -1048,6 +1219,23 @@
     memberModalPhoto.alt = `${member.name} profile photo`;
     memberModalName.textContent = member.name;
     memberModalMeta.textContent = composeMemberMeta(member);
+
+    if (memberModalTags) {
+      memberModalTags.innerHTML = "";
+      const tags = Array.isArray(member.tags) ? member.tags : [];
+
+      if (tags.length) {
+        tags.forEach((tag) => {
+          const item = document.createElement("span");
+          item.className = "member-modal-tag";
+          item.textContent = `#${tag.label}`;
+          memberModalTags.appendChild(item);
+        });
+        memberModalTags.hidden = false;
+      } else {
+        memberModalTags.hidden = true;
+      }
+    }
 
     if (memberModalDesc) {
       const summary = String(member.description || "").trim();
