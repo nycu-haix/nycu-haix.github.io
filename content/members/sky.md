@@ -1,7 +1,7 @@
 ---
 title: "Sky Shih-Kai Hong"
 slug: "sky"
-description: "I study AI-supported collaborative systems for online brainstorming and group discussion, with a particular interest in backchannel communication. My research..."
+description: "I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken..."
 username: "sky"
 role: "Master"
 degree: ""
@@ -16,12 +16,16 @@ og_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=12
 og_image_local: "/og/sky.png"
 gravatar_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=identicon&r=g"
 tags:
-  - "Group Branstorming Assistant"
-  - "Personal Informatics"
+  - "Backchannel Communication"
+  - "Online Deliberation"
 ---
 
 # Hi, I'm Sky!
 
-I study AI-supported collaborative systems for online brainstorming and group discussion, with a particular interest in backchannel communication. My research explores how private, implicit, and lightweight backchannel signals can help people contribute ideas that might otherwise remain unspoken in group discussions.
+I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution.
 
-I am particularly interested in how AI can support the transition from private sensemaking to public contribution by helping participants articulate early-stage ideas, recognize hidden consensus, and join discussions at the right moment. More broadly, I aim to design collaborative systems that make online group ideation more inclusive, reflective, and socially attuned.
+Recently, I’m also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion.
+
+# I will attend CHI 2026 as an Student Volunteer!
+
+I will attend CHI 2026 and serve as an SV in Barcelona, Spain. I am the second author of the paper, [Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games](https://programs.sigchi.org/chi/2026/program/content/223468), which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212.

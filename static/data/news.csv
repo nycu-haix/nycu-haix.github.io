@@ -1,4 +1,3 @@
-date,title,content,link_url,link_text
-2026-03-31,Student Recruitment,"Prof. Grace Yen is looking for motivated undergraduate and graduate students to join the group. If you are interested, please email yyen@nycu.edu.tw with your CV, transcripts, and a short note on why you want to work with us.",https://gracetfg2.github.io/,Contact Prof. Yen
-2026-03-30,Lab Gathering,"We had our lab gathering on March 30, launched the lab website, and finalized our lab name as HAIX (Human AI & Creative Computing) Lab.",,
-2026-04-13,Sky Hong to Attend CHI 2026,"Sky Shih-Kai Hong will attend CHI 2026 and serve as an SV in Barcelona, Spain. He is the second author of the paper, Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games, which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212.",https://programs.sigchi.org/chi/2026/program/content/223468,Conference Program
+date,title,link_url,link_text,content
+,Student Recruitment,https://gracetfg2.github.io/,Contact Prof. Yen,"Prof. Grace Yen is looking for motivated undergraduate and graduate students to join the group. If you are interested, please email yyen@nycu.edu.tw with your CV, transcripts, and a short note on why you want to work with us."
+2026-03-30,Lab Gathering,,,"We had our lab gathering on March 30, launched the lab website, and finalized our lab name as HAIX (Human AI & Creative Computing) Lab."
