@@ -1,0 +1,3 @@
+User-agent: *
+{{ if hugo.IsProduction }}Disallow:{{ else }}Disallow: /{{ end }}
+Sitemap: {{ "sitemap.xml" | absURL }}

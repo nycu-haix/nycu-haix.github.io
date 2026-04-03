@@ -5,12 +5,42 @@ This site is a one-page Hugo website based on Grace's requirements:
 - Manual member photos with Gravatar fallback
 - Spreadsheet/CSV-driven members, news, publications, and research areas
 - Lab branding and logo
+- SEO-ready static rendering for homepage and member profile pages (`/username/`)
 
 ## Run locally
 
 ```bash
+python3 scripts/sync_sheet.py --fetch --generate-og
 hugo server
 ```
+
+## SEO and static profile generation
+
+To generate all SEO pages/data from current CSV files:
+
+```bash
+python3 scripts/sync_sheet.py --generate-og
+```
+
+To fetch latest Google Spreadsheet CSV first:
+
+```bash
+python3 scripts/sync_sheet.py --fetch --generate-og
+```
+
+Generated outputs:
+
+- `content/members/*.md` (profile pages routed as `/<username>/`)
+- `data/generated/*.json` (server-rendered homepage content)
+- `static/og/*.png` (member-specific OG images downloaded from Gravatar)
+
+SEO coverage now includes:
+
+- Unique `title` + `description` per page
+- `og:*` + `twitter:*` tags per page (`og:image` uses member Gravatar image file)
+- Canonical URLs per page
+- `robots.txt` + `sitemap.xml`
+- Structured data (`Organization`, `Person`, `ItemList`/`ScholarlyArticle`)
 
 ## Data source setup (Google Sheet or CSV)
 
@@ -80,7 +110,8 @@ Member popup route behavior:
 - Click member photo/name to open popup in-page
 - URL changes to `https://nycu-haix.github.io/<username>` while popup is open
 - Browser back/forward replays popup state
-- For GitHub Pages direct visits to `/username`, `static/404.html` redirects to `/?member=<username>` and the popup opens automatically
+- Static profile pages are generated at `/username/` for SEO and sharing preview
+- For unknown paths, `static/404.html` still redirects to home fallback
 
 ### News (`news.csv`)
 

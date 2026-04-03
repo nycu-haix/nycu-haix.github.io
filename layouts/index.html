@@ -1,24 +1,67 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
+{{ $siteDesc := .Site.Params.description | default "HAIX (Human AI and Creative Computing) Lab website" }}
+{{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
+{{ $keywords := slice "HAIX Lab" "NYCU" "Human-AI Interaction" "HCI" "Creative Computing" "Cognition" "Social Computing" "Taiwan" }}
+{{ $members := site.Data.generated.members | default (slice) }}
+{{ $newsItems := site.Data.generated.news | default (slice) }}
+{{ $researchItems := site.Data.generated.research | default (slice) }}
+{{ $publications := site.Data.generated.publications | default (slice) }}
+{{ $organizationLd := dict
+  "@context" "https://schema.org"
+  "@type" "Organization"
+  "name" "HAIX (Human AI & Creative Computing) Lab"
+  "url" .Permalink
+  "logo" ("images/haix-logo.svg" | absURL)
+  "description" $siteDesc
+  "department" (dict "@type" "CollegeOrUniversity" "name" "National Yang Ming Chiao Tung University")
+}}
+{{ $publicationListItems := slice }}
+{{ range $index, $item := $publications }}
+  {{ $article := dict
+    "@type" "ScholarlyArticle"
+    "headline" $item.title
+    "author" $item.authors
+    "isPartOf" $item.proceedings
+    "datePublished" $item.year
+    "url" (or $item.website $item.doi)
+  }}
+  {{ $publicationListItems = $publicationListItems | append (dict "@type" "ListItem" "position" (add $index 1) "item" $article) }}
+{{ end }}
+{{ $publicationLd := dict
+  "@context" "https://schema.org"
+  "@type" "ItemList"
+  "name" "HAIX Publications"
+  "itemListElement" $publicationListItems
+}}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
-  <meta name="description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}HAIX (Human AI &amp; Creative Computing) Lab website{{ end }}">
+  <meta name="description" content="{{ $siteDesc }}">
+  <meta name="keywords" content="{{ delimit $keywords ", " }}">
+  <meta name="organization" content="{{ $labMeta }}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{ .Permalink }}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HAIX Lab">
   <meta property="og:title" content="{{ .Site.Title }}">
-  <meta property="og:description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}HAIX (Human AI &amp; Creative Computing) Lab website{{ end }}">
+  <meta property="og:description" content="{{ $siteDesc }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ .Site.Title }}">
-  <meta name="twitter:description" content="{{ with .Site.Params.description }}{{ . }}{{ else }}HAIX (Human AI &amp; Creative Computing) Lab website{{ end }}">
+  <meta name="twitter:description" content="{{ $siteDesc }}">
   <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  <script type="application/ld+json">{{ $organizationLd | jsonify | safeJS }}</script>
+  {{ if gt (len $publications) 0 }}
+  <script type="application/ld+json">{{ $publicationLd | jsonify | safeJS }}</script>
+  {{ end }}
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -55,7 +98,20 @@
         <div class="col-main">
           <h2>News</h2>
           <div id="news-list" class="news-list" aria-live="polite">
-            <p class="loading">Loading news...</p>
+            {{ if gt (len $newsItems) 0 }}
+              {{ range $newsItems }}
+                <article class="news-item">
+                  {{ if .date }}<p class="news-date">{{ .date }}</p>{{ end }}
+                  {{ if .title }}<h3 class="news-title">{{ .title }}</h3>{{ end }}
+                  {{ if .content }}<p class="news-content">{{ .content }}</p>{{ end }}
+                  {{ if .link_url }}
+                    <p><a class="news-link" href="{{ .link_url }}" target="_blank" rel="noopener noreferrer">{{ or .link_text .link_url }}</a></p>
+                  {{ end }}
+                </article>
+              {{ end }}
+            {{ else }}
+              <p class="loading">Loading news...</p>
+            {{ end }}
           </div>
         </div>
       </section>
@@ -66,12 +122,50 @@
         <div class="col-main">
           <h2>Research</h2>
           <div id="research-list" aria-live="polite">
-            <p class="loading">Loading research areas...</p>
+            {{ if gt (len $researchItems) 0 }}
+              <ul class="plain-list research-list">
+                {{ range $researchItems }}
+                  <li>
+                    {{ if .topic }}<strong>{{ .topic }}</strong>{{ end }}
+                    {{ if and .topic .description }}: {{ end }}
+                    {{ .description }}
+                  </li>
+                {{ end }}
+              </ul>
+            {{ else }}
+              <p class="loading">Loading research areas...</p>
+            {{ end }}
           </div>
 
           <h3>Latest Publications</h3>
           <div id="publications-list" class="publication-list" aria-live="polite">
-            <p class="loading">Loading publications...</p>
+            {{ if gt (len $publications) 0 }}
+              {{ range $publications }}
+                {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.svg" }}
+                <article class="publication-card">
+                  <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy">
+                  <div class="publication-meta">
+                    <h4>{{ .title }}</h4>
+                    {{ if .authors }}<p>{{ .authors }}</p>{{ end }}
+                    <p>
+                      {{ if .proceedings }}<span class="publication-venue">{{ .proceedings }}</span>{{ end }}
+                      {{ if and .proceedings .year }} · {{ end }}
+                      {{ if .year }}<span>{{ .year }}</span>{{ end }}
+                    </p>
+                    <p class="publication-links">
+                      {{ if .doi }}<a href="{{ .doi }}" target="_blank" rel="noopener noreferrer">DOI</a>{{ end }}
+                      {{ if and .doi .pdf }} · {{ end }}
+                      {{ if .pdf }}<a href="{{ .pdf }}" target="_blank" rel="noopener noreferrer">PDF</a>{{ end }}
+                      {{ if and (or .doi .pdf) .website }} · {{ end }}
+                      {{ if .website }}<a href="{{ .website }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
+                    </p>
+                    {{ if .award }}<p>{{ .award }}</p>{{ end }}
+                  </div>
+                </article>
+              {{ end }}
+            {{ else }}
+              <p class="loading">Loading publications...</p>
+            {{ end }}
           </div>
         </div>
       </section>
@@ -82,10 +176,24 @@
         <div class="col-main">
           <h2>People</h2>
           <div class="group-overview">
-            <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group dinner photo">
+            <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group photo">
           </div>
           <div id="members-list" class="member-grid" aria-live="polite">
-            <p class="loading">Loading members...</p>
+            {{ if gt (len $members) 0 }}
+              {{ range $members }}
+                {{ $photo := .photo | default "/images/members/member-placeholder.svg" }}
+                <article class="member-card" data-username="{{ .username }}">
+                  <a class="member-open-photo" href="{{ printf "/%s/" .username | relURL }}" aria-label="Open {{ .name }} profile">
+                    <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .name }} profile photo" loading="lazy">
+                  </a>
+                  <h4><a class="member-open-name" href="{{ printf "/%s/" .username | relURL }}">{{ .name }}</a></h4>
+                  <p class="member-meta">{{ if .role }}{{ .role }}{{ end }}{{ if .degree }}{{ if .role }} · {{ end }}{{ .degree }}{{ end }}{{ if .year }}{{ if or .role .degree }} · {{ end }}{{ .year }}{{ end }}</p>
+                  {{ if .description }}<p class="member-desc">{{ .description }}</p>{{ end }}
+                </article>
+              {{ end }}
+            {{ else }}
+              <p class="loading">Loading members...</p>
+            {{ end }}
           </div>
           <div class="lab-info">
             <h3>Lab Info</h3>
@@ -112,18 +220,8 @@
           Inspired by
           <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
         </p>
-        <a
-          class="footer-nycu-logo-link"
-          href="https://brand.nycu.edu.tw/guidelines/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="NYCU brand guidelines"
-        >
-          <img
-            src="{{ "images/nycu-logo-official-full-en.png" | relURL }}"
-            class="footer-nycu-logo"
-            alt="NYCU Taiwan National Yang Ming Chiao Tung University logo"
-          >
+        <a class="footer-nycu-logo-link" href="https://brand.nycu.edu.tw/guidelines/" target="_blank" rel="noopener noreferrer" aria-label="NYCU brand guidelines">
+          <img src="{{ "images/nycu-logo-official-full-en.png" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
         </a>
       </footer>
     </main>
@@ -131,12 +229,7 @@
 
   <div id="member-modal" class="member-modal" hidden>
     <div class="member-modal__backdrop" data-modal-close></div>
-    <div
-      class="member-modal__dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="member-modal-name"
-    >
+    <div class="member-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="member-modal-name">
       <button type="button" class="member-modal__close" data-modal-close aria-label="Close profile">×</button>
       <div class="member-modal__header">
         <img id="member-modal-photo" class="member-modal__photo" src="" alt="">

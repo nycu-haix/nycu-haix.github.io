@@ -661,6 +661,50 @@ p {
   flex: 0 0 100%;
 }
 
+.member-page {
+  margin-bottom: 2rem;
+}
+
+.member-profile {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  margin-top: 0.8rem;
+}
+
+.member-profile-photo {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #adadad;
+}
+
+.member-profile-main h1 {
+  font-family: "Roboto Mono", monospace;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.member-social-links {
+  margin-top: 0.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.member-profile-content {
+  margin-top: 1rem;
+}
+
+.member-profile-content p,
+.member-profile-content ul,
+.member-profile-content ol,
+.member-profile-content h2,
+.member-profile-content h3,
+.member-profile-content h4 {
+  margin-top: 0.6rem;
+}
+
 .error {
   color: #b23f24;
 }
@@ -819,6 +863,14 @@ p {
   .member-card h4 {
     font-size: 1rem;
   }
+
+  .member-profile {
+    grid-template-columns: 140px 1fr;
+  }
+
+  .member-profile-main h1 {
+    font-size: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 360px) {
@@ -843,5 +895,13 @@ p {
 
   .member-modal__intro {
     text-align: left;
+  }
+
+  .member-profile {
+    grid-template-columns: 1fr;
+  }
+
+  .member-profile-photo {
+    width: min(220px, 100%);
   }
 }

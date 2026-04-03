@@ -1,0 +1,22 @@
+[
+  {
+    "topic": "Mentorship & Learning",
+    "description": "AI tools for better research meetings, preparation, and feedback.",
+    "order_num": 1
+  },
+  {
+    "topic": "Reflection & Sensemaking",
+    "description": "Interfaces that help people think, remember, and articulate ideas.",
+    "order_num": 2
+  },
+  {
+    "topic": "Collaboration & Dialogue",
+    "description": "Systems for shared understanding, communication, and collective work.",
+    "order_num": 3
+  },
+  {
+    "topic": "Human-Centered AI",
+    "description": "Designing responsible AI for education, research, and real-world practice.",
+    "order_num": 4
+  }
+]

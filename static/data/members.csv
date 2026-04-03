@@ -1,26 +1,27 @@
-name,role,year,email,github,orcid,scholar,website,photo,description,tags,username,profile_markdown
-Grace Yu-Chun Yen,Associate Professor,,yyen@cs.nycu.edu.tw,https://github.com/gracetfg2,,https://scholar.google.com/citations?user=neA0_u8AAAAJ&hl=en,https://gracetfg2.github.io/,/images/members/grace-yen.png,,HAI;Creativity,grace,"Associate Professor at NYCU.
+name,username,tags,role,year,email,github,orcid,scholar,website,photo,description,profile_markdown
+Grace Yu-Chun Yen,grace,,Associate Professor,,yyen@nycu.edu.tw,https://github.com/gracetfg2,,https://scholar.google.com/citations?user=neA0_u8AAAAJ&hl=en,https://gracetfg2.github.io/,/images/members/grace-yen.png,,
+劉怡妏,ywliu,,Master,2024,ywliu.cs13@nycu.edu.tw,https://github.com/ywliuuuuu,,,,,,
+林長宏,ray,,Master,2024,rayyyyyy333.cs13@nycu.edu.tw,https://github.com/rayshikigami,,,,,,
+許針銀,sunny,,Master,2024,sunnyxiu.cs13@nycu.edu.tw,https://github.com/sunnyxiu,,,,,,
+吳季旻,jimmy,,Master,2024,jimmy0622.cs13@nycu.edu.tw,https://github.com/jimmy0622,,,,,,
+高浩哲,gau,,Master,2025,gau.cs14@nycu.edu.tw,https://github.com/gau132,,,,,,
+陳俞安,zxcv,,Master,2025,zxcv920703.cs14@nycu.edu.tw,,,,,,,
+洪薇欣,velda,,Master,2025,velda.cs14@nycu.edu.tw,https://github.com/veldahung,,,,,,
+陳昕妤,sychen,,Master,2025,sychen.cs14@nycu.edu.tw,https://github.com/Yu202523,,,,,,
+Sky Shih-Kai Hong,sky,"Group Branstorming Assistant,
+Personal Informatics",Master,2025,sky.cs14@nycu.edu.tw,https://github.com/skyhong2002,https://orcid.org/0009-0003-9491-7900,,https://skyhong.tw,,,"# Hi, I'm Sky!
 
-- Human-AI Interaction
-- Creativity and Cognition"
-劉怡妏,Master,2024,ywliu.cs13@nycu.edu.tw,https://github.com/ywliuuuuu,,,,,,,
-林長宏,Master,2024,rayyyyyy333.cs13@nycu.edu.tw,https://github.com/rayshikigami,,,,,,,
-許針銀,Master,2024,sunnyxiu.cs13@nycu.edu.tw,https://github.com/sunnyxiu,,,,,,,
-吳季旻,Master,2024,jimmy0622.cs13@nycu.edu.tw,https://github.com/jimmy0622,,,,,,,
-高浩哲,Master,2025,gau.cs14@nycu.edu.tw,https://github.com/gau132,,,,,,,
-陳俞安,Master,2025,zxcv920703.cs14@nycu.edu.tw,,,,,,,,
-洪薇欣,Master,2025,velda.cs14@nycu.edu.tw,https://github.com/veldahung,,,,,,,
-陳昕妤,Master,2025,sychen.cs14@nycu.edu.tw,https://github.com/Yu202523,,,,,,,
-Sky Shih-Kai Hong,Master,2025,sky.cs14@nycu.edu.tw,https://github.com/skyhong2002,https://orcid.org/0009-0003-9491-7900,,https://skyhong.tw,,,HCI;AI-assisted creation,"sky","M.S. student at NYCU.
+I study AI-supported collaborative systems for online brainstorming and group discussion, with a particular interest in backchannel communication. My research explores how private, implicit, and lightweight backchannel signals can help people contribute ideas that might otherwise remain unspoken in group discussions.
 
-Interested in HCI systems and AI-assisted creation."
-吳尚璇,Master,2025,brinawuwu.cs14@nycu.edu.tw,https://github.com/SabrinaWu555,,,,,,,
-王韋凱,Undergraduate,2025,lilb0425.cs12@nycu.edu.tw,https://github.com/wwk0425,,,,,,,
-馬晨瑜,Undergraduate,2025,cs112550152.cs12@nycu.edu.tw,,,,,,,,
-張晉睿,Undergraduate,2025,rain112550185.cs12@nycu.edu.tw,,,,,,,,
-蔡尚融,Undergraduate,2025,shangjung.cs12@nycu.edu.tw,https://github.com/shangjung1012,,,,,,,
-陳宥臻,Undergraduate,2025,kellychen.cs12@nycu.edu.tw,https://github.com/kellychen058,,,,,,,
-李羿昕,Undergraduate,2025,hsin.cs12@nycu.edu.tw,https://github.com/yiihsinn,,,,,,,
-陳奕潔,Undergraduate,2025,ej.cs12@nycu.edu.tw,https://github.com/ejejej19,,,,,,,
-蕭宇岑,Undergraduate,2025,ethelhsiao0616.cs12@nycu.edu.tw,https://github.com/EthelHsiao,,,,,,,
-張智鈞,Undergraduate,2025,jasontw.mg11@nycu.edu.tw,,,,,,,,
+I am particularly interested in how AI can support the transition from private sensemaking to public contribution by helping participants articulate early-stage ideas, recognize hidden consensus, and join discussions at the right moment. More broadly, I aim to design collaborative systems that make online group ideation more inclusive, reflective, and socially attuned."
+吳尚璇,brina,,Master,2025,brinawuwu.cs14@nycu.edu.tw,https://github.com/SabrinaWu555,,,,,,
+王韋凱,,,Undergraduate,2025,lilb0425.cs12@nycu.edu.tw,https://github.com/wwk0425,,,,,,
+馬晨瑜,,,Undergraduate,2025,cs112550152.cs12@nycu.edu.tw,,,,,,,
+張晉睿,,,Undergraduate,2025,rain112550185.cs12@nycu.edu.tw,,,,,,,
+蔡尚融,,,Undergraduate,2025,shangjung.cs12@nycu.edu.tw,https://github.com/shangjung1012,,,,,,
+陳宥臻,,,Undergraduate,2025,kellychen.cs12@nycu.edu.tw,https://github.com/kellychen058,,,,,,
+李羿昕,,,Undergraduate,2025,hsin.cs12@nycu.edu.tw,https://github.com/yiihsinn,,,,,,
+陳奕潔,ej,,Undergraduate,2025,ej.cs12@nycu.edu.tw,https://github.com/ejejej19,,,,,,
+蕭宇岑,ethel,,Undergraduate,2025,ethelhsiao0616.cs12@nycu.edu.tw,https://github.com/EthelHsiao,,,,,,
+張智鈞,jason,,Undergraduate,2025,jasontw.mg11@nycu.edu.tw,,,,,,,
+Elvis Dragon Mao ,em,,Undergraduate,2025,info@elvismao.com,https://github.com/elvisdragonmao,,,https://elvismao.com,,,

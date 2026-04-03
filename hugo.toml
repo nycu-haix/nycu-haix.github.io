@@ -3,6 +3,11 @@ languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "HAIX (Human AI & Creative Computing) Lab"
 theme = "anubis2"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[permalinks]
+members = "/:slug/"
 
 [params]
 description = "HAIX (Human AI & Creative Computing) Lab at National Yang Ming Chiao Tung University"

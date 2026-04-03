@@ -1,0 +1,36 @@
+name: Sync Spreadsheet Data
+
+on:
+  schedule:
+    - cron: "15 20 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Sync CSV and generate SEO content
+        run: python3 scripts/sync_sheet.py --fetch --generate-og
+
+      - name: Commit changes if needed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes detected."
+            exit 0
+          fi
+          git add static/data/*.csv data/generated/*.json content/members/*.md static/og/*.png
+          git commit -m "chore(data): sync spreadsheet content and SEO pages"
+          git push
