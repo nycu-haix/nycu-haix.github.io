@@ -42,6 +42,8 @@
     return;
   }
 
+  markContainersPending([newsContainer, researchContainer, publicationsContainer, membersContainer]);
+
   initializeData();
 
   async function initializeData() {
@@ -97,10 +99,11 @@
     ensureUniqueMemberUsernames(members);
     members.sort(compareMember);
     renderMembers(members);
+    markContainerReady(membersContainer);
     syncMemberModalFromLocation();
 
     if (result.usedFallback) {
-      renderFallbackNotice(membersContainer);
+      renderFallbackNotice();
     }
   }
 
@@ -117,9 +120,10 @@
 
     publications.sort((a, b) => (b.yearNum || 0) - (a.yearNum || 0));
     renderPublications(publications);
+    markContainerReady(publicationsContainer);
 
     if (result.usedFallback) {
-      renderFallbackNotice(publicationsContainer);
+      renderFallbackNotice();
     }
   }
 
@@ -136,9 +140,10 @@
 
     newsItems.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
     renderNews(newsItems);
+    markContainerReady(newsContainer);
 
     if (result.usedFallback) {
-      renderFallbackNotice(newsContainer);
+      renderFallbackNotice();
     }
   }
 
@@ -155,9 +160,10 @@
 
     researchItems.sort(compareResearch);
     renderResearch(researchItems);
+    markContainerReady(researchContainer);
 
     if (result.usedFallback) {
-      renderFallbackNotice(researchContainer);
+      renderFallbackNotice();
     }
   }
 
@@ -1893,15 +1899,29 @@
     return note;
   }
 
-  function renderFallbackNotice(container) {
-    if (!container) {
+  function renderFallbackNotice() {
+    if (document.getElementById("global-fallback-notice")) {
       return;
     }
 
     const notice = document.createElement("p");
-    notice.className = "fallback-notice";
+    notice.id = "global-fallback-notice";
+    notice.className = "fallback-notice fallback-notice--global";
     notice.textContent = "Spreadsheet unavailable. Showing local fallback data.";
-    container.prepend(notice);
+
+    const footer = document.querySelector("main .footer");
+    if (footer) {
+      footer.insertAdjacentElement("afterend", notice);
+      return;
+    }
+
+    const mainContent = document.getElementById("main-content");
+    if (mainContent) {
+      mainContent.appendChild(notice);
+      return;
+    }
+
+    document.body.appendChild(notice);
   }
 
   function renderError(container, message) {
@@ -1910,6 +1930,25 @@
     error.className = "error";
     error.textContent = message;
     container.appendChild(error);
+    markContainerReady(container);
+  }
+
+  function markContainersPending(containers) {
+    containers.forEach((container) => {
+      if (!container) {
+        return;
+      }
+
+      container.dataset.feedState = "pending";
+    });
+  }
+
+  function markContainerReady(container) {
+    if (!container) {
+      return;
+    }
+
+    container.dataset.feedState = "ready";
   }
 
   function setupReveal() {

@@ -53,6 +53,7 @@
   <meta name="twitter:title" content="{{ .Site.Title }}">
   <meta name="twitter:description" content="{{ $siteDesc }}">
   <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,7 +103,7 @@
       <section id="news" class="row section-row reveal">
         <div class="col-main">
           <h2>News</h2>
-          <div id="news-list" class="news-list" aria-live="polite">
+          <div id="news-list" class="news-list" aria-live="polite" data-feed-state="pending">
             {{ if gt (len $newsItems) 0 }}
               {{ range $newsItems }}
                 <article class="news-item">
@@ -126,7 +127,7 @@
       <section id="research" class="row section-row reveal">
         <div class="col-main">
           <h2>Research</h2>
-          <div id="research-list" aria-live="polite">
+          <div id="research-list" aria-live="polite" data-feed-state="pending">
             {{ if gt (len $researchItems) 0 }}
               <ul class="plain-list research-list">
                 {{ range $researchItems }}
@@ -143,7 +144,7 @@
           </div>
 
           <h3>Latest Publications</h3>
-          <div id="publications-list" class="publication-list" aria-live="polite">
+          <div id="publications-list" class="publication-list" aria-live="polite" data-feed-state="pending">
             {{ if gt (len $publications) 0 }}
               {{ range $publications }}
                 {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.svg" }}
@@ -168,8 +169,6 @@
                   </div>
                 </article>
               {{ end }}
-            {{ else }}
-              <p class="loading">Loading publications...</p>
             {{ end }}
           </div>
         </div>
@@ -183,7 +182,7 @@
           <div class="group-overview">
             <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group photo">
           </div>
-          <div id="members-list" class="member-grid" aria-live="polite">
+          <div id="members-list" class="member-grid" aria-live="polite" data-feed-state="pending">
             {{ if gt (len $members) 0 }}
               {{ range $members }}
                 {{ $photo := .photo | default "/images/members/member-placeholder.svg" }}

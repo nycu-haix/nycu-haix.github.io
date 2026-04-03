@@ -716,6 +716,11 @@ p {
   font-family: "Roboto Mono", monospace;
 }
 
+.fallback-notice--global {
+  margin: 0.8rem 0 0;
+  text-align: center;
+}
+
 .footer {
   margin: 1.2rem auto 1.6rem;
   text-align: center;
@@ -744,6 +749,10 @@ p {
 .js-enabled .reveal {
   opacity: 0;
   transform: translateY(10px);
+}
+
+.js-enabled [data-feed-state="pending"] {
+  display: none;
 }
 
 .js-enabled .reveal.is-visible {
