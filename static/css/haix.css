@@ -517,6 +517,7 @@ p {
 }
 
 .member-modal__dialog {
+  box-sizing: border-box;
   position: relative;
   width: min(740px, 100%);
   max-height: calc(100vh - 2.4rem);
@@ -861,13 +862,10 @@ p {
   }
 
   .member-modal {
-    --modal-edge-x: 0.55rem;
-    --modal-edge-y: 0.75rem;
-    align-items: stretch;
-    padding-top: calc(var(--modal-edge-y) + env(safe-area-inset-top));
-    padding-right: var(--modal-edge-x);
-    padding-bottom: calc(var(--modal-edge-y) + env(safe-area-inset-bottom));
-    padding-left: var(--modal-edge-x);
+    --modal-edge: 0.6rem;
+    align-items: center;
+    justify-content: center;
+    padding: var(--modal-edge);
     background: rgb(0 0 0 / 50%);
     overflow: hidden;
   }
@@ -877,8 +875,9 @@ p {
   }
 
   .member-modal__dialog {
-    width: min(740px, 100%);
-    max-height: 100%;
+    width: min(740px, calc(100dvw - var(--modal-edge) - var(--modal-edge)));
+    height: auto;
+    max-height: calc(100dvh - var(--modal-edge) - var(--modal-edge));
     margin: 0 auto;
     padding-bottom: 1.25rem;
   }

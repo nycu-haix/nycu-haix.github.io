@@ -26,7 +26,7 @@ tags:
 
 I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution.
 
-Recently, I’m also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion.
+Recently, I'm also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion.
 
 # I will attend CHI 2026 as an Student Volunteer!
 
