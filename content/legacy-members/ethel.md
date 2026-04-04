@@ -1,7 +1,9 @@
 ---
 title: "蕭宇岑"
-slug: "ethel"
 description: "Undergraduate, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/ethel/"
 username: "ethel"
 role: "Undergraduate"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/c3ef3ba37592c11662f37f91d9305ccf?s=800&d
 og_image: "https://www.gravatar.com/avatar/c3ef3ba37592c11662f37f91d9305ccf?s=1200&d=identicon&r=g"
 og_image_local: "/og/ethel.png"
 gravatar_image: "https://www.gravatar.com/avatar/c3ef3ba37592c11662f37f91d9305ccf?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/ethel/"
 tags:
   - ""
 ---

@@ -1,7 +1,9 @@
 ---
 title: "洪薇欣"
-slug: "velda"
 description: "Master, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/velda/"
 username: "velda"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=800&d
 og_image: "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=1200&d=identicon&r=g"
 og_image_local: "/og/velda.png"
 gravatar_image: "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/velda/"
 tags:
   - ""
 ---

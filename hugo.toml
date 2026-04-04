@@ -7,7 +7,7 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
 
 [permalinks]
-members = "/:slug/"
+members = "/labmem/:slug/"
 
 [params]
 description = "HAIX (Human AI & Creative Computing) Lab at National Yang Ming Chiao Tung University"

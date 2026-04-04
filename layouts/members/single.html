@@ -4,7 +4,9 @@
 {{ $desc := .Description | default (printf "%s profile at HAIX Lab." $name) }}
 {{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.jpg" }}
 {{ $photo := .Params.photo | default "images/members/member-placeholder.svg" }}
-{{ $home := "/" | relURL }}
+{{ $memberList := "/labmem/" | relURL }}
+{{ $canonical := .Permalink }}
+{{ with .Params.username }}{{ $canonical = (printf "/labmem/%s/" .) | absURL }}{{ end }}
 {{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $tags := .Params.tags | default (slice) }}
 {{ $keywordText := printf "%s, HAIX Lab, NYCU, Human-AI Interaction, HCI, Creative Computing, Taiwan" $name }}
@@ -38,12 +40,12 @@
   <meta name="author" content="{{ $name }}">
   <meta name="organization" content="{{ $labMeta }}">
   <meta name="robots" content="index,follow">
-  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="canonical" href="{{ $canonical }}">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="HAIX Lab">
   <meta property="og:title" content="{{ $name }} | HAIX Lab">
   <meta property="og:description" content="{{ $desc }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $canonical }}">
   <meta property="og:image" content="{{ if hasPrefix $og "http" }}{{ $og }}{{ else }}{{ $og | absURL }}{{ end }}">
   {{ with .Params.username }}<meta property="profile:username" content="{{ . }}">{{ end }}
   <meta name="twitter:card" content="summary_large_image">
@@ -53,6 +55,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -68,10 +71,13 @@
         return;
       }
 
-      var target = "{{ $home }}?member={{ .Params.username | urlquery }}";
-      if (window.location.pathname !== "{{ .RelPermalink }}" || window.location.search !== "?member={{ .Params.username | urlquery }}") {
-        window.location.replace(target);
+      var target = "{{ $memberList }}?member={{ .Params.username | urlquery }}";
+      var desiredPath = "{{ printf "/labmem/%s/" .Params.username }}";
+      if (window.location.pathname === desiredPath && params.get("member") === "{{ .Params.username }}") {
+        return;
       }
+
+      window.location.replace(target);
     })();
   </script>
 </head>
@@ -89,9 +95,11 @@
         </a>
       </div>
       <div class="col-right">
-        <nav class="menu" aria-label="Profile navigation">
-          <a href="{{ "/" | relURL }}">Home</a>
-          <a href="{{ "/members/" | relURL }}">People</a>
+        <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/labmem/" | relURL }}">Member</a>
+          <a href="{{ "/#news" | relURL }}">News</a>
+          <a href="{{ "/#research" | relURL }}">Research</a>
+          <a href="{{ "/#lab" | relURL }}">Info</a>
         </nav>
       </div>
     </header>

@@ -3,7 +3,6 @@
 {{ $siteDesc := .Site.Params.description | default "HAIX (Human AI and Creative Computing) Lab website" }}
 {{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $keywords := slice "HAIX Lab" "NYCU" "Human-AI Interaction" "HCI" "Creative Computing" "Cognition" "Social Computing" "Taiwan" }}
-{{ $members := site.Data.generated.members | default (slice) }}
 {{ $newsItems := site.Data.generated.news | default (slice) }}
 {{ $researchItems := site.Data.generated.research | default (slice) }}
 {{ $publications := site.Data.generated.publications | default (slice) }}
@@ -57,6 +56,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -85,9 +85,10 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/labmem/" | relURL }}">Member</a>
           <a href="#news">News</a>
           <a href="#research">Research</a>
-          <a href="#lab">Lab</a>
+          <a href="#lab">Info</a>
         </nav>
       </div>
     </header>
@@ -97,6 +98,12 @@
         The <b>HAIX (Human AI &amp; Creative Computing) Lab</b> is based out of the <a href="https://www.cs.nycu.edu.tw/">Department of Computer Science at National Yang Ming Chiao Tung University</a>.
         We are reimagining human-AI and collaborative systems to empower people and improve society.
       </p>
+
+      <section class="row hero-group reveal" aria-label="HAIX Lab group photo">
+        <div class="group-overview group-overview--hero">
+          <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group photo" loading="eager" fetchpriority="high" decoding="async">
+        </div>
+      </section>
 
       <hr>
 
@@ -178,29 +185,11 @@
 
       <section id="lab" class="row section-row">
         <div class="col-main">
-          <h2>People</h2>
-          <div class="group-overview">
-            <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group photo">
-          </div>
-          <div id="members-list" class="member-grid" aria-live="polite" data-feed-state="pending">
-            {{ if gt (len $members) 0 }}
-              {{ range $members }}
-                {{ $photo := .photo | default "/images/members/member-placeholder.svg" }}
-                <article class="member-card" data-username="{{ .username }}">
-                  <a class="member-open-photo" href="{{ printf "/%s/" .username | relURL }}" aria-label="Open {{ .name }} profile">
-                    <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .name }} profile photo" loading="lazy">
-                  </a>
-                  <h4><a class="member-open-name" href="{{ printf "/%s/" .username | relURL }}">{{ .name }}</a></h4>
-                  <p class="member-meta">{{ if .role }}{{ .role }}{{ end }}{{ if .degree }}{{ if .role }} · {{ end }}{{ .degree }}{{ end }}{{ if .year }}{{ if or .role .degree }} · {{ end }}{{ .year }}{{ end }}</p>
-                  {{ if .description }}<p class="member-desc">{{ .description }}</p>{{ end }}
-                </article>
-              {{ end }}
-            {{ else }}
-              <p class="loading">Loading members...</p>
-            {{ end }}
-          </div>
+          <h2>Info</h2>
+          <p>
+            Meet everyone on the <a href="{{ "/labmem/" | relURL }}">People page</a>.
+          </p>
           <div class="lab-info">
-            <h3>Lab Info</h3>
             <p><strong>Location: EC524 (Room 524, Engineering Bldg 3)</strong></p>
             <p><strong>位置：EC524（光復校區工程三館 524 室）</strong></p>
             <p>Room 524, Engineering Bldg 3, 1001 University Road, Hsinchu, Taiwan 300, ROC</p>
@@ -229,24 +218,6 @@
         </a>
       </footer>
     </main>
-  </div>
-
-  <div id="member-modal" class="member-modal" hidden>
-    <div class="member-modal__backdrop" data-modal-close></div>
-    <div class="member-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="member-modal-name">
-      <button type="button" class="member-modal__close" data-modal-close aria-label="Close profile">×</button>
-      <div class="member-modal__header">
-        <img id="member-modal-photo" class="member-modal__photo" src="" alt="">
-        <div class="member-modal__intro">
-          <h3 id="member-modal-name"></h3>
-          <p id="member-modal-meta" class="member-modal__meta"></p>
-          <div id="member-modal-tags" class="member-modal__tags" hidden></div>
-          <p id="member-modal-desc" class="member-modal__desc" hidden></p>
-        </div>
-      </div>
-      <div id="member-modal-content" class="member-modal__content"></div>
-      <div id="member-modal-links" class="member-modal__links"></div>
-    </div>
   </div>
 
   <script src="{{ "js/haix.js" | relURL }}" defer></script>

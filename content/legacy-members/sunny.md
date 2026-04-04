@@ -1,7 +1,9 @@
 ---
 title: "許針銀"
-slug: "sunny"
 description: "Master, Year 2024"
+layout: "members/single"
+type: "members"
+url: "/sunny/"
 username: "sunny"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=800&d
 og_image: "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=1200&d=identicon&r=g"
 og_image_local: "/og/sunny.png"
 gravatar_image: "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/sunny/"
 tags:
   - ""
 ---

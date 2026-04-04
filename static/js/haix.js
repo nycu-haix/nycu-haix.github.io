@@ -14,6 +14,7 @@
 
   const FALLBACK_MEMBER_PHOTO = "/images/members/member-placeholder.svg";
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
+  const MEMBER_LIST_PATH = "/labmem/";
 
   const membersContainer = document.getElementById("members-list");
   const publicationsContainer = document.getElementById("publications-list");
@@ -88,7 +89,7 @@
   async function loadMembers(sources) {
     const remote = cleanUrl(sources.membersCsvUrl);
     const local = cleanUrl(sources.membersLocalCsv) || DEFAULT_SOURCES.membersLocalCsv;
-    const result = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(local, remote);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -110,7 +111,7 @@
   async function loadPublications(sources) {
     const remote = cleanUrl(sources.publicationsCsvUrl);
     const local = cleanUrl(sources.publicationsLocalCsv) || DEFAULT_SOURCES.publicationsLocalCsv;
-    const result = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(local, remote);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -130,7 +131,7 @@
   async function loadNews(sources) {
     const remote = cleanUrl(sources.newsCsvUrl);
     const local = cleanUrl(sources.newsLocalCsv) || DEFAULT_SOURCES.newsLocalCsv;
-    const result = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(local, remote);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -150,7 +151,7 @@
   async function loadResearch(sources) {
     const remote = cleanUrl(sources.researchCsvUrl);
     const local = cleanUrl(sources.researchLocalCsv) || DEFAULT_SOURCES.researchLocalCsv;
-    const result = await fetchCsvWithFallback(remote, local);
+    const result = await fetchCsvWithFallback(local, remote);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -905,7 +906,11 @@
       photo.src = initialPhoto;
       updateMemberPhotoMode(photo, initialPhoto);
       photo.alt = `${member.name} profile photo`;
-      photo.loading = "lazy";
+      photo.loading = index < 8 ? "eager" : "lazy";
+      photo.decoding = "async";
+      if (index < 4) {
+        photo.fetchPriority = "high";
+      }
       photo.addEventListener("error", () => {
         if (photo.src.includes(FALLBACK_MEMBER_PHOTO)) {
           return;
@@ -923,6 +928,10 @@
       photoButton.setAttribute("aria-label", `Open ${member.name} profile`);
       photoButton.appendChild(photo);
       photoButton.addEventListener("click", (event) => {
+        if (!memberModal) {
+          return;
+        }
+
         event.preventDefault();
         openMemberModal(member, { pushHistory: true });
       });
@@ -933,6 +942,10 @@
       nameButton.href = profilePath;
       nameButton.textContent = member.name;
       nameButton.addEventListener("click", (event) => {
+        if (!memberModal) {
+          return;
+        }
+
         event.preventDefault();
         openMemberModal(member, { pushHistory: true });
       });
@@ -1147,7 +1160,7 @@
         closeMemberModal({ pushHistory: false });
       }
 
-      history.replaceState({}, "", "/");
+      history.replaceState({}, "", MEMBER_LIST_PATH);
       return;
     }
 
@@ -1178,7 +1191,16 @@
       return "";
     }
 
-    return slugifyUsername(safeDecodeURIComponent(segments[segments.length - 1]));
+    const memberRootSegment = MEMBER_LIST_PATH.replace(/^\/+|\/+$/g, "");
+    if (!memberRootSegment || segments[0] !== memberRootSegment) {
+      return "";
+    }
+
+    if (segments.length < 2) {
+      return "";
+    }
+
+    return slugifyUsername(safeDecodeURIComponent(segments[1]));
   }
 
   function safeDecodeURIComponent(value) {
@@ -1190,7 +1212,7 @@
   }
 
   function buildMemberPath(username) {
-    return `/${encodeURIComponent(String(username || "").trim())}`;
+    return `${MEMBER_LIST_PATH}${encodeURIComponent(String(username || "").trim())}/`;
   }
 
   function openMemberModal(member, options = {}) {
@@ -1290,10 +1312,10 @@
     lastFocusedElementBeforeModal = null;
 
     if (pushHistory) {
-      const shouldPush = location.pathname !== "/" || location.search || location.hash;
+      const shouldPush = location.pathname !== MEMBER_LIST_PATH || location.search || location.hash;
       if (shouldPush) {
         const method = replaceHistory ? "replaceState" : "pushState";
-        history[method]({}, "", "/");
+        history[method]({}, "", MEMBER_LIST_PATH);
       }
     }
   }

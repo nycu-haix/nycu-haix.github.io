@@ -1,7 +1,9 @@
 ---
 title: "陳奕潔"
-slug: "ej"
 description: "Undergraduate, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/ej/"
 username: "ej"
 role: "Undergraduate"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=800&d
 og_image: "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=1200&d=identicon&r=g"
 og_image_local: "/og/ej.png"
 gravatar_image: "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/ej/"
 tags:
   - ""
 ---

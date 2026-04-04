@@ -1,7 +1,9 @@
 ---
 title: "李羿昕"
-slug: "hsin-cs12"
 description: "Undergraduate, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/hsin-cs12/"
 username: "hsin-cs12"
 role: "Undergraduate"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=800&d
 og_image: "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=1200&d=identicon&r=g"
 og_image_local: "/og/hsin-cs12.png"
 gravatar_image: "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/hsin-cs12/"
 tags:
   - ""
 ---

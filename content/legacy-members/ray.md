@@ -1,7 +1,9 @@
 ---
 title: "林長宏"
-slug: "ray"
 description: "Master, Year 2024"
+layout: "members/single"
+type: "members"
+url: "/ray/"
 username: "ray"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=800&d
 og_image: "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=1200&d=identicon&r=g"
 og_image_local: "/og/ray.png"
 gravatar_image: "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/ray/"
 tags:
   - ""
 ---

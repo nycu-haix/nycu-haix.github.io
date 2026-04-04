@@ -1,7 +1,9 @@
 ---
 title: "吳季旻"
-slug: "jimmy"
 description: "Master, Year 2024"
+layout: "members/single"
+type: "members"
+url: "/jimmy/"
 username: "jimmy"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=800&d
 og_image: "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=1200&d=identicon&r=g"
 og_image_local: "/og/jimmy.png"
 gravatar_image: "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/jimmy/"
 tags:
   - ""
 ---

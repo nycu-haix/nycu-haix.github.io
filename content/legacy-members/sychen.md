@@ -1,7 +1,9 @@
 ---
 title: "陳昕妤"
-slug: "sychen"
 description: "Master, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/sychen/"
 username: "sychen"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=800&d
 og_image: "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=1200&d=identicon&r=g"
 og_image_local: "/og/sychen.png"
 gravatar_image: "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/sychen/"
 tags:
   - ""
 ---

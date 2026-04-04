@@ -222,6 +222,15 @@ p {
   border: 1px solid #adadad;
 }
 
+.hero-group {
+  margin-top: 0.9rem;
+}
+
+.group-overview--hero {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
 .lab-info {
   margin-top: 0.8rem;
 }
@@ -318,7 +327,7 @@ p {
 .member-filter-bar {
   width: 100%;
   max-width: 72.2rem;
-  margin: 0.4rem auto 0.95rem;
+  margin: 1.4rem auto 0.95rem;
 }
 
 .member-filter-chips {
@@ -340,6 +349,18 @@ p {
   padding: 0.4rem 0.68rem;
   cursor: pointer;
   transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.member-tag {
+  display: inline-block;
+  width: auto;
+  max-width: min(100%, 10.8rem);
+  line-height: 1.12;
+  padding: 0.24rem 0.42rem;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .member-filter-chip:hover,
@@ -481,6 +502,8 @@ p {
   align-items: center;
   justify-content: center;
   padding: 1.2rem;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .member-modal[hidden] {
@@ -498,6 +521,8 @@ p {
   width: min(740px, 100%);
   max-height: calc(100vh - 2.4rem);
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   background: #fff;
   border-radius: 14px;
   padding: 1.1rem 1.15rem 1.25rem;
@@ -836,11 +861,26 @@ p {
   }
 
   .member-modal {
-    padding: 0.9rem;
+    --modal-edge-x: 0.55rem;
+    --modal-edge-y: 0.75rem;
+    align-items: stretch;
+    padding-top: calc(var(--modal-edge-y) + env(safe-area-inset-top));
+    padding-right: var(--modal-edge-x);
+    padding-bottom: calc(var(--modal-edge-y) + env(safe-area-inset-bottom));
+    padding-left: var(--modal-edge-x);
+    background: rgb(0 0 0 / 50%);
+    overflow: hidden;
+  }
+
+  .member-modal__backdrop {
+    background: transparent;
   }
 
   .member-modal__dialog {
-    max-height: calc(100vh - 1.8rem);
+    width: min(740px, 100%);
+    max-height: 100%;
+    margin: 0 auto;
+    padding-bottom: 1.25rem;
   }
 
   .member-modal__header {

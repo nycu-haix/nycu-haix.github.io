@@ -17,6 +17,7 @@ STATIC_DATA_DIR = ROOT / "static" / "data"
 SOURCES_PATH = STATIC_DATA_DIR / "sources.json"
 GENERATED_DATA_DIR = ROOT / "data" / "generated"
 CONTENT_MEMBERS_DIR = ROOT / "content" / "members"
+CONTENT_LEGACY_MEMBERS_DIR = ROOT / "content" / "legacy-members"
 OG_DIR = ROOT / "static" / "og"
 
 
@@ -65,6 +66,7 @@ def main() -> None:
     write_json(GENERATED_DATA_DIR / "research.json", research)
 
     generate_member_content(members)
+    generate_legacy_member_content(members)
 
     if args.generate_og:
         generate_member_og_images(members)
@@ -504,6 +506,9 @@ def generate_member_content(members: list[dict]) -> None:
         "---\n"
         'title: "People"\n'
         'description: "Members of HAIX (Human AI and Creative Computing) Lab at NYCU."\n'
+        'url: "/labmem/"\n'
+        "aliases:\n"
+        '  - "/member/"\n'
         "---\n\n"
         "This page is generated from the latest spreadsheet member data.\n",
         encoding="utf-8",
@@ -539,6 +544,8 @@ def generate_member_content(members: list[dict]) -> None:
             f"og_image: {yaml_quote(member.get('og_image', ''))}",
             f"og_image_local: {yaml_quote(member.get('og_image_local', ''))}",
             f"gravatar_image: {yaml_quote(member.get('gravatar_image', ''))}",
+            "aliases:",
+            f"  - {yaml_quote('/member/' + member.get('username', '') + '/')}",
             "tags:",
         ]
 
@@ -552,6 +559,56 @@ def generate_member_content(members: list[dict]) -> None:
         lines.extend(["---", "", body.strip(), ""])
 
         target = CONTENT_MEMBERS_DIR / f"{member['username']}.md"
+        target.write_text("\n".join(lines), encoding="utf-8")
+
+
+def generate_legacy_member_content(members: list[dict]) -> None:
+    CONTENT_LEGACY_MEMBERS_DIR.mkdir(parents=True, exist_ok=True)
+
+    for old_file in CONTENT_LEGACY_MEMBERS_DIR.glob("*.md"):
+        old_file.unlink()
+
+    for member in members:
+        body = str(
+            member.get("profile_markdown") or member.get("description") or ""
+        ).strip()
+        if not body:
+            body = "Profile details will be updated soon."
+
+        username = member.get("username", "")
+        lines = [
+            "---",
+            f"title: {yaml_quote(member.get('name', ''))}",
+            f"description: {yaml_quote(member.get('seo_description', ''))}",
+            'layout: "members/single"',
+            'type: "members"',
+            f"url: {yaml_quote('/' + username + '/')}",
+            f"username: {yaml_quote(username)}",
+            f"role: {yaml_quote(member.get('role', ''))}",
+            f"degree: {yaml_quote(member.get('degree', ''))}",
+            f"year: {yaml_quote(member.get('year', ''))}",
+            f"email: {yaml_quote(member.get('email', ''))}",
+            f"github: {yaml_quote(member.get('github', ''))}",
+            f"orcid: {yaml_quote(member.get('orcid', ''))}",
+            f"scholar: {yaml_quote(member.get('scholar', ''))}",
+            f"website: {yaml_quote(member.get('website', ''))}",
+            f"photo: {yaml_quote(member.get('photo', ''))}",
+            f"og_image: {yaml_quote(member.get('og_image', ''))}",
+            f"og_image_local: {yaml_quote(member.get('og_image_local', ''))}",
+            f"gravatar_image: {yaml_quote(member.get('gravatar_image', ''))}",
+            "tags:",
+        ]
+
+        tags = member.get("tags", [])
+        if tags:
+            for tag in tags:
+                lines.append(f"  - {yaml_quote(tag)}")
+        else:
+            lines.append('  - ""')
+
+        lines.extend(["---", "", body.strip(), ""])
+
+        target = CONTENT_LEGACY_MEMBERS_DIR / f"{username}.md"
         target.write_text("\n".join(lines), encoding="utf-8")
 
 

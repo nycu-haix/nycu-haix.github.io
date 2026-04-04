@@ -31,6 +31,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -53,11 +54,18 @@
           </span>
         </a>
       </div>
+      <div class="col-right">
+        <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/labmem/" | relURL }}">Member</a>
+          <a href="{{ "/#news" | relURL }}">News</a>
+          <a href="{{ "/#research" | relURL }}">Research</a>
+          <a href="{{ "/#lab" | relURL }}">Info</a>
+        </nav>
+      </div>
     </header>
     <main id="main-content">
-      <h1>{{ .Title }}</h1>
-      <p>{{ $desc }}</p>
-      <div class="member-grid">
+      <h1>Lab Member</h1>
+      <div id="members-list" class="member-grid" aria-live="polite" data-feed-state="pending">
         {{ range $members }}
           {{ $photo := .Params.photo | default "/images/members/member-placeholder.svg" }}
           <article class="member-card">
@@ -69,7 +77,45 @@
           </article>
         {{ end }}
       </div>
+
+      <footer class="footer">
+        <p>© {{ now.Year }} HAIX (Human AI &amp; Creative Computing) Lab, NYCU</p>
+        <p class="footer-note">
+          <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
+          built by
+          <a href="https://gracetfg2.github.io/" target="_blank" rel="noopener noreferrer">Grace Yun-Chun Yen</a>
+          and
+          <a href="https://skyhong.tw" target="_blank" rel="noopener noreferrer">Sky Shih-Kai Hong</a>.
+        </p>
+        <p class="footer-note">
+          Inspired by
+          <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
+        </p>
+        <a class="footer-nycu-logo-link" href="https://brand.nycu.edu.tw/guidelines/" target="_blank" rel="noopener noreferrer" aria-label="NYCU brand guidelines">
+          <img src="{{ "images/nycu-logo-official-full-en.png" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
+        </a>
+      </footer>
     </main>
   </div>
+
+  <div id="member-modal" class="member-modal" hidden>
+    <div class="member-modal__backdrop" data-modal-close></div>
+    <div class="member-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="member-modal-name">
+      <button type="button" class="member-modal__close" data-modal-close aria-label="Close profile">×</button>
+      <div class="member-modal__header">
+        <img id="member-modal-photo" class="member-modal__photo" src="" alt="">
+        <div class="member-modal__intro">
+          <h3 id="member-modal-name"></h3>
+          <p id="member-modal-meta" class="member-modal__meta"></p>
+          <div id="member-modal-tags" class="member-modal__tags" hidden></div>
+          <p id="member-modal-desc" class="member-modal__desc" hidden></p>
+        </div>
+      </div>
+      <div id="member-modal-content" class="member-modal__content"></div>
+      <div id="member-modal-links" class="member-modal__links"></div>
+    </div>
+  </div>
+
+  <script src="{{ "js/haix.js" | relURL }}" defer></script>
 </body>
 </html>

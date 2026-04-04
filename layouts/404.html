@@ -14,12 +14,12 @@
       var path = window.location.pathname || "/";
       var segments = path.split("/").filter(Boolean);
       var username = segments.length ? segments[segments.length - 1] : "";
-      var home = "{{ "/" | relLangURL }}";
-      if (!home.endsWith("/")) {
-        home += "/";
+      var memberRoot = "{{ "/labmem/" | relLangURL }}";
+      if (!memberRoot.endsWith("/")) {
+        memberRoot += "/";
       }
 
-      var target = username ? home + "?member=" + encodeURIComponent(username) : home;
+      var target = username ? memberRoot + encodeURIComponent(username) + "/" : memberRoot;
       window.location.replace(target);
     })();
   </script>

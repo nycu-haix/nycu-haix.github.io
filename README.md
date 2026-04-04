@@ -5,7 +5,7 @@ This site is a one-page Hugo website based on Grace's requirements:
 - Manual member photos with Gravatar fallback
 - Spreadsheet/CSV-driven members, news, publications, and research areas
 - Lab branding and logo
-- SEO-ready static rendering for homepage and member profile pages (`/username/`)
+- SEO-ready static rendering for homepage and member profile pages (`/labmem/<username>/`)
 
 ## Run locally
 
@@ -30,7 +30,7 @@ python3 scripts/sync_sheet.py --fetch --generate-og
 
 Generated outputs:
 
-- `content/members/*.md` (profile pages routed as `/<username>/`)
+- `content/members/*.md` (profile pages routed as `/labmem/<username>/`)
 - `data/generated/*.json` (server-rendered homepage content)
 - `static/og/*.png` (member-specific OG images downloaded from Gravatar)
 
@@ -106,12 +106,11 @@ Photo fallback order:
 2. Gravatar from `email`
 3. `/images/members/member-placeholder.svg`
 
-Member popup route behavior:
-- Click member photo/name to open popup in-page
-- URL changes to `https://nycu-haix.github.io/<username>` while popup is open
-- Browser back/forward replays popup state
-- Static profile pages are generated at `/username/` for SEO and sharing preview
-- For unknown paths, `static/404.html` still redirects to home fallback
+Member route behavior:
+- People list page is available at `/labmem/`
+- Member profile pages are generated at `/labmem/<username>/`
+- Legacy short links (`/<username>/`) and previous `/member/<username>/` links are generated as aliases and redirect to `/labmem/<username>/`
+- Unknown paths still redirect through `static/404.html`
 
 ### News (`news.csv`)
 

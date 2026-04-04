@@ -1,7 +1,9 @@
 ---
 title: "高浩哲"
-slug: "gau"
 description: "Master, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/gau/"
 username: "gau"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=800&d
 og_image: "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=identicon&r=g"
 og_image_local: "/og/gau.png"
 gravatar_image: "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/gau/"
 tags:
   - ""
 ---

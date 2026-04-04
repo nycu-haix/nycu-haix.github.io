@@ -1,7 +1,9 @@
 ---
 title: "劉怡妏"
-slug: "ywliu"
 description: "Master, Year 2024"
+layout: "members/single"
+type: "members"
+url: "/ywliu/"
 username: "ywliu"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=800&d
 og_image: "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=1200&d=identicon&r=g"
 og_image_local: "/og/ywliu.png"
 gravatar_image: "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/ywliu/"
 tags:
   - ""
 ---

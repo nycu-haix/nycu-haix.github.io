@@ -1,7 +1,9 @@
 ---
 title: "陳俞安"
-slug: "zxcv"
 description: "Master, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/zxcv/"
 username: "zxcv"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=800&d
 og_image: "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=1200&d=identicon&r=g"
 og_image_local: "/og/zxcv.png"
 gravatar_image: "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/zxcv/"
 tags:
   - ""
 ---

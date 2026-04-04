@@ -1,7 +1,9 @@
 ---
 title: "Sky Shih-Kai Hong"
-slug: "sky"
 description: "I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken..."
+layout: "members/single"
+type: "members"
+url: "/sky/"
 username: "sky"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d
 og_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=identicon&r=g"
 og_image_local: "/og/sky.png"
 gravatar_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/sky/"
 tags:
   - "Backchannel Communication"
   - "Online Deliberation"

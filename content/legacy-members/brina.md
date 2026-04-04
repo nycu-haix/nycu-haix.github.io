@@ -1,7 +1,9 @@
 ---
 title: "吳尚璇"
-slug: "brina"
 description: "Master, Year 2025"
+layout: "members/single"
+type: "members"
+url: "/brina/"
 username: "brina"
 role: "Master"
 degree: ""
@@ -15,8 +17,6 @@ photo: "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=800&d
 og_image: "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=1200&d=identicon&r=g"
 og_image_local: "/og/brina.png"
 gravatar_image: "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/brina/"
 tags:
   - ""
 ---

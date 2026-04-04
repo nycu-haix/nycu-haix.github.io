@@ -1,7 +1,9 @@
 ---
 title: "Grace Yu-Chun Yen"
-slug: "grace"
 description: "Associate Professor"
+layout: "members/single"
+type: "members"
+url: "/grace/"
 username: "grace"
 role: "Associate Professor"
 degree: ""
@@ -15,8 +17,6 @@ photo: "/images/members/grace-yen.png"
 og_image: "https://www.gravatar.com/avatar/4bb5ad534bcdcaba06b131f90feeec5b?s=1200&d=identicon&r=g"
 og_image_local: "/og/grace.png"
 gravatar_image: "https://www.gravatar.com/avatar/4bb5ad534bcdcaba06b131f90feeec5b?s=1200&d=identicon&r=g"
-aliases:
-  - "/member/grace/"
 tags:
   - ""
 ---
