@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=12
 og_image_local: "/og/sychen.png"
 gravatar_image: "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/sychen/"
   - "/member/sychen/"
 tags:
   - ""

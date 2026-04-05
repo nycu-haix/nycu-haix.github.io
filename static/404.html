@@ -12,7 +12,7 @@
       var path = window.location.pathname || "/";
       var segments = path.split("/").filter(Boolean);
       var username = segments.length ? segments[segments.length - 1] : "";
-      var target = username ? "/labmem/" + encodeURIComponent(username) + "/" : "/labmem/";
+      var target = username ? "/people/" + encodeURIComponent(username) + "/" : "/people/";
       window.location.replace(target);
     })();
   </script>

@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=12
 og_image_local: "/og/ray.png"
 gravatar_image: "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/ray/"
   - "/member/ray/"
 tags:
   - ""

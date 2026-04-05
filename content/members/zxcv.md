@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=12
 og_image_local: "/og/zxcv.png"
 gravatar_image: "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/zxcv/"
   - "/member/zxcv/"
 tags:
   - ""

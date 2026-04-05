@@ -14,7 +14,7 @@
 
   const FALLBACK_MEMBER_PHOTO = "/images/members/member-placeholder.svg";
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
-  const MEMBER_LIST_PATH = "/labmem/";
+  const MEMBER_LIST_PATH = "/people/";
 
   const membersContainer = document.getElementById("members-list");
   const publicationsContainer = document.getElementById("publications-list");
@@ -54,7 +54,7 @@
     if (membersContainer) {
       jobs.push(
         loadMembers(sources).catch((error) => {
-          renderError(membersContainer, `Unable to load members data. ${error.message}`);
+          renderError(membersContainer, `Unable to load people data. ${error.message}`);
         })
       );
     }
@@ -888,7 +888,7 @@
     memberByAlias.clear();
 
     if (!members.length) {
-      membersContainer.appendChild(buildNote("No member rows found in CSV."));
+      membersContainer.appendChild(buildNote("No people rows found in CSV."));
       return;
     }
 
@@ -1019,7 +1019,7 @@
     if (!memberFilterBar) {
       memberFilterBar = document.createElement("div");
       memberFilterBar.className = "member-filter-bar";
-      memberFilterBar.setAttribute("aria-label", "Filter members by tag");
+      memberFilterBar.setAttribute("aria-label", "Filter people by tag");
 
       const parent = membersContainer.parentElement;
       if (parent) {
@@ -1167,7 +1167,7 @@
     openMemberModal(member, { pushHistory: false });
 
     if (location.search) {
-      history.replaceState({ member: member.username }, "", buildMemberPath(member.username));
+      history.replaceState({ people: member.username }, "", buildMemberPath(member.username));
     }
   }
 
@@ -1181,7 +1181,8 @@
   }
 
   function extractMemberFromLocation() {
-    const query = new URLSearchParams(location.search).get("member");
+    const params = new URLSearchParams(location.search);
+    const query = params.get("people") || params.get("member");
     if (query) {
       return slugifyUsername(safeDecodeURIComponent(query));
     }
@@ -1191,8 +1192,8 @@
       return "";
     }
 
-    const memberRootSegment = MEMBER_LIST_PATH.replace(/^\/+|\/+$/g, "");
-    if (!memberRootSegment || segments[0] !== memberRootSegment) {
+    const peopleRootSegment = MEMBER_LIST_PATH.replace(/^\/+|\/+$/g, "");
+    if (!peopleRootSegment || segments[0] !== peopleRootSegment) {
       return "";
     }
 
@@ -1290,7 +1291,7 @@
       const shouldPush = location.pathname !== targetPath || location.search || location.hash;
       if (shouldPush) {
         const method = replaceHistory ? "replaceState" : "pushState";
-        history[method]({ member: member.username }, "", targetPath);
+        history[method]({ people: member.username }, "", targetPath);
       }
     }
   }
@@ -1574,7 +1575,7 @@
       meta.push(member.year);
     }
 
-    return meta.join(" • ") || "Lab Member";
+    return meta.join(" • ") || "People";
   }
 
   function buildMemberLinks(member) {

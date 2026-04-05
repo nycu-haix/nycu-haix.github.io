@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
 {{ $name := .Title }}
+{{ $descParts := slice }}
+{{ with .Params.role }}{{ $descParts = $descParts | append . }}{{ end }}
+{{ with .Params.degree }}{{ $descParts = $descParts | append . }}{{ end }}
+{{ with .Params.year }}{{ $descParts = $descParts | append (printf "Year %v" .) }}{{ end }}
+{{ with .Params.tags }}{{ if gt (len .) 0 }}{{ $descParts = $descParts | append (printf "Tags: %s" (delimit . ", ")) }}{{ end }}{{ end }}
+{{ with .Description }}{{ $descParts = $descParts | append . }}{{ end }}
+{{ $contentPlain := .Content | plainify | replaceRE "\\s+" " " | trim " " }}
+{{ if and $contentPlain (ne $contentPlain .Description) }}{{ $descParts = $descParts | append $contentPlain }}{{ end }}
 {{ $desc := .Description | default (printf "%s profile at HAIX Lab." $name) }}
+{{ if gt (len $descParts) 0 }}{{ $desc = printf "%s: %s" $name (delimit $descParts " | ") }}{{ end }}
 {{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.jpg" }}
 {{ $photo := .Params.photo | default "images/members/member-placeholder.svg" }}
-{{ $memberList := "/labmem/" | relURL }}
+{{ $memberList := "/people/" | relURL }}
 {{ $canonical := .Permalink }}
-{{ with .Params.username }}{{ $canonical = (printf "/labmem/%s/" .) | absURL }}{{ end }}
+{{ with .Params.username }}{{ $canonical = (printf "/people/%s/" .) | absURL }}{{ end }}
 {{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $tags := .Params.tags | default (slice) }}
 {{ $keywordText := printf "%s, HAIX Lab, NYCU, Human-AI Interaction, HCI, Creative Computing, Taiwan" $name }}
@@ -71,9 +80,10 @@
         return;
       }
 
-      var target = "{{ $memberList }}?member={{ .Params.username | urlquery }}";
-      var desiredPath = "{{ printf "/labmem/%s/" .Params.username }}";
-      if (window.location.pathname === desiredPath && params.get("member") === "{{ .Params.username }}") {
+      var target = "{{ $memberList }}?people={{ .Params.username | urlquery }}";
+      var desiredPath = "{{ printf "/people/%s/" .Params.username }}";
+      var activePerson = params.get("people") || params.get("member");
+      if (window.location.pathname === desiredPath && activePerson === "{{ .Params.username }}") {
         return;
       }
 
@@ -96,7 +106,7 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
-          <a href="{{ "/labmem/" | relURL }}">Member</a>
+          <a href="{{ "/people/" | relURL }}">People</a>
           <a href="{{ "/#news" | relURL }}">News</a>
           <a href="{{ "/#research" | relURL }}">Research</a>
           <a href="{{ "/#lab" | relURL }}">Info</a>

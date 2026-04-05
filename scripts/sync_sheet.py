@@ -161,6 +161,7 @@ def normalize_members(rows: list[dict]) -> list[dict]:
         role = pick(row, "role", "position")
         degree = pick(row, "degree", "program", "group")
         year = pick(row, "year", "grade", "ms_year")
+        tags = parse_tags(pick(row, "tags", "tag", "labels", "interests"))
         explicit_photo = pick(row, "photo", "photo_url", "image")
 
         gravatar_image = gravatar_url(email, 1200)
@@ -175,6 +176,7 @@ def normalize_members(rows: list[dict]) -> list[dict]:
             role=role,
             degree=degree,
             year=year,
+            tags=tags,
         )
 
         members.append(
@@ -209,7 +211,7 @@ def normalize_members(rows: list[dict]) -> list[dict]:
                 "photo": photo,
                 "description": description,
                 "profile_markdown": profile_markdown,
-                "tags": parse_tags(pick(row, "tags", "tag", "labels", "interests")),
+                "tags": tags,
                 "seo_description": seo_description,
                 "og_image": og_image,
                 "og_image_local": og_image_local,
@@ -418,19 +420,35 @@ def build_member_seo_description(
     role: str,
     degree: str,
     year: str,
+    tags: list[str],
 ) -> str:
-    preferred = (
-        first_profile_paragraph(profile_markdown) or str(description or "").strip()
-    )
-    if preferred:
-        return trim_sentence(preferred, 160)
+    parts = [str(name or "").strip()]
 
     meta = compose_member_meta(role, degree, year)
     if meta:
-        return trim_sentence(meta, 160)
+        parts.append(meta)
 
-    fallback = f"{name} profile at HAIX (Human AI and Creative Computing) Lab, NYCU."
-    return trim_sentence(fallback, 160)
+    cleaned_tags = [
+        str(tag or "").strip() for tag in (tags or []) if str(tag or "").strip()
+    ]
+    if cleaned_tags:
+        parts.append(f"Tags: {', '.join(cleaned_tags)}")
+
+    cleaned_description = normalize_spaces(description)
+    if cleaned_description:
+        parts.append(cleaned_description)
+
+    profile_text = full_profile_text(profile_markdown)
+    if profile_text and profile_text != cleaned_description:
+        parts.append(profile_text)
+
+    normalized_parts = [
+        normalize_spaces(part) for part in parts if normalize_spaces(part)
+    ]
+    if normalized_parts:
+        return " | ".join(normalized_parts)
+
+    return f"{name} profile at HAIX (Human AI and Creative Computing) Lab, NYCU."
 
 
 def first_profile_paragraph(markdown: str) -> str:
@@ -462,6 +480,15 @@ def first_profile_paragraph(markdown: str) -> str:
     return strip_markdown_inline(text)
 
 
+def full_profile_text(markdown: str) -> str:
+    value = str(markdown or "").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.strip() for line in value.split("\n") if line.strip()]
+    if not lines:
+        return ""
+    text = " ".join(lines)
+    return strip_markdown_inline(text)
+
+
 def strip_markdown_inline(text: str) -> str:
     value = str(text or "")
     value = re.sub(r"!\[[^\]]*\]\(([^)]+)\)", "", value)
@@ -473,16 +500,8 @@ def strip_markdown_inline(text: str) -> str:
     return value.strip()
 
 
-def trim_sentence(text: str, max_len: int) -> str:
-    value = re.sub(r"\s+", " ", str(text or "")).strip()
-    if len(value) <= max_len:
-        return value
-
-    truncated = value[:max_len].rstrip(" ,;:-")
-    last_space = truncated.rfind(" ")
-    if last_space >= max_len - 24:
-        truncated = truncated[:last_space]
-    return truncated.rstrip(" ,;:-") + "..."
+def normalize_spaces(text: str) -> str:
+    return re.sub(r"\s+", " ", str(text or "")).strip()
 
 
 def write_json(path: Path, data: object) -> None:
@@ -505,12 +524,13 @@ def generate_member_content(members: list[dict]) -> None:
     index_path.write_text(
         "---\n"
         'title: "People"\n'
-        'description: "Members of HAIX (Human AI and Creative Computing) Lab at NYCU."\n'
-        'url: "/labmem/"\n'
+        'description: "People of HAIX (Human AI and Creative Computing) Lab at NYCU."\n'
+        'url: "/people/"\n'
         "aliases:\n"
+        '  - "/labmem/"\n'
         '  - "/member/"\n'
         "---\n\n"
-        "This page is generated from the latest spreadsheet member data.\n",
+        "This page is generated from the latest spreadsheet people data.\n",
         encoding="utf-8",
     )
 
@@ -545,6 +565,7 @@ def generate_member_content(members: list[dict]) -> None:
             f"og_image_local: {yaml_quote(member.get('og_image_local', ''))}",
             f"gravatar_image: {yaml_quote(member.get('gravatar_image', ''))}",
             "aliases:",
+            f"  - {yaml_quote('/labmem/' + member.get('username', '') + '/')}",
             f"  - {yaml_quote('/member/' + member.get('username', '') + '/')}",
             "tags:",
         ]

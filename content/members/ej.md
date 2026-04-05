@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=12
 og_image_local: "/og/ej.png"
 gravatar_image: "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/ej/"
   - "/member/ej/"
 tags:
   - ""

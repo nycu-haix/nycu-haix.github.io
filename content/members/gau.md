@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=12
 og_image_local: "/og/gau.png"
 gravatar_image: "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/gau/"
   - "/member/gau/"
 tags:
   - ""

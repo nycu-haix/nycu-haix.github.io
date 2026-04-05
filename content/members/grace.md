@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/4bb5ad534bcdcaba06b131f90feeec5b?s=12
 og_image_local: "/og/grace.png"
 gravatar_image: "https://www.gravatar.com/avatar/4bb5ad534bcdcaba06b131f90feeec5b?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/grace/"
   - "/member/grace/"
 tags:
   - ""

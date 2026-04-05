@@ -2,10 +2,10 @@
 
 This site is a one-page Hugo website based on Grace's requirements:
 - One-page structure: `News`, `Research`, `Human AI & Creative Computing Lab`
-- Manual member photos with Gravatar fallback
-- Spreadsheet/CSV-driven members, news, publications, and research areas
+- Manual people photos with Gravatar fallback
+- Spreadsheet/CSV-driven people, news, publications, and research areas
 - Lab branding and logo
-- SEO-ready static rendering for homepage and member profile pages (`/labmem/<username>/`)
+- SEO-ready static rendering for homepage and people profile pages (`/people/<username>/`)
 
 ## Run locally
 
@@ -30,14 +30,14 @@ python3 scripts/sync_sheet.py --fetch --generate-og
 
 Generated outputs:
 
-- `content/members/*.md` (profile pages routed as `/labmem/<username>/`)
+- `content/members/*.md` (profile pages routed as `/people/<username>/`)
 - `data/generated/*.json` (server-rendered homepage content)
-- `static/og/*.png` (member-specific OG images downloaded from Gravatar)
+- `static/og/*.png` (people-specific OG images downloaded from Gravatar)
 
 SEO coverage now includes:
 
 - Unique `title` + `description` per page
-- `og:*` + `twitter:*` tags per page (`og:image` uses member Gravatar image file)
+- `og:*` + `twitter:*` tags per page (`og:image` uses people Gravatar image file)
 - Canonical URLs per page
 - `robots.txt` + `sitemap.xml`
 - Structured data (`Organization`, `Person`, `ItemList`/`ScholarlyArticle`)
@@ -81,7 +81,7 @@ Important:
 
 ## CSV columns
 
-### Members (`members.csv`)
+### People (`members.csv`)
 
 Required:
 - `name`
@@ -97,7 +97,7 @@ Recommended:
 - `website`
 - `photo` (e.g., `/images/members/alice.jpg`)
 - `description`
-- `tags` (member-defined tags for People filtering; separate multiple tags with `,`, `;`, `/`, `|`, `、`, or `，`)
+- `tags` (people-defined tags for People filtering; separate multiple tags with `,`, `;`, `/`, `|`, `、`, or `，`)
 - `username` (URL slug for modal route, e.g., `sky`)
 - `profile_markdown` (popup content, supports new lines, headings `#`~`######`, links, lists, and images `![alt](url)`)
 
@@ -106,10 +106,10 @@ Photo fallback order:
 2. Gravatar from `email`
 3. `/images/members/member-placeholder.svg`
 
-Member route behavior:
-- People list page is available at `/labmem/`
-- Member profile pages are generated at `/labmem/<username>/`
-- Legacy short links (`/<username>/`) and previous `/member/<username>/` links are generated as aliases and redirect to `/labmem/<username>/`
+People route behavior:
+- People list page is available at `/people/`
+- People profile pages are generated at `/people/<username>/`
+- Legacy short links (`/<username>/`), `/member/<username>/`, and `/labmem/<username>/` links are generated as aliases and redirect to `/people/<username>/`
 - Unknown paths still redirect through `static/404.html`
 
 ### News (`news.csv`)
@@ -152,7 +152,7 @@ Recommended:
 
 - Lab logo: replace `static/images/haix-logo.svg`
 - Group photo: replace `static/images/group-photo.jpg`
-- Member photos: add files under `static/images/members/` and set CSV `photo` path
+- People photos: add files under `static/images/members/` and set CSV `photo` path
 - News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
 - Publication thumbnails: add files under `static/images/publications/` and set CSV `thumbnail` path
 - Research data: update `static/data/research.csv` or set `researchCsvUrl` in `static/data/sources.json`

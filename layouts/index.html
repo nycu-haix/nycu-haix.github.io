@@ -6,6 +6,47 @@
 {{ $newsItems := site.Data.generated.news | default (slice) }}
 {{ $researchItems := site.Data.generated.research | default (slice) }}
 {{ $publications := site.Data.generated.publications | default (slice) }}
+{{ $previewParts := slice }}
+{{ if gt (len $newsItems) 0 }}
+  {{ $newsPreview := slice }}
+  {{ range $newsItems }}
+    {{ $itemParts := slice }}
+    {{ with .date }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .title }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .content }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .link_text }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .link_url }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ if gt (len $itemParts) 0 }}{{ $newsPreview = $newsPreview | append (delimit $itemParts " | ") }}{{ end }}
+  {{ end }}
+  {{ if gt (len $newsPreview) 0 }}{{ $previewParts = $previewParts | append (printf "News: %s" (delimit $newsPreview " || ")) }}{{ end }}
+{{ end }}
+{{ if gt (len $researchItems) 0 }}
+  {{ $researchPreview := slice }}
+  {{ range $researchItems }}
+    {{ $itemParts := slice }}
+    {{ with .topic }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .description }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ if gt (len $itemParts) 0 }}{{ $researchPreview = $researchPreview | append (delimit $itemParts " | ") }}{{ end }}
+  {{ end }}
+  {{ if gt (len $researchPreview) 0 }}{{ $previewParts = $previewParts | append (printf "Research: %s" (delimit $researchPreview " || ")) }}{{ end }}
+{{ end }}
+{{ if gt (len $publications) 0 }}
+  {{ $publicationPreview := slice }}
+  {{ range $publications }}
+    {{ $itemParts := slice }}
+    {{ with .title }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .authors }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .proceedings }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .year }}{{ $itemParts = $itemParts | append (printf "%v" .) }}{{ end }}
+    {{ with .doi }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .website }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ with .award }}{{ $itemParts = $itemParts | append . }}{{ end }}
+    {{ if gt (len $itemParts) 0 }}{{ $publicationPreview = $publicationPreview | append (delimit $itemParts " | ") }}{{ end }}
+  {{ end }}
+  {{ if gt (len $publicationPreview) 0 }}{{ $previewParts = $previewParts | append (printf "Publications: %s" (delimit $publicationPreview " || ")) }}{{ end }}
+{{ end }}
+{{ $socialPreviewDesc := $siteDesc }}
+{{ if gt (len $previewParts) 0 }}{{ $socialPreviewDesc = printf "%s %s" $siteDesc (delimit $previewParts " /// ") }}{{ end }}
 {{ $organizationLd := dict
   "@context" "https://schema.org"
   "@type" "Organization"
@@ -37,7 +78,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ .Site.Title }}</title>
-  <meta name="description" content="{{ $siteDesc }}">
+  <meta name="description" content="{{ $socialPreviewDesc }}">
   <meta name="keywords" content="{{ delimit $keywords ", " }}">
   <meta name="organization" content="{{ $labMeta }}">
   <meta name="robots" content="index,follow">
@@ -45,12 +86,12 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="HAIX Lab">
   <meta property="og:title" content="{{ .Site.Title }}">
-  <meta property="og:description" content="{{ $siteDesc }}">
+  <meta property="og:description" content="{{ $socialPreviewDesc }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ .Site.Title }}">
-  <meta name="twitter:description" content="{{ $siteDesc }}">
+  <meta name="twitter:description" content="{{ $socialPreviewDesc }}">
   <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
   <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
@@ -85,7 +126,7 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
-          <a href="{{ "/labmem/" | relURL }}">Member</a>
+          <a href="{{ "/people/" | relURL }}">People</a>
           <a href="#news">News</a>
           <a href="#research">Research</a>
           <a href="#lab">Info</a>
@@ -187,7 +228,7 @@
         <div class="col-main">
           <h2>Info</h2>
           <p>
-            Meet everyone on the <a href="{{ "/labmem/" | relURL }}">People page</a>.
+            Meet everyone on the <a href="{{ "/people/" | relURL }}">People page</a>.
           </p>
           <div class="lab-info">
             <p><strong>Location: EC524 (Room 524, Engineering Bldg 3)</strong></p>

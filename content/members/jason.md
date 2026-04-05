@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/d3c5dc071c36ad308e94ab1b9125e7ff?s=12
 og_image_local: "/og/jason.png"
 gravatar_image: "https://www.gravatar.com/avatar/d3c5dc071c36ad308e94ab1b9125e7ff?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/jason/"
   - "/member/jason/"
 tags:
   - ""

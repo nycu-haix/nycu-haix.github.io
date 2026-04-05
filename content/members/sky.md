@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=12
 og_image_local: "/og/sky.png"
 gravatar_image: "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/sky/"
   - "/member/sky/"
 tags:
   - "Backchannel Communication"

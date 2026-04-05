@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=12
 og_image_local: "/og/brina.png"
 gravatar_image: "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/brina/"
   - "/member/brina/"
 tags:
   - ""

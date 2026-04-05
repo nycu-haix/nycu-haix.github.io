@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=12
 og_image_local: "/og/ywliu.png"
 gravatar_image: "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=1200&d=identicon&r=g"
 aliases:
+  - "/labmem/ywliu/"
   - "/member/ywliu/"
 tags:
   - ""

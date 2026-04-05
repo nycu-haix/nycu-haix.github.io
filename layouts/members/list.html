@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
-{{ $desc := .Description | default "Members of HAIX Lab at NYCU." }}
 {{ $members := .Pages.ByTitle }}
+{{ $baseDesc := .Description | default "People of HAIX Lab at NYCU." }}
+{{ $memberPreviewItems := slice }}
+{{ range $members }}
+  {{ $parts := slice }}
+  {{ with .Params.role }}{{ $parts = $parts | append . }}{{ end }}
+  {{ with .Params.degree }}{{ $parts = $parts | append . }}{{ end }}
+  {{ with .Params.year }}{{ $parts = $parts | append (printf "Year %v" .) }}{{ end }}
+  {{ with .Params.tags }}{{ if gt (len .) 0 }}{{ $parts = $parts | append (printf "Tags: %s" (delimit . ", ")) }}{{ end }}{{ end }}
+  {{ with .Description }}{{ $parts = $parts | append . }}{{ end }}
+  {{ $contentPlain := .Content | plainify | replaceRE "\\s+" " " | trim " " }}
+  {{ if and $contentPlain (ne $contentPlain .Description) }}{{ $parts = $parts | append $contentPlain }}{{ end }}
+  {{ $memberText := .Title }}
+  {{ if gt (len $parts) 0 }}{{ $memberText = printf "%s: %s" .Title (delimit $parts " | ") }}{{ end }}
+  {{ $memberPreviewItems = $memberPreviewItems | append $memberText }}
+{{ end }}
+{{ $desc := $baseDesc }}
+{{ if gt (len $memberPreviewItems) 0 }}{{ $desc = printf "%s %s" $baseDesc (delimit $memberPreviewItems " || ") }}{{ end }}
 {{ $memberItems := slice }}
 {{ range $index, $member := $members }}
   {{ $memberItems = $memberItems | append (dict "@type" "ListItem" "position" (add $index 1) "url" $member.Permalink "name" $member.Title) }}
@@ -9,7 +25,7 @@
 {{ $memberListLd := dict
   "@context" "https://schema.org"
   "@type" "ItemList"
-  "name" "HAIX Members"
+  "name" "HAIX People"
   "itemListElement" $memberItems
 }}
 <head>
@@ -56,7 +72,7 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
-          <a href="{{ "/labmem/" | relURL }}">Member</a>
+          <a href="{{ "/people/" | relURL }}">People</a>
           <a href="{{ "/#news" | relURL }}">News</a>
           <a href="{{ "/#research" | relURL }}">Research</a>
           <a href="{{ "/#lab" | relURL }}">Info</a>
@@ -64,7 +80,7 @@
       </div>
     </header>
     <main id="main-content">
-      <h1>Lab Member</h1>
+      <h1>People</h1>
       <div id="members-list" class="member-grid" aria-live="polite" data-feed-state="pending">
         {{ range $members }}
           {{ $photo := .Params.photo | default "/images/members/member-placeholder.svg" }}
