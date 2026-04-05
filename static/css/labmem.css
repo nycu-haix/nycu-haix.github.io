@@ -1,0 +1,335 @@
+@font-face {
+  font-family: "LabMemBONX";
+  src: url("https://raw.githubusercontent.com/zyf722/Max-s-Divergence-Meter/master/font/BONX-Medium.otf") format("opentype");
+  font-display: swap;
+}
+
+body.labmem-page {
+  --labmem-main: #ffb56a;
+  --labmem-main-soft: #ffd6a4;
+  --labmem-text: #f7dfbe;
+  --labmem-muted: rgba(247, 223, 190, 0.74);
+  color: var(--labmem-text);
+  background:
+    radial-gradient(130% 90% at 80% -20%, rgba(173, 84, 22, 0.25), transparent 60%),
+    radial-gradient(110% 85% at 0% 0%, rgba(120, 59, 20, 0.22), transparent 58%),
+    linear-gradient(180deg, #060709 0%, #0a0b0f 52%, #0c0d12 100%);
+  text-shadow: 0 0 1px rgba(255, 205, 148, 0.22);
+}
+
+body.labmem-page::before,
+body.labmem-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body.labmem-page::before {
+  z-index: 2;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 230, 196, 0.035) 0,
+    rgba(255, 230, 196, 0.035) 1px,
+    rgba(0, 0, 0, 0.055) 2px,
+    rgba(0, 0, 0, 0.055) 3px
+  );
+}
+
+body.labmem-page::after {
+  z-index: 1;
+  background-image:
+    radial-gradient(circle at 20% 35%, rgba(255, 183, 121, 0.06) 0, transparent 40%),
+    radial-gradient(circle at 75% 20%, rgba(255, 140, 87, 0.05) 0, transparent 33%);
+  mix-blend-mode: screen;
+  opacity: 0.24;
+  animation: labmem-noise 0.33s steps(2, end) infinite;
+}
+
+@keyframes labmem-noise {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  40% {
+    transform: translate(-0.35%, 0.28%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.labmem-page .container-fluid {
+  position: relative;
+  z-index: 3;
+}
+
+.labmem-page .skip-link:focus {
+  background: #23170d;
+  color: var(--labmem-main-soft);
+  border-color: var(--labmem-main);
+}
+
+.labmem-page .brand-line,
+.labmem-page .brand-copy strong,
+.labmem-page .brand-copy small,
+.labmem-page .menu a,
+.labmem-page h1,
+.labmem-page p,
+.labmem-page .people-meta,
+.labmem-page .footer {
+  color: var(--labmem-text);
+}
+
+.labmem-page .brand-copy strong,
+.labmem-page .menu a,
+.labmem-page .footer {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.labmem-page .brand-copy strong {
+  color: var(--labmem-main-soft);
+}
+
+.labmem-page .brand-copy small,
+.labmem-page .menu a,
+.labmem-page .footer-note,
+.labmem-page .meter-label {
+  color: var(--labmem-muted);
+}
+
+.labmem-page a,
+.labmem-page .people-open-name {
+  color: var(--labmem-main-soft);
+}
+
+.labmem-page a:hover,
+.labmem-page a:focus-visible,
+.labmem-page .people-open-name:hover,
+.labmem-page .people-open-name:focus-visible {
+  color: var(--labmem-main);
+}
+
+.labmem-page .logo-mark {
+  filter: sepia(0.28) saturate(0.74) brightness(1.08);
+}
+
+.labmem-page .labmem-panel {
+  margin: 1.3rem auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.labmem-page .labmem-hero {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.2rem;
+}
+
+.labmem-page h1 {
+  font-family: "Roboto Mono", monospace;
+  font-size: 2.25rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.labmem-page .meter-label {
+  margin: 0.18rem 0 0;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.83rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.labmem-page .meter-value {
+  margin: 0.12rem 0 0.16rem;
+  font-family: "LabMemBONX", "Roboto Mono", monospace;
+  font-size: clamp(2.25rem, 4.8vw, 3.2rem);
+  line-height: 1.04;
+  letter-spacing: 0.2em;
+  color: var(--labmem-main);
+  text-shadow:
+    0 0 4px rgba(255, 198, 139, 0.74),
+    0 0 14px rgba(255, 145, 61, 0.58),
+    0 0 26px rgba(255, 106, 40, 0.36);
+}
+
+.labmem-page .reading-steiner-trigger {
+  margin-top: 0.5rem;
+  border: 0;
+  background: transparent;
+  color: var(--labmem-main-soft);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.35rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 184, 113, 0.54);
+  text-underline-offset: 0.26em;
+}
+
+.labmem-page .reading-steiner-trigger:hover,
+.labmem-page .reading-steiner-trigger:focus-visible {
+  color: var(--labmem-main);
+  text-decoration-color: rgba(255, 198, 140, 0.9);
+}
+
+.labmem-page .people-grid {
+  gap: 1rem 0.9rem;
+}
+
+.labmem-page .people-card {
+  position: relative;
+  width: 13.8rem;
+  flex: 0 1 13.8rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0.1rem 0;
+  transition: transform 170ms ease;
+}
+
+.labmem-page .labmem-index {
+  display: block;
+  margin-top: 0.25rem;
+  margin-bottom: 0.1rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 1rem;
+  letter-spacing: 0.13em;
+  color: rgba(255, 214, 164, 0.82);
+  text-shadow: 0 0 8px rgba(255, 145, 61, 0.32);
+}
+
+.labmem-page .people-card:hover,
+.labmem-page .people-card:focus-within {
+  transform: translateY(-2px);
+}
+
+.labmem-page .people-card img {
+  width: 9.8rem;
+  margin-top: 0.6rem;
+  border-radius: 10px;
+  border: 0;
+  filter: sepia(0.18) saturate(0.86) contrast(1.06);
+  box-shadow: 0 0 18px rgba(255, 145, 61, 0.22);
+}
+
+.labmem-page .people-open-photo {
+  cursor: default;
+}
+
+.labmem-page .people-card h4 {
+  margin-top: 0.35rem;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+}
+
+.labmem-page .people-meta {
+  color: var(--labmem-muted);
+}
+
+.labmem-page .people-tags,
+.labmem-page .people-desc,
+.labmem-page .people-links,
+.labmem-page .people-filter-bar {
+  display: none;
+}
+
+.labmem-page .people-card.worldline-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.labmem-page .footer {
+  margin-top: 1.4rem;
+  border-top: 0;
+  text-align: center;
+}
+
+body.labmem-page.is-shifting {
+  animation: labmem-shift 400ms steps(2, end) 2;
+}
+
+body.labmem-page.is-shifting .people-card {
+  animation: labmem-flicker 520ms steps(2, end) 2;
+}
+
+@keyframes labmem-shift {
+  0% {
+    transform: translateX(0);
+  }
+
+  33% {
+    transform: translateX(1px);
+  }
+
+  66% {
+    transform: translateX(-1px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes labmem-flicker {
+  0% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .labmem-page h1 {
+    font-size: 1.95rem;
+  }
+
+  .labmem-page .meter-value {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    letter-spacing: 0.14em;
+  }
+
+  .labmem-page .people-card {
+    width: 12.8rem;
+    flex-basis: 12.8rem;
+  }
+
+  .labmem-page .people-card img {
+    width: 8.8rem;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .labmem-page .people-card {
+    flex: 0 1 calc(50% - 0.45rem);
+    width: auto;
+    max-width: 170px;
+    margin: 0;
+  }
+
+  .labmem-page .people-card img {
+    width: 100%;
+    max-width: 140px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .labmem-page .people-card {
+    flex-basis: 100%;
+  }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+{{ $peopleSection := site.GetPage "section" "people" }}
+{{ $people := slice }}
+{{ if $peopleSection }}{{ $people = $peopleSection.Pages.ByTitle }}{{ end }}
+{{ $baseDesc := .Description | default "Temporal member registry for HAIX Lab." }}
+{{ $previewItems := slice }}
+{{ range $people }}
+  {{ $previewItems = $previewItems | append (partial "people-preview-description.html" .) }}
+{{ end }}
+{{ $desc := $baseDesc }}
+{{ if gt (len $previewItems) 0 }}{{ $desc = printf "%s %s" $baseDesc (delimit $previewItems " || ") }}{{ end }}
+{{ $peopleItems := slice }}
+{{ range $index, $people := $people }}
+  {{ $peopleItems = $peopleItems | append (dict "@type" "ListItem" "position" (add $index 1) "url" $people.Permalink "name" $people.Title) }}
+{{ end }}
+{{ $peopleListLd := dict
+  "@context" "https://schema.org"
+  "@type" "ItemList"
+  "name" "HAIX LabMem Registry"
+  "itemListElement" $peopleItems
+}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }} | HAIX Lab</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ .Title }} | HAIX Lab">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title }} | HAIX Lab">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <script>document.documentElement.classList.add("js-enabled");</script>
+  <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/labmem.css" | relURL }}?v={{ now.Unix }}">
+  {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
+    {{ if hugo.IsProduction }}
+      {{ partial "analytics/google_analytics.html" $ }}
+    {{ end }}
+  {{ end }}
+  <script type="application/ld+json">{{ $peopleListLd | jsonify | safeJS }}</script>
+</head>
+<body class="labmem-page" data-people-root-path="/people/">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="container-fluid">
+    <header class="row nav-row" id="top">
+      <div class="col-left">
+        <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
+          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <span class="brand-copy">
+            <strong>HAIX Temporal Archive</strong>
+            <small>Worldline Observer Node - NYCU</small>
+          </span>
+        </a>
+      </div>
+      <div class="col-right">
+        <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/labmem/" | relURL }}">LabMem</a>
+          <a href="{{ "/#news" | relURL }}">News</a>
+          <a href="{{ "/#research" | relURL }}">Research</a>
+          <a href="{{ "/#lab" | relURL }}">Info</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="labmem-panel labmem-hero" aria-label="Worldline control panel">
+        <h1>LabMem Registry</h1>
+        <p class="meter-label">Worldline</p>
+        <p class="meter-value" id="worldline-value" role="status" aria-live="polite">1.048596</p>
+        <button id="reading-steiner-trigger" class="reading-steiner-trigger" type="button">Reading Steiner</button>
+      </section>
+
+      <section class="labmem-panel" aria-label="Lab member list">
+        <div id="people-list" class="people-grid" aria-live="polite" data-feed-state="pending">
+          {{ range $people }}
+            {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+            <article class="people-card">
+              <a class="people-open-photo" href="{{ .RelPermalink }}">
+                <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
+              </a>
+              <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+              <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
+            </article>
+          {{ end }}
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>Temporal Observation Node © {{ now.Year }} HAIX Lab, NYCU</p>
+        <p class="footer-note">El Psy Kongroo.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="{{ "js/haix.js" | relURL }}?v={{ now.Unix }}" defer></script>
+  <script src="{{ "js/labmem.js" | relURL }}?v={{ now.Unix }}" defer></script>
+</body>
+</html>

@@ -14,7 +14,7 @@
 
   const FALLBACK_PEOPLE_PHOTO = "/images/people/people-placeholder.svg";
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
-  const PEOPLE_LIST_PATH = "/people/";
+  const PEOPLE_LIST_PATH = cleanPeopleListPath(document.body ? document.body.dataset.peopleRootPath : "") || "/people/";
 
   const peopleContainer = document.getElementById("people-list");
   const publicationsContainer = document.getElementById("publications-list");
@@ -1221,6 +1221,16 @@
     } catch (_error) {
       return String(value || "");
     }
+  }
+
+  function cleanPeopleListPath(value) {
+    const trimmed = String(value || "").trim();
+    if (!trimmed) {
+      return "";
+    }
+
+    const withLeadingSlash = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return withLeadingSlash.endsWith("/") ? withLeadingSlash : `${withLeadingSlash}/`;
   }
 
   function buildPeoplePath(username) {
