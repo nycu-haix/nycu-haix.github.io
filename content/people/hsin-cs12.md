@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=12
 og_image_local: "/og/hsin-cs12.png"
 gravatar_image: "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=1200&d=identicon&r=g"
 aliases:
+  - "/hsin-cs12/"
   - "/labmem/hsin-cs12/"
 tags:
   - ""

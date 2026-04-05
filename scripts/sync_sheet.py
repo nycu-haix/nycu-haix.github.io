@@ -546,6 +546,7 @@ def generate_people_content(people: list[dict]) -> None:
             f"og_image_local: {yaml_quote(person.get('og_image_local', ''))}",
             f"gravatar_image: {yaml_quote(person.get('gravatar_image', ''))}",
             "aliases:",
+            f"  - {yaml_quote('/' + person.get('username', '') + '/')}",
             f"  - {yaml_quote('/labmem/' + person.get('username', '') + '/')}",
             "tags:",
         ]

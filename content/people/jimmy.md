@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=12
 og_image_local: "/og/jimmy.png"
 gravatar_image: "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=1200&d=identicon&r=g"
 aliases:
+  - "/jimmy/"
   - "/labmem/jimmy/"
 tags:
   - ""

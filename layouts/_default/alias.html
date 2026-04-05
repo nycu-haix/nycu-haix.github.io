@@ -1,18 +1,33 @@
 <!doctype html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
 <head>
+  {{ $target := .Permalink }}
+  {{ $desc := .Description | default .Site.Params.description | default "HAIX (Human AI & Creative Computing) Lab at National Yang Ming Chiao Tung University" }}
+  {{ $title := .Title | default .Site.Title | default "HAIX Lab" }}
+  {{ $fullTitle := printf "%s | HAIX Lab" $title }}
+  {{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.jpg" }}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Redirecting...</title>
-  <link rel="canonical" href="{{ .Permalink }}">
-  <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+  <title>{{ $fullTitle }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <link rel="canonical" href="{{ $target }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ $fullTitle }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ $target }}">
+  <meta property="og:image" content="{{ if hasPrefix $og "http" }}{{ $og }}{{ else }}{{ $og | absURL }}{{ end }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $fullTitle }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ if hasPrefix $og "http" }}{{ $og }}{{ else }}{{ $og | absURL }}{{ end }}">
+  <meta http-equiv="refresh" content="0; url={{ $target }}">
   <script>
-    window.location.replace({{ .Permalink | jsonify | safeJS }});
+    window.location.replace({{ $target | jsonify | safeJS }});
   </script>
 </head>
 <body style="margin:0">
   <noscript>
-    <p>Redirecting to <a href="{{ .Permalink }}">{{ .Permalink }}</a>...</p>
+    <p>Redirecting to <a href="{{ $target }}">{{ $target }}</a>...</p>
   </noscript>
 </body>
 </html>

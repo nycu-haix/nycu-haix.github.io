@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=12
 og_image_local: "/og/velda.png"
 gravatar_image: "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=1200&d=identicon&r=g"
 aliases:
+  - "/velda/"
   - "/labmem/velda/"
 tags:
   - ""

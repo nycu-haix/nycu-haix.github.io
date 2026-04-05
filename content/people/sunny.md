@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=12
 og_image_local: "/og/sunny.png"
 gravatar_image: "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=1200&d=identicon&r=g"
 aliases:
+  - "/sunny/"
   - "/labmem/sunny/"
 tags:
   - ""

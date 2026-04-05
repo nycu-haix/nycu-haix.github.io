@@ -110,7 +110,7 @@ Photo fallback order:
 People route behavior:
 - People list page is available at `/people/`
 - People profile pages are generated at `/people/<username>/`
-- Legacy `/labmem/<username>/` links are generated as aliases and redirect to `/people/<username>/`
+- Short links `/<username>/` and legacy `/labmem/<username>/` links are generated as aliases and redirect to `/people/<username>/`
 - Unknown paths still redirect through `static/404.html`
 
 ### News (`news.csv`)

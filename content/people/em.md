@@ -16,6 +16,7 @@ og_image: "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=12
 og_image_local: "/og/em.png"
 gravatar_image: "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=1200&d=identicon&r=g"
 aliases:
+  - "/em/"
   - "/labmem/em/"
 tags:
   - ""
