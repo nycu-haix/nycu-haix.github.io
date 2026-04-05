@@ -65,12 +65,6 @@
         </a>
       </div>
       <div class="col-right">
-        <nav class="menu" aria-label="Main navigation">
-          <a href="{{ "/labmem/" | relURL }}">LabMem</a>
-          <a href="{{ "/#news" | relURL }}">News</a>
-          <a href="{{ "/#research" | relURL }}">Research</a>
-          <a href="{{ "/#lab" | relURL }}">Info</a>
-        </nav>
       </div>
     </header>
 
@@ -81,10 +75,10 @@
         <div class="meter-crt-shell">
           <p class="meter-value" id="worldline-value" role="status" aria-live="polite">1.048596</p>
         </div>
-        <button id="reading-steiner-trigger" class="reading-steiner-trigger" type="button">Reading Steiner</button>
+        <p id="worldline-log" class="worldline-log">No major drift detected.</p>
       </section>
 
-      <section class="labmem-panel" aria-label="Lab member list">
+      <section class="labmem-panel" id="registry-panel" aria-label="Lab member list">
         <div id="people-list" class="people-grid" aria-live="polite" data-feed-state="pending">
           {{ range $people }}
             {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
@@ -92,8 +86,10 @@
               <a class="people-open-photo" href="{{ .RelPermalink }}">
                 <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
               </a>
-              <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-              <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
+              <p class="people-meta"><span class="dossier-label">SUBJECT</span><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+              <p class="people-meta"><span class="dossier-label">CLASS</span><span>{{ .Params.degree | default .Params.role | default "Observer" | upper }}</span></p>
+              <p class="people-meta"><span class="dossier-label">NODE</span><span>{{ .Params.year | default "Unknown" }}</span></p>
+              <p class="people-meta"><span class="dossier-label">STATUS</span><span>ACTIVE</span></p>
             </article>
           {{ end }}
         </div>
@@ -102,6 +98,7 @@
       <footer class="footer">
         <p>Temporal Observation Node © {{ now.Year }} HAIX Lab, NYCU</p>
         <p class="footer-note">El Psy Kongroo.</p>
+        <p id="observer-feedback" class="observer-feedback" aria-live="polite"></p>
       </footer>
     </main>
   </div>

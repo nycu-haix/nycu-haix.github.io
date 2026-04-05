@@ -129,7 +129,7 @@ body.labmem-page::after {
   display: grid;
   justify-items: center;
   text-align: center;
-  gap: 0.24rem;
+  gap: 0.32rem;
 }
 
 .labmem-page h1 {
@@ -224,6 +224,11 @@ body.labmem-page::after {
   text-shadow: none;
   transform: none;
   animation: labmem-crt-hum 2.8s steps(2, end) infinite;
+  cursor: pointer;
+}
+
+.labmem-page .meter-value.is-hovering::after {
+  animation: meter-hover-jitter 340ms steps(2, end) infinite;
 }
 
 .labmem-page .meter-value::before {
@@ -265,27 +270,16 @@ body.labmem-page::after {
   pointer-events: none;
 }
 
-.labmem-page .reading-steiner-trigger {
-  margin-top: 0.5rem;
-  border: 0;
-  background: transparent;
-  color: var(--labmem-main-soft);
+
+.labmem-page .worldline-log {
+  margin: 0.08rem 0 0;
+  min-height: 1.2rem;
   font-family: "Roboto Mono", monospace;
-  font-size: 0.95rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.35rem;
-  cursor: pointer;
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 184, 113, 0.54);
-  text-underline-offset: 0.26em;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(247, 223, 190, 0.7);
 }
 
-.labmem-page .reading-steiner-trigger:hover,
-.labmem-page .reading-steiner-trigger:focus-visible {
-  color: var(--labmem-main);
-  text-decoration-color: rgba(255, 198, 140, 0.9);
-}
 
 .labmem-page .people-grid {
   gap: 1rem 0.9rem;
@@ -300,6 +294,26 @@ body.labmem-page::after {
   box-shadow: none;
   padding: 0.1rem 0;
   transition: transform 170ms ease;
+}
+
+.labmem-page .people-card::before {
+  content: "TRACE: OBSERVABLE";
+  position: absolute;
+  left: 50%;
+  top: 2.95rem;
+  transform: translate(-50%, 4px);
+  padding: 0.12rem 0.42rem;
+  border: 1px solid rgba(255, 184, 113, 0.28);
+  border-radius: 999px;
+  background: rgba(10, 9, 12, 0.74);
+  color: rgba(255, 214, 164, 0.74);
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
 }
 
 .labmem-page .labmem-index {
@@ -318,6 +332,12 @@ body.labmem-page::after {
   transform: translateY(-2px);
 }
 
+.labmem-page .people-card:hover::before,
+.labmem-page .people-card:focus-within::before {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 .labmem-page .people-card img {
   width: 9.8rem;
   margin-top: 0.6rem;
@@ -331,14 +351,23 @@ body.labmem-page::after {
   cursor: default;
 }
 
-.labmem-page .people-card h4 {
-  margin-top: 0.35rem;
+.labmem-page .people-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0.15rem 0;
+  color: var(--labmem-muted);
   font-family: "Roboto Mono", monospace;
-  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
 }
 
-.labmem-page .people-meta {
-  color: var(--labmem-muted);
+.labmem-page .dossier-label {
+  min-width: 4.6rem;
+  text-align: right;
+  color: rgba(255, 214, 164, 0.74);
+  letter-spacing: 0.1em;
 }
 
 .labmem-page .people-tags,
@@ -397,6 +426,21 @@ body.labmem-page::after {
   text-align: center;
 }
 
+.labmem-page .observer-feedback {
+  margin-top: 0.32rem;
+  min-height: 1rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 214, 164, 0.9);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.labmem-page .observer-feedback.is-visible {
+  opacity: 1;
+}
+
 @keyframes labmem-crt-hum {
   0%,
   100% {
@@ -416,8 +460,27 @@ body.labmem-page.is-shifting {
   animation: labmem-shift 400ms steps(2, end) 2;
 }
 
+body.labmem-page.mode-alert {
+  --labmem-main: #ef6a6a;
+  --labmem-main-soft: #ffb3b3;
+  --labmem-text: #ffe0e0;
+  --labmem-muted: rgba(255, 198, 198, 0.76);
+}
+
 body.labmem-page.is-shifting .people-card {
   animation: labmem-flicker 520ms steps(2, end) 2;
+}
+
+body.labmem-page.is-unstable-sweep {
+  animation: labmem-unstable-shift 180ms steps(2, end) 8;
+}
+
+body.labmem-page.is-unstable-sweep .meter-value::after {
+  animation: meter-unstable-jitter 110ms steps(2, end) infinite;
+}
+
+body.labmem-page.is-unstable-sweep .people-card {
+  animation: labmem-unstable-flicker 180ms steps(2, end) infinite;
 }
 
 @keyframes labmem-shift {
@@ -449,6 +512,78 @@ body.labmem-page.is-shifting .people-card {
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes meter-hover-jitter {
+  0% {
+    transform: translateX(1px) translateY(var(--meter-y-shift));
+  }
+
+  50% {
+    transform: translateX(2px) translateY(calc(var(--meter-y-shift) + 1px));
+  }
+
+  100% {
+    transform: translateX(1px) translateY(var(--meter-y-shift));
+  }
+}
+
+@keyframes labmem-unstable-shift {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(2px);
+  }
+
+  50% {
+    transform: translateX(-2px);
+  }
+
+  75% {
+    transform: translateX(1px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes labmem-unstable-flicker {
+  0% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 0.62;
+  }
+
+  55% {
+    opacity: 0.82;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes meter-unstable-jitter {
+  0% {
+    transform: translateX(1px) translateY(var(--meter-y-shift));
+  }
+
+  33% {
+    transform: translateX(3px) translateY(calc(var(--meter-y-shift) + 1px));
+  }
+
+  66% {
+    transform: translateX(-1px) translateY(var(--meter-y-shift));
+  }
+
+  100% {
+    transform: translateX(1px) translateY(var(--meter-y-shift));
   }
 }
 
@@ -486,6 +621,10 @@ body.labmem-page.is-shifting .people-card {
 }
 
 @media screen and (max-width: 520px) {
+  .labmem-page .dossier-label {
+    min-width: 3.8rem;
+  }
+
   .labmem-page .meter-crt-shell {
     width: min(96vw, 22.5rem);
     border-radius: 14px;
