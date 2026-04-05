@@ -60,7 +60,7 @@
     if (animateMeter) {
       animateMeterDisplay(targetWorldline);
     } else {
-      worldlineValue.textContent = targetWorldline;
+      setWorldlineDisplay(targetWorldline);
     }
 
     if (worldlineLog) {
@@ -153,14 +153,20 @@
     let tick = 0;
     meterAnimationTimer = window.setInterval(() => {
       tick += 1;
-      worldlineValue.textContent = randomWorldlinePattern(value);
+      setWorldlineDisplay(randomWorldlinePattern(value));
 
       if (tick >= 11) {
         window.clearInterval(meterAnimationTimer);
         meterAnimationTimer = null;
-        worldlineValue.textContent = value;
+        setWorldlineDisplay(value);
       }
     }, 48);
+  }
+
+  function setWorldlineDisplay(value) {
+    const text = String(value || "");
+    worldlineValue.textContent = text;
+    worldlineValue.setAttribute("data-worldline", text);
   }
 
   function randomWorldlinePattern(targetPattern) {
