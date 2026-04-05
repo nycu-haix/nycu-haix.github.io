@@ -32,6 +32,7 @@
 
   const memberByUsername = new Map();
   const memberByAlias = new Map();
+  const defaultDocumentTitle = document.title;
   let lastFocusedElementBeforeModal = null;
   let activeMemberTagKey = "";
   let memberFilterBar = null;
@@ -1144,6 +1145,7 @@
     const requested = extractMemberFromLocation();
 
     if (!requested) {
+      updateMemberDocumentTitle();
       if (!memberModal.hidden) {
         closeMemberModal({ pushHistory: false });
       }
@@ -1156,6 +1158,7 @@
 
     const member = findMemberByRouteToken(requested);
     if (!member) {
+      updateMemberDocumentTitle();
       if (!memberModal.hidden) {
         closeMemberModal({ pushHistory: false });
       }
@@ -1278,6 +1281,7 @@
     memberModal.hidden = false;
     memberModal.setAttribute("data-member", member.username);
     document.body.classList.add("modal-open");
+    updateMemberDocumentTitle(member);
 
     if (wasHidden) {
       lastFocusedElementBeforeModal = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -1306,6 +1310,7 @@
     memberModal.hidden = true;
     memberModal.removeAttribute("data-member");
     document.body.classList.remove("modal-open");
+    updateMemberDocumentTitle();
 
     if (lastFocusedElementBeforeModal && document.contains(lastFocusedElementBeforeModal)) {
       lastFocusedElementBeforeModal.focus({ preventScroll: true });
@@ -1327,6 +1332,15 @@
     if (links) {
       memberModalLinks.appendChild(links);
     }
+  }
+
+  function updateMemberDocumentTitle(member) {
+    if (member && member.name) {
+      document.title = `${member.name} | HAIX Lab`;
+      return;
+    }
+
+    document.title = defaultDocumentTitle;
   }
 
   function renderMemberProfileMarkdown(markdownText) {

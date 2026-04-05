@@ -28,5 +28,10 @@ hugo_stats.json
 *~
 *.tmp
 *.temp
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
 /public
 AGENTS.md
