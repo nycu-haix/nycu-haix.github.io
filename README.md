@@ -1,7 +1,8 @@
 # Human AI & Creative Computing Lab Website
 
-This site is a one-page Hugo website based on Grace's requirements:
-- One-page structure: `News`, `Research`, `Human AI & Creative Computing Lab`
+This site is a Hugo website with a one-page homepage plus dedicated People pages:
+- One-page homepage sections: `News`, `Research`, `Human AI & Creative Computing Lab`
+- Dedicated People page: `/people/`, with profile pages at `/people/<username>/`
 - Manual people photos with Gravatar fallback
 - Spreadsheet/CSV-driven people, news, publications, and research areas
 - Lab branding and logo
@@ -30,7 +31,7 @@ python3 scripts/sync_sheet.py --fetch --generate-og
 
 Generated outputs:
 
-- `content/members/*.md` (profile pages routed as `/people/<username>/`)
+- `content/people/*.md` (profile pages routed as `/people/<username>/`)
 - `data/generated/*.json` (server-rendered homepage content)
 - `static/og/*.png` (people-specific OG images downloaded from Gravatar)
 
@@ -52,7 +53,7 @@ Current spreadsheet:
 
 - `https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/edit`
 - Sheet tabs / `gid`:
-  - `members` → `0`
+  - `people` → `0`
   - `publications` → `313564106`
   - `news` → `1707205392`
   - `research` → `1173471225`
@@ -61,11 +62,11 @@ Recommended config for this project:
 
 ```json
 {
-  "membersCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=0",
+  "peopleCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=0",
   "publicationsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=313564106",
   "newsCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1707205392",
   "researchCsvUrl": "https://docs.google.com/spreadsheets/d/1_L3tFxWwN1jLGDb94X7ewO4VMo9p0q9jvubQ96vutUI/export?format=csv&gid=1173471225",
-  "membersLocalCsv": "/data/members.csv",
+  "peopleLocalCsv": "/data/people.csv",
   "publicationsLocalCsv": "/data/publications.csv",
   "newsLocalCsv": "/data/news.csv",
   "researchLocalCsv": "/data/research.csv"
@@ -81,7 +82,7 @@ Important:
 
 ## CSV columns
 
-### People (`members.csv`)
+### People (`people.csv`)
 
 Required:
 - `name`
@@ -95,7 +96,7 @@ Recommended:
 - `orcid`
 - `scholar` (Google Scholar URL)
 - `website`
-- `photo` (e.g., `/images/members/alice.jpg`)
+- `photo` (e.g., `/images/people/alice.jpg`)
 - `description`
 - `tags` (people-defined tags for People filtering; separate multiple tags with `,`, `;`, `/`, `|`, `、`, or `，`)
 - `username` (URL slug for modal route, e.g., `sky`)
@@ -104,12 +105,12 @@ Recommended:
 Photo fallback order:
 1. `photo`
 2. Gravatar from `email`
-3. `/images/members/member-placeholder.svg`
+3. `/images/people/people-placeholder.svg`
 
 People route behavior:
 - People list page is available at `/people/`
 - People profile pages are generated at `/people/<username>/`
-- Legacy short links (`/<username>/`), `/member/<username>/`, and `/labmem/<username>/` links are generated as aliases and redirect to `/people/<username>/`
+- Legacy `/labmem/<username>/` links are generated as aliases and redirect to `/people/<username>/`
 - Unknown paths still redirect through `static/404.html`
 
 ### News (`news.csv`)
@@ -152,7 +153,7 @@ Recommended:
 
 - Lab logo: replace `static/images/haix-logo.svg`
 - Group photo: replace `static/images/group-photo.jpg`
-- People photos: add files under `static/images/members/` and set CSV `photo` path
+- People photos: add files under `static/images/people/` and set CSV `photo` path
 - News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
 - Publication thumbnails: add files under `static/images/publications/` and set CSV `thumbnail` path
 - Research data: update `static/data/research.csv` or set `researchCsvUrl` in `static/data/sources.json`

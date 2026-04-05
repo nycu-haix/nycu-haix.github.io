@@ -2,49 +2,49 @@
   document.documentElement.classList.add("js-enabled");
 
   const DEFAULT_SOURCES = {
-    membersCsvUrl: "",
+    peopleCsvUrl: "",
     publicationsCsvUrl: "",
     newsCsvUrl: "",
     researchCsvUrl: "",
-    membersLocalCsv: "/data/members.csv",
+    peopleLocalCsv: "/data/people.csv",
     publicationsLocalCsv: "/data/publications.csv",
     newsLocalCsv: "/data/news.csv",
     researchLocalCsv: "/data/research.csv"
   };
 
-  const FALLBACK_MEMBER_PHOTO = "/images/members/member-placeholder.svg";
+  const FALLBACK_PEOPLE_PHOTO = "/images/people/people-placeholder.svg";
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
-  const MEMBER_LIST_PATH = "/people/";
+  const PEOPLE_LIST_PATH = "/people/";
 
-  const membersContainer = document.getElementById("members-list");
+  const peopleContainer = document.getElementById("people-list");
   const publicationsContainer = document.getElementById("publications-list");
   const newsContainer = document.getElementById("news-list");
   const researchContainer = document.getElementById("research-list");
-  const memberModal = document.getElementById("member-modal");
-  const memberModalPhoto = document.getElementById("member-modal-photo");
-  const memberModalName = document.getElementById("member-modal-name");
-  const memberModalMeta = document.getElementById("member-modal-meta");
-  const memberModalTags = document.getElementById("member-modal-tags");
-  const memberModalDesc = document.getElementById("member-modal-desc");
-  const memberModalContent = document.getElementById("member-modal-content");
-  const memberModalLinks = document.getElementById("member-modal-links");
-  const memberModalCloseButton = memberModal ? memberModal.querySelector(".member-modal__close") : null;
+  const peopleModal = document.getElementById("people-modal");
+  const peopleModalPhoto = document.getElementById("people-modal-photo");
+  const peopleModalName = document.getElementById("people-modal-name");
+  const peopleModalMeta = document.getElementById("people-modal-meta");
+  const peopleModalTags = document.getElementById("people-modal-tags");
+  const peopleModalDesc = document.getElementById("people-modal-desc");
+  const peopleModalContent = document.getElementById("people-modal-content");
+  const peopleModalLinks = document.getElementById("people-modal-links");
+  const peopleModalCloseButton = peopleModal ? peopleModal.querySelector(".people-modal__close") : null;
 
-  const memberByUsername = new Map();
-  const memberByAlias = new Map();
+  const peopleByUsername = new Map();
+  const peopleByAlias = new Map();
   const defaultDocumentTitle = document.title;
   let lastFocusedElementBeforeModal = null;
-  let activeMemberTagKey = "";
-  let memberFilterBar = null;
+  let activePeopleTagKey = "";
+  let peopleFilterBar = null;
 
   setupReveal();
-  setupMemberModal();
+  setupPeopleModal();
 
-  if (!membersContainer && !publicationsContainer && !newsContainer && !researchContainer) {
+  if (!peopleContainer && !publicationsContainer && !newsContainer && !researchContainer) {
     return;
   }
 
-  markContainersPending([newsContainer, researchContainer, publicationsContainer, membersContainer]);
+  markContainersPending([newsContainer, researchContainer, publicationsContainer, peopleContainer]);
 
   initializeData();
 
@@ -52,10 +52,10 @@
     const sources = await loadSources();
     const jobs = [];
 
-    if (membersContainer) {
+    if (peopleContainer) {
       jobs.push(
-        loadMembers(sources).catch((error) => {
-          renderError(membersContainer, `Unable to load people data. ${error.message}`);
+        loadPeople(sources).catch((error) => {
+          renderError(peopleContainer, `Unable to load people data. ${error.message}`);
         })
       );
     }
@@ -87,22 +87,22 @@
     await Promise.all(jobs);
   }
 
-  async function loadMembers(sources) {
-    const remote = cleanUrl(sources.membersCsvUrl);
-    const local = cleanUrl(sources.membersLocalCsv) || DEFAULT_SOURCES.membersLocalCsv;
+  async function loadPeople(sources) {
+    const remote = cleanUrl(sources.peopleCsvUrl);
+    const local = cleanUrl(sources.peopleLocalCsv) || DEFAULT_SOURCES.peopleLocalCsv;
     const result = await fetchCsvWithFallback(local, remote);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
-    const members = rows
-      .map((row, index) => normalizeMember(row, index))
+    const people = rows
+      .map((row, index) => normalizePeople(row, index))
       .filter((item) => item.name);
 
-    ensureUniqueMemberUsernames(members);
-    members.sort(compareMember);
-    renderMembers(members);
-    markContainerReady(membersContainer);
-    syncMemberModalFromLocation();
+    ensureUniquePeopleUsernames(people);
+    people.sort(comparePeople);
+    renderPeople(people);
+    markContainerReady(peopleContainer);
+    syncPeopleModalFromLocation();
 
     if (result.usedFallback) {
       renderFallbackNotice();
@@ -318,7 +318,7 @@
       .replace(/\s+/g, "_");
   }
 
-  function normalizeMember(row, index) {
+  function normalizePeople(row, index) {
     const email = pick(row, "email", "mail", "e_mail", "e-mail");
     const explicitPhoto = pick(row, "photo", "photo_url", "image");
     const description = pick(row, "description", "bio", "intro");
@@ -334,11 +334,11 @@
       orcid: normalizeOrcidUrl(pick(row, "orcid", "orcid_url")),
       scholar: cleanUrl(pick(row, "scholar", "scholar_url", "google_scholar", "google_scholar_url")),
       website: cleanUrl(pick(row, "website", "personal_website", "homepage", "site", "personal_site")),
-      photo: resolveMemberPhoto(explicitPhoto, email),
+      photo: resolvePeoplePhoto(explicitPhoto, email),
       description,
-      tags: parseMemberTags(pick(row, "tags", "tag", "labels", "interests")),
+      tags: parsePeopleTags(pick(row, "tags", "tag", "labels", "interests")),
       profileMarkdown,
-      username: buildMemberUsername(
+      username: buildPeopleUsername(
         pick(row, "username", "user", "slug"),
         pick(row, "name", "student", "student_name"),
         email,
@@ -347,7 +347,7 @@
     };
   }
 
-  function parseMemberTags(value) {
+  function parsePeopleTags(value) {
     const tokens = String(value || "")
       .split(/[;,|/、，]+/)
       .map((item) => item.trim())
@@ -357,7 +357,7 @@
     const tags = [];
 
     tokens.forEach((token) => {
-      const key = normalizeMemberTagKey(token);
+      const key = normalizePeopleTagKey(token);
       if (!key || seen.has(key)) {
         return;
       }
@@ -372,7 +372,7 @@
     return tags;
   }
 
-  function normalizeMemberTagKey(value) {
+  function normalizePeopleTagKey(value) {
     return String(value || "")
       .normalize("NFKC")
       .trim()
@@ -380,7 +380,7 @@
       .replace(/\s+/g, " ");
   }
 
-  function buildMemberUsername(explicitUsername, name, email, index) {
+  function buildPeopleUsername(explicitUsername, name, email, index) {
     const explicit = slugifyUsername(explicitUsername);
     if (explicit) {
       return explicit;
@@ -397,7 +397,7 @@
       return fromEmail;
     }
 
-    return `member-${index + 1}`;
+    return `people-${index + 1}`;
   }
 
   function slugifyUsername(value) {
@@ -412,11 +412,11 @@
     return normalized.slice(0, 64);
   }
 
-  function ensureUniqueMemberUsernames(members) {
+  function ensureUniquePeopleUsernames(people) {
     const seen = new Set();
 
-    members.forEach((member) => {
-      const base = slugifyUsername(member.username) || "member";
+    people.forEach((people) => {
+      const base = slugifyUsername(people.username) || "people";
       let candidate = base;
       let serial = 2;
 
@@ -425,21 +425,21 @@
         serial += 1;
       }
 
-      member.username = candidate;
+      people.username = candidate;
       seen.add(candidate);
     });
   }
 
-  function registerMemberAliases(member) {
-    if (!member || !member.username) {
+  function registerPeopleAliases(people) {
+    if (!people || !people.username) {
       return;
     }
 
     const aliases = new Set();
-    aliases.add(member.username);
-    aliases.add(slugifyUsername(member.name));
+    aliases.add(people.username);
+    aliases.add(slugifyUsername(people.name));
 
-    const emailLocal = String(member.email || "").split("@")[0];
+    const emailLocal = String(people.email || "").split("@")[0];
     const emailSlug = slugifyUsername(emailLocal);
     if (emailSlug) {
       aliases.add(emailSlug);
@@ -447,16 +447,16 @@
     }
 
     aliases.forEach((alias) => {
-      if (!alias || memberByAlias.has(alias)) {
+      if (!alias || peopleByAlias.has(alias)) {
         return;
       }
-      memberByAlias.set(alias, member);
+      peopleByAlias.set(alias, people);
     });
   }
 
-  function resolveMemberPhoto(explicitPhoto, email) {
+  function resolvePeoplePhoto(explicitPhoto, email) {
     const cleanedPhoto = cleanUrl(explicitPhoto);
-    if (cleanedPhoto && cleanedPhoto !== FALLBACK_MEMBER_PHOTO) {
+    if (cleanedPhoto && cleanedPhoto !== FALLBACK_PEOPLE_PHOTO) {
       return cleanedPhoto;
     }
 
@@ -465,7 +465,7 @@
       return gravatarUrl;
     }
 
-    return FALLBACK_MEMBER_PHOTO;
+    return FALLBACK_PEOPLE_PHOTO;
   }
 
   function buildGravatarUrl(email) {
@@ -675,7 +675,7 @@
     return (wordToHex(a) + wordToHex(b) + wordToHex(c) + wordToHex(d)).toLowerCase();
   }
 
-  function compareMember(a, b) {
+  function comparePeople(a, b) {
     const orderA = roleWeight(a.role || a.degree);
     const orderB = roleWeight(b.role || b.degree);
 
@@ -683,16 +683,16 @@
       return orderA - orderB;
     }
 
-    const yearA = memberYearRank(a.year);
-    const yearB = memberYearRank(b.year);
+    const yearA = peopleYearRank(a.year);
+    const yearB = peopleYearRank(b.year);
     if (yearA !== yearB) {
       return yearA - yearB;
     }
 
-    return compareMemberName(a.name, b.name);
+    return comparePeopleName(a.name, b.name);
   }
 
-  function memberYearRank(yearValue) {
+  function peopleYearRank(yearValue) {
     const raw = String(yearValue || "").trim();
     if (!raw) {
       return Number.POSITIVE_INFINITY;
@@ -745,12 +745,12 @@
     return 9;
   }
 
-  function compareMemberName(nameA, nameB) {
+  function comparePeopleName(nameA, nameB) {
     const textA = String(nameA || "").trim();
     const textB = String(nameB || "").trim();
 
-    const scriptA = memberNameScriptRank(textA);
-    const scriptB = memberNameScriptRank(textB);
+    const scriptA = peopleNameScriptRank(textA);
+    const scriptB = peopleNameScriptRank(textB);
     if (scriptA !== scriptB) {
       return scriptA - scriptB;
     }
@@ -762,7 +762,7 @@
     return textA.localeCompare(textB, "zh-Hant");
   }
 
-  function memberNameScriptRank(name) {
+  function peopleNameScriptRank(name) {
     const firstChar = String(name || "").charAt(0);
     if (!firstChar) {
       return 2;
@@ -872,106 +872,114 @@
     for (const key of keys) {
       const value = row[key];
       if (value !== undefined && String(value).trim() !== "") {
-        return String(value).trim();
+        return normalizeApostrophes(String(value).trim());
       }
     }
 
     return "";
   }
 
+  function normalizeApostrophes(value) {
+    return String(value || "")
+      .replace(/\u2018/g, "'")
+      .replace(/\u2019/g, "'")
+      .replace(/\u02BC/g, "'")
+      .replace(/\uFF07/g, "'");
+  }
+
   function cleanUrl(value) {
     return String(value || "").trim();
   }
 
-  function renderMembers(members) {
-    membersContainer.innerHTML = "";
-    memberByUsername.clear();
-    memberByAlias.clear();
+  function renderPeople(people) {
+    peopleContainer.innerHTML = "";
+    peopleByUsername.clear();
+    peopleByAlias.clear();
 
-    if (!members.length) {
-      membersContainer.appendChild(buildNote("No people rows found in CSV."));
+    if (!people.length) {
+      peopleContainer.appendChild(buildNote("No people rows found in CSV."));
       return;
     }
 
     const fragment = document.createDocumentFragment();
 
-    members.forEach((member, index) => {
+    people.forEach((people, index) => {
       const card = document.createElement("article");
-      card.className = "member-card";
+      card.className = "people-card";
       card.style.animationDelay = `${Math.min(index * 70, 450)}ms`;
-      card.dataset.username = member.username;
-      card.dataset.memberTags = member.tags.map((tag) => tag.key).join("|");
+      card.dataset.username = people.username;
+      card.dataset.peopleTags = people.tags.map((tag) => tag.key).join("|");
 
       const photo = document.createElement("img");
-      const initialPhoto = member.photo || FALLBACK_MEMBER_PHOTO;
+      const initialPhoto = people.photo || FALLBACK_PEOPLE_PHOTO;
       photo.src = initialPhoto;
-      updateMemberPhotoMode(photo, initialPhoto);
-      photo.alt = `${member.name} profile photo`;
+      updatePeoplePhotoMode(photo, initialPhoto);
+      photo.alt = `${people.name} profile photo`;
       photo.loading = index < 8 ? "eager" : "lazy";
       photo.decoding = "async";
       if (index < 4) {
         photo.fetchPriority = "high";
       }
       photo.addEventListener("error", () => {
-        if (photo.src.includes(FALLBACK_MEMBER_PHOTO)) {
+        if (photo.src.includes(FALLBACK_PEOPLE_PHOTO)) {
           return;
         }
 
-        photo.src = FALLBACK_MEMBER_PHOTO;
-        updateMemberPhotoMode(photo, FALLBACK_MEMBER_PHOTO);
+        photo.src = FALLBACK_PEOPLE_PHOTO;
+        updatePeoplePhotoMode(photo, FALLBACK_PEOPLE_PHOTO);
       });
 
-      const profilePath = buildMemberPath(member.username);
+      const profilePath = buildPeoplePath(people.username);
 
       const photoButton = document.createElement("a");
-      photoButton.className = "member-open-photo";
+      photoButton.className = "people-open-photo";
       photoButton.href = profilePath;
-      photoButton.setAttribute("aria-label", `Open ${member.name} profile`);
+      photoButton.setAttribute("aria-label", `Open ${people.name} profile`);
       photoButton.appendChild(photo);
       photoButton.addEventListener("click", (event) => {
-        if (!memberModal) {
+        if (!peopleModal) {
           return;
         }
 
         event.preventDefault();
-        openMemberModal(member, { pushHistory: true });
+        openPeopleModal(people, { pushHistory: true });
       });
 
       const name = document.createElement("h4");
       const nameButton = document.createElement("a");
-      nameButton.className = "member-open-name";
+      nameButton.className = "people-open-name";
       nameButton.href = profilePath;
-      nameButton.textContent = member.name;
+      nameButton.textContent = people.name;
       nameButton.addEventListener("click", (event) => {
-        if (!memberModal) {
+        if (!peopleModal) {
           return;
         }
 
         event.preventDefault();
-        openMemberModal(member, { pushHistory: true });
+        openPeopleModal(people, { pushHistory: true });
       });
       name.appendChild(nameButton);
 
       const meta = document.createElement("p");
-      meta.className = "member-meta";
-      meta.textContent = composeMemberMeta(member);
+      meta.className = "people-meta";
+      meta.textContent = composePeopleMeta(people);
 
       card.append(photoButton, name, meta);
 
-      if (member.tags.length) {
+      if (people.tags.length) {
         const tagList = document.createElement("div");
-        tagList.className = "member-tags";
+        tagList.className = "people-tags";
 
-        member.tags.forEach((tag) => {
+        people.tags.forEach((tag) => {
           const tagButton = document.createElement("button");
           tagButton.type = "button";
-          tagButton.className = "member-tag";
-          tagButton.dataset.memberTagKey = tag.key;
+          tagButton.className = "people-tag";
+          tagButton.dataset.peopleTagKey = tag.key;
           tagButton.textContent = `#${tag.label}`;
           tagButton.addEventListener("click", (event) => {
             event.preventDefault();
             event.stopPropagation();
-            setActiveMemberTag(tag.key);
+            setActivePeopleTag(tag.key);
           });
           tagList.appendChild(tagButton);
         });
@@ -979,90 +987,90 @@
         card.appendChild(tagList);
       }
 
-      if (member.description) {
+      if (people.description) {
         const description = document.createElement("p");
-        description.className = "member-desc";
-        description.textContent = member.description;
+        description.className = "people-desc";
+        description.textContent = people.description;
         card.appendChild(description);
       }
 
-      const links = buildMemberLinks(member);
+      const links = buildPeopleLinks(people);
       if (links) {
         card.appendChild(links);
       }
 
-      memberByUsername.set(member.username, member);
-      registerMemberAliases(member);
+      peopleByUsername.set(people.username, people);
+      registerPeopleAliases(people);
       fragment.appendChild(card);
     });
 
-    renderMemberTagFilters(members);
-    membersContainer.appendChild(fragment);
-    applyMemberTagFilter();
+    renderPeopleTagFilters(people);
+    peopleContainer.appendChild(fragment);
+    applyPeopleTagFilter();
   }
 
-  function renderMemberTagFilters(members) {
-    const tags = collectMemberTags(members);
+  function renderPeopleTagFilters(people) {
+    const tags = collectPeopleTags(people);
 
     if (!tags.length) {
-      activeMemberTagKey = "";
-      if (memberFilterBar) {
-        memberFilterBar.remove();
-        memberFilterBar = null;
+      activePeopleTagKey = "";
+      if (peopleFilterBar) {
+        peopleFilterBar.remove();
+        peopleFilterBar = null;
       }
       return;
     }
 
-    if (activeMemberTagKey && !tags.some((tag) => tag.key === activeMemberTagKey)) {
-      activeMemberTagKey = "";
+    if (activePeopleTagKey && !tags.some((tag) => tag.key === activePeopleTagKey)) {
+      activePeopleTagKey = "";
     }
 
-    if (!memberFilterBar) {
-      memberFilterBar = document.createElement("div");
-      memberFilterBar.className = "member-filter-bar";
-      memberFilterBar.setAttribute("aria-label", "Filter people by tag");
+    if (!peopleFilterBar) {
+      peopleFilterBar = document.createElement("div");
+      peopleFilterBar.className = "people-filter-bar";
+      peopleFilterBar.setAttribute("aria-label", "Filter people by tag");
 
-      const parent = membersContainer.parentElement;
+      const parent = peopleContainer.parentElement;
       if (parent) {
-        parent.insertBefore(memberFilterBar, membersContainer);
+        parent.insertBefore(peopleFilterBar, peopleContainer);
       }
     }
 
-    memberFilterBar.innerHTML = "";
+    peopleFilterBar.innerHTML = "";
 
     const chips = document.createElement("div");
-    chips.className = "member-filter-chips";
+    chips.className = "people-filter-chips";
 
     const allButton = document.createElement("button");
     allButton.type = "button";
-    allButton.className = "member-filter-chip";
-    allButton.dataset.memberTagKey = "";
+    allButton.className = "people-filter-chip";
+    allButton.dataset.peopleTagKey = "";
     allButton.textContent = "All";
     allButton.addEventListener("click", () => {
-      setActiveMemberTag("");
+      setActivePeopleTag("");
     });
     chips.appendChild(allButton);
 
     tags.forEach((tag) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "member-filter-chip";
-      button.dataset.memberTagKey = tag.key;
+      button.className = "people-filter-chip";
+      button.dataset.peopleTagKey = tag.key;
       button.textContent = `${tag.label} (${tag.count})`;
       button.addEventListener("click", () => {
-        setActiveMemberTag(tag.key);
+        setActivePeopleTag(tag.key);
       });
       chips.appendChild(button);
     });
 
-    memberFilterBar.appendChild(chips);
+    peopleFilterBar.appendChild(chips);
   }
 
-  function collectMemberTags(members) {
+  function collectPeopleTags(people) {
     const tagMap = new Map();
 
-    members.forEach((member) => {
-      member.tags.forEach((tag) => {
+    people.forEach((people) => {
+      people.tags.forEach((tag) => {
         const existing = tagMap.get(tag.key);
         if (!existing) {
           tagMap.set(tag.key, {
@@ -1080,112 +1088,112 @@
     return Array.from(tagMap.values()).sort((a, b) => a.label.localeCompare(b.label, "zh-Hant", { sensitivity: "base" }));
   }
 
-  function setActiveMemberTag(key) {
-    const normalizedKey = normalizeMemberTagKey(key);
-    activeMemberTagKey = normalizedKey;
-    applyMemberTagFilter();
+  function setActivePeopleTag(key) {
+    const normalizedKey = normalizePeopleTagKey(key);
+    activePeopleTagKey = normalizedKey;
+    applyPeopleTagFilter();
   }
 
-  function applyMemberTagFilter() {
-    if (!membersContainer) {
+  function applyPeopleTagFilter() {
+    if (!peopleContainer) {
       return;
     }
 
-    const cards = Array.from(membersContainer.querySelectorAll(".member-card"));
+    const cards = Array.from(peopleContainer.querySelectorAll(".people-card"));
     cards.forEach((card) => {
-      const tags = String(card.dataset.memberTags || "")
+      const tags = String(card.dataset.peopleTags || "")
         .split("|")
         .filter(Boolean);
-      const visible = !activeMemberTagKey || tags.includes(activeMemberTagKey);
+      const visible = !activePeopleTagKey || tags.includes(activePeopleTagKey);
       card.hidden = !visible;
     });
 
-    const toggles = Array.from(document.querySelectorAll("[data-member-tag-key]"));
+    const toggles = Array.from(document.querySelectorAll("[data-people-tag-key]"));
     toggles.forEach((button) => {
-      const key = normalizeMemberTagKey(button.dataset.memberTagKey || "");
-      const isActive = key === activeMemberTagKey;
+      const key = normalizePeopleTagKey(button.dataset.peopleTagKey || "");
+      const isActive = key === activePeopleTagKey;
       const isAll = !key;
-      const active = isAll ? !activeMemberTagKey : isActive;
+      const active = isAll ? !activePeopleTagKey : isActive;
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
   }
 
-  function setupMemberModal() {
-    if (!memberModal) {
+  function setupPeopleModal() {
+    if (!peopleModal) {
       return;
     }
 
-    const closeTargets = Array.from(memberModal.querySelectorAll("[data-modal-close]"));
+    const closeTargets = Array.from(peopleModal.querySelectorAll("[data-modal-close]"));
     closeTargets.forEach((target) => {
       target.addEventListener("click", () => {
-        closeMemberModal({ pushHistory: true });
+        closePeopleModal({ pushHistory: true });
       });
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key !== "Escape" || memberModal.hidden) {
+      if (event.key !== "Escape" || peopleModal.hidden) {
         return;
       }
 
       event.preventDefault();
-      closeMemberModal({ pushHistory: true });
+      closePeopleModal({ pushHistory: true });
     });
 
     window.addEventListener("popstate", () => {
-      syncMemberModalFromLocation();
+      syncPeopleModalFromLocation();
     });
   }
 
-  function syncMemberModalFromLocation() {
-    if (!memberModal) {
+  function syncPeopleModalFromLocation() {
+    if (!peopleModal) {
       return;
     }
 
-    const requested = extractMemberFromLocation();
+    const requested = extractPeopleFromLocation();
 
     if (!requested) {
-      updateMemberDocumentTitle();
-      if (!memberModal.hidden) {
-        closeMemberModal({ pushHistory: false });
+      updatePeopleDocumentTitle();
+      if (!peopleModal.hidden) {
+        closePeopleModal({ pushHistory: false });
       }
       return;
     }
 
-    if (!memberByUsername.size) {
+    if (!peopleByUsername.size) {
       return;
     }
 
-    const member = findMemberByRouteToken(requested);
-    if (!member) {
-      updateMemberDocumentTitle();
-      if (!memberModal.hidden) {
-        closeMemberModal({ pushHistory: false });
+    const people = findPeopleByRouteToken(requested);
+    if (!people) {
+      updatePeopleDocumentTitle();
+      if (!peopleModal.hidden) {
+        closePeopleModal({ pushHistory: false });
       }
 
-      history.replaceState({}, "", MEMBER_LIST_PATH);
+      history.replaceState({}, "", PEOPLE_LIST_PATH);
       return;
     }
 
-    openMemberModal(member, { pushHistory: false });
+    openPeopleModal(people, { pushHistory: false });
 
     if (location.search) {
-      history.replaceState({ people: member.username }, "", buildMemberPath(member.username));
+      history.replaceState({ people: people.username }, "", buildPeoplePath(people.username));
     }
   }
 
-  function findMemberByRouteToken(token) {
+  function findPeopleByRouteToken(token) {
     const normalized = slugifyUsername(token);
     if (!normalized) {
       return null;
     }
 
-    return memberByUsername.get(normalized) || memberByAlias.get(normalized) || null;
+    return peopleByUsername.get(normalized) || peopleByAlias.get(normalized) || null;
   }
 
-  function extractMemberFromLocation() {
+  function extractPeopleFromLocation() {
     const params = new URLSearchParams(location.search);
-    const query = params.get("people") || params.get("member");
+    const query = params.get("people");
     if (query) {
       return slugifyUsername(safeDecodeURIComponent(query));
     }
@@ -1195,7 +1203,7 @@
       return "";
     }
 
-    const peopleRootSegment = MEMBER_LIST_PATH.replace(/^\/+|\/+$/g, "");
+    const peopleRootSegment = PEOPLE_LIST_PATH.replace(/^\/+|\/+$/g, "");
     if (!peopleRootSegment || segments[0] !== peopleRootSegment) {
       return "";
     }
@@ -1215,102 +1223,102 @@
     }
   }
 
-  function buildMemberPath(username) {
-    return `${MEMBER_LIST_PATH}${encodeURIComponent(String(username || "").trim())}/`;
+  function buildPeoplePath(username) {
+    return `${PEOPLE_LIST_PATH}${encodeURIComponent(String(username || "").trim())}/`;
   }
 
-  function openMemberModal(member, options = {}) {
+  function openPeopleModal(people, options = {}) {
     const { pushHistory = false, replaceHistory = false } = options;
 
     if (
-      !memberModal ||
-      !memberModalPhoto ||
-      !memberModalName ||
-      !memberModalMeta ||
-      !memberModalContent ||
-      !memberModalLinks
+      !peopleModal ||
+      !peopleModalPhoto ||
+      !peopleModalName ||
+      !peopleModalMeta ||
+      !peopleModalContent ||
+      !peopleModalLinks
     ) {
       return;
     }
 
-    const wasHidden = memberModal.hidden;
-    const photoSource = member.photo || FALLBACK_MEMBER_PHOTO;
+    const wasHidden = peopleModal.hidden;
+    const photoSource = people.photo || FALLBACK_PEOPLE_PHOTO;
 
-    memberModalPhoto.onerror = () => {
-      if (memberModalPhoto.src.includes(FALLBACK_MEMBER_PHOTO)) {
-        memberModalPhoto.onerror = null;
+    peopleModalPhoto.onerror = () => {
+      if (peopleModalPhoto.src.includes(FALLBACK_PEOPLE_PHOTO)) {
+        peopleModalPhoto.onerror = null;
         return;
       }
 
-      memberModalPhoto.src = FALLBACK_MEMBER_PHOTO;
-      updateMemberPhotoMode(memberModalPhoto, FALLBACK_MEMBER_PHOTO);
-      memberModalPhoto.onerror = null;
+      peopleModalPhoto.src = FALLBACK_PEOPLE_PHOTO;
+      updatePeoplePhotoMode(peopleModalPhoto, FALLBACK_PEOPLE_PHOTO);
+      peopleModalPhoto.onerror = null;
     };
-    memberModalPhoto.src = photoSource;
-    updateMemberPhotoMode(memberModalPhoto, photoSource);
-    memberModalPhoto.alt = `${member.name} profile photo`;
-    memberModalName.textContent = member.name;
-    memberModalMeta.textContent = composeMemberMeta(member);
+    peopleModalPhoto.src = photoSource;
+    updatePeoplePhotoMode(peopleModalPhoto, photoSource);
+    peopleModalPhoto.alt = `${people.name} profile photo`;
+    peopleModalName.textContent = people.name;
+    peopleModalMeta.textContent = composePeopleMeta(people);
 
-    if (memberModalTags) {
-      memberModalTags.innerHTML = "";
-      const tags = Array.isArray(member.tags) ? member.tags : [];
+    if (peopleModalTags) {
+      peopleModalTags.innerHTML = "";
+      const tags = Array.isArray(people.tags) ? people.tags : [];
 
       if (tags.length) {
         tags.forEach((tag) => {
           const item = document.createElement("span");
-          item.className = "member-modal-tag";
+          item.className = "people-modal-tag";
           item.textContent = `#${tag.label}`;
-          memberModalTags.appendChild(item);
+          peopleModalTags.appendChild(item);
         });
-        memberModalTags.hidden = false;
+        peopleModalTags.hidden = false;
       } else {
-        memberModalTags.hidden = true;
+        peopleModalTags.hidden = true;
       }
     }
 
-    if (memberModalDesc) {
-      const summary = String(member.description || "").trim();
-      memberModalDesc.textContent = summary;
-      memberModalDesc.hidden = !summary;
+    if (peopleModalDesc) {
+      const summary = String(people.description || "").trim();
+      peopleModalDesc.textContent = summary;
+      peopleModalDesc.hidden = !summary;
     }
 
-    renderMemberProfileMarkdown(member.profileMarkdown);
-    renderMemberModalLinks(member);
+    renderPeopleProfileMarkdown(people.profileMarkdown);
+    renderPeopleModalLinks(people);
 
-    memberModal.hidden = false;
-    memberModal.setAttribute("data-member", member.username);
+    peopleModal.hidden = false;
+    peopleModal.setAttribute("data-people", people.username);
     document.body.classList.add("modal-open");
-    updateMemberDocumentTitle(member);
+    updatePeopleDocumentTitle(people);
 
     if (wasHidden) {
       lastFocusedElementBeforeModal = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-      if (memberModalCloseButton) {
-        memberModalCloseButton.focus({ preventScroll: true });
+      if (peopleModalCloseButton) {
+        peopleModalCloseButton.focus({ preventScroll: true });
       }
     }
 
     if (pushHistory) {
-      const targetPath = buildMemberPath(member.username);
+      const targetPath = buildPeoplePath(people.username);
       const shouldPush = location.pathname !== targetPath || location.search || location.hash;
       if (shouldPush) {
         const method = replaceHistory ? "replaceState" : "pushState";
-        history[method]({ people: member.username }, "", targetPath);
+        history[method]({ people: people.username }, "", targetPath);
       }
     }
   }
 
-  function closeMemberModal(options = {}) {
+  function closePeopleModal(options = {}) {
     const { pushHistory = false, replaceHistory = false } = options;
 
-    if (!memberModal || memberModal.hidden) {
+    if (!peopleModal || peopleModal.hidden) {
       return;
     }
 
-    memberModal.hidden = true;
-    memberModal.removeAttribute("data-member");
+    peopleModal.hidden = true;
+    peopleModal.removeAttribute("data-people");
     document.body.classList.remove("modal-open");
-    updateMemberDocumentTitle();
+    updatePeopleDocumentTitle();
 
     if (lastFocusedElementBeforeModal && document.contains(lastFocusedElementBeforeModal)) {
       lastFocusedElementBeforeModal.focus({ preventScroll: true });
@@ -1318,40 +1326,40 @@
     lastFocusedElementBeforeModal = null;
 
     if (pushHistory) {
-      const shouldPush = location.pathname !== MEMBER_LIST_PATH || location.search || location.hash;
+      const shouldPush = location.pathname !== PEOPLE_LIST_PATH || location.search || location.hash;
       if (shouldPush) {
         const method = replaceHistory ? "replaceState" : "pushState";
-        history[method]({}, "", MEMBER_LIST_PATH);
+        history[method]({}, "", PEOPLE_LIST_PATH);
       }
     }
   }
 
-  function renderMemberModalLinks(member) {
-    memberModalLinks.innerHTML = "";
-    const links = buildMemberLinks(member);
+  function renderPeopleModalLinks(people) {
+    peopleModalLinks.innerHTML = "";
+    const links = buildPeopleLinks(people);
     if (links) {
-      memberModalLinks.appendChild(links);
+      peopleModalLinks.appendChild(links);
     }
   }
 
-  function updateMemberDocumentTitle(member) {
-    if (member && member.name) {
-      document.title = `${member.name} | HAIX Lab`;
+  function updatePeopleDocumentTitle(people) {
+    if (people && people.name) {
+      document.title = `${people.name} | HAIX Lab`;
       return;
     }
 
     document.title = defaultDocumentTitle;
   }
 
-  function renderMemberProfileMarkdown(markdownText) {
-    memberModalContent.innerHTML = "";
+  function renderPeopleProfileMarkdown(markdownText) {
+    peopleModalContent.innerHTML = "";
     const normalized = String(markdownText || "").trim();
 
     if (!normalized) {
       return;
     }
 
-    memberModalContent.appendChild(parseMarkdownToFragment(normalized));
+    peopleModalContent.appendChild(parseMarkdownToFragment(normalized));
   }
 
   function parseMarkdownToFragment(markdownText) {
@@ -1501,7 +1509,7 @@
     image.src = safeUrl;
     image.alt = altText || "";
     image.loading = "lazy";
-    image.className = "member-modal__markdown-image";
+    image.className = "people-modal__markdown-image";
     return image;
   }
 
@@ -1572,33 +1580,33 @@
     researchContainer.appendChild(list);
   }
 
-  function updateMemberPhotoMode(photo, source) {
+  function updatePeoplePhotoMode(photo, source) {
     const normalized = cleanUrl(source);
-    photo.classList.toggle("member-photo-square", normalized === FALLBACK_MEMBER_PHOTO);
+    photo.classList.toggle("people-photo-square", normalized === FALLBACK_PEOPLE_PHOTO);
   }
 
-  function composeMemberMeta(member) {
+  function composePeopleMeta(people) {
     const meta = [];
-    const primaryMeta = member.degree || member.role;
+    const primaryMeta = people.degree || people.role;
 
     if (primaryMeta) {
       meta.push(primaryMeta);
     }
 
-    if (member.year) {
-      meta.push(member.year);
+    if (people.year) {
+      meta.push(people.year);
     }
 
     return meta.join(" • ") || "People";
   }
 
-  function buildMemberLinks(member) {
+  function buildPeopleLinks(people) {
     const linkItems = [
-      { label: "Email", url: toSafeMailto(member.email), type: "email", external: false },
-      { label: "GitHub", url: toSafeExternalUrl(member.github), type: "github", external: true },
-      { label: "ORCID", url: toSafeExternalUrl(member.orcid), type: "orcid", external: true },
-      { label: "Google Scholar", url: toSafeExternalUrl(member.scholar), type: "scholar", external: true },
-      { label: "Website", url: toSafeExternalUrl(member.website), type: "website", external: true }
+      { label: "Email", url: toSafeMailto(people.email), type: "email", external: false },
+      { label: "GitHub", url: toSafeExternalUrl(people.github), type: "github", external: true },
+      { label: "ORCID", url: toSafeExternalUrl(people.orcid), type: "orcid", external: true },
+      { label: "Google Scholar", url: toSafeExternalUrl(people.scholar), type: "scholar", external: true },
+      { label: "Website", url: toSafeExternalUrl(people.website), type: "website", external: true }
     ].filter((item) => item.url);
 
     if (!linkItems.length) {
@@ -1606,11 +1614,11 @@
     }
 
     const container = document.createElement("div");
-    container.className = "member-links";
+    container.className = "people-links";
 
     linkItems.forEach((item) => {
       const link = document.createElement("a");
-      link.className = `member-link member-link--${item.type}`;
+      link.className = `people-link people-link--${item.type}`;
       link.href = item.url;
       if (item.external) {
         link.target = "_blank";
@@ -1618,14 +1626,14 @@
       }
       link.title = item.label;
       link.setAttribute("aria-label", item.label);
-      link.appendChild(createMemberLinkIcon(item.type));
+      link.appendChild(createPeopleLinkIcon(item.type));
       container.appendChild(link);
     });
 
     return container;
   }
 
-  function createMemberLinkIcon(type) {
+  function createPeopleLinkIcon(type) {
     const ns = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(ns, "svg");
     svg.setAttribute("viewBox", "0 0 24 24");
@@ -1637,7 +1645,7 @@
     svg.setAttribute("stroke-linecap", "round");
     svg.setAttribute("stroke-linejoin", "round");
     svg.setAttribute("aria-hidden", "true");
-    svg.classList.add("member-link-icon");
+    svg.classList.add("people-link-icon");
 
     const drawPath = (d) => {
       const path = document.createElementNS(ns, "path");

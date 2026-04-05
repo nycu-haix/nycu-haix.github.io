@@ -16,13 +16,12 @@ ROOT = Path(__file__).resolve().parents[1]
 STATIC_DATA_DIR = ROOT / "static" / "data"
 SOURCES_PATH = STATIC_DATA_DIR / "sources.json"
 GENERATED_DATA_DIR = ROOT / "data" / "generated"
-CONTENT_MEMBERS_DIR = ROOT / "content" / "members"
-CONTENT_LEGACY_MEMBERS_DIR = ROOT / "content" / "legacy-members"
+CONTENT_PEOPLE_DIR = ROOT / "content" / "people"
 OG_DIR = ROOT / "static" / "og"
 
 
 CSV_KEYS = {
-    "members": "membersCsvUrl",
+    "people": "peopleCsvUrl",
     "publications": "publicationsCsvUrl",
     "news": "newsCsvUrl",
     "research": "researchCsvUrl",
@@ -41,7 +40,7 @@ def main() -> None:
     parser.add_argument(
         "--generate-og",
         action="store_true",
-        help="Generate per-member Open Graph images from Gravatar",
+        help="Generate per-people Open Graph images from Gravatar",
     )
     args = parser.parse_args()
 
@@ -49,30 +48,29 @@ def main() -> None:
     if args.fetch:
         fetch_remote_csvs(sources)
 
-    members_rows = read_csv_rows(STATIC_DATA_DIR / "members.csv")
+    people_rows = read_csv_rows(STATIC_DATA_DIR / "people.csv")
     publications_rows = read_csv_rows(STATIC_DATA_DIR / "publications.csv")
     news_rows = read_csv_rows(STATIC_DATA_DIR / "news.csv")
     research_rows = read_csv_rows(STATIC_DATA_DIR / "research.csv")
 
-    members = normalize_members(members_rows)
+    people = normalize_people(people_rows)
     publications = normalize_publications(publications_rows)
     news = normalize_news(news_rows)
     research = normalize_research(research_rows)
 
     GENERATED_DATA_DIR.mkdir(parents=True, exist_ok=True)
-    write_json(GENERATED_DATA_DIR / "members.json", members)
+    write_json(GENERATED_DATA_DIR / "people.json", people)
     write_json(GENERATED_DATA_DIR / "publications.json", publications)
     write_json(GENERATED_DATA_DIR / "news.json", news)
     write_json(GENERATED_DATA_DIR / "research.json", research)
 
-    generate_member_content(members)
-    generate_legacy_member_content(members)
+    generate_people_content(people)
 
     if args.generate_og:
-        generate_member_og_images(members)
+        generate_people_og_images(people)
 
     print(
-        f"Generated {len(members)} members, {len(publications)} publications, {len(news)} news, {len(research)} research rows"
+        f"Generated {len(people)} people, {len(publications)} publications, {len(news)} news, {len(research)} research rows"
     )
 
 
@@ -136,19 +134,19 @@ def pick(row: dict, *keys: str) -> str:
     for key in keys:
         value = row.get(key, "")
         if str(value).strip():
-            return str(value).strip()
+            return normalize_apostrophes(str(value).strip())
     return ""
 
 
-def normalize_members(rows: list[dict]) -> list[dict]:
-    members = []
+def normalize_people(rows: list[dict]) -> list[dict]:
+    people = []
     for index, row in enumerate(rows):
         name = pick(row, "name", "student", "student_name")
         if not name:
             continue
 
         email = pick(row, "email", "mail", "e_mail", "e-mail")
-        username = build_member_username(
+        username = build_people_username(
             pick(row, "username", "user", "slug"),
             name,
             email,
@@ -169,7 +167,7 @@ def normalize_members(rows: list[dict]) -> list[dict]:
         og_image = gravatar_image
         og_image_local = f"/og/{username}.png"
 
-        seo_description = build_member_seo_description(
+        seo_description = build_people_seo_description(
             name=name,
             description=description,
             profile_markdown=profile_markdown,
@@ -179,7 +177,7 @@ def normalize_members(rows: list[dict]) -> list[dict]:
             tags=tags,
         )
 
-        members.append(
+        people.append(
             {
                 "name": name,
                 "username": username,
@@ -219,9 +217,9 @@ def normalize_members(rows: list[dict]) -> list[dict]:
             }
         )
 
-    ensure_unique_usernames(members)
-    members.sort(key=member_sort_key)
-    return members
+    ensure_unique_usernames(people)
+    people.sort(key=people_sort_key)
+    return people
 
 
 def normalize_publications(rows: list[dict]) -> list[dict]:
@@ -302,7 +300,7 @@ def parse_int(value: str, default: int = 0) -> int:
         return default
 
 
-def build_member_username(
+def build_people_username(
     explicit_username: str, name: str, email: str, index: int
 ) -> str:
     explicit = slugify_username(explicit_username)
@@ -317,7 +315,7 @@ def build_member_username(
     if from_email:
         return from_email
 
-    return f"member-{index + 1}"
+    return f"people-{index + 1}"
 
 
 def slugify_username(value: str) -> str:
@@ -327,24 +325,24 @@ def slugify_username(value: str) -> str:
     return text[:64]
 
 
-def ensure_unique_usernames(members: list[dict]) -> None:
+def ensure_unique_usernames(people: list[dict]) -> None:
     seen = set()
-    for member in members:
-        base = slugify_username(member.get("username", "")) or "member"
+    for person in people:
+        base = slugify_username(person.get("username", "")) or "people"
         candidate = base
         serial = 2
         while candidate in seen:
             candidate = f"{base}-{serial}"
             serial += 1
-        member["username"] = candidate
+        person["username"] = candidate
         seen.add(candidate)
 
 
-def member_sort_key(member: dict) -> tuple:
+def people_sort_key(person: dict) -> tuple:
     return (
-        role_weight(member.get("role", "")),
-        parse_int(member.get("year", ""), default=9999),
-        member.get("name", ""),
+        role_weight(person.get("role", "")),
+        parse_int(person.get("year", ""), default=9999),
+        person.get("name", ""),
     )
 
 
@@ -402,17 +400,17 @@ def normalize_orcid_url(value: str) -> str:
 def gravatar_url(email: str, size: int) -> str:
     token = str(email or "").strip().lower()
     if not token:
-        token = "member@nycu-haix.invalid"
+        token = "people@nycu-haix.invalid"
     digest = hashlib.md5(token.encode("utf-8"), usedforsecurity=False).hexdigest()
     return f"https://www.gravatar.com/avatar/{digest}?s={size}&d=identicon&r=g"
 
 
-def compose_member_meta(role: str, degree: str, year: str) -> str:
+def compose_people_meta(role: str, degree: str, year: str) -> str:
     parts = [part for part in (role, degree, f"Year {year}" if year else "") if part]
     return ", ".join(parts)
 
 
-def build_member_seo_description(
+def build_people_seo_description(
     *,
     name: str,
     description: str,
@@ -424,7 +422,7 @@ def build_member_seo_description(
 ) -> str:
     parts = [str(name or "").strip()]
 
-    meta = compose_member_meta(role, degree, year)
+    meta = compose_people_meta(role, degree, year)
     if meta:
         parts.append(meta)
 
@@ -442,42 +440,15 @@ def build_member_seo_description(
     if profile_text and profile_text != cleaned_description:
         parts.append(profile_text)
 
-    normalized_parts = [
-        normalize_spaces(part) for part in parts if normalize_spaces(part)
-    ]
+    normalized_parts = []
+    for part in parts:
+        normalized = normalize_spaces(part)
+        if normalized:
+            normalized_parts.append(normalized)
     if normalized_parts:
         return " | ".join(normalized_parts)
 
     return f"{name} profile at HAIX (Human AI and Creative Computing) Lab, NYCU."
-
-
-def first_profile_paragraph(markdown: str) -> str:
-    lines = str(markdown or "").replace("\r\n", "\n").replace("\r", "\n").split("\n")
-    block = []
-
-    for raw in lines:
-        line = raw.strip()
-        if not line:
-            if block:
-                break
-            continue
-
-        if re.match(r"^#{1,6}\s+", line):
-            continue
-        if re.match(r"^[-*+]\s+", line):
-            continue
-        if re.match(r"^\d+\.\s+", line):
-            continue
-        if line.startswith(">"):
-            continue
-
-        block.append(line)
-
-    if not block:
-        return ""
-
-    text = " ".join(block)
-    return strip_markdown_inline(text)
 
 
 def full_profile_text(markdown: str) -> str:
@@ -504,6 +475,16 @@ def normalize_spaces(text: str) -> str:
     return re.sub(r"\s+", " ", str(text or "")).strip()
 
 
+def normalize_apostrophes(text: str) -> str:
+    value = str(text or "")
+    return (
+        value.replace("\u2018", "'")
+        .replace("\u2019", "'")
+        .replace("\u02bc", "'")
+        .replace("\uff07", "'")
+    )
+
+
 def write_json(path: Path, data: object) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -517,10 +498,10 @@ def yaml_quote(value: str) -> str:
     return f'"{text}"'
 
 
-def generate_member_content(members: list[dict]) -> None:
-    CONTENT_MEMBERS_DIR.mkdir(parents=True, exist_ok=True)
+def generate_people_content(people: list[dict]) -> None:
+    CONTENT_PEOPLE_DIR.mkdir(parents=True, exist_ok=True)
 
-    index_path = CONTENT_MEMBERS_DIR / "_index.md"
+    index_path = CONTENT_PEOPLE_DIR / "_index.md"
     index_path.write_text(
         "---\n"
         'title: "People"\n'
@@ -528,49 +509,48 @@ def generate_member_content(members: list[dict]) -> None:
         'url: "/people/"\n'
         "aliases:\n"
         '  - "/labmem/"\n'
-        '  - "/member/"\n'
+        '  - "/people/"\n'
         "---\n\n"
         "This page is generated from the latest spreadsheet people data.\n",
         encoding="utf-8",
     )
 
-    for old_file in CONTENT_MEMBERS_DIR.glob("*.md"):
+    for old_file in CONTENT_PEOPLE_DIR.glob("*.md"):
         if old_file.name == "_index.md":
             continue
         old_file.unlink()
 
-    for member in members:
+    for person in people:
         body = str(
-            member.get("profile_markdown") or member.get("description") or ""
+            person.get("profile_markdown") or person.get("description") or ""
         ).strip()
         if not body:
             body = "Profile details will be updated soon."
 
         lines = [
             "---",
-            f"title: {yaml_quote(member.get('name', ''))}",
-            f"slug: {yaml_quote(member.get('username', ''))}",
-            f"description: {yaml_quote(member.get('seo_description', ''))}",
-            f"username: {yaml_quote(member.get('username', ''))}",
-            f"role: {yaml_quote(member.get('role', ''))}",
-            f"degree: {yaml_quote(member.get('degree', ''))}",
-            f"year: {yaml_quote(member.get('year', ''))}",
-            f"email: {yaml_quote(member.get('email', ''))}",
-            f"github: {yaml_quote(member.get('github', ''))}",
-            f"orcid: {yaml_quote(member.get('orcid', ''))}",
-            f"scholar: {yaml_quote(member.get('scholar', ''))}",
-            f"website: {yaml_quote(member.get('website', ''))}",
-            f"photo: {yaml_quote(member.get('photo', ''))}",
-            f"og_image: {yaml_quote(member.get('og_image', ''))}",
-            f"og_image_local: {yaml_quote(member.get('og_image_local', ''))}",
-            f"gravatar_image: {yaml_quote(member.get('gravatar_image', ''))}",
+            f"title: {yaml_quote(person.get('name', ''))}",
+            f"slug: {yaml_quote(person.get('username', ''))}",
+            f"description: {yaml_quote(person.get('seo_description', ''))}",
+            f"username: {yaml_quote(person.get('username', ''))}",
+            f"role: {yaml_quote(person.get('role', ''))}",
+            f"degree: {yaml_quote(person.get('degree', ''))}",
+            f"year: {yaml_quote(person.get('year', ''))}",
+            f"email: {yaml_quote(person.get('email', ''))}",
+            f"github: {yaml_quote(person.get('github', ''))}",
+            f"orcid: {yaml_quote(person.get('orcid', ''))}",
+            f"scholar: {yaml_quote(person.get('scholar', ''))}",
+            f"website: {yaml_quote(person.get('website', ''))}",
+            f"photo: {yaml_quote(person.get('photo', ''))}",
+            f"og_image: {yaml_quote(person.get('og_image', ''))}",
+            f"og_image_local: {yaml_quote(person.get('og_image_local', ''))}",
+            f"gravatar_image: {yaml_quote(person.get('gravatar_image', ''))}",
             "aliases:",
-            f"  - {yaml_quote('/labmem/' + member.get('username', '') + '/')}",
-            f"  - {yaml_quote('/member/' + member.get('username', '') + '/')}",
+            f"  - {yaml_quote('/labmem/' + person.get('username', '') + '/')}",
             "tags:",
         ]
 
-        tags = member.get("tags", [])
+        tags = person.get("tags", [])
         if tags:
             for tag in tags:
                 lines.append(f"  - {yaml_quote(tag)}")
@@ -579,72 +559,22 @@ def generate_member_content(members: list[dict]) -> None:
 
         lines.extend(["---", "", body.strip(), ""])
 
-        target = CONTENT_MEMBERS_DIR / f"{member['username']}.md"
+        target = CONTENT_PEOPLE_DIR / f"{person['username']}.md"
         target.write_text("\n".join(lines), encoding="utf-8")
 
 
-def generate_legacy_member_content(members: list[dict]) -> None:
-    CONTENT_LEGACY_MEMBERS_DIR.mkdir(parents=True, exist_ok=True)
-
-    for old_file in CONTENT_LEGACY_MEMBERS_DIR.glob("*.md"):
-        old_file.unlink()
-
-    for member in members:
-        body = str(
-            member.get("profile_markdown") or member.get("description") or ""
-        ).strip()
-        if not body:
-            body = "Profile details will be updated soon."
-
-        username = member.get("username", "")
-        lines = [
-            "---",
-            f"title: {yaml_quote(member.get('name', ''))}",
-            f"description: {yaml_quote(member.get('seo_description', ''))}",
-            'layout: "members/single"',
-            'type: "members"',
-            f"url: {yaml_quote('/' + username + '/')}",
-            f"username: {yaml_quote(username)}",
-            f"role: {yaml_quote(member.get('role', ''))}",
-            f"degree: {yaml_quote(member.get('degree', ''))}",
-            f"year: {yaml_quote(member.get('year', ''))}",
-            f"email: {yaml_quote(member.get('email', ''))}",
-            f"github: {yaml_quote(member.get('github', ''))}",
-            f"orcid: {yaml_quote(member.get('orcid', ''))}",
-            f"scholar: {yaml_quote(member.get('scholar', ''))}",
-            f"website: {yaml_quote(member.get('website', ''))}",
-            f"photo: {yaml_quote(member.get('photo', ''))}",
-            f"og_image: {yaml_quote(member.get('og_image', ''))}",
-            f"og_image_local: {yaml_quote(member.get('og_image_local', ''))}",
-            f"gravatar_image: {yaml_quote(member.get('gravatar_image', ''))}",
-            "tags:",
-        ]
-
-        tags = member.get("tags", [])
-        if tags:
-            for tag in tags:
-                lines.append(f"  - {yaml_quote(tag)}")
-        else:
-            lines.append('  - ""')
-
-        lines.extend(["---", "", body.strip(), ""])
-
-        target = CONTENT_LEGACY_MEMBERS_DIR / f"{username}.md"
-        target.write_text("\n".join(lines), encoding="utf-8")
-
-
-def generate_member_og_images(members: list[dict]) -> None:
+def generate_people_og_images(people: list[dict]) -> None:
     OG_DIR.mkdir(parents=True, exist_ok=True)
 
     for old_file in OG_DIR.glob("*.png"):
         old_file.unlink()
 
-    for member in members:
-        username = member.get("username", "")
+    for person in people:
+        username = person.get("username", "")
         if not username:
             continue
-        url = member.get("gravatar_image") or gravatar_url(
-            member.get("email", ""), 1200
+        url = person.get("gravatar_image") or gravatar_url(
+            person.get("email", ""), 1200
         )
         target = OG_DIR / f"{username}.png"
         try:

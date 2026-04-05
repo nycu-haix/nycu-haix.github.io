@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+{{ $people := .Pages.ByTitle }}
+{{ $baseDesc := .Description | default "People of HAIX Lab at NYCU." }}
+{{ $peoplePreviewItems := slice }}
+{{ range $people }}
+  {{ $peoplePreviewItems = $peoplePreviewItems | append (partial "people-preview-description.html" .) }}
+{{ end }}
+{{ $desc := $baseDesc }}
+{{ if gt (len $peoplePreviewItems) 0 }}{{ $desc = printf "%s %s" $baseDesc (delimit $peoplePreviewItems " || ") }}{{ end }}
+{{ $peopleItems := slice }}
+{{ range $index, $people := $people }}
+  {{ $peopleItems = $peopleItems | append (dict "@type" "ListItem" "position" (add $index 1) "url" $people.Permalink "name" $people.Title) }}
+{{ end }}
+{{ $peopleListLd := dict
+  "@context" "https://schema.org"
+  "@type" "ItemList"
+  "name" "HAIX People"
+  "itemListElement" $peopleItems
+}}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ .Title }} | HAIX Lab</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ .Title }} | HAIX Lab">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title }} | HAIX Lab">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
+    {{ if hugo.IsProduction }}
+      {{ partial "analytics/google_analytics.html" $ }}
+    {{ end }}
+  {{ end }}
+  <script type="application/ld+json">{{ $peopleListLd | jsonify | safeJS }}</script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="container-fluid">
+    <header class="row nav-row" id="top">
+      <div class="col-left">
+        <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
+          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <span class="brand-copy">
+            <strong>HAIX (Human AI &amp; Creative Computing) Lab</strong>
+            <small>National Yang Ming Chiao Tung University</small>
+          </span>
+        </a>
+      </div>
+      <div class="col-right">
+        <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/people/" | relURL }}">People</a>
+          <a href="{{ "/#news" | relURL }}">News</a>
+          <a href="{{ "/#research" | relURL }}">Research</a>
+          <a href="{{ "/#lab" | relURL }}">Info</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main-content">
+      <h1>People</h1>
+      <div id="people-list" class="people-grid" aria-live="polite" data-feed-state="pending">
+        {{ range $people }}
+          {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+          <article class="people-card">
+            <a class="people-open-photo" href="{{ .RelPermalink }}">
+              <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
+            </a>
+            <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+            <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
+          </article>
+        {{ end }}
+      </div>
+
+      <footer class="footer">
+        <p>© {{ now.Year }} HAIX (Human AI &amp; Creative Computing) Lab, NYCU</p>
+        <p class="footer-note">
+          <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
+          built by
+          <a href="https://gracetfg2.github.io/" target="_blank" rel="noopener noreferrer">Grace Yun-Chun Yen</a>
+          and
+          <a href="https://skyhong.tw" target="_blank" rel="noopener noreferrer">Sky Shih-Kai Hong</a>.
+        </p>
+        <p class="footer-note">
+          Inspired by
+          <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
+        </p>
+        <a class="footer-nycu-logo-link" href="https://brand.nycu.edu.tw/guidelines/" target="_blank" rel="noopener noreferrer" aria-label="NYCU brand guidelines">
+          <img src="{{ "images/nycu-logo-official-full-en.png" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
+        </a>
+      </footer>
+    </main>
+  </div>
+
+  <div id="people-modal" class="people-modal" hidden>
+    <div class="people-modal__backdrop" data-modal-close></div>
+    <div class="people-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="people-modal-name">
+      <button type="button" class="people-modal__close" data-modal-close aria-label="Close profile">×</button>
+      <div class="people-modal__header">
+        <img id="people-modal-photo" class="people-modal__photo" src="" alt="">
+        <div class="people-modal__intro">
+          <h3 id="people-modal-name"></h3>
+          <p id="people-modal-meta" class="people-modal__meta"></p>
+          <div id="people-modal-tags" class="people-modal__tags" hidden></div>
+          <p id="people-modal-desc" class="people-modal__desc" hidden></p>
+        </div>
+      </div>
+      <div id="people-modal-content" class="people-modal__content"></div>
+      <div id="people-modal-links" class="people-modal__links"></div>
+    </div>
+  </div>
+
+  <script src="{{ "js/haix.js" | relURL }}?v={{ now.Unix }}" defer></script>
+</body>
+</html>
