@@ -2,7 +2,7 @@ name: Sync Spreadsheet Data
 
 on:
   schedule:
-    - cron: "15 20 * * *"
+    - cron: "15 20 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -31,6 +31,6 @@ jobs:
             echo "No changes detected."
             exit 0
           fi
-          git add static/data/*.csv data/generated/*.json content/members/*.md static/og/*.png
+          git add static/data/*.csv data/generated/*.json content/people/*.md static/og/*.png
           git commit -m "chore(data): sync spreadsheet content and SEO pages"
           git push
