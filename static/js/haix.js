@@ -90,7 +90,7 @@
   async function loadPeople(sources) {
     const remote = cleanUrl(sources.peopleCsvUrl);
     const local = cleanUrl(sources.peopleLocalCsv) || DEFAULT_SOURCES.peopleLocalCsv;
-    const result = await fetchCsvWithFallback(local, remote);
+    const result = await fetchCsvWithFallback(remote, local);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -112,7 +112,7 @@
   async function loadPublications(sources) {
     const remote = cleanUrl(sources.publicationsCsvUrl);
     const local = cleanUrl(sources.publicationsLocalCsv) || DEFAULT_SOURCES.publicationsLocalCsv;
-    const result = await fetchCsvWithFallback(local, remote);
+    const result = await fetchCsvWithFallback(remote, local);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -132,7 +132,7 @@
   async function loadNews(sources) {
     const remote = cleanUrl(sources.newsCsvUrl);
     const local = cleanUrl(sources.newsLocalCsv) || DEFAULT_SOURCES.newsLocalCsv;
-    const result = await fetchCsvWithFallback(local, remote);
+    const result = await fetchCsvWithFallback(remote, local);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
@@ -152,7 +152,7 @@
   async function loadResearch(sources) {
     const remote = cleanUrl(sources.researchCsvUrl);
     const local = cleanUrl(sources.researchLocalCsv) || DEFAULT_SOURCES.researchLocalCsv;
-    const result = await fetchCsvWithFallback(local, remote);
+    const result = await fetchCsvWithFallback(remote, local);
     const csvText = result.text;
     const rows = parseCsv(csvText);
 
