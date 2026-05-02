@@ -394,6 +394,8 @@ p {
   display: inline-block;
   width: 10.6rem;
   height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
   margin: 0.5em 0;
   border-radius: 14px;
 }
@@ -434,11 +436,6 @@ p {
 .people-open-name:focus-visible {
   outline: 2px solid #4c86f4;
   outline-offset: 2px;
-}
-
-.people-card img.people-photo-square {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
 }
 
 .people-card h4 {
@@ -563,11 +560,6 @@ p {
 .people-modal__photo {
   width: 160px;
   border-radius: 12px;
-}
-
-.people-modal__photo.people-photo-square {
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
 }
 
 .people-modal__meta {

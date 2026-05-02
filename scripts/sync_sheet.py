@@ -162,9 +162,17 @@ def normalize_people(rows: list[dict]) -> list[dict]:
         tags = parse_tags(pick(row, "tags", "tag", "labels", "interests"))
         explicit_photo = pick(row, "photo", "photo_url", "image")
 
+        if explicit_photo:
+            photo = explicit_photo
+            og_image = explicit_photo
+        elif check_gravatar_exists(email):
+            photo = gravatar_url(email, 800)
+            og_image = gravatar_url(email, 1200)
+        else:
+            photo = "/images/people/people-placeholder.svg"
+            og_image = "/images/people/people-placeholder.svg"
+
         gravatar_image = gravatar_url(email, 1200)
-        photo = explicit_photo or gravatar_url(email, 800)
-        og_image = gravatar_image
         og_image_local = f"/og/{username}.png"
 
         seo_description = build_people_seo_description(
@@ -402,7 +410,20 @@ def gravatar_url(email: str, size: int) -> str:
     if not token:
         token = "people@nycu-haix.invalid"
     digest = hashlib.md5(token.encode("utf-8"), usedforsecurity=False).hexdigest()
-    return f"https://www.gravatar.com/avatar/{digest}?s={size}&d=identicon&r=g"
+    return f"https://www.gravatar.com/avatar/{digest}?s={size}&d=404&r=g"
+
+def check_gravatar_exists(email: str) -> bool:
+    token = str(email or "").strip().lower()
+    if not token:
+        return False
+    digest = hashlib.md5(token.encode("utf-8"), usedforsecurity=False).hexdigest()
+    url = f"https://www.gravatar.com/avatar/{digest}?d=404"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}, method="HEAD")
+        with urllib.request.urlopen(req, timeout=5) as response:
+            return response.status == 200
+    except Exception:
+        return False
 
 
 def compose_people_meta(role: str, degree: str, year: str) -> str:

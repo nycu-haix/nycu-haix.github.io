@@ -1591,8 +1591,7 @@
   }
 
   function updatePeoplePhotoMode(photo, source) {
-    const normalized = cleanUrl(source);
-    photo.classList.toggle("people-photo-square", normalized === FALLBACK_PEOPLE_PHOTO);
+    // Styling handled in CSS
   }
 
   function composePeopleMeta(people) {

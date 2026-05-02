@@ -1,22 +1,2 @@
 {{- $people := . -}}
-{{- $name := $people.Title -}}
-{{- $parts := slice -}}
-{{- with $people.Params.role -}}{{- $parts = $parts | append . -}}{{- end -}}
-{{- with $people.Params.degree -}}{{- $parts = $parts | append . -}}{{- end -}}
-{{- with $people.Params.year -}}{{- $parts = $parts | append (printf "Year %v" .) -}}{{- end -}}
-{{- with $people.Params.tags -}}
-  {{- if gt (len .) 0 -}}
-    {{- $parts = $parts | append (printf "Tags: %s" (delimit . ", ")) -}}
-  {{- end -}}
-{{- end -}}
-{{- with $people.Description -}}{{- $parts = $parts | append . -}}{{- end -}}
-{{- $contentPlain := $people.Content | plainify | replaceRE "\\s+" " " | trim " " -}}
-{{- if and $contentPlain (ne $contentPlain $people.Description) -}}
-  {{- $parts = $parts | append $contentPlain -}}
-{{- end -}}
-
-{{- if gt (len $parts) 0 -}}
-  {{- printf "%s: %s" $name (delimit $parts " | ") -}}
-{{- else -}}
-  {{- $people.Description | default (printf "%s profile at HAIX Lab." $name) -}}
-{{- end -}}
+{{- $people.Description | default (printf "%s profile at HAIX Lab." $people.Title) -}}
