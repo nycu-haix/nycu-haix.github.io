@@ -324,6 +324,10 @@ p {
   margin-inline: auto;
 }
 
+h1 + .people-grid {
+  margin-top: 1.4rem;
+}
+
 .people-filter-bar {
   width: 100%;
   max-width: 72.2rem;
