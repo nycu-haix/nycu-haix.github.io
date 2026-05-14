@@ -1,9 +1,9 @@
 ---
 title: "Grace Yu-Chun Yen"
 slug: "grace"
-description: "Grace Yu-Chun Yen | Associate Professor"
+description: "Grace Yu-Chun Yen | Assistant Professor"
 username: "grace"
-role: "Associate Professor"
+role: "Assistant Professor"
 degree: ""
 year: ""
 email: "yyen@nycu.edu.tw"
