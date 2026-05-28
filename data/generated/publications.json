@@ -51,6 +51,7 @@
     "website": "",
     "video": "https://youtu.be/l1eS5ZlEzFM",
     "award": "Final round · May 13, 2026",
+    "category": "late-breaking",
     "highlight": true
   },
   {
@@ -99,6 +100,7 @@
     "website": "",
     "video": "",
     "award": "Final round · May 13, 2026",
+    "category": "late-breaking",
     "highlight": true
   },
   {
@@ -147,6 +149,7 @@
     "website": "",
     "video": "",
     "award": "",
+    "category": "late-breaking",
     "highlight": false
   }
 ]

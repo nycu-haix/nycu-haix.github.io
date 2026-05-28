@@ -126,6 +126,7 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/research/" | relURL }}">Research</a>
           <a href="{{ "/people/" | relURL }}">People</a>
         </nav>
       </div>
@@ -188,7 +189,7 @@
             {{ end }}
           </div>
 
-          <h3>Latest Publications</h3>
+          <h3>Latest Publications <a class="subtle" href="{{ "/research/" | relURL }}">see all &rarr;</a></h3>
           <div id="publications-list" class="publication-list" aria-live="polite" data-feed-state="pending">
             {{ if gt (len $publications) 0 }}
               {{ range $publications }}

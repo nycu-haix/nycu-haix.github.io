@@ -301,6 +301,7 @@ def normalize_publications(
             or infer_publication_thumbnail(pdf)
         )
         award = pick(row, "award", "note") or infer_publication_award(key)
+        category = normalize_publication_category(pick(row, "category", "type", "pub_type"))
         publications.append(
             {
                 "key": key,
@@ -322,6 +323,7 @@ def normalize_publications(
                 "website": clean_url(pick(row, "website", "url", "link")),
                 "video": video,
                 "award": award,
+                "category": category,
                 "highlight": is_highlighted_publication(key, award),
             }
         )
@@ -448,6 +450,13 @@ def is_highlighted_publication(key: str, award: str) -> bool:
 
 def publication_key_matches(key: str) -> bool:
     return str(key or "").strip().lower() in FINAL_ROUND_PUBLICATION_KEYS
+
+
+def normalize_publication_category(value: str) -> str:
+    normalized = str(value or "").strip().lower()
+    if normalized in ("late-breaking", "late breaking", "lbw", "latebreaking", "poster", "demo", "workshop"):
+        return "late-breaking"
+    return ""
 
 
 def normalize_news(rows: list[dict]) -> list[dict]:

@@ -880,6 +880,7 @@
       website: cleanUrl(pick(row, "website", "url", "link")),
       video,
       award,
+      category: normalizePublicationCategory(pick(row, "category", "type", "pub_type")),
       highlight: isHighlightedPublication(key, award)
     };
   }
@@ -954,6 +955,14 @@
 
   function publicationKeyMatches(key) {
     return FINAL_ROUND_PUBLICATION_KEYS.has(String(key || "").trim().toLowerCase());
+  }
+
+  function normalizePublicationCategory(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    if (["late-breaking", "late breaking", "lbw", "latebreaking", "poster", "demo", "workshop"].includes(normalized)) {
+      return "late-breaking";
+    }
+    return "";
   }
 
   function normalizeNews(row) {
