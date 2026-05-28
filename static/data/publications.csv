@@ -1,1 +1,4 @@
-title,authors,proceedings,year,doi,thumbnail,pdf,website,award
+key,title,authors,author_usernames,proceedings,year,doi,thumbnail,pdf,website,award
+urop2026-omniobserve,OmniObserve: An online meeting facilator unveiling hidden consensus,"陳奕潔 EJ, Ethel Hsiao, 張智鈞, Elvis Dragon Mao, Sky Shih-Kai Hong, Grace Yu-Chun Yen","ej,ethel,jason,em,sky,grace",NYCU CS Undergraduate Project Contest,2026,,,/files/posters/OmniObserve.pdf,,"Final round · May 13, 2026"
+urop2026-longtermrms,A Traceable Hierarchical Memory System for Long-Term Research Meeting Support,"蔡尚融, 陳宥臻, 李羿昕, 洪薇欣, Grace Yu-Chun Yen","shangjung,kellychen,hsin,velda,grace",NYCU CS Undergraduate Project Contest,2026,,,/files/posters/LongTermRMS.pdf,,"Final round · May 13, 2026"
+urop2026-deliberate,Deliberate: A Human–AI Collaborative System for Evaluating Large-Scale Application Materials,"張晉睿, 王韋凱, 馬晨瑜, 陳俞安, Grace Yu-Chun Yen","rain112550185,lilb0425,cs112550152,andrew,grace",NYCU CS Undergraduate Project Contest,2026,,,/files/posters/Deliberate.pdf,,

@@ -131,7 +131,9 @@ Required:
 - `title`
 
 Recommended:
+- `key` (stable identifier, e.g., `omniobserve`; do not change when title changes)
 - `authors`
+- `author_usernames` (comma-separated People usernames matching `authors`, e.g., `alice,bob,grace`)
 - `proceedings`
 - `year`
 - `doi` (raw DOI or full URL)

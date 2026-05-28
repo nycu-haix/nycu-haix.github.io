@@ -2,6 +2,7 @@
 title: "吳尚璇"
 slug: "brina"
 description: "吳尚璇 | Master, Year 2025"
+profile_summary: ""
 username: "brina"
 role: "Master"
 degree: ""

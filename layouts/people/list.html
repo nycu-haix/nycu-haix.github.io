@@ -39,7 +39,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-publications">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
     {{ if hugo.IsProduction }}
       {{ partial "analytics/google_analytics.html" $ }}
@@ -119,6 +119,7 @@
       </div>
       <div id="people-modal-content" class="people-modal__content"></div>
       <div id="people-modal-links" class="people-modal__links"></div>
+      <div id="people-modal-publications" class="people-modal__publications" hidden></div>
     </div>
   </div>
 

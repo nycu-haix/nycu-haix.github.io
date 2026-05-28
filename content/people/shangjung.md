@@ -1,8 +1,9 @@
 ---
 title: "蔡尚融"
-slug: "shangjung-cs12"
+slug: "shangjung"
 description: "蔡尚融 | Undergraduate, Year 2025"
-username: "shangjung-cs12"
+profile_summary: ""
+username: "shangjung"
 role: "Undergraduate"
 degree: ""
 year: "2025"
@@ -13,11 +14,11 @@ scholar: ""
 website: ""
 photo: "/images/people/people-placeholder.svg"
 og_image: "/images/people/people-placeholder.svg"
-og_image_local: "/og/shangjung-cs12.png"
+og_image_local: "/og/shangjung.png"
 gravatar_image: "https://www.gravatar.com/avatar/f424bce6e0a79c225744191416cb5948?s=1200&d=404&r=g"
 aliases:
-  - "/shangjung-cs12/"
-  - "/labmem/shangjung-cs12/"
+  - "/shangjung/"
+  - "/labmem/shangjung/"
 tags:
   - ""
 ---

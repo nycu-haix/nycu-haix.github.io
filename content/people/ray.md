@@ -2,6 +2,7 @@
 title: "林長宏"
 slug: "ray"
 description: "林長宏 | Master, Year 2024"
+profile_summary: ""
 username: "ray"
 role: "Master"
 degree: ""

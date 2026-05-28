@@ -2,6 +2,7 @@
 title: "高浩哲"
 slug: "gau"
 description: "高浩哲 | Master, Year 2025"
+profile_summary: ""
 username: "gau"
 role: "Master"
 degree: ""

@@ -261,7 +261,7 @@
   },
   {
     "name": "張晉睿",
-    "username": "rain112550185-cs12",
+    "username": "rain112550185",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -270,13 +270,13 @@
     "orcid": "",
     "scholar": "",
     "website": "",
-    "photo": "/images/people/people-placeholder.svg",
+    "photo": "/images/people/rain112550185.jpg",
     "description": "",
     "profile_markdown": "",
     "tags": [],
     "seo_description": "張晉睿 | Undergraduate, Year 2025",
-    "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/rain112550185-cs12.png",
+    "og_image": "/images/people/rain112550185.jpg",
+    "og_image_local": "/og/rain112550185.png",
     "gravatar_image": "https://www.gravatar.com/avatar/4450039a2f7abb6752c74c3b961339f1?s=1200&d=404&r=g"
   },
   {
@@ -301,7 +301,7 @@
   },
   {
     "name": "李羿昕",
-    "username": "hsin-cs12",
+    "username": "hsin",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -316,12 +316,12 @@
     "tags": [],
     "seo_description": "李羿昕 | Undergraduate, Year 2025",
     "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/hsin-cs12.png",
+    "og_image_local": "/og/hsin.png",
     "gravatar_image": "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=1200&d=404&r=g"
   },
   {
     "name": "王韋凱",
-    "username": "lilb0425-cs12",
+    "username": "lilb0425",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -330,18 +330,18 @@
     "orcid": "",
     "scholar": "",
     "website": "",
-    "photo": "/images/people/people-placeholder.svg",
+    "photo": "/images/people/lilb0425.jpg",
     "description": "",
     "profile_markdown": "",
     "tags": [],
     "seo_description": "王韋凱 | Undergraduate, Year 2025",
-    "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/lilb0425-cs12.png",
+    "og_image": "/images/people/lilb0425.jpg",
+    "og_image_local": "/og/lilb0425.png",
     "gravatar_image": "https://www.gravatar.com/avatar/9596e6635e3a1d434f9d9f73e3a4d869?s=1200&d=404&r=g"
   },
   {
     "name": "蔡尚融",
-    "username": "shangjung-cs12",
+    "username": "shangjung",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -356,7 +356,7 @@
     "tags": [],
     "seo_description": "蔡尚融 | Undergraduate, Year 2025",
     "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/shangjung-cs12.png",
+    "og_image_local": "/og/shangjung.png",
     "gravatar_image": "https://www.gravatar.com/avatar/f424bce6e0a79c225744191416cb5948?s=1200&d=404&r=g"
   },
   {
@@ -381,7 +381,7 @@
   },
   {
     "name": "陳宥臻",
-    "username": "kellychen-cs12",
+    "username": "kellychen",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -396,12 +396,12 @@
     "tags": [],
     "seo_description": "陳宥臻 | Undergraduate, Year 2025",
     "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/kellychen-cs12.png",
+    "og_image_local": "/og/kellychen.png",
     "gravatar_image": "https://www.gravatar.com/avatar/e26c5d79a6902db08a02bdb85d36e16c?s=1200&d=404&r=g"
   },
   {
     "name": "馬晨瑜",
-    "username": "cs112550152-cs12",
+    "username": "cs112550152",
     "role": "Undergraduate",
     "degree": "",
     "year": "2025",
@@ -410,13 +410,13 @@
     "orcid": "",
     "scholar": "",
     "website": "",
-    "photo": "/images/people/people-placeholder.svg",
+    "photo": "/images/people/cs112550152.jpg",
     "description": "",
     "profile_markdown": "",
     "tags": [],
     "seo_description": "馬晨瑜 | Undergraduate, Year 2025",
-    "og_image": "/images/people/people-placeholder.svg",
-    "og_image_local": "/og/cs112550152-cs12.png",
+    "og_image": "/images/people/cs112550152.jpg",
+    "og_image_local": "/og/cs112550152.png",
     "gravatar_image": "https://www.gravatar.com/avatar/8839292c5855b8a6aaec869431257d39?s=1200&d=404&r=g"
   }
 ]

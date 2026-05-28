@@ -2,6 +2,7 @@
 title: "陳昕妤"
 slug: "sychen"
 description: "陳昕妤 | Master, Year 2025"
+profile_summary: ""
 username: "sychen"
 role: "Master"
 degree: ""

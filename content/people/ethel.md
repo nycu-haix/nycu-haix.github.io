@@ -2,6 +2,7 @@
 title: "Ethel Hsiao"
 slug: "ethel"
 description: "Ethel Hsiao | Undergraduate, Year 2025"
+profile_summary: ""
 username: "ethel"
 role: "Undergraduate"
 degree: ""

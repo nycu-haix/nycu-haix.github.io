@@ -2,6 +2,7 @@
 title: "Grace Yu-Chun Yen"
 slug: "grace"
 description: "Grace Yu-Chun Yen | Assistant Professor"
+profile_summary: ""
 username: "grace"
 role: "Assistant Professor"
 degree: ""

@@ -7,8 +7,18 @@
 {{ $peopleList := "/people/" | relURL }}
 {{ $canonical := .Permalink }}
 {{ with .Params.username }}{{ $canonical = (printf "/people/%s/" .) | absURL }}{{ end }}
+{{ $profileUsername := .Params.username | default .Slug }}
+{{ $profilePublications := slice }}
+{{ range $publication := site.Data.generated.publications | default (slice) }}
+  {{ $isProfileAuthor := false }}
+  {{ range $author := $publication.author_list | default (slice) }}
+    {{ if eq $author.username $profileUsername }}{{ $isProfileAuthor = true }}{{ end }}
+  {{ end }}
+  {{ if $isProfileAuthor }}{{ $profilePublications = $profilePublications | append $publication }}{{ end }}
+{{ end }}
 {{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $tags := .Params.tags | default (slice) }}
+{{ $profileSummary := .Params.profile_summary | default .Params.bio | default .Params.intro | default "" }}
 {{ $keywordText := printf "%s, HAIX Lab, NYCU, Human-AI Interaction, HCI, Creative Computing, Taiwan" $name }}
 {{ with .Params.role }}{{ $keywordText = printf "%s, %s" $keywordText . }}{{ end }}
 {{ with .Params.degree }}{{ $keywordText = printf "%s, %s" $keywordText . }}{{ end }}
@@ -57,7 +67,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-publications">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
     {{ if hugo.IsProduction }}
       {{ partial "analytics/google_analytics.html" $ }}
@@ -107,11 +117,11 @@
 
     <main id="main-content" class="people-page">
       <article class="people-profile">
-        <img class="people-profile-photo" src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ $name }} profile photo" loading="eager">
+        <img class="people-profile-photo" src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ $name }} profile photo" loading="eager" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.svg" | relURL }}';">
         <div class="people-profile-main">
           <h1>{{ $name }}</h1>
           <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
-          {{ if .Description }}<p class="people-desc">{{ .Description }}</p>{{ end }}
+          {{ with $profileSummary }}<p class="people-desc">{{ . }}</p>{{ end }}
           <div class="people-social-links">
             {{ with .Params.email }}<a href="mailto:{{ . }}">Email</a>{{ end }}
             {{ with .Params.github }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>{{ end }}
@@ -125,6 +135,36 @@
       <section class="people-profile-content">
         {{ .Content }}
       </section>
+
+      {{ if gt (len $profilePublications) 0 }}
+        <section class="profile-publications" aria-labelledby="profile-publications-title">
+          <h2 id="profile-publications-title">Publications</h2>
+          <div class="people-publication-list">
+            {{ range $publication := $profilePublications }}
+              {{ $thumb := $publication.thumbnail | default "/images/publications/paper-placeholder.svg" }}
+              <article class="people-publication">
+                <img class="people-publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ $publication.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.svg" | relURL }}';">
+                <div class="people-publication-main">
+                  <h3>{{ $publication.title }}</h3>
+                  <p>
+                    {{ if $publication.proceedings }}<span>{{ $publication.proceedings }}</span>{{ end }}
+                    {{ if and $publication.proceedings $publication.year }} · {{ end }}
+                    {{ if $publication.year }}<span>{{ $publication.year }}</span>{{ end }}
+                  </p>
+                  {{ if $publication.award }}<p class="publication-note">{{ $publication.award }}</p>{{ end }}
+                  <p class="publication-links">
+                    {{ if $publication.doi }}<a href="{{ $publication.doi }}" target="_blank" rel="noopener noreferrer">DOI</a>{{ end }}
+                    {{ if and $publication.doi $publication.pdf }} · {{ end }}
+                    {{ if $publication.pdf }}<a href="{{ $publication.pdf }}" target="_blank" rel="noopener noreferrer">PDF</a>{{ end }}
+                    {{ if and (or $publication.doi $publication.pdf) $publication.website }} · {{ end }}
+                    {{ if $publication.website }}<a href="{{ $publication.website }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
+                  </p>
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
     </main>
   </div>
 </body>

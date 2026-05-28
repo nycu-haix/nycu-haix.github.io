@@ -1,1 +1,149 @@
-[]
+[
+  {
+    "key": "urop2026-omniobserve",
+    "title": "OmniObserve: An online meeting facilator unveiling hidden consensus",
+    "authors": "陳奕潔 EJ, Ethel Hsiao, 張智鈞, Elvis Dragon Mao, Sky Shih-Kai Hong, Grace Yu-Chun Yen",
+    "author_usernames": "ej,ethel,jason,em,sky,grace",
+    "author_list": [
+      {
+        "name": "陳奕潔 EJ",
+        "username": "ej",
+        "photo": "/images/people/EJ.jpg",
+        "url": "/people/ej/"
+      },
+      {
+        "name": "Ethel Hsiao",
+        "username": "ethel",
+        "photo": "/images/people/Ethel.jpg",
+        "url": "/people/ethel/"
+      },
+      {
+        "name": "張智鈞",
+        "username": "jason",
+        "photo": "/images/people/jason.jpg",
+        "url": "/people/jason/"
+      },
+      {
+        "name": "Elvis Dragon Mao",
+        "username": "em",
+        "photo": "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=800&d=404&r=g",
+        "url": "/people/em/"
+      },
+      {
+        "name": "Sky Shih-Kai Hong",
+        "username": "sky",
+        "photo": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d=404&r=g",
+        "url": "/people/sky/"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.png",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "NYCU CS Undergraduate Project Contest",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "",
+    "thumbnail": "/images/publications/OmniObserve.jpg",
+    "pdf": "/files/posters/OmniObserve.pdf",
+    "website": "",
+    "award": "Final round · May 13, 2026",
+    "highlight": true
+  },
+  {
+    "key": "urop2026-longtermrms",
+    "title": "A Traceable Hierarchical Memory System for Long-Term Research Meeting Support",
+    "authors": "蔡尚融, 陳宥臻, 李羿昕, 洪薇欣, Grace Yu-Chun Yen",
+    "author_usernames": "shangjung,kellychen,hsin,velda,grace",
+    "author_list": [
+      {
+        "name": "蔡尚融",
+        "username": "shangjung",
+        "photo": "/images/people/people-placeholder.svg",
+        "url": "/people/shangjung/"
+      },
+      {
+        "name": "陳宥臻",
+        "username": "kellychen",
+        "photo": "/images/people/people-placeholder.svg",
+        "url": "/people/kellychen/"
+      },
+      {
+        "name": "李羿昕",
+        "username": "hsin",
+        "photo": "/images/people/people-placeholder.svg",
+        "url": "/people/hsin/"
+      },
+      {
+        "name": "洪薇欣",
+        "username": "velda",
+        "photo": "/images/people/velda.jpg",
+        "url": "/people/velda/"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.png",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "NYCU CS Undergraduate Project Contest",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "",
+    "thumbnail": "/images/publications/LongTermRMS.jpg",
+    "pdf": "/files/posters/LongTermRMS.pdf",
+    "website": "",
+    "award": "Final round · May 13, 2026",
+    "highlight": true
+  },
+  {
+    "key": "urop2026-deliberate",
+    "title": "Deliberate: A Human–AI Collaborative System for Evaluating Large-Scale Application Materials",
+    "authors": "張晉睿, 王韋凱, 馬晨瑜, 陳俞安, Grace Yu-Chun Yen",
+    "author_usernames": "rain112550185,lilb0425,cs112550152,andrew,grace",
+    "author_list": [
+      {
+        "name": "張晉睿",
+        "username": "rain112550185",
+        "photo": "/images/people/rain112550185.jpg",
+        "url": "/people/rain112550185/"
+      },
+      {
+        "name": "王韋凱",
+        "username": "lilb0425",
+        "photo": "/images/people/lilb0425.jpg",
+        "url": "/people/lilb0425/"
+      },
+      {
+        "name": "馬晨瑜",
+        "username": "cs112550152",
+        "photo": "/images/people/cs112550152.jpg",
+        "url": "/people/cs112550152/"
+      },
+      {
+        "name": "陳俞安",
+        "username": "andrew",
+        "photo": "/images/people/andrew.jpg",
+        "url": "/people/andrew/"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.png",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "NYCU CS Undergraduate Project Contest",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "",
+    "thumbnail": "/images/publications/Deliberate.jpg",
+    "pdf": "/files/posters/Deliberate.pdf",
+    "website": "",
+    "award": "",
+    "highlight": false
+  }
+]

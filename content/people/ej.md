@@ -2,6 +2,7 @@
 title: "陳奕潔 EJ"
 slug: "ej"
 description: "陳奕潔 EJ | Undergraduate, Year 2025"
+profile_summary: ""
 username: "ej"
 role: "Undergraduate"
 degree: ""

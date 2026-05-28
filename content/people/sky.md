@@ -2,6 +2,7 @@
 title: "Sky Shih-Kai Hong"
 slug: "sky"
 description: "Sky Shih-Kai Hong | Master, Year 2025 | # Hi, I'm Sky! I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution. Recently, I'm also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion. # I attended CHI 2026 as an Student Volunteer! I attended CHI 2026 and serve as an SV in Barcelona, Spain. I am the second author of the paper, Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games, which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212."
+profile_summary: ""
 username: "sky"
 role: "Master"
 degree: ""

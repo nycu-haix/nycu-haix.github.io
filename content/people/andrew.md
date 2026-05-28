@@ -2,6 +2,7 @@
 title: "陳俞安"
 slug: "andrew"
 description: "陳俞安 | Master, Year 2025"
+profile_summary: ""
 username: "andrew"
 role: "Master"
 degree: ""

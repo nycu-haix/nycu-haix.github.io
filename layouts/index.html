@@ -99,7 +99,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-publications">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
     {{ if hugo.IsProduction }}
       {{ partial "analytics/google_analytics.html" $ }}
@@ -196,14 +196,32 @@
             {{ if gt (len $publications) 0 }}
               {{ range $publications }}
                 {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.svg" }}
-                <article class="publication-card">
-                  <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy">
+                <article class="publication-card{{ if .highlight }} publication-card--highlight{{ end }}">
+                  <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.svg" | relURL }}';">
                   <div class="publication-meta">
                     <h4>{{ .title }}</h4>
-                    {{ if .authors }}<p>{{ .authors }}</p>{{ end }}
+                    {{ $authorList := .author_list | default (slice) }}
+                    {{ if gt (len $authorList) 0 }}
+                      <p class="publication-authors">
+                        {{ range $author := $authorList }}
+                          {{ if $author.username }}
+                            {{ $photo := $author.photo | default "/images/people/people-placeholder.svg" }}
+                            <a class="publication-author" href="{{ $author.url | relURL }}" title="{{ $author.name }} profile">
+                              <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.svg" | relURL }}';">
+                              <span>{{ $author.name }}</span>
+                            </a>
+                          {{ else }}
+                            <span class="publication-author publication-author--plain">{{ $author.name }}</span>
+                          {{ end }}
+                        {{ end }}
+                      </p>
+                    {{ else if .authors }}
+                      <p>{{ .authors }}</p>
+                    {{ end }}
+                    {{ $proceedings := .proceedings }}
                     <p>
-                      {{ if .proceedings }}<span class="publication-venue">{{ .proceedings }}</span>{{ end }}
-                      {{ if and .proceedings .year }} · {{ end }}
+                      {{ if $proceedings }}<span class="publication-venue">{{ $proceedings }}</span>{{ end }}
+                      {{ if and $proceedings .year }} · {{ end }}
                       {{ if .year }}<span>{{ .year }}</span>{{ end }}
                     </p>
                     <p class="publication-links">
@@ -213,7 +231,7 @@
                       {{ if and (or .doi .pdf) .website }} · {{ end }}
                       {{ if .website }}<a href="{{ .website }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
                     </p>
-                    {{ if .award }}<p>{{ .award }}</p>{{ end }}
+                    {{ if .award }}<p class="publication-note">{{ .award }}</p>{{ end }}
                   </div>
                 </article>
               {{ end }}

@@ -14,6 +14,8 @@
 
   const FALLBACK_PEOPLE_PHOTO = "/images/people/people-placeholder.svg";
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
+  const FINAL_ROUND_PUBLICATION_KEYS = new Set(["omniobserve", "longtermrms", "urop2026-omniobserve", "urop2026-longtermrms"]);
+  const FINAL_ROUND_NOTE = "Final round · May 13, 2026";
   const PEOPLE_LIST_PATH = cleanPeopleListPath(document.body ? document.body.dataset.peopleRootPath : "") || "/people/";
 
   const peopleContainer = document.getElementById("people-list");
@@ -28,10 +30,13 @@
   const peopleModalDesc = document.getElementById("people-modal-desc");
   const peopleModalContent = document.getElementById("people-modal-content");
   const peopleModalLinks = document.getElementById("people-modal-links");
+  const peopleModalPublications = document.getElementById("people-modal-publications");
   const peopleModalCloseButton = peopleModal ? peopleModal.querySelector(".people-modal__close") : null;
 
   const peopleByUsername = new Map();
   const peopleByAlias = new Map();
+  const peopleByName = new Map();
+  const publicationsByUsername = new Map();
   const defaultDocumentTitle = document.title;
   let lastFocusedElementBeforeModal = null;
   let activePeopleTagKey = "";
@@ -51,18 +56,26 @@
   async function initializeData() {
     const sources = await loadSources();
     const jobs = [];
+    let peopleJob = null;
 
-    if (peopleContainer) {
-      jobs.push(
-        loadPeople(sources).catch((error) => {
+    if (peopleContainer || publicationsContainer || peopleModal) {
+      peopleJob = loadPeople(sources).catch((error) => {
+        if (peopleContainer) {
           renderError(peopleContainer, `Unable to load people data. ${error.message}`);
-        })
-      );
+        }
+        return [];
+      });
+      jobs.push(peopleJob);
     }
 
-    if (publicationsContainer) {
+    if (publicationsContainer || peopleModal) {
       jobs.push(
-        loadPublications(sources).catch((error) => {
+        (async () => {
+          if (peopleJob) {
+            await peopleJob;
+          }
+          await loadPublications(sources);
+        })().catch((error) => {
           renderError(publicationsContainer, `Unable to load publications data. ${error.message}`);
         })
       );
@@ -100,13 +113,19 @@
 
     ensureUniquePeopleUsernames(people);
     people.sort(comparePeople);
-    renderPeople(people);
-    markContainerReady(peopleContainer);
+    cachePeople(people);
+
+    if (peopleContainer) {
+      renderPeople(people);
+      markContainerReady(peopleContainer);
+    }
     syncPeopleModalFromLocation();
 
     if (result.usedFallback) {
       renderFallbackNotice();
     }
+
+    return people;
   }
 
   async function loadPublications(sources) {
@@ -121,8 +140,14 @@
       .filter((item) => item.title);
 
     publications.sort((a, b) => (b.yearNum || 0) - (a.yearNum || 0));
-    renderPublications(publications);
-    markContainerReady(publicationsContainer);
+    cachePublicationParticipation(publications);
+
+    if (publicationsContainer) {
+      renderPublications(publications);
+      markContainerReady(publicationsContainer);
+    }
+
+    refreshOpenPeopleModalPublications();
 
     if (result.usedFallback) {
       renderFallbackNotice();
@@ -430,6 +455,21 @@
     });
   }
 
+  function cachePeople(people) {
+    peopleByUsername.clear();
+    peopleByAlias.clear();
+    peopleByName.clear();
+
+    people.forEach((person) => {
+      if (!person || !person.username) {
+        return;
+      }
+
+      peopleByUsername.set(person.username, person);
+      registerPeopleAliases(person);
+    });
+  }
+
   function registerPeopleAliases(people) {
     if (!people || !people.username) {
       return;
@@ -438,6 +478,11 @@
     const aliases = new Set();
     aliases.add(people.username);
     aliases.add(slugifyUsername(people.name));
+
+    const nameKey = normalizeNameKey(people.name);
+    if (nameKey && !peopleByName.has(nameKey)) {
+      peopleByName.set(nameKey, people);
+    }
 
     const emailLocal = String(people.email || "").split("@")[0];
     const emailSlug = slugifyUsername(emailLocal);
@@ -452,6 +497,14 @@
       }
       peopleByAlias.set(alias, people);
     });
+  }
+
+  function normalizeNameKey(value) {
+    return String(value || "")
+      .normalize("NFKC")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
   }
 
   function resolvePeoplePhoto(explicitPhoto, email) {
@@ -804,19 +857,92 @@
     const yearText = pick(row, "year", "publication_year");
     const yearNum = Number.parseInt(yearText, 10);
     const doiRaw = pick(row, "doi", "doi_url");
+    const pdf = cleanUrl(pick(row, "pdf", "pdf_url"));
+    const title = pick(row, "title");
+    const proceedings = pick(row, "proceedings", "venue", "journal");
+    const key = normalizePublicationKey(pick(row, "key", "slug", "id", "publication_key", "project_key"), title, pdf);
+    const award = pick(row, "award", "note") || inferPublicationAward(key);
 
     return {
-      title: pick(row, "title"),
+      key,
+      title,
       authors: pick(row, "authors"),
-      proceedings: pick(row, "proceedings", "venue", "journal"),
+      authorUsernames: pick(row, "author_usernames", "author_slugs", "author_profiles", "people_usernames"),
+      proceedings,
       year: yearText,
       yearNum: Number.isFinite(yearNum) ? yearNum : 0,
       doi: normalizeDoiUrl(doiRaw),
-      thumbnail: pick(row, "thumbnail", "thumbnail_url", "image") || FALLBACK_PAPER_THUMB,
-      pdf: cleanUrl(pick(row, "pdf", "pdf_url")),
+      thumbnail: pick(row, "thumbnail", "thumbnail_url", "image") || inferPublicationThumbnail(pdf),
+      pdf,
       website: cleanUrl(pick(row, "website", "url", "link")),
-      award: pick(row, "award", "note")
+      award,
+      highlight: isHighlightedPublication(key, award)
     };
+  }
+
+  function inferPublicationThumbnail(pdf) {
+    const value = cleanUrl(pdf);
+    if (!value) {
+      return FALLBACK_PAPER_THUMB;
+    }
+
+    let pathname = value;
+    try {
+      pathname = new URL(value, window.location.origin).pathname;
+    } catch (_error) {
+      pathname = value.split("?")[0].split("#")[0];
+    }
+
+    const filename = pathname.split("/").filter(Boolean).pop() || "";
+    const stem = filename.replace(/\.[^.]+$/, "");
+    if (!stem) {
+      return FALLBACK_PAPER_THUMB;
+    }
+
+    return `/images/publications/${encodeURIComponent(stem)}.jpg`;
+  }
+
+  function normalizePublicationKey(explicitKey, title, pdf) {
+    if (cleanUrl(explicitKey)) {
+      return slugifyKey(explicitKey);
+    }
+
+    const pdfStem = cleanUrl(pdf)
+      .split("?")[0]
+      .split("#")[0]
+      .split("/")
+      .filter(Boolean)
+      .pop()
+      ?.replace(/\.[^.]+$/, "") || "";
+    if (pdfStem) {
+      return slugifyKey(pdfStem);
+    }
+
+    return slugifyKey(title);
+  }
+
+  function slugifyKey(value) {
+    return String(value || "")
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  function inferPublicationAward(key) {
+    if (publicationKeyMatches(key)) {
+      return FINAL_ROUND_NOTE;
+    }
+    return "";
+  }
+
+  function isHighlightedPublication(key, award) {
+    const awardKey = String(award || "").trim().toLowerCase();
+    return publicationKeyMatches(key) || awardKey.includes("final round");
+  }
+
+  function publicationKeyMatches(key) {
+    return FINAL_ROUND_PUBLICATION_KEYS.has(String(key || "").trim().toLowerCase());
   }
 
   function normalizeNews(row) {
@@ -895,6 +1021,7 @@
     peopleContainer.innerHTML = "";
     peopleByUsername.clear();
     peopleByAlias.clear();
+    peopleByName.clear();
 
     if (!people.length) {
       peopleContainer.appendChild(buildNote("No people rows found in CSV."));
@@ -1295,6 +1422,7 @@
 
     renderPeopleProfileMarkdown(people.profileMarkdown);
     renderPeopleModalLinks(people);
+    renderPeopleModalPublications(people);
 
     peopleModal.hidden = false;
     peopleModal.setAttribute("data-people", people.username);
@@ -1696,6 +1824,10 @@
   }
 
   function renderPublications(publications) {
+    if (!publicationsContainer) {
+      return;
+    }
+
     publicationsContainer.innerHTML = "";
 
     if (!publications.length) {
@@ -1707,7 +1839,7 @@
 
     publications.forEach((publication, index) => {
       const card = document.createElement("article");
-      card.className = "publication-card";
+      card.className = publication.highlight ? "publication-card publication-card--highlight" : "publication-card";
       card.style.animationDelay = `${Math.min(index * 65, 450)}ms`;
 
       const thumb = document.createElement("img");
@@ -1725,8 +1857,7 @@
       const title = document.createElement("h4");
       title.textContent = publication.title;
 
-      const author = document.createElement("p");
-      author.textContent = publication.authors || "Authors to be updated";
+      const author = buildPublicationAuthors(publication);
 
       const venue = document.createElement("p");
       venue.textContent = composeVenueText(publication);
@@ -1735,7 +1866,8 @@
 
       if (publication.award) {
         const award = document.createElement("p");
-        award.textContent = `Note: ${publication.award}`;
+        award.className = "publication-note";
+        award.textContent = publication.award;
         meta.appendChild(award);
       }
 
@@ -1749,6 +1881,194 @@
     });
 
     publicationsContainer.appendChild(fragment);
+  }
+
+  function cachePublicationParticipation(publications) {
+    publicationsByUsername.clear();
+
+    publications.forEach((publication) => {
+      resolvePublicationAuthors(publication).forEach((author) => {
+        if (!author.person || !author.person.username) {
+          return;
+        }
+
+        const username = author.person.username;
+        const items = publicationsByUsername.get(username) || [];
+        if (!items.includes(publication)) {
+          items.push(publication);
+        }
+        publicationsByUsername.set(username, items);
+      });
+    });
+  }
+
+  function refreshOpenPeopleModalPublications() {
+    if (!peopleModal || peopleModal.hidden) {
+      return;
+    }
+
+    const username = peopleModal.getAttribute("data-people");
+    const people = username ? peopleByUsername.get(username) : null;
+    if (people) {
+      renderPeopleModalPublications(people);
+    }
+  }
+
+  function renderPeopleModalPublications(people) {
+    if (!peopleModalPublications || !people || !people.username) {
+      return;
+    }
+
+    const publications = publicationsByUsername.get(people.username) || [];
+    peopleModalPublications.innerHTML = "";
+
+    if (!publications.length) {
+      peopleModalPublications.hidden = true;
+      return;
+    }
+
+    const heading = document.createElement("h4");
+    heading.textContent = "Publications";
+
+    const list = document.createElement("div");
+    list.className = "people-publication-list";
+
+    publications.forEach((publication) => {
+      list.appendChild(buildPeoplePublicationItem(publication));
+    });
+
+    peopleModalPublications.append(heading, list);
+    peopleModalPublications.hidden = false;
+  }
+
+  function buildPeoplePublicationItem(publication) {
+    const item = document.createElement("article");
+    item.className = "people-publication";
+
+    const thumb = document.createElement("img");
+    thumb.className = "people-publication-thumb";
+    thumb.src = publication.thumbnail || FALLBACK_PAPER_THUMB;
+    thumb.alt = `${publication.title} thumbnail`;
+    thumb.loading = "lazy";
+    thumb.decoding = "async";
+    thumb.addEventListener("error", () => {
+      if (thumb.src.includes(FALLBACK_PAPER_THUMB)) {
+        return;
+      }
+      thumb.src = FALLBACK_PAPER_THUMB;
+    });
+
+    const main = document.createElement("div");
+    main.className = "people-publication-main";
+
+    const title = document.createElement("h5");
+    title.textContent = publication.title;
+    main.appendChild(title);
+
+    const venue = document.createElement("p");
+    venue.textContent = composeVenueText(publication);
+    main.appendChild(venue);
+
+    if (publication.award) {
+      const award = document.createElement("p");
+      award.className = "publication-note";
+      award.textContent = publication.award;
+      main.appendChild(award);
+    }
+
+    const links = buildPublicationLinks(publication);
+    if (links) {
+      main.appendChild(links);
+    }
+
+    item.append(thumb, main);
+    return item;
+  }
+
+  function buildPublicationAuthors(publication) {
+    const authors = resolvePublicationAuthors(publication);
+    const container = document.createElement("p");
+    container.className = "publication-authors";
+
+    if (!authors.length) {
+      container.textContent = "Authors to be updated";
+      return container;
+    }
+
+    authors.forEach((author) => {
+      if (author.person) {
+        const link = document.createElement("a");
+        link.className = "publication-author";
+        link.href = buildPeoplePath(author.person.username);
+        link.title = `${author.name} profile`;
+
+        const photo = document.createElement("img");
+        const photoSource = author.person.photo || FALLBACK_PEOPLE_PHOTO;
+        photo.src = photoSource;
+        photo.alt = "";
+        photo.loading = "lazy";
+        photo.decoding = "async";
+        photo.addEventListener("error", () => {
+          if (photo.src.includes(FALLBACK_PEOPLE_PHOTO)) {
+            return;
+          }
+          photo.src = FALLBACK_PEOPLE_PHOTO;
+        });
+
+        const name = document.createElement("span");
+        name.textContent = author.name;
+        link.append(photo, name);
+        container.appendChild(link);
+        return;
+      }
+
+      const plain = document.createElement("span");
+      plain.className = "publication-author publication-author--plain";
+      plain.textContent = author.name;
+      container.appendChild(plain);
+    });
+
+    return container;
+  }
+
+  function resolvePublicationAuthors(publication) {
+    const names = splitPublicationAuthors(publication.authors);
+    const usernames = parsePublicationAuthorUsernames(publication.authorUsernames);
+
+    return names.map((name, index) => {
+      const username = usernames[index] || "";
+      const person = findPublicationAuthorPerson(name, username);
+      return {
+        name,
+        person
+      };
+    });
+  }
+
+  function splitPublicationAuthors(authors) {
+    return String(authors || "")
+      .split(",")
+      .map((author) => author.trim())
+      .filter(Boolean);
+  }
+
+  function parsePublicationAuthorUsernames(value) {
+    return String(value || "")
+      .split(/[;,|/、，]+/)
+      .map((username) => slugifyUsername(username))
+      .filter(Boolean);
+  }
+
+  function findPublicationAuthorPerson(name, username) {
+    if (username) {
+      const explicit = findPeopleByRouteToken(username);
+      if (explicit) {
+        return explicit;
+      }
+    }
+
+    const nameKey = normalizeNameKey(name);
+    return peopleByName.get(nameKey) || peopleByAlias.get(slugifyUsername(name)) || null;
   }
 
   function renderNews(newsItems) {
@@ -1908,9 +2228,10 @@
 
   function composeVenueText(publication) {
     const pieces = [];
+    const proceedings = publication.proceedings;
 
-    if (publication.proceedings) {
-      pieces.push(publication.proceedings);
+    if (proceedings) {
+      pieces.push(proceedings);
     }
 
     if (publication.year) {

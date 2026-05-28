@@ -8,7 +8,9 @@ import hashlib
 import json
 import re
 import urllib.error
+import urllib.parse
 import urllib.request
+import time
 from pathlib import Path
 
 
@@ -26,6 +28,14 @@ CSV_KEYS = {
     "news": "newsCsvUrl",
     "research": "researchCsvUrl",
 }
+
+FINAL_ROUND_PUBLICATION_KEYS = {
+    "omniobserve",
+    "longtermrms",
+    "urop2026-omniobserve",
+    "urop2026-longtermrms",
+}
+FINAL_ROUND_NOTE = "Final round · May 13, 2026"
 
 
 def main() -> None:
@@ -54,7 +64,7 @@ def main() -> None:
     research_rows = read_csv_rows(STATIC_DATA_DIR / "research.csv")
 
     people = normalize_people(people_rows)
-    publications = normalize_publications(publications_rows)
+    publications = normalize_publications(publications_rows, people)
     news = normalize_news(news_rows)
     research = normalize_research(research_rows)
 
@@ -91,6 +101,7 @@ def fetch_remote_csvs(sources: dict) -> None:
             body = fetch_text(url)
             if not body.strip():
                 raise ValueError("empty csv")
+            body = normalize_newlines(body)
             target.write_text(body, encoding="utf-8")
             print(f"Fetched {stem}.csv")
         except Exception as error:  # noqa: BLE001
@@ -98,7 +109,14 @@ def fetch_remote_csvs(sources: dict) -> None:
 
 
 def fetch_text(url: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": "nycu-haix-sync/1.0"})
+    req = urllib.request.Request(
+        add_cache_buster(url),
+        headers={
+            "User-Agent": "nycu-haix-sync/1.0",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+        },
+    )
     with urllib.request.urlopen(req, timeout=30) as response:  # noqa: S310
         return response.read().decode("utf-8")
 
@@ -107,6 +125,18 @@ def fetch_bytes(url: str) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": "nycu-haix-sync/1.0"})
     with urllib.request.urlopen(req, timeout=30) as response:  # noqa: S310
         return response.read()
+
+
+def add_cache_buster(url: str) -> str:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.netloc != "docs.google.com" or "/spreadsheets/" not in parsed.path:
+        return url
+
+    query = urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
+    query.append(("_haix_cache_bust", str(int(time.time()))))
+    return urllib.parse.urlunparse(
+        parsed._replace(query=urllib.parse.urlencode(query))
+    )
 
 
 def read_csv_rows(path: Path) -> list[dict]:
@@ -128,6 +158,10 @@ def read_csv_rows(path: Path) -> list[dict]:
 def normalize_header(value: str | None) -> str:
     text = str(value or "").strip().lower()
     return re.sub(r"\s+", "_", text)
+
+
+def normalize_newlines(text: str) -> str:
+    return str(text or "").replace("\r\n", "\n").replace("\r", "\n")
 
 
 def pick(row: dict, *keys: str) -> str:
@@ -230,32 +264,178 @@ def normalize_people(rows: list[dict]) -> list[dict]:
     return people
 
 
-def normalize_publications(rows: list[dict]) -> list[dict]:
+def normalize_publications(
+    rows: list[dict], people: list[dict] | None = None
+) -> list[dict]:
     publications = []
+    people_by_username, people_by_name = build_people_lookup(people or [])
     for row in rows:
         title = pick(row, "title")
         if not title:
             continue
+        authors = pick(row, "authors")
+        author_usernames = pick(
+            row,
+            "author_usernames",
+            "author_slugs",
+            "author_profiles",
+            "people_usernames",
+        )
         year_text = pick(row, "year", "publication_year")
         year_num = parse_int(year_text)
         doi = normalize_doi_url(pick(row, "doi", "doi_url"))
+        pdf = clean_url(pick(row, "pdf", "pdf_url"))
+        proceedings = pick(row, "proceedings", "venue", "journal")
+        key = normalize_publication_key(
+            pick(row, "key", "slug", "id", "publication_key", "project_key"),
+            title,
+            pdf,
+        )
+        thumbnail = (
+            pick(row, "thumbnail", "thumbnail_url", "image")
+            or infer_publication_thumbnail(pdf)
+        )
+        award = pick(row, "award", "note") or infer_publication_award(key)
         publications.append(
             {
+                "key": key,
                 "title": title,
-                "authors": pick(row, "authors"),
-                "proceedings": pick(row, "proceedings", "venue", "journal"),
+                "authors": authors,
+                "author_usernames": author_usernames,
+                "author_list": build_publication_author_list(
+                    authors,
+                    author_usernames,
+                    people_by_username,
+                    people_by_name,
+                ),
+                "proceedings": proceedings,
                 "year": year_text,
                 "year_num": year_num,
                 "doi": doi,
-                "thumbnail": pick(row, "thumbnail", "thumbnail_url", "image")
-                or "/images/publications/paper-placeholder.svg",
-                "pdf": clean_url(pick(row, "pdf", "pdf_url")),
+                "thumbnail": thumbnail,
+                "pdf": pdf,
                 "website": clean_url(pick(row, "website", "url", "link")),
-                "award": pick(row, "award", "note"),
+                "award": award,
+                "highlight": is_highlighted_publication(key, award),
             }
         )
     publications.sort(key=lambda item: item.get("year_num", 0), reverse=True)
     return publications
+
+
+def build_people_lookup(people: list[dict]) -> tuple[dict[str, dict], dict[str, dict]]:
+    by_username = {}
+    by_name = {}
+    for person in people:
+        username = slugify_username(person.get("username", ""))
+        if username and username not in by_username:
+            by_username[username] = person
+
+        name_key = normalize_name_key(person.get("name", ""))
+        if name_key and name_key not in by_name:
+            by_name[name_key] = person
+    return by_username, by_name
+
+
+def build_publication_author_list(
+    authors: str,
+    author_usernames: str,
+    people_by_username: dict[str, dict],
+    people_by_name: dict[str, dict],
+) -> list[dict]:
+    names = split_author_names(authors)
+    usernames = parse_author_usernames(author_usernames)
+    author_list = []
+
+    for index, name in enumerate(names):
+        username = usernames[index] if index < len(usernames) else ""
+        person = None
+        if username:
+            person = people_by_username.get(slugify_username(username))
+        if person is None:
+            person = people_by_name.get(normalize_name_key(name))
+
+        item = {"name": name}
+        if person:
+            item.update(
+                {
+                    "username": person.get("username", ""),
+                    "photo": person.get("photo", ""),
+                    "url": f"/people/{person.get('username', '')}/",
+                }
+            )
+        author_list.append(item)
+
+    return author_list
+
+
+def split_author_names(authors: str) -> list[str]:
+    return [
+        token.strip()
+        for token in str(authors or "").split(",")
+        if token.strip()
+    ]
+
+
+def parse_author_usernames(value: str) -> list[str]:
+    return [
+        slugify_username(token)
+        for token in re.split(r"[;,|/、，]+", str(value or ""))
+        if slugify_username(token)
+    ]
+
+
+def normalize_name_key(value: str) -> str:
+    return re.sub(r"\s+", " ", str(value or "").strip()).casefold()
+
+
+def infer_publication_thumbnail(pdf: str) -> str:
+    value = str(pdf or "").strip()
+    if not value:
+        return "/images/publications/paper-placeholder.svg"
+
+    path = value.split("?", 1)[0].split("#", 1)[0]
+    stem = Path(path).stem
+    if not stem:
+        return "/images/publications/paper-placeholder.svg"
+
+    candidate = f"/images/publications/{stem}.jpg"
+    if (ROOT / "static" / candidate.lstrip("/")).exists():
+        return candidate
+
+    return "/images/publications/paper-placeholder.svg"
+
+
+def normalize_publication_key(explicit_key: str, title: str, pdf: str) -> str:
+    if explicit_key:
+        return slugify_key(explicit_key)
+
+    pdf_stem = Path(str(pdf or "").split("?", 1)[0].split("#", 1)[0]).stem
+    if pdf_stem:
+        return slugify_key(pdf_stem)
+
+    return slugify_key(title)
+
+
+def slugify_key(value: str) -> str:
+    text = str(value or "").strip().lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")
+
+
+def infer_publication_award(key: str) -> str:
+    if publication_key_matches(key):
+        return FINAL_ROUND_NOTE
+    return ""
+
+
+def is_highlighted_publication(key: str, award: str) -> bool:
+    award_key = str(award or "").strip().lower()
+    return publication_key_matches(key) or "final round" in award_key
+
+
+def publication_key_matches(key: str) -> bool:
+    return str(key or "").strip().lower() in FINAL_ROUND_PUBLICATION_KEYS
 
 
 def normalize_news(rows: list[dict]) -> list[dict]:
@@ -553,6 +733,7 @@ def generate_people_content(people: list[dict]) -> None:
             f"title: {yaml_quote(person.get('name', ''))}",
             f"slug: {yaml_quote(person.get('username', ''))}",
             f"description: {yaml_quote(person.get('seo_description', ''))}",
+            f"profile_summary: {yaml_quote(person.get('description', ''))}",
             f"username: {yaml_quote(person.get('username', ''))}",
             f"role: {yaml_quote(person.get('role', ''))}",
             f"degree: {yaml_quote(person.get('degree', ''))}",

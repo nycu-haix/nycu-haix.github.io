@@ -2,6 +2,7 @@
 title: "吳季旻"
 slug: "jimmy"
 description: "吳季旻 | Master, Year 2024"
+profile_summary: ""
 username: "jimmy"
 role: "Master"
 degree: ""

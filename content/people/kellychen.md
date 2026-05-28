@@ -1,8 +1,9 @@
 ---
 title: "陳宥臻"
-slug: "kellychen-cs12"
+slug: "kellychen"
 description: "陳宥臻 | Undergraduate, Year 2025"
-username: "kellychen-cs12"
+profile_summary: ""
+username: "kellychen"
 role: "Undergraduate"
 degree: ""
 year: "2025"
@@ -13,11 +14,11 @@ scholar: ""
 website: ""
 photo: "/images/people/people-placeholder.svg"
 og_image: "/images/people/people-placeholder.svg"
-og_image_local: "/og/kellychen-cs12.png"
+og_image_local: "/og/kellychen.png"
 gravatar_image: "https://www.gravatar.com/avatar/e26c5d79a6902db08a02bdb85d36e16c?s=1200&d=404&r=g"
 aliases:
-  - "/kellychen-cs12/"
-  - "/labmem/kellychen-cs12/"
+  - "/kellychen/"
+  - "/labmem/kellychen/"
 tags:
   - ""
 ---

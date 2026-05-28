@@ -2,6 +2,7 @@
 title: "洪薇欣"
 slug: "velda"
 description: "洪薇欣 | Master, Year 2025"
+profile_summary: ""
 username: "velda"
 role: "Master"
 degree: ""
