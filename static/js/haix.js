@@ -16,6 +16,8 @@
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.svg";
   const FINAL_ROUND_PUBLICATION_KEYS = new Set(["omniobserve", "longtermrms", "urop2026-omniobserve", "urop2026-longtermrms"]);
   const FINAL_ROUND_NOTE = "Final round · May 13, 2026";
+  const OMNIOBSERVE_PUBLICATION_KEYS = new Set(["omniobserve", "urop2026-omniobserve"]);
+  const OMNIOBSERVE_VIDEO_URL = "https://youtu.be/l1eS5ZlEzFM";
   const PEOPLE_LIST_PATH = cleanPeopleListPath(document.body ? document.body.dataset.peopleRootPath : "") || "/people/";
 
   const peopleContainer = document.getElementById("people-list");
@@ -862,6 +864,7 @@
     const proceedings = pick(row, "proceedings", "venue", "journal");
     const key = normalizePublicationKey(pick(row, "key", "slug", "id", "publication_key", "project_key"), title, pdf);
     const award = pick(row, "award", "note") || inferPublicationAward(key);
+    const video = cleanUrl(pick(row, "video", "video_url", "youtube", "youtube_url", "demo", "demo_url")) || inferPublicationVideo(key);
 
     return {
       key,
@@ -875,6 +878,7 @@
       thumbnail: pick(row, "thumbnail", "thumbnail_url", "image") || inferPublicationThumbnail(pdf),
       pdf,
       website: cleanUrl(pick(row, "website", "url", "link")),
+      video,
       award,
       highlight: isHighlightedPublication(key, award)
     };
@@ -932,6 +936,13 @@
   function inferPublicationAward(key) {
     if (publicationKeyMatches(key)) {
       return FINAL_ROUND_NOTE;
+    }
+    return "";
+  }
+
+  function inferPublicationVideo(key) {
+    if (OMNIOBSERVE_PUBLICATION_KEYS.has(String(key || "").trim().toLowerCase())) {
+      return OMNIOBSERVE_VIDEO_URL;
     }
     return "";
   }
@@ -2248,6 +2259,7 @@
     const linkItems = [
       { label: "DOI", url: publication.doi },
       { label: "PDF", url: publication.pdf },
+      { label: "Video", url: publication.video },
       { label: "Website", url: publication.website }
     ].filter((item) => item.url);
 

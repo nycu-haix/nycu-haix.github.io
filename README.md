@@ -139,6 +139,7 @@ Recommended:
 - `doi` (raw DOI or full URL)
 - `thumbnail` (e.g., `/images/publications/paper1.jpg`)
 - `pdf`
+- `video` (e.g., YouTube URL)
 - `website`
 - `award`
 

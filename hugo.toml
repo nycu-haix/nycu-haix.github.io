@@ -26,5 +26,10 @@ hidefooterattribution = true
 [params.anubis2.services.googleanalytics]
 gtag = "G-JM618SFJRK"
 
+[markup.goldmark.extensions.typographer]
+apostrophe = "&#39;"
+leftSingleQuote = "&#39;"
+rightSingleQuote = "&#39;"
+
 [markup.goldmark.renderer]
 unsafe = true

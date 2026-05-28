@@ -664,6 +664,8 @@ h1 + .people-grid {
 .people-modal__content h4,
 .people-modal__content h5,
 .people-modal__content h6 {
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   margin: 0.72rem 0 0.2rem;
   line-height: 1.35;
 }
@@ -778,7 +780,8 @@ h1 + .people-grid {
 }
 
 .people-profile-main h1 {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   font-size: 2rem;
   line-height: 1.22;
   margin: 0;
@@ -812,6 +815,8 @@ h1 + .people-grid {
 .people-profile-content h4,
 .people-profile-content h5,
 .people-profile-content h6 {
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   margin: 1rem 0 0.28rem;
   line-height: 1.35;
 }
@@ -884,6 +889,8 @@ h1 + .people-grid {
 }
 
 .profile-publications h2 {
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   margin-bottom: 0.8rem;
   font-size: 1.55rem;
 }
@@ -909,6 +916,8 @@ h1 + .people-grid {
 
 .people-publication-main h3,
 .people-publication-main h5 {
+  font-family: "Noto Sans TC", "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   margin: 0;
   font-size: 1.05rem;
   line-height: 1.35;

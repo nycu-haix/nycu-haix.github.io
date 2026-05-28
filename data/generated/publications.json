@@ -49,6 +49,7 @@
     "thumbnail": "/images/publications/OmniObserve.jpg",
     "pdf": "/files/posters/OmniObserve.pdf",
     "website": "",
+    "video": "https://youtu.be/l1eS5ZlEzFM",
     "award": "Final round · May 13, 2026",
     "highlight": true
   },
@@ -96,6 +97,7 @@
     "thumbnail": "/images/publications/LongTermRMS.jpg",
     "pdf": "/files/posters/LongTermRMS.pdf",
     "website": "",
+    "video": "",
     "award": "Final round · May 13, 2026",
     "highlight": true
   },
@@ -143,6 +145,7 @@
     "thumbnail": "/images/publications/Deliberate.jpg",
     "pdf": "/files/posters/Deliberate.pdf",
     "website": "",
+    "video": "",
     "award": "",
     "highlight": false
   }

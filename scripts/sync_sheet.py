@@ -36,6 +36,8 @@ FINAL_ROUND_PUBLICATION_KEYS = {
     "urop2026-longtermrms",
 }
 FINAL_ROUND_NOTE = "Final round · May 13, 2026"
+OMNIOBSERVE_PUBLICATION_KEYS = {"omniobserve", "urop2026-omniobserve"}
+OMNIOBSERVE_VIDEO_URL = "https://youtu.be/l1eS5ZlEzFM"
 
 
 def main() -> None:
@@ -291,6 +293,9 @@ def normalize_publications(
             title,
             pdf,
         )
+        video = clean_url(
+            pick(row, "video", "video_url", "youtube", "youtube_url", "demo", "demo_url")
+        ) or infer_publication_video(key)
         thumbnail = (
             pick(row, "thumbnail", "thumbnail_url", "image")
             or infer_publication_thumbnail(pdf)
@@ -315,6 +320,7 @@ def normalize_publications(
                 "thumbnail": thumbnail,
                 "pdf": pdf,
                 "website": clean_url(pick(row, "website", "url", "link")),
+                "video": video,
                 "award": award,
                 "highlight": is_highlighted_publication(key, award),
             }
@@ -404,6 +410,12 @@ def infer_publication_thumbnail(pdf: str) -> str:
         return candidate
 
     return "/images/publications/paper-placeholder.svg"
+
+
+def infer_publication_video(key: str) -> str:
+    if slugify_key(key) in OMNIOBSERVE_PUBLICATION_KEYS:
+        return OMNIOBSERVE_VIDEO_URL
+    return ""
 
 
 def normalize_publication_key(explicit_key: str, title: str, pdf: str) -> str:

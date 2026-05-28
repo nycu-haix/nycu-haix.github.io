@@ -99,7 +99,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-publications">
+  <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-title-fonts">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
     {{ if hugo.IsProduction }}
       {{ partial "analytics/google_analytics.html" $ }}
@@ -225,7 +225,9 @@
                       {{ if .doi }}<a href="{{ .doi }}" target="_blank" rel="noopener noreferrer">DOI</a>{{ end }}
                       {{ if and .doi .pdf }} · {{ end }}
                       {{ if .pdf }}<a href="{{ .pdf }}" target="_blank" rel="noopener noreferrer">PDF</a>{{ end }}
-                      {{ if and (or .doi .pdf) .website }} · {{ end }}
+                      {{ if and (or .doi .pdf) .video }} · {{ end }}
+                      {{ if .video }}<a href="{{ .video }}" target="_blank" rel="noopener noreferrer">Video</a>{{ end }}
+                      {{ if and (or .doi .pdf .video) .website }} · {{ end }}
                       {{ if .website }}<a href="{{ .website }}" target="_blank" rel="noopener noreferrer">Website</a>{{ end }}
                     </p>
                     {{ if .award }}<p class="publication-note">{{ .award }}</p>{{ end }}
