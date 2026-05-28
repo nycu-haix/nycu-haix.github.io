@@ -649,7 +649,7 @@ def build_people_seo_description(
     if normalized_parts:
         return " | ".join(normalized_parts)
 
-    return f"{name} profile at HAIX (Human AI and Creative Computing) Lab, NYCU."
+    return f"{name} profile at Human-AI & Creative Computing (HAIX) Lab, NYCU."
 
 
 def full_profile_text(markdown: str) -> str:
@@ -706,7 +706,7 @@ def generate_people_content(people: list[dict]) -> None:
     index_path.write_text(
         "---\n"
         'title: "People"\n'
-        'description: "People of HAIX (Human AI and Creative Computing) Lab at NYCU."\n'
+        'description: "People of Human-AI & Creative Computing (HAIX) Lab at NYCU."\n'
         'url: "/people/"\n'
         "aliases:\n"
         '  - "/labmem/"\n'

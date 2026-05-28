@@ -1,7 +1,7 @@
 baseURL = "https://nycu-haix.github.io/"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-title = "HAIX (Human AI & Creative Computing) Lab"
+title = "Human-AI & Creative Computing (HAIX) Lab"
 theme = "anubis2"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term"]
@@ -10,10 +10,10 @@ disableKinds = ["taxonomy", "term"]
 people = "/people/:slug/"
 
 [params]
-description = "HAIX (Human AI & Creative Computing) Lab at National Yang Ming Chiao Tung University"
+description = "Human-AI & Creative Computing (HAIX) Lab at National Yang Ming Chiao Tung University"
 
 [params.author]
-name = "HAIX (Human AI & Creative Computing) Lab"
+name = "Human-AI & Creative Computing (HAIX) Lab"
 location = "Hsinchu, Taiwan"
 
 [params.anubis2]

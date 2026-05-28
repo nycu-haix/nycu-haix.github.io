@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
-{{ $siteDesc := .Site.Params.description | default "HAIX (Human AI and Creative Computing) Lab website" }}
-{{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
+{{ $siteDesc := .Site.Params.description | default "Human-AI & Creative Computing (HAIX) Lab website" }}
+{{ $labMeta := "Human-AI & Creative Computing (HAIX) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $keywords := slice "HAIX Lab" "NYCU" "Human-AI Interaction" "HCI" "Creative Computing" "Cognition" "Social Computing" "Taiwan" }}
 {{ $newsItems := site.Data.generated.news | default (slice) }}
 {{ $researchItems := site.Data.generated.research | default (slice) }}
@@ -50,7 +50,7 @@
 {{ $organizationLd := dict
   "@context" "https://schema.org"
   "@type" "Organization"
-  "name" "HAIX (Human AI & Creative Computing) Lab"
+  "name" "Human-AI & Creative Computing (HAIX) Lab"
   "url" .Permalink
   "logo" ("images/haix-logo.svg" | absURL)
   "description" $siteDesc
@@ -116,10 +116,10 @@
   <div class="container-fluid">
     <header class="row nav-row" id="top">
       <div class="col-left">
-        <a class="brand-line" href="#top" aria-label="HAIX (Human AI &amp; Creative Computing) Lab Home">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX (Human AI &amp; Creative Computing) Lab logo">
+        <a class="brand-line" href="#top" aria-label="Human-AI &amp; Creative Computing (HAIX) Lab Home">
+          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="Human-AI &amp; Creative Computing (HAIX) Lab logo">
           <span class="brand-copy">
-            <strong>HAIX (Human AI &amp; Creative Computing) Lab</strong>
+            <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
           </span>
         </a>
@@ -127,22 +127,19 @@
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
           <a href="{{ "/people/" | relURL }}">People</a>
-          <a href="#news">News</a>
-          <a href="#research">Research</a>
-          <a href="#lab">Info</a>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
       <p class="title reveal">
-        The <b>HAIX (Human AI &amp; Creative Computing) Lab</b> is based out of the <a href="https://www.cs.nycu.edu.tw/">Department of Computer Science at National Yang Ming Chiao Tung University</a>.
+        The <b>Human-AI &amp; Creative Computing (HAIX) Lab</b> is based out of the <a href="https://www.cs.nycu.edu.tw/">Department of Computer Science at National Yang Ming Chiao Tung University</a>.
         We are reimagining human-AI and collaborative systems to empower people and improve society.
       </p>
 
       <section class="row hero-group reveal" aria-label="HAIX Lab group photo">
         <div class="group-overview group-overview--hero">
-          <img src="{{ "images/group-photo.jpg" | relURL }}" alt="HAIX (Human AI and Creative Computing) Lab group photo" loading="eager" fetchpriority="high" decoding="async">
+          <img src="{{ "images/group-photo.jpg" | relURL }}" alt="Human-AI and Creative Computing (HAIX) Lab group photo" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </section>
 
@@ -249,10 +246,12 @@
             Meet everyone on the <a href="{{ "/people/" | relURL }}">People page</a>.
           </p>
           <div class="lab-info">
-            <p><strong>Location: EC524 (Room 524, Engineering Bldg 3)</strong></p>
-            <p><strong>位置：EC524（光復校區工程三館 524 室）</strong></p>
-            <p>Room 524, Engineering Bldg 3, 1001 University Road, Hsinchu, Taiwan 300, ROC</p>
-            <p>300 新竹市大學路 1001 號光復校區工程三館 524 室</p>
+            <p><strong>人機互動與創意計算實驗室</strong></p>
+            <p><strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong></p>
+            <p><strong>Location: EC237 (Room 237, Engineering Bldg 3)</strong></p>
+            <p><strong>位置：EC237（光復校區工程三館 237 室）</strong></p>
+            <p>Room 237, Engineering Bldg 3, 1001 University Road, Hsinchu, Taiwan 300, ROC</p>
+            <p>300 新竹市大學路 1001 號光復校區工程三館 237 室</p>
           </div>
         </div>
       </section>
@@ -260,7 +259,7 @@
       <hr>
 
       <footer class="footer">
-        <p>© {{ now.Year }} HAIX (Human AI &amp; Creative Computing) Lab, NYCU</p>
+        <p>© {{ now.Year }} Human-AI &amp; Creative Computing (HAIX) Lab, NYCU</p>
         <p class="footer-note">
           <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
           built by

@@ -1,4 +1,4 @@
-# NYCU HAIX, Human AI & Creative Computing Lab Website
+# NYCU Human-AI & Creative Computing (HAIX) Lab Website
 
 This site is a Hugo website with a Homepage and People pages:
 - Homepage sections: `News`, `Research`, `Info`

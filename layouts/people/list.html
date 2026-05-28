@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "en" }}">
 {{ $people := .Pages.ByTitle }}
-{{ $baseDesc := .Description | default "People of HAIX Lab at NYCU." }}
+{{ $baseDesc := .Description | default "People of Human-AI & Creative Computing (HAIX) Lab at NYCU." }}
 {{ $peoplePreviewItems := slice }}
 {{ range $people }}
   {{ $peoplePreviewItems = $peoplePreviewItems | append (partial "people-preview-description.html" .) }}
@@ -55,7 +55,7 @@
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
           <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
-            <strong>HAIX (Human AI &amp; Creative Computing) Lab</strong>
+            <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
           </span>
         </a>
@@ -63,9 +63,6 @@
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
           <a href="{{ "/people/" | relURL }}">People</a>
-          <a href="{{ "/#news" | relURL }}">News</a>
-          <a href="{{ "/#research" | relURL }}">Research</a>
-          <a href="{{ "/#lab" | relURL }}">Info</a>
         </nav>
       </div>
     </header>
@@ -85,7 +82,7 @@
       </div>
 
       <footer class="footer">
-        <p>© {{ now.Year }} HAIX (Human AI &amp; Creative Computing) Lab, NYCU</p>
+        <p>© {{ now.Year }} Human-AI &amp; Creative Computing (HAIX) Lab, NYCU</p>
         <p class="footer-note">
           <a href="https://github.com/nycu-haix/nycu-haix.github.io" target="_blank" rel="noopener noreferrer">Site</a>
           built by

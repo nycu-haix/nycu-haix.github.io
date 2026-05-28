@@ -1,6 +1,6 @@
 ---
 title: "People"
-description: "People of HAIX (Human AI and Creative Computing) Lab at NYCU."
+description: "People of Human-AI & Creative Computing (HAIX) Lab at NYCU."
 url: "/people/"
 aliases:
   - "/labmem/"

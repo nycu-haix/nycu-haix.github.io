@@ -16,7 +16,7 @@
   {{ end }}
   {{ if $isProfileAuthor }}{{ $profilePublications = $profilePublications | append $publication }}{{ end }}
 {{ end }}
-{{ $labMeta := "HAIX (Human AI & Creative Computing) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
+{{ $labMeta := "Human-AI & Creative Computing (HAIX) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $tags := .Params.tags | default (slice) }}
 {{ $profileSummary := .Params.profile_summary | default .Params.bio | default .Params.intro | default "" }}
 {{ $keywordText := printf "%s, HAIX Lab, NYCU, Human-AI Interaction, HCI, Creative Computing, Taiwan" $name }}
@@ -39,7 +39,7 @@
   "email" .Params.email
   "knowsAbout" $tags
   "sameAs" $sameAs
-  "affiliation" (dict "@type" "Organization" "name" "HAIX (Human AI & Creative Computing) Lab, NYCU")
+  "affiliation" (dict "@type" "Organization" "name" "Human-AI & Creative Computing (HAIX) Lab, NYCU")
 }}
 <head>
   <meta charset="utf-8">
@@ -100,7 +100,7 @@
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
           <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
-            <strong>HAIX (Human AI &amp; Creative Computing) Lab</strong>
+            <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
           </span>
         </a>
@@ -108,9 +108,6 @@
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
           <a href="{{ "/people/" | relURL }}">People</a>
-          <a href="{{ "/#news" | relURL }}">News</a>
-          <a href="{{ "/#research" | relURL }}">Research</a>
-          <a href="{{ "/#lab" | relURL }}">Info</a>
         </nav>
       </div>
     </header>
