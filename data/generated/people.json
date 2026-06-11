@@ -113,8 +113,10 @@
     "photo": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d=404&r=g",
     "description": "",
     "profile_markdown": "# Hi, I'm Sky!\n\nI study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution.\n\nRecently, I'm also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion.\n\n# I attended CHI 2026 as an Student Volunteer!\n\nI attended CHI 2026 and serve as an SV in Barcelona, Spain. I am the second author of the paper, [Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games](https://programs.sigchi.org/chi/2026/program/content/223468), which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212.",
-    "tags": [],
-    "seo_description": "Sky Shih-Kai Hong | Master, Year 2025 | # Hi, I'm Sky! I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution. Recently, I'm also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion. # I attended CHI 2026 as an Student Volunteer! I attended CHI 2026 and serve as an SV in Barcelona, Spain. I am the second author of the paper, Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games, which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212.",
+    "tags": [
+      "Mediated Communication"
+    ],
+    "seo_description": "Sky Shih-Kai Hong | Master, Year 2025 | Tags: Mediated Communication | # Hi, I'm Sky! I study AI-supported collaboration for brainstorming and group discussion, especially how private and lightweight signals help people move from unspoken thoughts to public contribution. Recently, I'm also exploring a project on AI for social-issue reflection, where we test different AI roles (interviewer, mentor, opponent) to help people clarify what they think before discussion. # I attended CHI 2026 as an Student Volunteer! I attended CHI 2026 and serve as an SV in Barcelona, Spain. I am the second author of the paper, Keeping Everyone in the Game: Bringing Ability-Inclusive Family Co-Play to Unmodified Console Games, which appears in the Youth, Families, and Safe Play session on Thu, 16 Apr (11:15 AM - 11:27 AM), M2 - Room M211/212.",
     "og_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g",
     "og_image_local": "/og/sky.png",
     "gravatar_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g"
@@ -418,5 +420,29 @@
     "og_image": "/images/people/cs112550152.jpg",
     "og_image_local": "/og/cs112550152.png",
     "gravatar_image": "https://www.gravatar.com/avatar/8839292c5855b8a6aaec869431257d39?s=1200&d=404&r=g"
+  },
+  {
+    "name": "胡甄倪",
+    "username": "jennifer",
+    "role": "Undergraduate",
+    "degree": "",
+    "year": "2026",
+    "email": "jenniferhu1067.mg12@nycu.edu.tw",
+    "github": "https://github.com/jennifer1067",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/jennifer.jpg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "智慧照護",
+      "人機互動",
+      "社交機器人"
+    ],
+    "seo_description": "胡甄倪 | Undergraduate, Year 2026 | Tags: 智慧照護, 人機互動, 社交機器人",
+    "og_image": "/images/people/jennifer.jpg",
+    "og_image_local": "/og/jennifer.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/af3698bfb1e0b5746475a363079a6eff?s=1200&d=404&r=g"
   }
 ]
