@@ -444,5 +444,27 @@
     "og_image": "/images/people/jennifer.jpg",
     "og_image_local": "/og/jennifer.png",
     "gravatar_image": "https://www.gravatar.com/avatar/af3698bfb1e0b5746475a363079a6eff?s=1200&d=404&r=g"
+  },
+  {
+    "name": "葉宥均",
+    "username": "aoggg",
+    "role": "Undergraduate",
+    "degree": "",
+    "year": "2026",
+    "email": "aoggg.cs13@nycu.edu.tw",
+    "github": "https://github.com/aoggg",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/aoggg.jpeg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "智慧學習與設計輔助"
+    ],
+    "seo_description": "葉宥均 | Undergraduate, Year 2026 | Tags: 智慧學習與設計輔助",
+    "og_image": "/images/people/aoggg.jpeg",
+    "og_image_local": "/og/aoggg.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/9d267a7c9b29ab7b89daf7b30e9e1f45?s=1200&d=404&r=g"
   }
 ]
