@@ -466,5 +466,25 @@
     "og_image": "/images/people/aoggg.jpeg",
     "og_image_local": "/og/aoggg.png",
     "gravatar_image": "https://www.gravatar.com/avatar/9d267a7c9b29ab7b89daf7b30e9e1f45?s=1200&d=404&r=g"
+  },
+  {
+    "name": "郭采納",
+    "username": "popo",
+    "role": "Undergraduate",
+    "degree": "",
+    "year": "2026",
+    "email": "popo.cs13@nycu.edu.tw",
+    "github": "https://github.com/skyler726",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/popo.jpg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [],
+    "seo_description": "郭采納 | Undergraduate, Year 2026",
+    "og_image": "/images/people/popo.jpg",
+    "og_image_local": "/og/popo.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/dbbfed72d17bcc80c8867ca91b0430ba?s=1200&d=404&r=g"
   }
 ]
