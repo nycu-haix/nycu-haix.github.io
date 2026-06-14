@@ -1,0 +1,27 @@
+---
+title: "蔡秉翰"
+slug: "chigee"
+description: "蔡秉翰 | Undergraduate, Year 2026 | Tags: 電腦輔助溝通, 智慧學習與設計輔助"
+profile_summary: ""
+username: "chigee"
+role: "Undergraduate"
+degree: ""
+year: "2026"
+email: "jason.cs13@nycu.edu.tw"
+github: "https://github.com/chigee87"
+orcid: ""
+scholar: ""
+website: ""
+photo: "/images/people/chigee.jpg"
+og_image: "/images/people/chigee.jpg"
+og_image_local: "/og/chigee.png"
+gravatar_image: "https://www.gravatar.com/avatar/0d51ecc94a0bce6dca2c2c6f2d4b8a55?s=1200&d=404&r=g"
+aliases:
+  - "/chigee/"
+  - "/labmem/chigee/"
+tags:
+  - "電腦輔助溝通"
+  - "智慧學習與設計輔助"
+---
+
+Profile details will be updated soon.
