@@ -1,7 +1,7 @@
 ---
 title: "吳季旻"
 slug: "jimmy"
-description: "吳季旻 | Master, Year 2024"
+description: "吳季旻 | Master, Year 2024 | Tags: AIED, 寫作學習"
 profile_summary: ""
 username: "jimmy"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/jimmy/"
   - "/labmem/jimmy/"
 tags:
-  - ""
+  - "AIED"
+  - "寫作學習"
 ---
 
 Profile details will be updated soon.

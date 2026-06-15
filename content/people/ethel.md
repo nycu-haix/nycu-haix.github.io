@@ -1,7 +1,7 @@
 ---
 title: "Ethel Hsiao"
 slug: "ethel"
-description: "Ethel Hsiao | Undergraduate, Year 2025"
+description: "Ethel Hsiao | Undergraduate, Year 2025 | Tags: CMC, 隱性共識"
 profile_summary: ""
 username: "ethel"
 role: "Undergraduate"
@@ -20,7 +20,8 @@ aliases:
   - "/ethel/"
   - "/labmem/ethel/"
 tags:
-  - ""
+  - "CMC"
+  - "隱性共識"
 ---
 
 Profile details will be updated soon.

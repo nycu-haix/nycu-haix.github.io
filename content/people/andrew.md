@@ -1,7 +1,7 @@
 ---
 title: "陳俞安"
 slug: "andrew"
-description: "陳俞安 | Master, Year 2025"
+description: "陳俞安 | Master, Year 2025 | Tags: 文件審查, 可信任AI"
 profile_summary: ""
 username: "andrew"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/andrew/"
   - "/labmem/andrew/"
 tags:
-  - ""
+  - "文件審查"
+  - "可信任AI"
 ---
 
 Profile details will be updated soon.

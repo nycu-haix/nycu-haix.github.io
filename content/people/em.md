@@ -1,7 +1,7 @@
 ---
 title: "Elvis Dragon Mao"
 slug: "em"
-description: "Elvis Dragon Mao | Undergraduate, Year 2025"
+description: "Elvis Dragon Mao | Undergraduate, Year 2025 | Tags: CMC, 隱性共識"
 profile_summary: ""
 username: "em"
 role: "Undergraduate"
@@ -20,7 +20,8 @@ aliases:
   - "/em/"
   - "/labmem/em/"
 tags:
-  - ""
+  - "CMC"
+  - "隱性共識"
 ---
 
 Profile details will be updated soon.

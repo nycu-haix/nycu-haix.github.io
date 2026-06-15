@@ -1,7 +1,7 @@
 ---
 title: "許針銀"
 slug: "sunny"
-description: "許針銀 | Master, Year 2024"
+description: "許針銀 | Master, Year 2024 | Tags: AIED, 學習回饋"
 profile_summary: ""
 username: "sunny"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/sunny/"
   - "/labmem/sunny/"
 tags:
-  - ""
+  - "AIED"
+  - "學習回饋"
 ---
 
 Profile details will be updated soon.

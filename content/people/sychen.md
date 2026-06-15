@@ -1,7 +1,7 @@
 ---
 title: "陳昕妤"
 slug: "sychen"
-description: "陳昕妤 | Master, Year 2025"
+description: "陳昕妤 | Master, Year 2025 | Tags: 智慧照護, HAI"
 profile_summary: ""
 username: "sychen"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/sychen/"
   - "/labmem/sychen/"
 tags:
-  - ""
+  - "智慧照護"
+  - "HAI"
 ---
 
 Profile details will be updated soon.

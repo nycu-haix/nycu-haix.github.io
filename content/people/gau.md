@@ -1,7 +1,7 @@
 ---
 title: "高浩哲"
 slug: "gau"
-description: "高浩哲 | Master, Year 2025"
+description: "高浩哲 | Master, Year 2025 | Tags: LLMEval, IdeaUnit"
 profile_summary: ""
 username: "gau"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/gau/"
   - "/labmem/gau/"
 tags:
-  - ""
+  - "LLMEval"
+  - "IdeaUnit"
 ---
 
 Profile details will be updated soon.

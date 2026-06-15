@@ -33,8 +33,11 @@
     "photo": "/images/people/ywliu.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "劉怡妏 | Master, Year 2024",
+    "tags": [
+      "CSCW",
+      "非同步討論"
+    ],
+    "seo_description": "劉怡妏 | Master, Year 2024 | Tags: CSCW, 非同步討論",
     "og_image": "/images/people/ywliu.jpg",
     "og_image_local": "/og/ywliu.png",
     "gravatar_image": "https://www.gravatar.com/avatar/ae06a0f114ff331a2afc00c32d342ac7?s=1200&d=404&r=g"
@@ -53,8 +56,11 @@
     "photo": "/images/people/jimmy.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "吳季旻 | Master, Year 2024",
+    "tags": [
+      "AIED",
+      "寫作學習"
+    ],
+    "seo_description": "吳季旻 | Master, Year 2024 | Tags: AIED, 寫作學習",
     "og_image": "/images/people/jimmy.jpg",
     "og_image_local": "/og/jimmy.png",
     "gravatar_image": "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=1200&d=404&r=g"
@@ -73,8 +79,11 @@
     "photo": "https://images.steamusercontent.com/ugc/14117585436244989252/67E7D1218B7A29A0499E3B8BD39082A11C4726D4/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "林長宏 | Master, Year 2024",
+    "tags": [
+      "NLP",
+      "學術閱讀"
+    ],
+    "seo_description": "林長宏 | Master, Year 2024 | Tags: NLP, 學術閱讀",
     "og_image": "https://images.steamusercontent.com/ugc/14117585436244989252/67E7D1218B7A29A0499E3B8BD39082A11C4726D4/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
     "og_image_local": "/og/ray.png",
     "gravatar_image": "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=1200&d=404&r=g"
@@ -93,8 +102,11 @@
     "photo": "/images/people/sunny.png",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "許針銀 | Master, Year 2024",
+    "tags": [
+      "AIED",
+      "學習回饋"
+    ],
+    "seo_description": "許針銀 | Master, Year 2024 | Tags: AIED, 學習回饋",
     "og_image": "/images/people/sunny.png",
     "og_image_local": "/og/sunny.png",
     "gravatar_image": "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=1200&d=404&r=g"
@@ -114,9 +126,10 @@
     "description": "",
     "profile_markdown": "",
     "tags": [
-      "Mediated Communication"
+      "CMC",
+      "隱性共識"
     ],
-    "seo_description": "Sky Shih-Kai Hong | Master, Year 2025 | Tags: Mediated Communication",
+    "seo_description": "Sky Shih-Kai Hong | Master, Year 2025 | Tags: CMC, 隱性共識",
     "og_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g",
     "og_image_local": "/og/sky.png",
     "gravatar_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g"
@@ -135,8 +148,11 @@
     "photo": "/images/people/brina.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "吳尚璇 | Master, Year 2025",
+    "tags": [
+      "HRI",
+      "智慧照護"
+    ],
+    "seo_description": "吳尚璇 | Master, Year 2025 | Tags: HRI, 智慧照護",
     "og_image": "/images/people/brina.jpg",
     "og_image_local": "/og/brina.png",
     "gravatar_image": "https://www.gravatar.com/avatar/84b5f2299d91d4e0193321253077c708?s=1200&d=404&r=g"
@@ -155,8 +171,11 @@
     "photo": "/images/people/velda.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "洪薇欣 | Master, Year 2025",
+    "tags": [
+      "PBL",
+      "回饋鷹架"
+    ],
+    "seo_description": "洪薇欣 | Master, Year 2025 | Tags: PBL, 回饋鷹架",
     "og_image": "/images/people/velda.jpg",
     "og_image_local": "/og/velda.png",
     "gravatar_image": "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=1200&d=404&r=g"
@@ -175,8 +194,11 @@
     "photo": "/images/people/andrew.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "陳俞安 | Master, Year 2025",
+    "tags": [
+      "文件審查",
+      "可信任AI"
+    ],
+    "seo_description": "陳俞安 | Master, Year 2025 | Tags: 文件審查, 可信任AI",
     "og_image": "/images/people/andrew.jpg",
     "og_image_local": "/og/andrew.png",
     "gravatar_image": "https://www.gravatar.com/avatar/2e558ea81f3e8c421c2d8947168f22a2?s=1200&d=404&r=g"
@@ -195,8 +217,11 @@
     "photo": "/images/people/sychen.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "陳昕妤 | Master, Year 2025",
+    "tags": [
+      "智慧照護",
+      "HAI"
+    ],
+    "seo_description": "陳昕妤 | Master, Year 2025 | Tags: 智慧照護, HAI",
     "og_image": "/images/people/sychen.jpg",
     "og_image_local": "/og/sychen.png",
     "gravatar_image": "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=1200&d=404&r=g"
@@ -215,8 +240,11 @@
     "photo": "/images/people/gau.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "高浩哲 | Master, Year 2025",
+    "tags": [
+      "LLMEval",
+      "IdeaUnit"
+    ],
+    "seo_description": "高浩哲 | Master, Year 2025 | Tags: LLMEval, IdeaUnit",
     "og_image": "/images/people/gau.jpg",
     "og_image_local": "/og/gau.png",
     "gravatar_image": "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=404&r=g"
@@ -235,8 +263,11 @@
     "photo": "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=800&d=404&r=g",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "Elvis Dragon Mao | Undergraduate, Year 2025",
+    "tags": [
+      "CMC",
+      "隱性共識"
+    ],
+    "seo_description": "Elvis Dragon Mao | Undergraduate, Year 2025 | Tags: CMC, 隱性共識",
     "og_image": "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=1200&d=404&r=g",
     "og_image_local": "/og/em.png",
     "gravatar_image": "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=1200&d=404&r=g"
@@ -255,8 +286,11 @@
     "photo": "/images/people/Ethel.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "Ethel Hsiao | Undergraduate, Year 2025",
+    "tags": [
+      "CMC",
+      "隱性共識"
+    ],
+    "seo_description": "Ethel Hsiao | Undergraduate, Year 2025 | Tags: CMC, 隱性共識",
     "og_image": "/images/people/Ethel.jpg",
     "og_image_local": "/og/ethel.png",
     "gravatar_image": "https://www.gravatar.com/avatar/c3ef3ba37592c11662f37f91d9305ccf?s=1200&d=404&r=g"
@@ -275,8 +309,11 @@
     "photo": "/images/people/rain112550185.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "張晉睿 | Undergraduate, Year 2025",
+    "tags": [
+      "文件審查",
+      "可信任AI"
+    ],
+    "seo_description": "張晉睿 | Undergraduate, Year 2025 | Tags: 文件審查, 可信任AI",
     "og_image": "/images/people/rain112550185.jpg",
     "og_image_local": "/og/rain112550185.png",
     "gravatar_image": "https://www.gravatar.com/avatar/4450039a2f7abb6752c74c3b961339f1?s=1200&d=404&r=g"
@@ -295,8 +332,11 @@
     "photo": "/images/people/jason.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "張智鈞 | Undergraduate, Year 2025",
+    "tags": [
+      "CMC",
+      "隱性共識"
+    ],
+    "seo_description": "張智鈞 | Undergraduate, Year 2025 | Tags: CMC, 隱性共識",
     "og_image": "/images/people/jason.jpg",
     "og_image_local": "/og/jason.png",
     "gravatar_image": "https://www.gravatar.com/avatar/d3c5dc071c36ad308e94ab1b9125e7ff?s=1200&d=404&r=g"
@@ -315,8 +355,11 @@
     "photo": "/images/people/people-placeholder.svg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "李羿昕 | Undergraduate, Year 2025",
+    "tags": [
+      "ResearchMemory",
+      "會議支援"
+    ],
+    "seo_description": "李羿昕 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援",
     "og_image": "/images/people/people-placeholder.svg",
     "og_image_local": "/og/hsin.png",
     "gravatar_image": "https://www.gravatar.com/avatar/55c6c83e1e1feb2245903c236d8de7b2?s=1200&d=404&r=g"
@@ -335,8 +378,11 @@
     "photo": "/images/people/lilb0425.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "王韋凱 | Undergraduate, Year 2025",
+    "tags": [
+      "文件審查",
+      "可信任AI"
+    ],
+    "seo_description": "王韋凱 | Undergraduate, Year 2025 | Tags: 文件審查, 可信任AI",
     "og_image": "/images/people/lilb0425.jpg",
     "og_image_local": "/og/lilb0425.png",
     "gravatar_image": "https://www.gravatar.com/avatar/9596e6635e3a1d434f9d9f73e3a4d869?s=1200&d=404&r=g"
@@ -355,8 +401,11 @@
     "photo": "/images/people/people-placeholder.svg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "蔡尚融 | Undergraduate, Year 2025",
+    "tags": [
+      "ResearchMemory",
+      "會議支援"
+    ],
+    "seo_description": "蔡尚融 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援",
     "og_image": "/images/people/people-placeholder.svg",
     "og_image_local": "/og/shangjung.png",
     "gravatar_image": "https://www.gravatar.com/avatar/f424bce6e0a79c225744191416cb5948?s=1200&d=404&r=g"
@@ -375,8 +424,11 @@
     "photo": "/images/people/EJ.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "陳奕潔 EJ | Undergraduate, Year 2025",
+    "tags": [
+      "CMC",
+      "隱性共識"
+    ],
+    "seo_description": "陳奕潔 EJ | Undergraduate, Year 2025 | Tags: CMC, 隱性共識",
     "og_image": "/images/people/EJ.jpg",
     "og_image_local": "/og/ej.png",
     "gravatar_image": "https://www.gravatar.com/avatar/f1baaabad2624fd92f296f2cd4af39be?s=1200&d=404&r=g"
@@ -395,8 +447,11 @@
     "photo": "/images/people/people-placeholder.svg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "陳宥臻 | Undergraduate, Year 2025",
+    "tags": [
+      "ResearchMemory",
+      "會議支援"
+    ],
+    "seo_description": "陳宥臻 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援",
     "og_image": "/images/people/people-placeholder.svg",
     "og_image_local": "/og/kellychen.png",
     "gravatar_image": "https://www.gravatar.com/avatar/e26c5d79a6902db08a02bdb85d36e16c?s=1200&d=404&r=g"
@@ -415,8 +470,11 @@
     "photo": "/images/people/cs112550152.jpg",
     "description": "",
     "profile_markdown": "",
-    "tags": [],
-    "seo_description": "馬晨瑜 | Undergraduate, Year 2025",
+    "tags": [
+      "文件審查",
+      "可信任AI"
+    ],
+    "seo_description": "馬晨瑜 | Undergraduate, Year 2025 | Tags: 文件審查, 可信任AI",
     "og_image": "/images/people/cs112550152.jpg",
     "og_image_local": "/og/cs112550152.png",
     "gravatar_image": "https://www.gravatar.com/avatar/8839292c5855b8a6aaec869431257d39?s=1200&d=404&r=g"

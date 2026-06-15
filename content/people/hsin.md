@@ -1,7 +1,7 @@
 ---
 title: "李羿昕"
 slug: "hsin"
-description: "李羿昕 | Undergraduate, Year 2025"
+description: "李羿昕 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援"
 profile_summary: ""
 username: "hsin"
 role: "Undergraduate"
@@ -20,7 +20,8 @@ aliases:
   - "/hsin/"
   - "/labmem/hsin/"
 tags:
-  - ""
+  - "ResearchMemory"
+  - "會議支援"
 ---
 
 Profile details will be updated soon.

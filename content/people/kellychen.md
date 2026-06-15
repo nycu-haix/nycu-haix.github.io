@@ -1,7 +1,7 @@
 ---
 title: "陳宥臻"
 slug: "kellychen"
-description: "陳宥臻 | Undergraduate, Year 2025"
+description: "陳宥臻 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援"
 profile_summary: ""
 username: "kellychen"
 role: "Undergraduate"
@@ -20,7 +20,8 @@ aliases:
   - "/kellychen/"
   - "/labmem/kellychen/"
 tags:
-  - ""
+  - "ResearchMemory"
+  - "會議支援"
 ---
 
 Profile details will be updated soon.

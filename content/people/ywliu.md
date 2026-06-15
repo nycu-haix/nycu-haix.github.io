@@ -1,7 +1,7 @@
 ---
 title: "劉怡妏"
 slug: "ywliu"
-description: "劉怡妏 | Master, Year 2024"
+description: "劉怡妏 | Master, Year 2024 | Tags: CSCW, 非同步討論"
 profile_summary: ""
 username: "ywliu"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/ywliu/"
   - "/labmem/ywliu/"
 tags:
-  - ""
+  - "CSCW"
+  - "非同步討論"
 ---
 
 Profile details will be updated soon.

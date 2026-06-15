@@ -1,7 +1,7 @@
 ---
 title: "Sky Shih-Kai Hong"
 slug: "sky"
-description: "Sky Shih-Kai Hong | Master, Year 2025 | Tags: Mediated Communication"
+description: "Sky Shih-Kai Hong | Master, Year 2025 | Tags: CMC, 隱性共識"
 profile_summary: ""
 username: "sky"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/sky/"
   - "/labmem/sky/"
 tags:
-  - "Mediated Communication"
+  - "CMC"
+  - "隱性共識"
 ---
 
 Profile details will be updated soon.

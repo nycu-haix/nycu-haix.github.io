@@ -1,7 +1,7 @@
 ---
 title: "林長宏"
 slug: "ray"
-description: "林長宏 | Master, Year 2024"
+description: "林長宏 | Master, Year 2024 | Tags: NLP, 學術閱讀"
 profile_summary: ""
 username: "ray"
 role: "Master"
@@ -20,7 +20,8 @@ aliases:
   - "/ray/"
   - "/labmem/ray/"
 tags:
-  - ""
+  - "NLP"
+  - "學術閱讀"
 ---
 
 Profile details will be updated soon.

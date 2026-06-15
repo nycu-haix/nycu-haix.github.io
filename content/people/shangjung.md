@@ -1,7 +1,7 @@
 ---
 title: "蔡尚融"
 slug: "shangjung"
-description: "蔡尚融 | Undergraduate, Year 2025"
+description: "蔡尚融 | Undergraduate, Year 2025 | Tags: ResearchMemory, 會議支援"
 profile_summary: ""
 username: "shangjung"
 role: "Undergraduate"
@@ -20,7 +20,8 @@ aliases:
   - "/shangjung/"
   - "/labmem/shangjung/"
 tags:
-  - ""
+  - "ResearchMemory"
+  - "會議支援"
 ---
 
 Profile details will be updated soon.
