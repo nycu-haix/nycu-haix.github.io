@@ -1,7 +1,7 @@
 ---
 title: "高浩哲"
 slug: "gau"
-description: "高浩哲 | Master, Year 2025 | Tags: LLMEval, IdeaUnit"
+description: "高浩哲 | Master, Year 2025 | Tags: LINUX Kernel User, Yes-No Engineer"
 profile_summary: ""
 username: "gau"
 role: "Master"
@@ -20,8 +20,8 @@ aliases:
   - "/gau/"
   - "/labmem/gau/"
 tags:
-  - "LLMEval"
-  - "IdeaUnit"
+  - "LINUX Kernel User"
+  - "Yes-No Engineer"
 ---
 
 Profile details will be updated soon.
