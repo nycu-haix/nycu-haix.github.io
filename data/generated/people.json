@@ -66,6 +66,28 @@
     "gravatar_image": "https://www.gravatar.com/avatar/eb5158c1eaacc650c216ae6fc4a265e3?s=1200&d=404&r=g"
   },
   {
+    "name": "林念慈",
+    "username": "veronica",
+    "role": "Master",
+    "degree": "",
+    "year": "2024",
+    "email": "nx6110.cs13@nycu.edu.tw",
+    "github": "https://github.com/NienTL",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/veronica.jpg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "Interaction design"
+    ],
+    "seo_description": "林念慈 | Master, Year 2024 | Tags: Interaction design",
+    "og_image": "/images/people/veronica.jpg",
+    "og_image_local": "/og/veronica.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/d5ee095dfcb2af65bdfc5069429dc774?s=1200&d=404&r=g"
+  },
+  {
     "name": "林長宏",
     "username": "ray",
     "role": "Master",
