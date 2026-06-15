@@ -18,6 +18,11 @@
   "name" "HAIX People"
   "itemListElement" $peopleItems
 }}
+{{ $peopleSections := slice
+  (dict "key" "advisor" "title" "Advisor" "match" (slice "prof" "faculty" "pi" "advisor" "教師" "教授"))
+  (dict "key" "master" "title" "Master Students" "match" (slice "master" "ms" "碩士"))
+  (dict "key" "undergraduate" "title" "Undergraduate Students" "match" (slice "undergrad" "bachelor" "大學部" "學士"))
+}}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -70,15 +75,59 @@
     <main id="main-content">
       <h1>People</h1>
       <div id="people-list" class="people-grid" aria-live="polite" data-feed-state="pending">
+        {{ $renderedPeople := slice }}
+        {{ range $section := $peopleSections }}
+          {{ $sectionPeople := slice }}
+          {{ range $people }}
+            {{ $roleText := printf "%s %s" (.Params.role | default "") (.Params.degree | default "") }}
+            {{ $roleKey := lower $roleText }}
+            {{ $matchesSection := false }}
+            {{ range $needle := $section.match }}
+              {{ if in $roleKey (lower $needle) }}{{ $matchesSection = true }}{{ end }}
+            {{ end }}
+            {{ if $matchesSection }}
+              {{ $sectionPeople = $sectionPeople | append . }}
+              {{ $renderedPeople = $renderedPeople | append .RelPermalink }}
+            {{ end }}
+          {{ end }}
+          {{ if gt (len $sectionPeople) 0 }}
+            <section class="people-section people-section--{{ $section.key }}" aria-labelledby="people-section-{{ $section.key }}">
+              <h2 id="people-section-{{ $section.key }}" class="people-section-title">{{ $section.title }}</h2>
+              <div class="people-section-grid">
+                {{ range $sectionPeople }}
+                  {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+                  <article class="people-card">
+                    <a class="people-open-photo" href="{{ .RelPermalink }}">
+                      <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
+                    </a>
+                    <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                    <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
+                  </article>
+                {{ end }}
+              </div>
+            </section>
+          {{ end }}
+        {{ end }}
+        {{ $otherPeople := slice }}
         {{ range $people }}
-          {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
-          <article class="people-card">
-            <a class="people-open-photo" href="{{ .RelPermalink }}">
-              <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
-            </a>
-            <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-            <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
-          </article>
+          {{ if not (in $renderedPeople .RelPermalink) }}{{ $otherPeople = $otherPeople | append . }}{{ end }}
+        {{ end }}
+        {{ if gt (len $otherPeople) 0 }}
+          <section class="people-section people-section--other" aria-labelledby="people-section-other">
+            <h2 id="people-section-other" class="people-section-title">Other Members</h2>
+            <div class="people-section-grid">
+              {{ range $otherPeople }}
+                {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+                <article class="people-card">
+                  <a class="people-open-photo" href="{{ .RelPermalink }}">
+                    <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
+                  </a>
+                  <h4><a class="people-open-name" href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                  <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
+                </article>
+              {{ end }}
+            </div>
+          </section>
         {{ end }}
       </div>
 

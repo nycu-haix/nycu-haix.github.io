@@ -43,6 +43,8 @@
   let lastFocusedElementBeforeModal = null;
   let activePeopleTagKey = "";
   let peopleFilterBar = null;
+  let peopleFilterToggle = null;
+  let peopleFiltersExpanded = false;
 
   setupReveal();
   setupPeopleModal();
@@ -1049,111 +1051,186 @@
     }
 
     const fragment = document.createDocumentFragment();
+    const sections = buildPeopleSections(people);
+    let cardIndex = 0;
 
-    people.forEach((people, index) => {
-      const card = document.createElement("article");
-      card.className = "people-card";
-      card.style.animationDelay = `${Math.min(index * 70, 450)}ms`;
-      card.dataset.username = people.username;
-      card.dataset.peopleTags = people.tags.map((tag) => tag.key).join("|");
+    sections.forEach((section) => {
+      const sectionElement = document.createElement("section");
+      sectionElement.className = `people-section people-section--${section.key}`;
+      sectionElement.dataset.peopleSection = section.key;
 
-      const photo = document.createElement("img");
-      const initialPhoto = people.photo || FALLBACK_PEOPLE_PHOTO;
-      photo.src = initialPhoto;
-      updatePeoplePhotoMode(photo, initialPhoto);
-      photo.alt = `${people.name} profile photo`;
-      photo.loading = index < 8 ? "eager" : "lazy";
-      photo.decoding = "async";
-      if (index < 4) {
-        photo.fetchPriority = "high";
-      }
-      photo.addEventListener("error", () => {
-        if (photo.src.includes(FALLBACK_PEOPLE_PHOTO)) {
-          return;
-        }
+      const heading = document.createElement("h2");
+      const headingId = `people-section-${section.key}`;
+      heading.id = headingId;
+      heading.className = "people-section-title";
+      heading.textContent = section.title;
+      sectionElement.setAttribute("aria-labelledby", headingId);
 
-        photo.src = FALLBACK_PEOPLE_PHOTO;
-        updatePeoplePhotoMode(photo, FALLBACK_PEOPLE_PHOTO);
+      const grid = document.createElement("div");
+      grid.className = "people-section-grid";
+
+      section.people.forEach((person) => {
+        const card = buildPeopleCard(person, cardIndex);
+        cardIndex += 1;
+        peopleByUsername.set(person.username, person);
+        registerPeopleAliases(person);
+        grid.appendChild(card);
       });
 
-      const profilePath = buildPeoplePath(people.username);
-
-      const photoButton = document.createElement("a");
-      photoButton.className = "people-open-photo";
-      photoButton.href = profilePath;
-      photoButton.setAttribute("aria-label", `Open ${people.name} profile`);
-      photoButton.appendChild(photo);
-      photoButton.addEventListener("click", (event) => {
-        if (!peopleModal) {
-          return;
-        }
-
-        event.preventDefault();
-        openPeopleModal(people, { pushHistory: true });
-      });
-
-      const name = document.createElement("h4");
-      const nameButton = document.createElement("a");
-      nameButton.className = "people-open-name";
-      nameButton.href = profilePath;
-      nameButton.textContent = people.name;
-      nameButton.addEventListener("click", (event) => {
-        if (!peopleModal) {
-          return;
-        }
-
-        event.preventDefault();
-        openPeopleModal(people, { pushHistory: true });
-      });
-      name.appendChild(nameButton);
-
-      const meta = document.createElement("p");
-      meta.className = "people-meta";
-      meta.textContent = composePeopleMeta(people);
-
-      card.append(photoButton, name, meta);
-
-      if (people.tags.length) {
-        const tagList = document.createElement("div");
-        tagList.className = "people-tags";
-
-        people.tags.forEach((tag) => {
-          const tagButton = document.createElement("button");
-          tagButton.type = "button";
-          tagButton.className = "people-tag";
-          tagButton.dataset.peopleTagKey = tag.key;
-          tagButton.textContent = `#${tag.label}`;
-          tagButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            setActivePeopleTag(tag.key);
-          });
-          tagList.appendChild(tagButton);
-        });
-
-        card.appendChild(tagList);
-      }
-
-      if (people.description) {
-        const description = document.createElement("p");
-        description.className = "people-desc";
-        description.textContent = people.description;
-        card.appendChild(description);
-      }
-
-      const links = buildPeopleLinks(people);
-      if (links) {
-        card.appendChild(links);
-      }
-
-      peopleByUsername.set(people.username, people);
-      registerPeopleAliases(people);
-      fragment.appendChild(card);
+      sectionElement.append(heading, grid);
+      fragment.appendChild(sectionElement);
     });
 
     renderPeopleTagFilters(people);
     peopleContainer.appendChild(fragment);
     applyPeopleTagFilter();
+  }
+
+  function buildPeopleSections(people) {
+    const sections = [
+      { key: "advisor", title: "Advisor", people: [] },
+      { key: "master", title: "Master Students", people: [] },
+      { key: "undergraduate", title: "Undergraduate Students", people: [] },
+      { key: "other", title: "Other Members", people: [] }
+    ];
+    const sectionByKey = new Map(sections.map((section) => [section.key, section]));
+
+    people.forEach((person) => {
+      const section = sectionByKey.get(peopleSectionKey(person)) || sectionByKey.get("other");
+      section.people.push(person);
+    });
+
+    return sections.filter((section) => section.people.length);
+  }
+
+  function peopleSectionKey(people) {
+    const normalized = `${people.role || ""} ${people.degree || ""}`.toLowerCase();
+    const roleText = `${people.role || ""} ${people.degree || ""}`;
+
+    if (
+      normalized.includes("pi") ||
+      normalized.includes("advisor") ||
+      normalized.includes("faculty") ||
+      normalized.includes("prof") ||
+      roleText.includes("教師") ||
+      roleText.includes("教授")
+    ) {
+      return "advisor";
+    }
+
+    if (normalized.includes("master") || normalized.includes("ms") || roleText.includes("碩士")) {
+      return "master";
+    }
+
+    if (
+      normalized.includes("undergrad") ||
+      normalized.includes("bachelor") ||
+      roleText.includes("大學部") ||
+      roleText.includes("學士")
+    ) {
+      return "undergraduate";
+    }
+
+    return "other";
+  }
+
+  function buildPeopleCard(people, index) {
+    const card = document.createElement("article");
+    card.className = "people-card";
+    card.style.animationDelay = `${Math.min(index * 70, 450)}ms`;
+    card.dataset.username = people.username;
+    card.dataset.peopleTags = people.tags.map((tag) => tag.key).join("|");
+
+    const photo = document.createElement("img");
+    const initialPhoto = people.photo || FALLBACK_PEOPLE_PHOTO;
+    photo.src = initialPhoto;
+    updatePeoplePhotoMode(photo, initialPhoto);
+    photo.alt = `${people.name} profile photo`;
+    photo.loading = index < 8 ? "eager" : "lazy";
+    photo.decoding = "async";
+    if (index < 4) {
+      photo.fetchPriority = "high";
+    }
+    photo.addEventListener("error", () => {
+      if (photo.src.includes(FALLBACK_PEOPLE_PHOTO)) {
+        return;
+      }
+
+      photo.src = FALLBACK_PEOPLE_PHOTO;
+      updatePeoplePhotoMode(photo, FALLBACK_PEOPLE_PHOTO);
+    });
+
+    const profilePath = buildPeoplePath(people.username);
+
+    const photoButton = document.createElement("a");
+    photoButton.className = "people-open-photo";
+    photoButton.href = profilePath;
+    photoButton.setAttribute("aria-label", `Open ${people.name} profile`);
+    photoButton.appendChild(photo);
+    photoButton.addEventListener("click", (event) => {
+      if (!peopleModal) {
+        return;
+      }
+
+      event.preventDefault();
+      openPeopleModal(people, { pushHistory: true });
+    });
+
+    const name = document.createElement("h4");
+    const nameButton = document.createElement("a");
+    nameButton.className = "people-open-name";
+    nameButton.href = profilePath;
+    nameButton.textContent = people.name;
+    nameButton.addEventListener("click", (event) => {
+      if (!peopleModal) {
+        return;
+      }
+
+      event.preventDefault();
+      openPeopleModal(people, { pushHistory: true });
+    });
+    name.appendChild(nameButton);
+
+    const meta = document.createElement("p");
+    meta.className = "people-meta";
+    meta.textContent = composePeopleMeta(people);
+
+    card.append(photoButton, name, meta);
+
+    if (people.tags.length) {
+      const tagList = document.createElement("div");
+      tagList.className = "people-tags";
+
+      people.tags.forEach((tag) => {
+        const tagButton = document.createElement("button");
+        tagButton.type = "button";
+        tagButton.className = "people-tag";
+        tagButton.dataset.peopleTagKey = tag.key;
+        tagButton.textContent = `#${tag.label}`;
+        tagButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          setActivePeopleTag(tag.key);
+        });
+        tagList.appendChild(tagButton);
+      });
+
+      card.appendChild(tagList);
+    }
+
+    if (people.description) {
+      const description = document.createElement("p");
+      description.className = "people-desc";
+      description.textContent = people.description;
+      card.appendChild(description);
+    }
+
+    const links = buildPeopleLinks(people);
+    if (links) {
+      card.appendChild(links);
+    }
+
+    return card;
   }
 
   function renderPeopleTagFilters(people) {
@@ -1184,8 +1261,34 @@
     }
 
     peopleFilterBar.innerHTML = "";
+    peopleFilterBar.classList.toggle("is-expanded", peopleFiltersExpanded);
+
+    peopleFilterToggle = document.createElement("button");
+    peopleFilterToggle.type = "button";
+    peopleFilterToggle.className = "people-filter-toggle";
+    peopleFilterToggle.setAttribute("aria-expanded", peopleFiltersExpanded ? "true" : "false");
+    peopleFilterToggle.setAttribute("aria-controls", "people-filter-chips");
+
+    const toggleLabel = document.createElement("span");
+    toggleLabel.className = "people-filter-toggle__label";
+    toggleLabel.textContent = "Topics";
+
+    const toggleValue = document.createElement("span");
+    toggleValue.className = "people-filter-toggle__value";
+
+    const toggleIcon = document.createElement("span");
+    toggleIcon.className = "people-filter-toggle__icon";
+    toggleIcon.setAttribute("aria-hidden", "true");
+    toggleIcon.textContent = "v";
+
+    peopleFilterToggle.append(toggleLabel, toggleValue, toggleIcon);
+    peopleFilterToggle.addEventListener("click", () => {
+      peopleFiltersExpanded = !peopleFiltersExpanded;
+      updatePeopleFilterToggle();
+    });
 
     const chips = document.createElement("div");
+    chips.id = "people-filter-chips";
     chips.className = "people-filter-chips";
 
     const allButton = document.createElement("button");
@@ -1194,7 +1297,7 @@
     allButton.dataset.peopleTagKey = "";
     allButton.textContent = "All";
     allButton.addEventListener("click", () => {
-      setActivePeopleTag("");
+      setActivePeopleTag("", { collapseFilters: true });
     });
     chips.appendChild(allButton);
 
@@ -1205,12 +1308,13 @@
       button.dataset.peopleTagKey = tag.key;
       button.textContent = `${tag.label} (${tag.count})`;
       button.addEventListener("click", () => {
-        setActivePeopleTag(tag.key);
+        setActivePeopleTag(tag.key, { collapseFilters: true });
       });
       chips.appendChild(button);
     });
 
-    peopleFilterBar.appendChild(chips);
+    peopleFilterBar.append(peopleFilterToggle, chips);
+    updatePeopleFilterToggle();
   }
 
   function collectPeopleTags(people) {
@@ -1241,10 +1345,31 @@
     });
   }
 
-  function setActivePeopleTag(key) {
+  function setActivePeopleTag(key, options = {}) {
     const normalizedKey = normalizePeopleTagKey(key);
     activePeopleTagKey = normalizedKey;
+    if (options.collapseFilters) {
+      peopleFiltersExpanded = false;
+    }
     applyPeopleTagFilter();
+  }
+
+  function updatePeopleFilterToggle() {
+    if (!peopleFilterBar || !peopleFilterToggle) {
+      return;
+    }
+
+    peopleFilterBar.classList.toggle("is-expanded", peopleFiltersExpanded);
+    peopleFilterToggle.setAttribute("aria-expanded", peopleFiltersExpanded ? "true" : "false");
+
+    const value = peopleFilterToggle.querySelector(".people-filter-toggle__value");
+    if (!value) {
+      return;
+    }
+
+    const activeButton = Array.from(peopleFilterBar.querySelectorAll(".people-filter-chip"))
+      .find((button) => normalizePeopleTagKey(button.dataset.peopleTagKey || "") === activePeopleTagKey);
+    value.textContent = activeButton ? activeButton.textContent.trim() : "All";
   }
 
   function applyPeopleTagFilter() {
@@ -1261,6 +1386,12 @@
       card.hidden = !visible;
     });
 
+    const sections = Array.from(peopleContainer.querySelectorAll(".people-section"));
+    sections.forEach((section) => {
+      const visibleCard = section.querySelector(".people-card:not([hidden])");
+      section.hidden = !visibleCard;
+    });
+
     const toggles = Array.from(document.querySelectorAll("[data-people-tag-key]"));
     toggles.forEach((button) => {
       const key = normalizePeopleTagKey(button.dataset.peopleTagKey || "");
@@ -1270,6 +1401,8 @@
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
     });
+
+    updatePeopleFilterToggle();
   }
 
   function setupPeopleModal() {
