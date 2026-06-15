@@ -80,10 +80,9 @@
     "description": "",
     "profile_markdown": "",
     "tags": [
-      "NLP",
       "學術閱讀"
     ],
-    "seo_description": "林長宏 | Master, Year 2024 | Tags: NLP, 學術閱讀",
+    "seo_description": "林長宏 | Master, Year 2024 | Tags: 學術閱讀",
     "og_image": "https://images.steamusercontent.com/ugc/14117585436244989252/67E7D1218B7A29A0499E3B8BD39082A11C4726D4/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false",
     "og_image_local": "/og/ray.png",
     "gravatar_image": "https://www.gravatar.com/avatar/74714e071cf4c68a8af96348ec847684?s=1200&d=404&r=g"
@@ -248,6 +247,30 @@
     "og_image": "/images/people/gau.jpg",
     "og_image_local": "/og/gau.png",
     "gravatar_image": "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=404&r=g"
+  },
+  {
+    "name": "李明韋",
+    "username": "wayne",
+    "role": "In-service Master",
+    "degree": "",
+    "year": "2026",
+    "email": "ci891028.cs14@nycu.edu.tw",
+    "github": "",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/wayne.jpg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "NLP",
+      "Smart Policing",
+      "Legal Technology"
+    ],
+    "seo_description": "李明韋 | In-service Master, Year 2026 | Tags: NLP, Smart Policing, Legal Technology",
+    "og_image": "/images/people/wayne.jpg",
+    "og_image_local": "/og/wayne.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/6db23e82dfb7cd8a3b4ac58ab88ed134?s=1200&d=404&r=g"
   },
   {
     "name": "Elvis Dragon Mao",
