@@ -1,7 +1,7 @@
 ---
-title: "Sky Shih-Kai Hong"
+title: "洪軾凱 Sky Hong"
 slug: "sky"
-description: "Sky Shih-Kai Hong | Master, Year 2025 | Tags: CMC, 隱性共識"
+description: "洪軾凱 Sky Hong | Master, Year 2025 | Tags: CMC, 隱性共識"
 profile_summary: ""
 username: "sky"
 role: "Master"

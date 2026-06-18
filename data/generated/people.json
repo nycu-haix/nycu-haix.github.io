@@ -133,29 +133,6 @@
     "gravatar_image": "https://www.gravatar.com/avatar/b608d722729f65f3ad309a42650d5803?s=1200&d=404&r=g"
   },
   {
-    "name": "Sky Shih-Kai Hong",
-    "username": "sky",
-    "role": "Master",
-    "degree": "",
-    "year": "2025",
-    "email": "sky.cs14@nycu.edu.tw",
-    "github": "https://github.com/skyhong2002",
-    "orcid": "",
-    "scholar": "https://scholar.google.com/citations?user=A4lHWQcAAAAJ",
-    "website": "https://skyhong.tw",
-    "photo": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d=404&r=g",
-    "description": "",
-    "profile_markdown": "",
-    "tags": [
-      "CMC",
-      "隱性共識"
-    ],
-    "seo_description": "Sky Shih-Kai Hong | Master, Year 2025 | Tags: CMC, 隱性共識",
-    "og_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g",
-    "og_image_local": "/og/sky.png",
-    "gravatar_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g"
-  },
-  {
     "name": "吳尚璇",
     "username": "brina",
     "role": "Master",
@@ -202,6 +179,29 @@
     "gravatar_image": "https://www.gravatar.com/avatar/d88cd984262f346da933dcdca445326a?s=1200&d=404&r=g"
   },
   {
+    "name": "洪軾凱 Sky Hong",
+    "username": "sky",
+    "role": "Master",
+    "degree": "",
+    "year": "2025",
+    "email": "sky.cs14@nycu.edu.tw",
+    "github": "https://github.com/skyhong2002",
+    "orcid": "",
+    "scholar": "https://scholar.google.com/citations?user=A4lHWQcAAAAJ",
+    "website": "https://skyhong.tw",
+    "photo": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d=404&r=g",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "CMC",
+      "隱性共識"
+    ],
+    "seo_description": "洪軾凱 Sky Hong | Master, Year 2025 | Tags: CMC, 隱性共識",
+    "og_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g",
+    "og_image_local": "/og/sky.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=1200&d=404&r=g"
+  },
+  {
     "name": "陳俞安",
     "username": "andrew",
     "role": "Master",
@@ -240,9 +240,9 @@
     "profile_markdown": "",
     "tags": [
       "智慧照護",
-      "HAI"
+      "HRI"
     ],
-    "seo_description": "陳昕妤 | Master, Year 2025 | Tags: 智慧照護, HAI",
+    "seo_description": "陳昕妤 | Master, Year 2025 | Tags: 智慧照護, HRI",
     "og_image": "/images/people/sychen.jpg",
     "og_image_local": "/og/sychen.png",
     "gravatar_image": "https://www.gravatar.com/avatar/b5b3b75d8ff0a7fc28447092c9463460?s=1200&d=404&r=g"
@@ -269,6 +269,28 @@
     "og_image": "/images/people/gau.jpg",
     "og_image_local": "/og/gau.png",
     "gravatar_image": "https://www.gravatar.com/avatar/68356f6e227e8f9af7ca05336e363b08?s=1200&d=404&r=g"
+  },
+  {
+    "name": "Simon Liu",
+    "username": "simon",
+    "role": "Master",
+    "degree": "",
+    "year": "2026",
+    "email": "simonliu423.cs15@nycu.edu.tw",
+    "github": "https://github.com/SimonLiu423",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/simon.jpg",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "Human-AI Collaboration"
+    ],
+    "seo_description": "Simon Liu | Master, Year 2026 | Tags: Human-AI Collaboration",
+    "og_image": "/images/people/simon.jpg",
+    "og_image_local": "/og/simon.png",
+    "gravatar_image": "https://www.gravatar.com/avatar/463bfebf3e26dbcccd55efc028507229?s=1200&d=404&r=g"
   },
   {
     "name": "李明韋",
