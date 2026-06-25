@@ -31,16 +31,15 @@
   <meta property="og:title" content="{{ .Title }} | HAIX Lab">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta property="og:image" content="{{ "images/group-photo.webp" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ .Title }} | HAIX Lab">
   <meta name="twitter:description" content="{{ $desc }}">
-  <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta name="twitter:image" content="{{ "images/group-photo.webp" | absURL }}">
   <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-title-fonts">
   <link rel="stylesheet" href="{{ "css/labmem.css" | relURL }}?v={{ now.Unix }}">
@@ -57,7 +56,7 @@
     <header class="row nav-row" id="top">
       <div class="col-left">
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <img src="{{ "images/haix-logo.webp" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
             <strong>HAIX Temporal Archive</strong>
             <small>Worldline Observer Node - NYCU</small>
@@ -81,7 +80,7 @@
       <section class="labmem-panel" id="registry-panel" aria-label="Lab member list">
         <div id="people-list" class="people-grid" aria-live="polite" data-feed-state="pending">
           {{ range $people }}
-            {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+            {{ $photo := .Params.photo | default "/images/people/people-placeholder.webp" }}
             <article class="people-card">
               <a class="people-open-photo" href="{{ .RelPermalink }}">
                 <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">

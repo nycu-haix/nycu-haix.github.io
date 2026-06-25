@@ -5,7 +5,7 @@
   {{ $desc := .Description | default .Site.Params.description | default "Human-AI & Creative Computing (HAIX) Lab at National Yang Ming Chiao Tung University" }}
   {{ $title := .Title | default .Site.Title | default "HAIX Lab" }}
   {{ $fullTitle := printf "%s | HAIX Lab" $title }}
-  {{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.jpg" }}
+  {{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.webp" }}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ $fullTitle }}</title>

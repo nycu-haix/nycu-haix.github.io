@@ -8,37 +8,37 @@
       {
         "name": "陳奕潔 EJ",
         "username": "ej",
-        "photo": "/images/people/EJ.jpg",
+        "photo": "/images/people/EJ.webp",
         "url": "/people/ej/"
       },
       {
         "name": "Ethel Hsiao",
         "username": "ethel",
-        "photo": "/images/people/Ethel.jpg",
+        "photo": "/images/people/Ethel.webp",
         "url": "/people/ethel/"
       },
       {
         "name": "張智鈞",
         "username": "jason",
-        "photo": "/images/people/jason.jpg",
+        "photo": "/images/people/jason.webp",
         "url": "/people/jason/"
       },
       {
         "name": "Elvis Dragon Mao",
         "username": "em",
-        "photo": "https://www.gravatar.com/avatar/2c2e9a275f6129bc5f1f2742316fac94?s=800&d=404&r=g",
+        "photo": "/images/people/em.webp",
         "url": "/people/em/"
       },
       {
         "name": "Sky Shih-Kai Hong",
         "username": "sky",
-        "photo": "https://www.gravatar.com/avatar/41a42e0518bb327aae6fe02c3501a507?s=800&d=404&r=g",
+        "photo": "/images/people/sky.webp",
         "url": "/people/sky/"
       },
       {
         "name": "Grace Yu-Chun Yen",
         "username": "grace",
-        "photo": "/images/people/grace-yen.png",
+        "photo": "/images/people/grace-yen.webp",
         "url": "/people/grace/"
       }
     ],
@@ -46,7 +46,7 @@
     "year": "2026",
     "year_num": 2026,
     "doi": "",
-    "thumbnail": "/images/publications/OmniObserve.jpg",
+    "thumbnail": "/images/publications/OmniObserve.webp",
     "pdf": "/files/posters/OmniObserve.pdf",
     "website": "",
     "video": "https://youtu.be/l1eS5ZlEzFM",
@@ -63,31 +63,31 @@
       {
         "name": "蔡尚融",
         "username": "shangjung",
-        "photo": "/images/people/people-placeholder.svg",
+        "photo": "/images/people/people-placeholder.webp",
         "url": "/people/shangjung/"
       },
       {
         "name": "陳宥臻",
         "username": "kellychen",
-        "photo": "/images/people/people-placeholder.svg",
+        "photo": "/images/people/people-placeholder.webp",
         "url": "/people/kellychen/"
       },
       {
         "name": "李羿昕",
         "username": "hsin",
-        "photo": "/images/people/people-placeholder.svg",
+        "photo": "/images/people/people-placeholder.webp",
         "url": "/people/hsin/"
       },
       {
         "name": "洪薇欣",
         "username": "velda",
-        "photo": "/images/people/velda.jpg",
+        "photo": "/images/people/velda.webp",
         "url": "/people/velda/"
       },
       {
         "name": "Grace Yu-Chun Yen",
         "username": "grace",
-        "photo": "/images/people/grace-yen.png",
+        "photo": "/images/people/grace-yen.webp",
         "url": "/people/grace/"
       }
     ],
@@ -95,7 +95,7 @@
     "year": "2026",
     "year_num": 2026,
     "doi": "",
-    "thumbnail": "/images/publications/LongTermRMS.jpg",
+    "thumbnail": "/images/publications/LongTermRMS.webp",
     "pdf": "/files/posters/LongTermRMS.pdf",
     "website": "",
     "video": "",
@@ -112,31 +112,31 @@
       {
         "name": "張晉睿",
         "username": "rain112550185",
-        "photo": "/images/people/rain112550185.jpg",
+        "photo": "/images/people/rain112550185.webp",
         "url": "/people/rain112550185/"
       },
       {
         "name": "王韋凱",
         "username": "lilb0425",
-        "photo": "/images/people/lilb0425.jpg",
+        "photo": "/images/people/lilb0425.webp",
         "url": "/people/lilb0425/"
       },
       {
         "name": "馬晨瑜",
         "username": "cs112550152",
-        "photo": "/images/people/cs112550152.jpg",
+        "photo": "/images/people/cs112550152.webp",
         "url": "/people/cs112550152/"
       },
       {
         "name": "陳俞安",
         "username": "andrew",
-        "photo": "/images/people/andrew.jpg",
+        "photo": "/images/people/andrew.webp",
         "url": "/people/andrew/"
       },
       {
         "name": "Grace Yu-Chun Yen",
         "username": "grace",
-        "photo": "/images/people/grace-yen.png",
+        "photo": "/images/people/grace-yen.webp",
         "url": "/people/grace/"
       }
     ],
@@ -144,7 +144,7 @@
     "year": "2026",
     "year_num": 2026,
     "doi": "",
-    "thumbnail": "/images/publications/Deliberate.jpg",
+    "thumbnail": "/images/publications/Deliberate.webp",
     "pdf": "/files/posters/Deliberate.pdf",
     "website": "",
     "video": "",

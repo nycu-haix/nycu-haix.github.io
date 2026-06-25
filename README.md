@@ -3,7 +3,7 @@
 This site is a Hugo website with a Homepage and People pages:
 - Homepage sections: `News`, `Research`, `Info`
 - Dedicated People page: `/people/`, with profile pages at `/people/<username>/`
-- Manual people photos with Gravatar fallback
+- Manual people photos with local WebP assets and WebP placeholders
 - Spreadsheet/CSV-driven people, news, publications, and research areas
 - Lab branding and logo
 - SEO-ready static rendering for homepage and people profile pages (`/people/<username>/`)
@@ -33,12 +33,12 @@ Generated outputs:
 
 - `content/people/*.md` (profile pages routed as `/people/<username>/`)
 - `data/generated/*.json` (server-rendered homepage content)
-- `static/og/*.png` (people-specific OG images downloaded from Gravatar)
+- `static/og/*.webp` (people-specific OG images converted to WebP)
 
 SEO coverage now includes:
 
 - Unique `title` + `description` per page
-- `og:*` + `twitter:*` tags per page (`og:image` uses people Gravatar image file)
+- `og:*` + `twitter:*` tags per page (`og:image` uses local WebP assets)
 - Canonical URLs per page
 - `robots.txt` + `sitemap.xml`
 - Structured data (`Organization`, `Person`, `ItemList`/`ScholarlyArticle`)
@@ -96,7 +96,7 @@ Recommended:
 - `orcid`
 - `scholar` (Google Scholar URL)
 - `website`
-- `photo` (e.g., `/images/people/alice.jpg`)
+- `photo` (e.g., `/images/people/alice.webp`)
 - `description`
 - `tags` (people-defined tags for People filtering; separate multiple tags with `,`, `;`, `/`, `|`, `、`, or `，`)
 - `username` (URL slug for modal route, e.g., `grace`)
@@ -104,8 +104,8 @@ Recommended:
 
 Photo fallback order:
 1. `photo`
-2. Gravatar from `email`
-3. `/images/people/people-placeholder.svg`
+2. `/images/people/<username>.webp` when a matching local file exists
+3. `/images/people/people-placeholder.webp`
 
 People route behavior:
 - People list page is available at `/people/`
@@ -137,7 +137,7 @@ Recommended:
 - `proceedings`
 - `year`
 - `doi` (raw DOI or full URL)
-- `thumbnail` (e.g., `/images/publications/paper1.jpg`)
+- `thumbnail` (e.g., `/images/publications/paper1.webp`)
 - `pdf`
 - `video` (e.g., YouTube URL)
 - `website`
@@ -154,8 +154,8 @@ Recommended:
 
 ## Image replacement
 
-- Lab logo: replace `static/images/haix-logo.svg`
-- Group photo: replace `static/images/group-photo.jpg`
+- Lab logo: replace `static/images/haix-logo.webp` for rendered pages; keep `static/images/haix-logo.svg` for the favicon/source vector
+- Group photo: replace `static/images/group-photo.webp`
 - People photos: add files under `static/images/people/` and set CSV `photo` path
 - News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
 - Publication thumbnails: add files under `static/images/publications/` and set CSV `thumbnail` path

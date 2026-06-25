@@ -2,8 +2,8 @@
 <html lang="{{ .Site.Language.Lang | default "en" }}">
 {{ $name := .Title }}
 {{ $desc := partial "people-preview-description.html" . }}
-{{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.jpg" }}
-{{ $photo := .Params.photo | default "images/people/people-placeholder.svg" }}
+{{ $og := .Params.og_image | default .Params.og_image_local | default "images/group-photo.webp" }}
+{{ $photo := .Params.photo | default "images/people/people-placeholder.webp" }}
 {{ $peopleList := "/people/" | relURL }}
 {{ $canonical := .Permalink }}
 {{ with .Params.username }}{{ $canonical = (printf "/people/%s/" .) | absURL }}{{ end }}
@@ -65,7 +65,6 @@
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-title-fonts">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -98,7 +97,7 @@
     <header class="row nav-row" id="top">
       <div class="col-left">
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <img src="{{ "images/haix-logo.webp" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
             <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
@@ -115,7 +114,7 @@
 
     <main id="main-content" class="people-page">
       <article class="people-profile">
-        <img class="people-profile-photo" src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ $name }} profile photo" loading="eager" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.svg" | relURL }}';">
+        <img class="people-profile-photo" src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ $name }} profile photo" loading="eager" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.webp" | relURL }}';">
         <div class="people-profile-main">
           <h1>{{ $name }}</h1>
           <p class="people-meta">{{ if .Params.role }}{{ .Params.role }}{{ end }}{{ if .Params.degree }}{{ if .Params.role }} · {{ end }}{{ .Params.degree }}{{ end }}{{ if .Params.year }}{{ if or .Params.role .Params.degree }} · {{ end }}{{ .Params.year }}{{ end }}</p>
@@ -139,9 +138,9 @@
           <h2 id="profile-publications-title">Publications</h2>
           <div class="people-publication-list">
             {{ range $publication := $profilePublications }}
-              {{ $thumb := $publication.thumbnail | default "/images/publications/paper-placeholder.svg" }}
+              {{ $thumb := $publication.thumbnail | default "/images/publications/paper-placeholder.webp" }}
               <article class="people-publication">
-                <img class="people-publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ $publication.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.svg" | relURL }}';">
+                <img class="people-publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ $publication.title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.webp" | relURL }}';">
                 <div class="people-publication-main">
                   <h3>{{ $publication.title }}</h3>
                   <p>

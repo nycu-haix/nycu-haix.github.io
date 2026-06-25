@@ -50,16 +50,15 @@
   <meta property="og:title" content="Research | HAIX Lab">
   <meta property="og:description" content="{{ $socialPreviewDesc }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta property="og:image" content="{{ "images/group-photo.webp" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Research | HAIX Lab">
   <meta name="twitter:description" content="{{ $socialPreviewDesc }}">
-  <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta name="twitter:image" content="{{ "images/group-photo.webp" | absURL }}">
   <script>document.documentElement.classList.add("js-enabled");</script>
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-research-page">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -75,7 +74,7 @@
     <header class="row nav-row" id="top">
       <div class="col-left">
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <img src="{{ "images/haix-logo.webp" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
             <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
@@ -121,9 +120,9 @@
           <h2>Publications</h2>
           <div class="publication-list">
             {{ range $regularPubs }}
-              {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.svg" }}
+              {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.webp" }}
               <article class="publication-card{{ if .highlight }} publication-card--highlight{{ end }}">
-                <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.svg" | relURL }}';">
+                <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.webp" | relURL }}';">
                 <div class="publication-meta">
                   <h4>{{ .title }}</h4>
                   {{ $authorList := .author_list | default (slice) }}
@@ -131,9 +130,9 @@
                     <p class="publication-authors">
                       {{ range $author := $authorList }}
                         {{ if $author.username }}
-                          {{ $photo := $author.photo | default "/images/people/people-placeholder.svg" }}
+                          {{ $photo := $author.photo | default "/images/people/people-placeholder.webp" }}
                           <a class="publication-author" href="{{ $author.url | relURL }}" title="{{ $author.name }} profile">
-                            <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.svg" | relURL }}';">
+                            <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.webp" | relURL }}';">
                             <span>{{ $author.name }}</span>
                           </a>
                         {{ else }}
@@ -176,9 +175,9 @@
           <h2>Late-Breaking Work</h2>
           <div class="publication-list">
             {{ range $lateBreakingPubs }}
-              {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.svg" }}
+              {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.webp" }}
               <article class="publication-card{{ if .highlight }} publication-card--highlight{{ end }}">
-                <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.svg" | relURL }}';">
+                <img class="publication-thumb" src="{{ if hasPrefix $thumb "http" }}{{ $thumb }}{{ else }}{{ $thumb | relURL }}{{ end }}" alt="Publication thumbnail for {{ .title }}" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/publications/paper-placeholder.webp" | relURL }}';">
                 <div class="publication-meta">
                   <h4>{{ .title }}</h4>
                   {{ $authorList := .author_list | default (slice) }}
@@ -186,9 +185,9 @@
                     <p class="publication-authors">
                       {{ range $author := $authorList }}
                         {{ if $author.username }}
-                          {{ $photo := $author.photo | default "/images/people/people-placeholder.svg" }}
+                          {{ $photo := $author.photo | default "/images/people/people-placeholder.webp" }}
                           <a class="publication-author" href="{{ $author.url | relURL }}" title="{{ $author.name }} profile">
-                            <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.svg" | relURL }}';">
+                            <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="" loading="lazy" onerror="this.onerror=null;this.src='{{ "/images/people/people-placeholder.webp" | relURL }}';">
                             <span>{{ $author.name }}</span>
                           </a>
                         {{ else }}
@@ -239,7 +238,7 @@
           <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
         </p>
         <a class="footer-nycu-logo-link" href="https://brand.nycu.edu.tw/guidelines/" target="_blank" rel="noopener noreferrer" aria-label="NYCU brand guidelines">
-          <img src="{{ "images/nycu-logo-official-full-en.png" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
+          <img src="{{ "images/nycu-logo-official-full-en.webp" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
         </a>
       </footer>
     </main>

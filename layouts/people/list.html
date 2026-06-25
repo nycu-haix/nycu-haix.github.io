@@ -34,15 +34,14 @@
   <meta property="og:title" content="{{ .Title }} | HAIX Lab">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:url" content="{{ .Permalink }}">
-  <meta property="og:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta property="og:image" content="{{ "images/group-photo.webp" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ .Title }} | HAIX Lab">
   <meta name="twitter:description" content="{{ $desc }}">
-  <meta name="twitter:image" content="{{ "images/group-photo.jpg" | absURL }}">
+  <meta name="twitter:image" content="{{ "images/group-photo.webp" | absURL }}">
   <link rel="icon" type="image/svg+xml" href="{{ "images/haix-logo.svg" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto+Mono:ital,wght@0,500;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/haix.css" | relURL }}?v=20260528-profile-title-fonts">
   {{ with .Site.Params.anubis2.services.googleanalytics.gtag }}
@@ -58,7 +57,7 @@
     <header class="row nav-row" id="top">
       <div class="col-left">
         <a class="brand-line" href="{{ "/" | relURL }}" aria-label="Back to HAIX homepage">
-          <img src="{{ "images/haix-logo.svg" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
+          <img src="{{ "images/haix-logo.webp" | relURL }}" class="logo-mark" alt="HAIX Lab logo">
           <span class="brand-copy">
             <strong>Human-AI &amp; Creative Computing (HAIX) Lab</strong>
             <small>National Yang Ming Chiao Tung University</small>
@@ -95,7 +94,7 @@
               <h2 id="people-section-{{ $section.key }}" class="people-section-title">{{ $section.title }}</h2>
               <div class="people-section-grid">
                 {{ range $sectionPeople }}
-                  {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+                  {{ $photo := .Params.photo | default "/images/people/people-placeholder.webp" }}
                   <article class="people-card">
                     <a class="people-open-photo" href="{{ .RelPermalink }}">
                       <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
@@ -117,7 +116,7 @@
             <h2 id="people-section-other" class="people-section-title">Other Members</h2>
             <div class="people-section-grid">
               {{ range $otherPeople }}
-                {{ $photo := .Params.photo | default "/images/people/people-placeholder.svg" }}
+                {{ $photo := .Params.photo | default "/images/people/people-placeholder.webp" }}
                 <article class="people-card">
                   <a class="people-open-photo" href="{{ .RelPermalink }}">
                     <img src="{{ if hasPrefix $photo "http" }}{{ $photo }}{{ else }}{{ $photo | relURL }}{{ end }}" alt="{{ .Title }} profile photo" loading="lazy">
@@ -145,7 +144,7 @@
           <a href="https://social.cs.washington.edu" target="_blank" rel="noopener noreferrer">Social Futures Lab</a>
         </p>
         <a class="footer-nycu-logo-link" href="https://brand.nycu.edu.tw/guidelines/" target="_blank" rel="noopener noreferrer" aria-label="NYCU brand guidelines">
-          <img src="{{ "images/nycu-logo-official-full-en.png" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
+          <img src="{{ "images/nycu-logo-official-full-en.webp" | relURL }}" class="footer-nycu-logo" alt="NYCU Taiwan National Yang Ming Chiao Tung University logo">
         </a>
       </footer>
     </main>

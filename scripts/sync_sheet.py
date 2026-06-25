@@ -7,6 +7,9 @@ import csv
 import hashlib
 import json
 import re
+import shutil
+import subprocess
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -20,6 +23,10 @@ SOURCES_PATH = STATIC_DATA_DIR / "sources.json"
 GENERATED_DATA_DIR = ROOT / "data" / "generated"
 CONTENT_PEOPLE_DIR = ROOT / "content" / "people"
 OG_DIR = ROOT / "static" / "og"
+
+PEOPLE_PLACEHOLDER = "/images/people/people-placeholder.webp"
+PUBLICATION_PLACEHOLDER = "/images/publications/paper-placeholder.webp"
+WEBP_SOURCE_EXT_RE = re.compile(r"\.(?:jpe?g|png)(?=$|[?#])", re.IGNORECASE)
 
 
 CSV_KEYS = {
@@ -198,18 +205,20 @@ def normalize_people(rows: list[dict]) -> list[dict]:
         tags = parse_tags(pick(row, "tags", "tag", "labels", "interests"))
         explicit_photo = pick(row, "photo", "photo_url", "image")
 
+        local_photo = local_people_photo(username)
         if explicit_photo:
-            photo = explicit_photo
-            og_image = explicit_photo
-        elif check_gravatar_exists(email):
-            photo = gravatar_url(email, 800)
-            og_image = gravatar_url(email, 1200)
+            photo = normalize_image_path(explicit_photo)
+            if is_external_url(photo) and local_photo:
+                photo = local_photo
+            og_image = photo
+        elif local_photo:
+            photo = local_photo
+            og_image = local_photo
         else:
-            photo = "/images/people/people-placeholder.svg"
-            og_image = "/images/people/people-placeholder.svg"
+            photo = PEOPLE_PLACEHOLDER
+            og_image = PEOPLE_PLACEHOLDER
 
-        gravatar_image = gravatar_url(email, 1200)
-        og_image_local = f"/og/{username}.png"
+        og_image_local = f"/og/{username}.webp"
 
         seo_description = build_people_seo_description(
             name=name,
@@ -257,7 +266,6 @@ def normalize_people(rows: list[dict]) -> list[dict]:
                 "seo_description": seo_description,
                 "og_image": og_image,
                 "og_image_local": og_image_local,
-                "gravatar_image": gravatar_image,
             }
         )
 
@@ -296,9 +304,11 @@ def normalize_publications(
         video = clean_url(
             pick(row, "video", "video_url", "youtube", "youtube_url", "demo", "demo_url")
         ) or infer_publication_video(key)
+        explicit_thumbnail = pick(row, "thumbnail", "thumbnail_url", "image")
         thumbnail = (
-            pick(row, "thumbnail", "thumbnail_url", "image")
-            or infer_publication_thumbnail(pdf)
+            normalize_image_path(explicit_thumbnail)
+            if explicit_thumbnail
+            else infer_publication_thumbnail(pdf)
         )
         award = pick(row, "award", "note") or infer_publication_award(key)
         category = normalize_publication_category(pick(row, "category", "type", "pub_type"))
@@ -400,18 +410,18 @@ def normalize_name_key(value: str) -> str:
 def infer_publication_thumbnail(pdf: str) -> str:
     value = str(pdf or "").strip()
     if not value:
-        return "/images/publications/paper-placeholder.svg"
+        return PUBLICATION_PLACEHOLDER
 
     path = value.split("?", 1)[0].split("#", 1)[0]
     stem = Path(path).stem
     if not stem:
-        return "/images/publications/paper-placeholder.svg"
+        return PUBLICATION_PLACEHOLDER
 
-    candidate = f"/images/publications/{stem}.jpg"
+    candidate = f"/images/publications/{stem}.webp"
     if (ROOT / "static" / candidate.lstrip("/")).exists():
         return candidate
 
-    return "/images/publications/paper-placeholder.svg"
+    return PUBLICATION_PLACEHOLDER
 
 
 def infer_publication_video(key: str) -> str:
@@ -588,6 +598,43 @@ def clean_url(value: str) -> str:
     return str(value or "").strip()
 
 
+def is_external_url(value: str) -> bool:
+    text = str(value or "").strip().lower()
+    return text.startswith(("http://", "https://", "//"))
+
+
+def static_asset_exists(url_path: str) -> bool:
+    path = str(url_path or "").split("?", 1)[0].split("#", 1)[0].lstrip("/")
+    return bool(path) and (ROOT / "static" / path).exists()
+
+
+def normalize_image_path(value: str) -> str:
+    text = clean_url(value)
+    if not text:
+        return ""
+    if text == "/images/people/people-placeholder.svg":
+        return PEOPLE_PLACEHOLDER
+    if text == "/images/publications/paper-placeholder.svg":
+        return PUBLICATION_PLACEHOLDER
+    if is_external_url(text):
+        return text
+
+    candidate = WEBP_SOURCE_EXT_RE.sub(".webp", text, count=1)
+    if candidate != text and static_asset_exists(candidate):
+        return candidate
+    return text
+
+
+def local_people_photo(username: str) -> str:
+    slug = slugify_username(username)
+    if not slug:
+        return ""
+    candidate = f"/images/people/{slug}.webp"
+    if static_asset_exists(candidate):
+        return candidate
+    return ""
+
+
 def normalize_doi_url(doi: str) -> str:
     value = str(doi or "").strip()
     if not value:
@@ -612,20 +659,6 @@ def gravatar_url(email: str, size: int) -> str:
         token = "people@nycu-haix.invalid"
     digest = hashlib.md5(token.encode("utf-8"), usedforsecurity=False).hexdigest()
     return f"https://www.gravatar.com/avatar/{digest}?s={size}&d=404&r=g"
-
-def check_gravatar_exists(email: str) -> bool:
-    token = str(email or "").strip().lower()
-    if not token:
-        return False
-    digest = hashlib.md5(token.encode("utf-8"), usedforsecurity=False).hexdigest()
-    url = f"https://www.gravatar.com/avatar/{digest}?d=404"
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}, method="HEAD")
-        with urllib.request.urlopen(req, timeout=5) as response:
-            return response.status == 200
-    except Exception:
-        return False
-
 
 def compose_people_meta(role: str, degree: str, year: str) -> str:
     parts = [part for part in (role, degree, f"Year {year}" if year else "") if part]
@@ -767,7 +800,6 @@ def generate_people_content(people: list[dict]) -> None:
             f"photo: {yaml_quote(person.get('photo', ''))}",
             f"og_image: {yaml_quote(person.get('og_image', ''))}",
             f"og_image_local: {yaml_quote(person.get('og_image_local', ''))}",
-            f"gravatar_image: {yaml_quote(person.get('gravatar_image', ''))}",
             "aliases:",
             f"  - {yaml_quote('/' + person.get('username', '') + '/')}",
             f"  - {yaml_quote('/labmem/' + person.get('username', '') + '/')}",
@@ -790,22 +822,44 @@ def generate_people_content(people: list[dict]) -> None:
 def generate_people_og_images(people: list[dict]) -> None:
     OG_DIR.mkdir(parents=True, exist_ok=True)
 
-    for old_file in OG_DIR.glob("*.png"):
+    for old_file in OG_DIR.glob("*.webp"):
         old_file.unlink()
 
     for person in people:
         username = person.get("username", "")
         if not username:
             continue
-        url = person.get("gravatar_image") or gravatar_url(
-            person.get("email", ""), 1200
-        )
-        target = OG_DIR / f"{username}.png"
+        url = gravatar_url(person.get("email", ""), 1200)
+        target = OG_DIR / f"{username}.webp"
         try:
             body = fetch_bytes(url)
-            target.write_bytes(body)
-        except urllib.error.URLError as error:
+            write_webp_image(body, target)
+        except (urllib.error.URLError, RuntimeError, subprocess.CalledProcessError) as error:
             print(f"Skip OG image for {username}: {error}")
+
+
+def write_webp_image(body: bytes, target: Path) -> None:
+    magick = shutil.which("magick")
+    if not magick:
+        raise RuntimeError("ImageMagick `magick` is required to generate WebP OG images")
+
+    with tempfile.NamedTemporaryFile(suffix=".image") as fp:
+        fp.write(body)
+        fp.flush()
+        subprocess.run(
+            [
+                magick,
+                fp.name,
+                "-auto-orient",
+                "-resize",
+                "1600x1600>",
+                "-strip",
+                "-quality",
+                "82",
+                str(target),
+            ],
+            check=True,
+        )
 
 
 if __name__ == "__main__":
