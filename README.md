@@ -154,7 +154,7 @@ Recommended:
 
 ## Image replacement
 
-- Lab logo: replace `static/images/haix-logo.webp` for rendered pages; keep `static/images/haix-logo.svg` for the favicon/source vector
+- Lab logo: update `static/images/haix-logo.svg`; rendered pages and favicon both use this source vector. Keep `static/images/haix-logo.webp` only as a raster fallback asset.
 - Group photo: replace `static/images/group-photo.webp`
 - People photos: add files under `static/images/people/` and set CSV `photo` path
 - News data: update `static/data/news.csv` or set `newsCsvUrl` in `static/data/sources.json`
