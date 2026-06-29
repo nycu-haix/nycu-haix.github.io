@@ -822,6 +822,11 @@ def generate_people_content(people: list[dict]) -> None:
 def generate_people_og_images(people: list[dict]) -> None:
     OG_DIR.mkdir(parents=True, exist_ok=True)
 
+    image_converter = find_image_converter()
+    if not image_converter:
+        print("Skip OG image generation: ImageMagick `magick` or `convert` is required")
+        return
+
     for old_file in OG_DIR.glob("*.webp"):
         old_file.unlink()
 
@@ -833,22 +838,22 @@ def generate_people_og_images(people: list[dict]) -> None:
         target = OG_DIR / f"{username}.webp"
         try:
             body = fetch_bytes(url)
-            write_webp_image(body, target)
+            write_webp_image(body, target, image_converter)
         except (urllib.error.URLError, RuntimeError, subprocess.CalledProcessError) as error:
             print(f"Skip OG image for {username}: {error}")
 
 
-def write_webp_image(body: bytes, target: Path) -> None:
-    magick = shutil.which("magick")
-    if not magick:
-        raise RuntimeError("ImageMagick `magick` is required to generate WebP OG images")
+def find_image_converter() -> str:
+    return shutil.which("magick") or shutil.which("convert") or ""
 
+
+def write_webp_image(body: bytes, target: Path, image_converter: str) -> None:
     with tempfile.NamedTemporaryFile(suffix=".image") as fp:
         fp.write(body)
         fp.flush()
         subprocess.run(
             [
-                magick,
+                image_converter,
                 fp.name,
                 "-auto-orient",
                 "-resize",
