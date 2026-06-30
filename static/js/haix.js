@@ -16,6 +16,7 @@
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.webp";
   const LOCAL_PEOPLE_PHOTO_OVERRIDES = new Map([
     ["em", "/images/people/em.webp"],
+    ["kellychen", "/images/people/kellychen.webp"],
     ["ray", "/images/people/ray.webp"],
     ["sky", "/images/people/sky.webp"]
   ]);
