@@ -16,8 +16,10 @@
   const FALLBACK_PAPER_THUMB = "/images/publications/paper-placeholder.webp";
   const LOCAL_PEOPLE_PHOTO_OVERRIDES = new Map([
     ["em", "/images/people/em.webp"],
+    ["hsin", "/images/people/hsin.webp"],
     ["kellychen", "/images/people/kellychen.webp"],
     ["ray", "/images/people/ray.webp"],
+    ["shangjung", "/images/people/shangjung.webp"],
     ["sky", "/images/people/sky.webp"]
   ]);
   const FINAL_ROUND_PUBLICATION_KEYS = new Set(["omniobserve", "longtermrms", "urop2026-omniobserve", "urop2026-longtermrms"]);
