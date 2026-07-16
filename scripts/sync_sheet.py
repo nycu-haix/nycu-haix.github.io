@@ -36,13 +36,13 @@ CSV_KEYS = {
     "research": "researchCsvUrl",
 }
 
-FINAL_ROUND_PUBLICATION_KEYS = {
+CONTEST_AWARD_PUBLICATION_KEYS = {
     "omniobserve",
     "longtermrms",
     "urop2026-omniobserve",
     "urop2026-longtermrms",
 }
-FINAL_ROUND_NOTE = "Final round · May 13, 2026"
+CONTEST_AWARD_NOTE = "Honorable Mention · NYCU CS Undergraduate Project Contest, Spring 2026"
 OMNIOBSERVE_PUBLICATION_KEYS = {"omniobserve", "urop2026-omniobserve"}
 OMNIOBSERVE_VIDEO_URL = "https://youtu.be/l1eS5ZlEzFM"
 
@@ -449,17 +449,17 @@ def slugify_key(value: str) -> str:
 
 def infer_publication_award(key: str) -> str:
     if publication_key_matches(key):
-        return FINAL_ROUND_NOTE
+        return CONTEST_AWARD_NOTE
     return ""
 
 
 def is_highlighted_publication(key: str, award: str) -> bool:
     award_key = str(award or "").strip().lower()
-    return publication_key_matches(key) or "final round" in award_key
+    return publication_key_matches(key) or "honorable mention" in award_key
 
 
 def publication_key_matches(key: str) -> bool:
-    return str(key or "").strip().lower() in FINAL_ROUND_PUBLICATION_KEYS
+    return str(key or "").strip().lower() in CONTEST_AWARD_PUBLICATION_KEYS
 
 
 def normalize_publication_category(value: str) -> str:

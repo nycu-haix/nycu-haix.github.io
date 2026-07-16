@@ -22,8 +22,8 @@
     ["shangjung", "/images/people/shangjung.webp"],
     ["sky", "/images/people/sky.webp"]
   ]);
-  const FINAL_ROUND_PUBLICATION_KEYS = new Set(["omniobserve", "longtermrms", "urop2026-omniobserve", "urop2026-longtermrms"]);
-  const FINAL_ROUND_NOTE = "Final round · May 13, 2026";
+  const CONTEST_AWARD_PUBLICATION_KEYS = new Set(["omniobserve", "longtermrms", "urop2026-omniobserve", "urop2026-longtermrms"]);
+  const CONTEST_AWARD_NOTE = "Honorable Mention · NYCU CS Undergraduate Project Contest, Spring 2026";
   const OMNIOBSERVE_PUBLICATION_KEYS = new Set(["omniobserve", "urop2026-omniobserve"]);
   const OMNIOBSERVE_VIDEO_URL = "https://youtu.be/l1eS5ZlEzFM";
   const PEOPLE_LIST_PATH = cleanPeopleListPath(document.body ? document.body.dataset.peopleRootPath : "") || "/people/";
@@ -781,7 +781,7 @@
 
   function inferPublicationAward(key) {
     if (publicationKeyMatches(key)) {
-      return FINAL_ROUND_NOTE;
+      return CONTEST_AWARD_NOTE;
     }
     return "";
   }
@@ -795,11 +795,11 @@
 
   function isHighlightedPublication(key, award) {
     const awardKey = String(award || "").trim().toLowerCase();
-    return publicationKeyMatches(key) || awardKey.includes("final round");
+    return publicationKeyMatches(key) || awardKey.includes("honorable mention");
   }
 
   function publicationKeyMatches(key) {
-    return FINAL_ROUND_PUBLICATION_KEYS.has(String(key || "").trim().toLowerCase());
+    return CONTEST_AWARD_PUBLICATION_KEYS.has(String(key || "").trim().toLowerCase());
   }
 
   function normalizePublicationCategory(value) {
