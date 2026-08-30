@@ -151,5 +151,60 @@
     "award": "",
     "category": "",
     "highlight": false
+  },
+  {
+    "key": "taichi2026-omniobserve",
+    "title": "OmniObserve: Revealing Hidden Consensus in Online Meetings",
+    "authors": "Shih-Kai Hong, Ethel Yu-Tsen Hsiao, Yi-Jie Chen, Jason Zhi-Jun Chang, Elvis Dragon Mao, Grace Yu-Chun Yen",
+    "author_usernames": "sky,ethel,ej,jason,em,grace",
+    "author_list": [
+      {
+        "name": "Shih-Kai Hong",
+        "username": "sky",
+        "photo": "/images/people/sky.webp",
+        "url": "/people/sky/"
+      },
+      {
+        "name": "Ethel Yu-Tsen Hsiao",
+        "username": "ethel",
+        "photo": "/images/people/Ethel.webp",
+        "url": "/people/ethel/"
+      },
+      {
+        "name": "Yi-Jie Chen",
+        "username": "ej",
+        "photo": "/images/people/EJ.webp",
+        "url": "/people/ej/"
+      },
+      {
+        "name": "Jason Zhi-Jun Chang",
+        "username": "jason",
+        "photo": "/images/people/jason.webp",
+        "url": "/people/jason/"
+      },
+      {
+        "name": "Elvis Dragon Mao",
+        "username": "em",
+        "photo": "/images/people/em.webp",
+        "url": "/people/em/"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "TAICHI 2026 Poster Session",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "",
+    "thumbnail": "/images/publications/OmniObserve.webp",
+    "pdf": "",
+    "website": "https://taichi2026.taiwanchi.org/program#day2",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
   }
 ]
