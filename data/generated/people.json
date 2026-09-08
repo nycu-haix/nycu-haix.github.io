@@ -561,6 +561,28 @@
     "og_image_local": "/og/cs112550152.webp"
   },
   {
+    "name": "楊士毅",
+    "username": "s113550097",
+    "role": "Undergraduate",
+    "degree": "",
+    "year": "2026",
+    "email": "s113550097.cs13@nycu.edu.tw",
+    "github": "https://github.com/0906094456jason-cmyk",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/s113550097.webp",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "電腦輔助溝通",
+      "智慧學習設計輔助"
+    ],
+    "seo_description": "楊士毅 | Undergraduate, Year 2026 | Tags: 電腦輔助溝通, 智慧學習設計輔助",
+    "og_image": "/images/people/s113550097.webp",
+    "og_image_local": "/og/s113550097.webp"
+  },
+  {
     "name": "歐陽辰宣",
     "username": "chensyuan",
     "role": "Undergraduate",
