@@ -341,6 +341,27 @@
     "og_image_local": "/og/wayne.webp"
   },
   {
+    "name": "石雲",
+    "username": "shi",
+    "role": "In-service Master",
+    "degree": "",
+    "year": "2026",
+    "email": "ys.cs14@nycu.edu.tw",
+    "github": "",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/shi.webp",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "Legal Technology"
+    ],
+    "seo_description": "石雲 | In-service Master, Year 2026 | Tags: Legal Technology",
+    "og_image": "/images/people/shi.webp",
+    "og_image_local": "/og/shi.webp"
+  },
+  {
     "name": "Elvis Dragon Mao",
     "username": "em",
     "role": "Undergraduate",
