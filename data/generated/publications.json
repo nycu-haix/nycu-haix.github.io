@@ -206,5 +206,961 @@
     "award": "",
     "category": "",
     "highlight": false
+  },
+  {
+    "key": "evaluaid-2026",
+    "title": "EvaluAId: Human-AI Collaborative Evaluation of Open-Ended Student Essays",
+    "authors": "Chao Zhang, Kexin Phyllis Ju, Xinyi Lu, Grace Yu-Chun Yen, Jeffrey M. Rzeszotarski",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chao Zhang"
+      },
+      {
+        "name": "Kexin Phyllis Ju"
+      },
+      {
+        "name": "Xinyi Lu"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Jeffrey M. Rzeszotarski"
+      }
+    ],
+    "proceedings": "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "https://doi.org/10.1145/3772318.3790814",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3772318.3790814",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "rationalizer-2026",
+    "title": "Rationalizer: Leveraging LLM to Support User Providing the Rationales Behind the Rating of Likert Scale Questionnaires",
+    "authors": "Meng Ting Shih, Po Yen Wu, Yun Chen Chang, Grace Yu-Chun Yen, Liwei Chan",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Meng Ting Shih"
+      },
+      {
+        "name": "Po Yen Wu"
+      },
+      {
+        "name": "Yun Chen Chang"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Liwei Chan"
+      }
+    ],
+    "proceedings": "Proceedings of the 31st International Conference on Intelligent User Interfaces",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "https://doi.org/10.1145/3742413.3789171",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "disentangling-threads-2026",
+    "title": "Disentangling Threads: Exploring the Potential of LLM-Supported Discussion Forum Analysis for Community Insight",
+    "authors": "Tony Wang Li, Zhiqing Wang, Thanh-Nha Tran, Grace Yu-Chun Yen, Steven Dow",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Tony Wang Li"
+      },
+      {
+        "name": "Zhiqing Wang"
+      },
+      {
+        "name": "Thanh-Nha Tran"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Steven Dow"
+      }
+    ],
+    "proceedings": "ACM Collective Intelligence 2026 (accepted; preprint available)",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "https://doi.org/10.1145/3834581.3838629",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://arxiv.org/pdf/2608.20591",
+    "website": "https://arxiv.org/abs/2608.20591",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "assistive-meal-preparation-2026",
+    "title": "Structuring User Preferences for Task Delegation and Proactivity in Assistive Meal Preparation: Insights from a Survey Study",
+    "authors": "Han Pan, Ti-Chung Cheng, Grace Yu-Chun Yen, Yi-Ting Chen",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Han Pan"
+      },
+      {
+        "name": "Ti-Chung Cheng"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Yi-Ting Chen"
+      }
+    ],
+    "proceedings": "6th Workshop on Lifelong Learning and Personalization in Long-Term Human-Robot Interaction (LEAP-HRI 2026)",
+    "year": "2026",
+    "year_num": 2026,
+    "doi": "",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://leap-hri.github.io/docs/LEAP-HRI_2026_paper_7.pdf",
+    "website": "https://leap-hri.github.io/",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "friction-2025",
+    "title": "Friction: Deciphering Writing Feedback into Writing Revisions through LLM-Assisted Reflection",
+    "authors": "Chao Zhang, Kexin Ju, Peter Bidoshi, Grace Yu-Chun Yen, Jeffrey M. Rzeszotarski",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chao Zhang"
+      },
+      {
+        "name": "Kexin Ju"
+      },
+      {
+        "name": "Peter Bidoshi"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Jeffrey M. Rzeszotarski"
+      }
+    ],
+    "proceedings": "Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems",
+    "year": "2025",
+    "year_num": 2025,
+    "doi": "https://doi.org/10.1145/3706598.3714316",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3706598.3714316",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "synthia-2025",
+    "title": "Synthia: Visually Interpreting and Synthesizing Feedback for Writing Revision",
+    "authors": "Chao Zhang, Kexin Ju, Zhuolun Han, Grace Yu-Chun Yen, Jeffrey M. Rzeszotarski",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chao Zhang"
+      },
+      {
+        "name": "Kexin Ju"
+      },
+      {
+        "name": "Zhuolun Han"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Jeffrey M. Rzeszotarski"
+      }
+    ],
+    "proceedings": "Proceedings of the 38th Annual ACM Symposium on User Interface Software and Technology",
+    "year": "2025",
+    "year_num": 2025,
+    "doi": "https://doi.org/10.1145/3746059.3747703",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3746059.3747703",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "feedstack-2025",
+    "title": "Feedstack: Layering Structured Representations Over Unstructured Feedback to Scaffold Human–AI Conversation",
+    "authors": "Hannah Vy Nguyen, Grace Yu-Chun Yen, Omar Shakir, Hang Huynh, Sebastian Gutierrez, June A Smith, Sheila Jimenez, Salma E Abdelgelil, Stephen MacNeil",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Hannah Vy Nguyen"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Omar Shakir"
+      },
+      {
+        "name": "Hang Huynh"
+      },
+      {
+        "name": "Sebastian Gutierrez"
+      },
+      {
+        "name": "June A Smith"
+      },
+      {
+        "name": "Sheila Jimenez"
+      },
+      {
+        "name": "Salma E Abdelgelil"
+      },
+      {
+        "name": "Stephen MacNeil"
+      }
+    ],
+    "proceedings": "Proceedings of the 7th ACM Conference on Conversational User Interfaces",
+    "year": "2025",
+    "year_num": 2025,
+    "doi": "https://doi.org/10.1145/3719160.3737636",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "when-to-give-feedback-2024",
+    "title": "When to Give Feedback: Exploring Tradeoffs in the Timing of Design Feedback",
+    "authors": "Jane L. E, Grace Yu-Chun Yen, Isabelle Yan Pan, Grace Lin, Mingyi Li, Hyoungwook Jin, Mengyi Chen, Haijun Xia, Steven P. Dow",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Jane L. E"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Isabelle Yan Pan"
+      },
+      {
+        "name": "Grace Lin"
+      },
+      {
+        "name": "Mingyi Li"
+      },
+      {
+        "name": "Hyoungwook Jin"
+      },
+      {
+        "name": "Mengyi Chen"
+      },
+      {
+        "name": "Haijun Xia"
+      },
+      {
+        "name": "Steven P. Dow"
+      }
+    ],
+    "proceedings": "Creativity and Cognition",
+    "year": "2024",
+    "year_num": 2024,
+    "doi": "https://doi.org/10.1145/3635636.3656183",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3635636.3656183",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "processgallery-2024",
+    "title": "ProcessGallery: Contrasting Early and Late Iterations for Design Principle Learning",
+    "authors": "Grace Yu-Chun Yen, Jane L. E, Hyoungwook Jin, Mingyi Li, Grace Lin, Isabelle Yan Pan, Steven P. Dow",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Jane L. E"
+      },
+      {
+        "name": "Hyoungwook Jin"
+      },
+      {
+        "name": "Mingyi Li"
+      },
+      {
+        "name": "Grace Lin"
+      },
+      {
+        "name": "Isabelle Yan Pan"
+      },
+      {
+        "name": "Steven P. Dow"
+      }
+    ],
+    "proceedings": "Proceedings of the ACM on Human-Computer Interaction 8 (CSCW1)",
+    "year": "2024",
+    "year_num": 2024,
+    "doi": "https://doi.org/10.1145/3637389",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3637389",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "regular-visitors-2024",
+    "title": "“I Prefer Regular Visitors to Answer My Questions”: Users' Desired Experiential Background of Contributors for Location-based Crowdsourcing Platform",
+    "authors": "Fang-Yu Lin, Pei-Hua Tsai, Chia-Yi Lee, Yi-Ting Ho, Yao-Kuang Chen, Grace Yu-Chun Yen, Yung-Ju Chang",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Fang-Yu Lin"
+      },
+      {
+        "name": "Pei-Hua Tsai"
+      },
+      {
+        "name": "Chia-Yi Lee"
+      },
+      {
+        "name": "Yi-Ting Ho"
+      },
+      {
+        "name": "Yao-Kuang Chen"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Yung-Ju Chang"
+      }
+    ],
+    "proceedings": "Proceedings of the CHI Conference on Human Factors in Computing Systems",
+    "year": "2024",
+    "year_num": 2024,
+    "doi": "https://doi.org/10.1145/3613904.3642520",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3613904.3642520",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "visualizing-peer-feedback-2023",
+    "title": "Visualizing Topics and Opinions Helps Students Interpret Large Collections of Peer Feedback for Creative Projects",
+    "authors": "Patrick Crain, Jaewook Lee, Grace Yu-Chun Yen, Joy Kim, Alyssa Aiello, Brian Bailey",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Patrick Crain"
+      },
+      {
+        "name": "Jaewook Lee"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Joy Kim"
+      },
+      {
+        "name": "Alyssa Aiello"
+      },
+      {
+        "name": "Brian Bailey"
+      }
+    ],
+    "proceedings": "ACM Transactions on Computer-Human Interaction 30 (3)",
+    "year": "2023",
+    "year_num": 2023,
+    "doi": "https://doi.org/10.1145/3571817",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3571817",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "seeking-exemplars-2022",
+    "title": "Seeking Exemplars in the Wild: Exploring How Students Find Design Examples to Support Personalized Learning",
+    "authors": "Grace Yu-Chun Yen, Steven P. Dow",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Steven P. Dow"
+      }
+    ],
+    "proceedings": "Proceedings of the Ninth ACM Conference on Learning @ Scale",
+    "year": "2022",
+    "year_num": 2022,
+    "doi": "https://doi.org/10.1145/3491140.3528303",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3491140.3528303",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "desired-crowdsourcing-experiences-2022",
+    "title": "What Kinds of Experiences Do You Desire? A Preliminary Study of the Desired Experiences of Contributors to Location-Based Mobile Crowdsourcing",
+    "authors": "Fang-Yu Lin, Chia-Yi Lee, Yi-Ting Ho, Yao-Kuang Chen, Grace Yu-Chun Yen, Yung-Ju Chang",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Fang-Yu Lin"
+      },
+      {
+        "name": "Chia-Yi Lee"
+      },
+      {
+        "name": "Yi-Ting Ho"
+      },
+      {
+        "name": "Yao-Kuang Chen"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Yung-Ju Chang"
+      }
+    ],
+    "proceedings": "CHI Conference on Human Factors in Computing Systems Extended Abstracts",
+    "year": "2022",
+    "year_num": 2022,
+    "doi": "https://doi.org/10.1145/3491101.3519744",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3491101.3519744",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "narratives-diagrams-2021",
+    "title": "Narratives + Diagrams: An Integrated Approach for Externalizing and Sharing People's Causal Beliefs",
+    "authors": "Chi-Hsien (Eric) Yen, Haocong Cheng, Grace Yu-Chun Yen, Brian P. Bailey, Yun Huang",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chi-Hsien (Eric) Yen"
+      },
+      {
+        "name": "Haocong Cheng"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Brian P. Bailey"
+      },
+      {
+        "name": "Yun Huang"
+      }
+    ],
+    "proceedings": "Proceedings of the ACM on Human-Computer Interaction 5 (CSCW2)",
+    "year": "2021",
+    "year_num": 2021,
+    "doi": "https://doi.org/10.1145/3479588",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://dl.acm.org/doi/pdf/10.1145/3479588",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "feedback-interpretation-dissertation-2021",
+    "title": "Scaffolding feedback interpretation process for creative work through reflection, paraphrasing, and information visualization",
+    "authors": "Grace Yu-Chun Yen",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "Ph.D. dissertation, University of Illinois at Urbana-Champaign",
+    "year": "2021",
+    "year_num": 2021,
+    "doi": "",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "",
+    "website": "https://www.ideals.illinois.edu/items/121099",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "decipher-2020",
+    "title": "Decipher: An Interactive Visualization Tool for Interpreting Unstructured Design Feedback from Multiple Providers",
+    "authors": "Grace Yu-Chun Yen, Joy O. Kim, Brian P. Bailey",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Joy O. Kim"
+      },
+      {
+        "name": "Brian P. Bailey"
+      }
+    ],
+    "proceedings": "Proceedings of the 2020 CHI Conference on Human Factors in Computing Systems",
+    "year": "2020",
+    "year_num": 2020,
+    "doi": "https://doi.org/10.1145/3313831.3376380",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/paper_decipher.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "mediation-analysis-2019",
+    "title": "An intelligent assistant for mediation analysis in visual analytics",
+    "authors": "Chi-Hsien Yen, Grace Yu-Chun Yen, Wai-Tat Fu",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chi-Hsien Yen"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Wai-Tat Fu"
+      }
+    ],
+    "proceedings": "Proceedings of the 24th International Conference on Intelligent User Interfaces",
+    "year": "2019",
+    "year_num": 2019,
+    "doi": "https://doi.org/10.1145/3301275.3302325",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c7_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "smart-ward-2018",
+    "title": "An Empirical Study on Engineering a Real-World Smart Ward Using Pervasive Technologies",
+    "authors": "Chun-Feng Liao, Grace Yu-Chun Yen, Yu-Chiao Huang, Li-Chen Fu",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Chun-Feng Liao"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Yu-Chiao Huang"
+      },
+      {
+        "name": "Li-Chen Fu"
+      }
+    ],
+    "proceedings": "IEEE Systems Journal 12 (1)",
+    "year": "2018",
+    "year_num": 2018,
+    "doi": "https://doi.org/10.1109/jsyst.2016.2606129",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/j1_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "listen-to-others-2017",
+    "title": "Listen to Others, Listen to Yourself: Combining Feedback Review and Reflection to Improve Iterative Design",
+    "authors": "Grace Yu-Chun Yen, Steven P. Dow, Elizabeth Gerber, Brian P. Bailey",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Steven P. Dow"
+      },
+      {
+        "name": "Elizabeth Gerber"
+      },
+      {
+        "name": "Brian P. Bailey"
+      }
+    ],
+    "proceedings": "Proceedings of the 2017 ACM SIGCHI Conference on Creativity and Cognition",
+    "year": "2017",
+    "year_num": 2017,
+    "doi": "https://doi.org/10.1145/3059454.3059468",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c6_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "class-or-wild-2017",
+    "title": "From in the Class or in the Wild?: Peers Provide Better Design Feedback Than External Crowds",
+    "authors": "Helen Wauck, Grace Yu-Chun Yen, Wai-Tat Fu, Elizabeth Gerber, Steven P. Dow, Brian P. Bailey",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Helen Wauck"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Wai-Tat Fu"
+      },
+      {
+        "name": "Elizabeth Gerber"
+      },
+      {
+        "name": "Steven P. Dow"
+      },
+      {
+        "name": "Brian P. Bailey"
+      }
+    ],
+    "proceedings": "Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems",
+    "year": "2017",
+    "year_num": 2017,
+    "doi": "https://doi.org/10.1145/3025453.3025477",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c5_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "crowd-feedback-doctoral-consortium-2017",
+    "title": "Enhancing the Usage of Crowd Feedback for Iterative Design",
+    "authors": "Grace Yu-Chun Yen",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      }
+    ],
+    "proceedings": "Proceedings of the 2017 ACM SIGCHI Conference on Creativity and Cognition — Doctoral Consortium",
+    "year": "2017",
+    "year_num": 2017,
+    "doi": "https://doi.org/10.1145/3059454.3078701",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "crowd-feedback-exchange-2016",
+    "title": "Social Network, Web Forum, or Task Market?: Comparing Different Crowd Genres for Design Feedback Exchange",
+    "authors": "Grace Yu-Chun Yen, Steven P. Dow, Elizabeth Gerber, Brian P. Bailey",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Steven P. Dow"
+      },
+      {
+        "name": "Elizabeth Gerber"
+      },
+      {
+        "name": "Brian P. Bailey"
+      }
+    ],
+    "proceedings": "Proceedings of the 2016 ACM Conference on Designing Interactive Systems",
+    "year": "2016",
+    "year_num": 2016,
+    "doi": "https://doi.org/10.1145/2901790.2901820",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c4_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "situation-aware-smart-wards-2012",
+    "title": "An Extensible Situation-Aware Caring System for Real-World Smart Wards",
+    "authors": "Yu-Chiao Huang, Chun-Feng Liao, Grace Yu-Chun Yen, Li-Jen Hou, Li-Chen Fu, Chia-Hui Chen, Chiung-Nien Chen",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Yu-Chiao Huang"
+      },
+      {
+        "name": "Chun-Feng Liao"
+      },
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Li-Jen Hou"
+      },
+      {
+        "name": "Li-Chen Fu"
+      },
+      {
+        "name": "Chia-Hui Chen"
+      },
+      {
+        "name": "Chiung-Nien Chen"
+      }
+    ],
+    "proceedings": "International Conference on Smart Homes and Health Telematics (ICOST 2012)",
+    "year": "2012",
+    "year_num": 2012,
+    "doi": "https://doi.org/10.1007/978-3-642-30779-9_24",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c3_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "elderly-caring-2011",
+    "title": "Towards an Evidence-Based and Context-Aware Elderly Caring System Using Persuasive Engagement",
+    "authors": "Grace Yu-Chun Yen, Ching Hu Lu, Yi Chung Cheng, Jing Siang Chen, Li Chen Fu",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Ching Hu Lu"
+      },
+      {
+        "name": "Yi Chung Cheng"
+      },
+      {
+        "name": "Jing Siang Chen"
+      },
+      {
+        "name": "Li Chen Fu"
+      }
+    ],
+    "proceedings": "Universal Access in Human-Computer Interaction: Context Diversity (HCII 2011)",
+    "year": "2011",
+    "year_num": 2011,
+    "doi": "https://doi.org/10.1007/978-3-642-21666-4_27",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c1_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "bedroom-awareness-2011",
+    "title": "Human-Centric Situational Awareness in the Bedroom",
+    "authors": "Grace Yu-Chun Yen, Jiun-Yi Li, Ching Hu Lu, Tsung Han Yang, Li Chen Fu",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Jiun-Yi Li"
+      },
+      {
+        "name": "Ching Hu Lu"
+      },
+      {
+        "name": "Tsung Han Yang"
+      },
+      {
+        "name": "Li Chen Fu"
+      }
+    ],
+    "proceedings": "International Conference on Smart Homes and Health Telematics (ICOST 2011)",
+    "year": "2011",
+    "year_num": 2011,
+    "doi": "https://doi.org/10.1007/978-3-642-21535-3_10",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/c2_grace.pdf",
+    "website": "",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
+  },
+  {
+    "key": "to-stop-or-not-to-stop",
+    "title": "To Stop or Not to Stop? A Case Study of an Early intervention for Data Collection",
+    "authors": "Grace Yu-Chun Yen, Hidy Kong, Jingning Zhang, Yu Wu, Qian Cheng",
+    "author_usernames": "",
+    "author_list": [
+      {
+        "name": "Grace Yu-Chun Yen",
+        "username": "grace",
+        "photo": "/images/people/grace-yen.webp",
+        "url": "/people/grace/"
+      },
+      {
+        "name": "Hidy Kong"
+      },
+      {
+        "name": "Jingning Zhang"
+      },
+      {
+        "name": "Yu Wu"
+      },
+      {
+        "name": "Qian Cheng"
+      }
+    ],
+    "proceedings": "CS565 Human-Computer Interaction course project report, University of Illinois at Urbana-Champaign",
+    "year": "",
+    "year_num": 0,
+    "doi": "",
+    "thumbnail": "/images/publications/paper-placeholder.webp",
+    "pdf": "https://gracetfg2.github.io/paper/CS565.pdf",
+    "website": "https://gracetfg2.github.io/",
+    "video": "",
+    "award": "",
+    "category": "",
+    "highlight": false
   }
 ]
