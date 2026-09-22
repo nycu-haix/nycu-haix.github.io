@@ -5,7 +5,8 @@
 {{ $keywords := slice "HAIX Lab" "NYCU" "Human-AI Interaction" "HCI" "Creative Computing" "Cognition" "Social Computing" "Taiwan" }}
 {{ $newsItems := site.Data.generated.news | default (slice) }}
 {{ $researchItems := site.Data.generated.research | default (slice) }}
-{{ $publications := site.Data.generated.publications | default (slice) }}
+{{ $publicationLimit := 5 }}
+{{ $publications := first $publicationLimit (site.Data.generated.publications | default (slice)) }}
 {{ $previewParts := slice }}
 {{ if gt (len $newsItems) 0 }}
   {{ $newsPreview := slice }}
@@ -188,8 +189,8 @@
             {{ end }}
           </div>
 
-          <h3>Latest Publications <a class="subtle" href="{{ "/research/" | relURL }}">see all &rarr;</a></h3>
-          <div id="publications-list" class="publication-list" aria-live="polite" data-feed-state="pending">
+          <h3>Latest Publications</h3>
+          <div id="publications-list" class="publication-list" aria-live="polite" data-feed-state="pending" data-limit="{{ $publicationLimit }}">
             {{ if gt (len $publications) 0 }}
               {{ range $publications }}
                 {{ $thumb := .thumbnail | default "/images/publications/paper-placeholder.webp" }}
@@ -236,6 +237,7 @@
               {{ end }}
             {{ end }}
           </div>
+          <p><a href="{{ "/research/#publications" | relURL }}">View all publications &rarr;</a></p>
         </div>
       </section>
 

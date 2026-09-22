@@ -1839,7 +1839,12 @@
 
     const fragment = document.createDocumentFragment();
 
-    publications.forEach((publication, index) => {
+    const limit = Number(publicationsContainer.dataset.limit);
+    const visiblePublications = Number.isInteger(limit) && limit > 0
+      ? publications.slice(0, limit)
+      : publications;
+
+    visiblePublications.forEach((publication, index) => {
       const card = document.createElement("article");
       card.className = publication.highlight ? "publication-card publication-card--highlight" : "publication-card";
       card.style.animationDelay = `${Math.min(index * 65, 450)}ms`;
