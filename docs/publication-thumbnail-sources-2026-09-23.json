@@ -1,0 +1,228 @@
+{
+  "date": "2026-09-23",
+  "notes": [
+    "Shared project thumbnails on Grace’s former website are retained for associated publications.",
+    "Original four publication thumbnails are unchanged."
+  ],
+  "thumbnails": [
+    {
+      "key": "evaluaid-2026",
+      "thumbnail": "/images/publications/evaluaid-2026.webp",
+      "source_page": "https://chaozhang.design/",
+      "source_asset": "https://chaozhang.design/assets/publications/evaluaid_chi26/teaser.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "rationalizer-2026",
+      "thumbnail": "/images/publications/rationalizer-2026.webp",
+      "source_page": "https://people.cs.nycu.edu.tw/~liweichan/",
+      "source_asset": "https://people.cs.nycu.edu.tw/~liweichan/placeholders/project_icons/rationalizer_icon.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "disentangling-threads-2026",
+      "thumbnail": "/images/publications/disentangling-threads-2026.webp",
+      "source_asset": "https://arxiv.org/pdf/2608.20591",
+      "page": 3,
+      "crop_points": [
+        45,
+        76,
+        565,
+        256
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 1: topic extraction workflow"
+    },
+    {
+      "key": "assistive-meal-preparation-2026",
+      "thumbnail": "/images/publications/assistive-meal-preparation-2026.webp",
+      "source_asset": "https://leap-hri.github.io/docs/LEAP-HRI_2026_paper_7.pdf",
+      "page": 4,
+      "crop_points": [
+        150,
+        80,
+        460,
+        252
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 2: task delegation and proactivity heatmap"
+    },
+    {
+      "key": "friction-2025",
+      "thumbnail": "/images/publications/friction-2025.webp",
+      "source_page": "https://chaozhang.design/",
+      "source_asset": "https://chaozhang.design/assets/publications/friction_chi25/teaser.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "synthia-2025",
+      "thumbnail": "/images/publications/synthia-2025.webp",
+      "source_page": "https://chaozhang.design/",
+      "source_asset": "https://chaozhang.design/assets/publications/synthia_uist25/teaser.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "feedstack-2025",
+      "thumbnail": "/images/publications/feedstack-2025.webp",
+      "source_asset": "https://arxiv.org/pdf/2506.03052",
+      "page": 4,
+      "crop_points": [
+        110,
+        88,
+        540,
+        363
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 1: system interface"
+    },
+    {
+      "key": "when-to-give-feedback-2024",
+      "thumbnail": "/images/publications/when-to-give-feedback-2024.webp",
+      "source_page": "https://jhw123.github.io/",
+      "source_asset": "https://jhw123.github.io/posters/realtime-feedback.webp",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "processgallery-2024",
+      "thumbnail": "/images/publications/processgallery-2024.webp",
+      "source_page": "https://jhw123.github.io/",
+      "source_asset": "https://jhw123.github.io/posters/processgallery.webp",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "regular-visitors-2024",
+      "thumbnail": "/images/publications/regular-visitors-2024.webp",
+      "source_asset": "https://people.cs.nycu.edu.tw/~armuro/pubs/lin-et-al-2024-chi.pdf",
+      "page": 5,
+      "crop_points": [
+        50,
+        78,
+        563,
+        272
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 1: experience and information sorting cards"
+    },
+    {
+      "key": "visualizing-peer-feedback-2023",
+      "thumbnail": "/images/publications/visualizing-peer-feedback-2023.webp",
+      "source_page": "https://jaewook-lee.com/",
+      "source_asset": "https://jaewook-lee.com/img/papers/Visualizing_Peer_Feedback.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "desired-crowdsourcing-experiences-2022",
+      "thumbnail": "/images/publications/desired-crowdsourcing-experiences-2022.webp",
+      "source_asset": "https://people.cs.nycu.edu.tw/~armuro/pubs/lin-et-al-2022-chi-lbw.pdf",
+      "page": 2,
+      "crop_points": [
+        80,
+        78,
+        531,
+        231
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 1: sorting cards"
+    },
+    {
+      "key": "decipher-2020",
+      "thumbnail": "/images/publications/decipher-2020.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/decipher.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "mediation-analysis-2019",
+      "thumbnail": "/images/publications/mediation-analysis-2019.webp",
+      "source_asset": "https://gracetfg2.github.io/paper/c7_grace.pdf",
+      "page": 3,
+      "crop_points": [
+        104,
+        355,
+        509,
+        553
+      ],
+      "method": "Rendered published PDF figure",
+      "description": "Figure 3: analysis interface"
+    },
+    {
+      "key": "smart-ward-2018",
+      "thumbnail": "/images/publications/smart-ward-2018.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/smartward.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "listen-to-others-2017",
+      "thumbnail": "/images/publications/listen-to-others-2017.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/crowd.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "class-or-wild-2017",
+      "thumbnail": "/images/publications/class-or-wild-2017.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/reflection.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "crowd-feedback-doctoral-consortium-2017",
+      "thumbnail": "/images/publications/crowd-feedback-doctoral-consortium-2017.webp",
+      "source_asset": "https://gracetfg2.github.io/paper/c_grace.pdf",
+      "page": 1,
+      "crop_points": null,
+      "method": "Rendered paper first page",
+      "description": "Paper first page"
+    },
+    {
+      "key": "crowd-feedback-exchange-2016",
+      "thumbnail": "/images/publications/crowd-feedback-exchange-2016.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/reflection.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "situation-aware-smart-wards-2012",
+      "thumbnail": "/images/publications/situation-aware-smart-wards-2012.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/smartward.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "elderly-caring-2011",
+      "thumbnail": "/images/publications/elderly-caring-2011.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/nursingcycle.jpg",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "bedroom-awareness-2011",
+      "thumbnail": "/images/publications/bedroom-awareness-2011.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/hospital.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    },
+    {
+      "key": "to-stop-or-not-to-stop",
+      "thumbnail": "/images/publications/to-stop-or-not-to-stop.webp",
+      "source_page": "https://gracetfg2.github.io/",
+      "source_asset": "https://gracetfg2.github.io/photo/565flow.png",
+      "method": "Author website image; resized to at most 1000 px and encoded as WebP without cropping."
+    }
+  ],
+  "pending": [
+    {
+      "key": "seeking-exemplars-2022",
+      "title": "Seeking Exemplars in the Wild: Exploring How Students Find Design Examples to Support Personalized Learning"
+    },
+    {
+      "key": "narratives-diagrams-2021",
+      "title": "Narratives + Diagrams: An Integrated Approach for Externalizing and Sharing People's Causal Beliefs"
+    },
+    {
+      "key": "feedback-interpretation-dissertation-2021",
+      "title": "Scaffolding feedback interpretation process for creative work through reflection, paraphrasing, and information visualization"
+    }
+  ]
+}
