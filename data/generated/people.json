@@ -299,6 +299,25 @@
     "og_image_local": "/og/simon.webp"
   },
   {
+    "name": "廖翊翔 / Leo",
+    "username": "leo",
+    "role": "Master",
+    "degree": "",
+    "year": "2026",
+    "email": "leo271828.cs15@nycu.edu.tw",
+    "github": "https://github.com/leo271828",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/leo.webp",
+    "description": "",
+    "profile_markdown": "Joined HAIX Lab in September 2026.",
+    "tags": [],
+    "seo_description": "廖翊翔 / Leo | Master, Year 2026 | Joined HAIX Lab in September 2026.",
+    "og_image": "/images/people/leo.webp",
+    "og_image_local": "/og/leo.webp"
+  },
+  {
     "name": "李孟澤",
     "username": "mengzelee",
     "role": "Master",
