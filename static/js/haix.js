@@ -2353,7 +2353,9 @@
         });
       },
       {
-        threshold: 0.15,
+        // Long publication sections can exceed the viewport by many times.
+        // Reveal on entry so they do not need 15% of their height on screen.
+        threshold: 0,
         rootMargin: "0px 0px -8% 0px"
       }
     );
