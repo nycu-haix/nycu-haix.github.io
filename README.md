@@ -1,7 +1,8 @@
 # NYCU Human-AI & Creative Computing (HAIX) Lab Website
 
 This site is a Hugo website with a Homepage and People pages:
-- Homepage sections: `News`, `Research`, `Info`
+- Homepage sections: `News` (latest five), `Research`, `Info`
+- Complete News archive: `/news/`, updated from the same spreadsheet feed
 - Dedicated People page: `/people/`, with profile pages at `/people/<username>/`
 - Manual people photos with local WebP assets and WebP placeholders
 - Spreadsheet/CSV-driven people, news, publications, and research areas

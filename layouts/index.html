@@ -3,7 +3,8 @@
 {{ $siteDesc := .Site.Params.description | default "Human-AI & Creative Computing (HAIX) Lab website" }}
 {{ $labMeta := "Human-AI & Creative Computing (HAIX) Lab, National Yang Ming Chiao Tung University, Hsinchu, Taiwan" }}
 {{ $keywords := slice "HAIX Lab" "NYCU" "Human-AI Interaction" "HCI" "Creative Computing" "Cognition" "Social Computing" "Taiwan" }}
-{{ $newsItems := site.Data.generated.news | default (slice) }}
+{{ $newsLimit := 5 }}
+{{ $newsItems := first $newsLimit (site.Data.generated.news | default (slice)) }}
 {{ $researchItems := site.Data.generated.research | default (slice) }}
 {{ $publicationLimit := 5 }}
 {{ $publications := first $publicationLimit (site.Data.generated.publications | default (slice)) }}
@@ -126,6 +127,7 @@
       </div>
       <div class="col-right">
         <nav class="menu" aria-label="Main navigation">
+          <a href="{{ "/news/" | relURL }}">News</a>
           <a href="{{ "/research/" | relURL }}">Research</a>
           <a href="{{ "/people/" | relURL }}">People</a>
         </nav>
@@ -149,7 +151,7 @@
       <section id="news" class="row section-row reveal">
         <div class="col-main">
           <h2>News</h2>
-          <div id="news-list" class="news-list" aria-live="polite" data-feed-state="pending">
+          <div id="news-list" class="news-list" aria-live="polite" data-feed-state="pending" data-limit="{{ $newsLimit }}">
             {{ if gt (len $newsItems) 0 }}
               {{ range $newsItems }}
                 <article class="news-item">
@@ -165,6 +167,7 @@
               <p class="loading">Loading news...</p>
             {{ end }}
           </div>
+          <p><a href="{{ "/news/" | relURL }}">View all news →</a></p>
         </div>
       </section>
 

@@ -2095,7 +2095,10 @@
 
     const fragment = document.createDocumentFragment();
 
-    newsItems.forEach((item, index) => {
+    const limit = Number(newsContainer.dataset.limit);
+    const visibleNews = Number.isInteger(limit) && limit > 0 ? newsItems.slice(0, limit) : newsItems;
+
+    visibleNews.forEach((item, index) => {
       const card = document.createElement("article");
       card.className = "news-item";
       card.style.animationDelay = `${Math.min(index * 55, 450)}ms`;
