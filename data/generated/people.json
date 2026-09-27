@@ -762,12 +762,12 @@
     "website": "",
     "photo": "/images/people/jimmy.webp",
     "description": "",
-    "profile_markdown": "",
+    "profile_markdown": "## Master's Thesis (2026)\n\n**ExampleBridge：連結寫作教學影片與範例文本以支援讀書計畫寫作**\n\nExampleBridge: Connecting Video-Based Writing Instruction with Writing Samples to Support Statement of Purpose Writing\n\n- Degree: Master's, Institute of Multimedia Engineering, National Yang Ming Chiao Tung University\n- Advisor: Grace Yu-Chun Yen (顏羽君)\n- [Thesis record — NYCU Library](https://hdl.handle.net/20.500.14371/91077)\n- Electronic full text and abstract available from August 20, 2031; the library record lists the print thesis as immediately available.",
     "tags": [
       "AIED",
       "寫作學習"
     ],
-    "seo_description": "吳季旻 | Alumni, Year 2024 | Tags: AIED, 寫作學習",
+    "seo_description": "吳季旻 | Alumni, Year 2024 | Tags: AIED, 寫作學習 | ## Master's Thesis (2026) ExampleBridge：連結寫作教學影片與範例文本以支援讀書計畫寫作 ExampleBridge: Connecting Video-Based Writing Instruction with Writing Samples to Support Statement of Purpose Writing - Degree: Master's, Institute of Multimedia Engineering, National Yang Ming Chiao Tung University - Advisor: Grace Yu-Chun Yen (顏羽君) - Thesis record — NYCU Library - Electronic full text and abstract available from August 20, 2031; the library record lists the print thesis as immediately available.",
     "og_image": "/images/people/jimmy.webp",
     "og_image_local": "/og/jimmy.webp"
   }

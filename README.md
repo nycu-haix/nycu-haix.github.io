@@ -114,6 +114,10 @@ People route behavior:
 - Short links `/<username>/` are generated as aliases and redirect to `/people/<username>/`
 - Unknown paths still redirect through `static/404.html`
 
+### Graduate alumni theses
+
+Set `role` to `Alumni` and keep `year` as the admission year. In each master's or doctoral alumnus's `profile_markdown`, add a `Master's Thesis (YEAR)` or `Doctoral Dissertation (YEAR)` section with the verified title, degree/program, advisor, and library record link. State any full-text embargo separately. Preserve other profile content and only add information confirmed by an authoritative record. This field appears in both the profile page and the People modal and is maintained in the existing Google Sheet.
+
 ### News (`news.csv`)
 
 Required:
