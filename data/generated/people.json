@@ -41,28 +41,6 @@
     "og_image_local": "/og/ywliu.webp"
   },
   {
-    "name": "吳季旻",
-    "username": "jimmy",
-    "role": "Master",
-    "degree": "",
-    "year": "2024",
-    "email": "jimmy0622.cs13@nycu.edu.tw",
-    "github": "https://github.com/jimmy0622",
-    "orcid": "",
-    "scholar": "",
-    "website": "",
-    "photo": "/images/people/jimmy.webp",
-    "description": "",
-    "profile_markdown": "",
-    "tags": [
-      "AIED",
-      "寫作學習"
-    ],
-    "seo_description": "吳季旻 | Master, Year 2024 | Tags: AIED, 寫作學習",
-    "og_image": "/images/people/jimmy.webp",
-    "og_image_local": "/og/jimmy.webp"
-  },
-  {
     "name": "林念慈",
     "username": "veronica",
     "role": "Master",
@@ -770,5 +748,27 @@
     "seo_description": "郭采納 | Undergraduate, Year 2026",
     "og_image": "/images/people/popo.webp",
     "og_image_local": "/og/popo.webp"
+  },
+  {
+    "name": "吳季旻",
+    "username": "jimmy",
+    "role": "Alumni",
+    "degree": "",
+    "year": "2024",
+    "email": "jimmy0622.cs13@nycu.edu.tw",
+    "github": "https://github.com/jimmy0622",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/jimmy.webp",
+    "description": "",
+    "profile_markdown": "",
+    "tags": [
+      "AIED",
+      "寫作學習"
+    ],
+    "seo_description": "吳季旻 | Alumni, Year 2024 | Tags: AIED, 寫作學習",
+    "og_image": "/images/people/jimmy.webp",
+    "og_image_local": "/og/jimmy.webp"
   }
 ]

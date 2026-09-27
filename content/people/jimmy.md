@@ -1,10 +1,10 @@
 ---
 title: "吳季旻"
 slug: "jimmy"
-description: "吳季旻 | Master, Year 2024 | Tags: AIED, 寫作學習"
+description: "吳季旻 | Alumni, Year 2024 | Tags: AIED, 寫作學習"
 profile_summary: ""
 username: "jimmy"
-role: "Master"
+role: "Alumni"
 degree: ""
 year: "2024"
 email: "jimmy0622.cs13@nycu.edu.tw"

@@ -22,6 +22,7 @@
   (dict "key" "advisor" "title" "Advisor" "match" (slice "prof" "faculty" "pi" "advisor" "教師" "教授"))
   (dict "key" "master" "title" "Master Students" "match" (slice "master" "ms" "碩士"))
   (dict "key" "undergraduate" "title" "Undergraduate Students" "match" (slice "undergrad" "bachelor" "大學部" "學士"))
+  (dict "key" "alumni" "title" "Alumni" "match" (slice "alumni"))
 }}
 <head>
   <meta charset="utf-8">
@@ -84,6 +85,7 @@
             {{ range $needle := $section.match }}
               {{ if in $roleKey (lower $needle) }}{{ $matchesSection = true }}{{ end }}
             {{ end }}
+            {{ if and (in $roleKey "alumni") (ne $section.key "alumni") }}{{ $matchesSection = false }}{{ end }}
             {{ if $matchesSection }}
               {{ $sectionPeople = $sectionPeople | append . }}
               {{ $renderedPeople = $renderedPeople | append .RelPermalink }}

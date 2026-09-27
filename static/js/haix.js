@@ -934,6 +934,7 @@
       { key: "advisor", title: "Advisor", people: [] },
       { key: "master", title: "Master Students", people: [] },
       { key: "undergraduate", title: "Undergraduate Students", people: [] },
+      { key: "alumni", title: "Alumni", people: [] },
       { key: "other", title: "Other Members", people: [] }
     ];
     const sectionByKey = new Map(sections.map((section) => [section.key, section]));
@@ -949,6 +950,8 @@
   function peopleSectionKey(people) {
     const normalized = `${people.role || ""} ${people.degree || ""}`.toLowerCase();
     const roleText = `${people.role || ""} ${people.degree || ""}`;
+
+    if (normalized.includes("alumni")) return "alumni";
 
     if (
       normalized.includes("pi") ||
