@@ -1,7 +1,7 @@
 ---
 title: "廖翊翔 / Leo"
 slug: "leo"
-description: "廖翊翔 / Leo | Master, Year 2026 | Joined HAIX Lab in September 2026."
+description: "廖翊翔 / Leo | Master, Year 2026"
 profile_summary: ""
 username: "leo"
 role: "Master"
@@ -22,4 +22,4 @@ tags:
   - ""
 ---
 
-Joined HAIX Lab in September 2026.
+Profile details will be updated soon.

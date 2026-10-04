@@ -289,9 +289,9 @@
     "website": "",
     "photo": "/images/people/leo.webp",
     "description": "",
-    "profile_markdown": "Joined HAIX Lab in September 2026.",
+    "profile_markdown": "",
     "tags": [],
-    "seo_description": "廖翊翔 / Leo | Master, Year 2026 | Joined HAIX Lab in September 2026.",
+    "seo_description": "廖翊翔 / Leo | Master, Year 2026",
     "og_image": "/images/people/leo.webp",
     "og_image_local": "/og/leo.webp"
   },
@@ -308,11 +308,11 @@
     "website": "",
     "photo": "/images/people/huiyui.webp",
     "description": "",
-    "profile_markdown": "2026 年 9 月加入 HAIX Lab，碩士班一年級。",
+    "profile_markdown": "",
     "tags": [
       "環保型人機互動"
     ],
-    "seo_description": "張匯育 | Master, Year 2026 | Tags: 環保型人機互動 | 2026 年 9 月加入 HAIX Lab，碩士班一年級。",
+    "seo_description": "張匯育 | Master, Year 2026 | Tags: 環保型人機互動",
     "og_image": "/images/people/huiyui.webp",
     "og_image_local": "/og/huiyui.webp"
   },

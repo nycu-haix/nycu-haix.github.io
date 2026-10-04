@@ -1,7 +1,7 @@
 ---
 title: "張匯育"
 slug: "huiyui"
-description: "張匯育 | Master, Year 2026 | Tags: 環保型人機互動 | 2026 年 9 月加入 HAIX Lab，碩士班一年級。"
+description: "張匯育 | Master, Year 2026 | Tags: 環保型人機互動"
 profile_summary: ""
 username: "huiyui"
 role: "Master"
@@ -22,4 +22,4 @@ tags:
   - "環保型人機互動"
 ---
 
-2026 年 9 月加入 HAIX Lab，碩士班一年級。
+Profile details will be updated soon.
