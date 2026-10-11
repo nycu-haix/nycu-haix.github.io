@@ -1,7 +1,7 @@
 ---
 title: "鍾玉玲"
 slug: "letitia"
-description: "鍾玉玲 | In-service Master, Year 2026 | Tags: 人機互動, 智慧設計 | 在職專班碩士，於 2026/09 加入 HAIX Lab。"
+description: "鍾玉玲 | In-service Master, Year 2026 | Tags: 人機互動, 智慧設計"
 profile_summary: ""
 username: "letitia"
 role: "In-service Master"
@@ -23,4 +23,4 @@ tags:
   - "智慧設計"
 ---
 
-在職專班碩士，於 2026/09 加入 HAIX Lab。
+Profile details will be updated soon.
