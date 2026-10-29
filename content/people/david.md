@@ -1,7 +1,7 @@
 ---
 title: "張子中"
 slug: "david"
-description: "張子中 | Master, Year 2026 | Tags: 智慧照護, 對話遊戲 | 碩士，於 2026/10 加入 HAIX Lab。"
+description: "張子中 | Master, Year 2026 | Tags: 智慧照護, 對話遊戲"
 profile_summary: ""
 username: "david"
 role: "Master"
@@ -23,4 +23,4 @@ tags:
   - "對話遊戲"
 ---
 
-碩士，於 2026/10 加入 HAIX Lab。
+Profile details will be updated soon.
