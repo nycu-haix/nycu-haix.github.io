@@ -9,6 +9,11 @@ This site is a Hugo website with a Homepage and People pages:
 - Lab branding and logo
 - SEO-ready static rendering for homepage and people profile pages (`/people/<username>/`)
 
+## Development location
+
+Primary development checkout: `sky-mini:/Users/skyhong/Projects/nycu-haix.github.io`.
+T3 project on sky-mini: `HAIX Lab Website`. GitHub Pages continues to deploy from `main`.
+
 ## Run locally
 
 ```bash

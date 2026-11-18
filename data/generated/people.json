@@ -424,6 +424,48 @@
     "og_image_local": "/og/letitia.webp"
   },
   {
+    "name": "侯竣奇 Pytree",
+    "username": "pytree",
+    "role": "Incoming Master",
+    "degree": "",
+    "year": "2027",
+    "email": "",
+    "github": "https://github.com/coke5151",
+    "orcid": "",
+    "scholar": "",
+    "website": "https://pytreedao.com",
+    "photo": "/images/people/pytree.webp",
+    "description": "預計於 2027 年 9 月以碩一身分加入實驗室。",
+    "profile_markdown": "",
+    "tags": [
+      "Human-AI Collaboration",
+      "文件審查",
+      "可信任AI"
+    ],
+    "seo_description": "侯竣奇 Pytree | Incoming Master, Year 2027 | Tags: Human-AI Collaboration, 文件審查, 可信任AI | 預計於 2027 年 9 月以碩一身分加入實驗室。",
+    "og_image": "/images/people/pytree.webp",
+    "og_image_local": "/og/pytree.webp"
+  },
+  {
+    "name": "李重佑 Kasper",
+    "username": "kasper",
+    "role": "Incoming Master",
+    "degree": "",
+    "year": "2027",
+    "email": "",
+    "github": "",
+    "orcid": "",
+    "scholar": "",
+    "website": "",
+    "photo": "/images/people/kasper.webp",
+    "description": "預計於 2027 年 7 月加入實驗室。",
+    "profile_markdown": "",
+    "tags": [],
+    "seo_description": "李重佑 Kasper | Incoming Master, Year 2027 | 預計於 2027 年 7 月加入實驗室。",
+    "og_image": "/images/people/kasper.webp",
+    "og_image_local": "/og/kasper.webp"
+  },
+  {
     "name": "Elvis Dragon Mao",
     "username": "em",
     "role": "Undergraduate",
