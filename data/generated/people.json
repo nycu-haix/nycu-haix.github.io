@@ -435,14 +435,14 @@
     "scholar": "",
     "website": "https://pytreedao.com",
     "photo": "/images/people/pytree.webp",
-    "description": "預計於 2027 年 9 月以碩一身分加入實驗室。",
+    "description": "",
     "profile_markdown": "",
     "tags": [
       "Human-AI Collaboration",
       "文件審查",
       "可信任AI"
     ],
-    "seo_description": "侯竣奇 Pytree | Incoming Master, Year 2027 | Tags: Human-AI Collaboration, 文件審查, 可信任AI | 預計於 2027 年 9 月以碩一身分加入實驗室。",
+    "seo_description": "侯竣奇 Pytree | Incoming Master, Year 2027 | Tags: Human-AI Collaboration, 文件審查, 可信任AI",
     "og_image": "/images/people/pytree.webp",
     "og_image_local": "/og/pytree.webp"
   },
@@ -458,10 +458,10 @@
     "scholar": "",
     "website": "",
     "photo": "/images/people/kasper.webp",
-    "description": "預計於 2027 年 7 月加入實驗室。",
+    "description": "",
     "profile_markdown": "",
     "tags": [],
-    "seo_description": "李重佑 Kasper | Incoming Master, Year 2027 | 預計於 2027 年 7 月加入實驗室。",
+    "seo_description": "李重佑 Kasper | Incoming Master, Year 2027",
     "og_image": "/images/people/kasper.webp",
     "og_image_local": "/og/kasper.webp"
   },

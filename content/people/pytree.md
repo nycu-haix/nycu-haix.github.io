@@ -1,8 +1,8 @@
 ---
 title: "侯竣奇 Pytree"
 slug: "pytree"
-description: "侯竣奇 Pytree | Incoming Master, Year 2027 | Tags: Human-AI Collaboration, 文件審查, 可信任AI | 預計於 2027 年 9 月以碩一身分加入實驗室。"
-profile_summary: "預計於 2027 年 9 月以碩一身分加入實驗室。"
+description: "侯竣奇 Pytree | Incoming Master, Year 2027 | Tags: Human-AI Collaboration, 文件審查, 可信任AI"
+profile_summary: ""
 username: "pytree"
 role: "Incoming Master"
 degree: ""
@@ -24,4 +24,4 @@ tags:
   - "可信任AI"
 ---
 
-預計於 2027 年 9 月以碩一身分加入實驗室。
+Profile details will be updated soon.

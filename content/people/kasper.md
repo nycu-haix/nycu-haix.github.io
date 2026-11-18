@@ -1,8 +1,8 @@
 ---
 title: "李重佑 Kasper"
 slug: "kasper"
-description: "李重佑 Kasper | Incoming Master, Year 2027 | 預計於 2027 年 7 月加入實驗室。"
-profile_summary: "預計於 2027 年 7 月加入實驗室。"
+description: "李重佑 Kasper | Incoming Master, Year 2027"
+profile_summary: ""
 username: "kasper"
 role: "Incoming Master"
 degree: ""
@@ -22,4 +22,4 @@ tags:
   - ""
 ---
 
-預計於 2027 年 7 月加入實驗室。
+Profile details will be updated soon.
